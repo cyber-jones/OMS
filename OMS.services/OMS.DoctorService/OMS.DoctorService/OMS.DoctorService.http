@@ -1,0 +1,6 @@
+@OMS.DoctorService_HostAddress = http://localhost:5177
+
+GET {{OMS.DoctorService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,6 @@
+@OMS.StaffService_HostAddress = http://localhost:5235
+
+GET {{OMS.StaffService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

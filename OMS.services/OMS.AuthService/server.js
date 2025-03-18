@@ -13,7 +13,7 @@ import refreshRouter from "./routes/refreshRouter.js";
 
 const app = express();
 config();
-const URI = process.env.MONGOOSE_DEV_URI;
+const URI = process.env.MONGOOSE_PRODUCTION_URI;
 const PORT = process.env.PORT || 7005;
 connectDb(URI);
 
@@ -27,7 +27,7 @@ app.use(express.json());
 
 
 
-app.use("/api", userRouter);
+app.use("/api/user", userRouter);
 app.use("/api", refreshRouter);
 
 

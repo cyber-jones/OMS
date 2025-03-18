@@ -29,7 +29,7 @@ export const registerUser = async (req, res, next) => {
     
 
         const passHashed = bcryptjs.hashSync(password, bcryptjs.genSaltSync(10));
-        const newUser = new User({ password: passHashed, email: value.email });
+        const newUser = new User({ password: passHashed, email: value.email, user_Profile_Id: value.user_Profile_Id });
         newUser.roles.push(value.role);
 
         await newUser.save();

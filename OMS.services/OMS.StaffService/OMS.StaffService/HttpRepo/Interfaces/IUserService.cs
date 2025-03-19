@@ -5,5 +5,5 @@ namespace OMS.StaffService.HttpRepo.Interfaces;
 
 public interface IUserService
 {
-    Task<ResponseDto> postNewUser(UserDto userDto);
+    Task<ResponseDto> RegisterUser(UserDto userDto);
 }

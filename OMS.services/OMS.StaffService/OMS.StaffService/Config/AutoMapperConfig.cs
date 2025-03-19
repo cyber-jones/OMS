@@ -9,6 +9,7 @@ namespace OMS.StaffService.Config
         public AutoMapperConfig()
         {
             CreateMap<StaffDto, StaffModel>().ReverseMap();
+            CreateMap<StaffRegistrationDto, StaffModel>().ReverseMap();
         }
     }
 }

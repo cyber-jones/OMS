@@ -15,11 +15,11 @@ public class UserService : IUserService
     }
 
 
-    public async Task<ResponseDto> postNewUser(UserDto userDto)
+    public async Task<ResponseDto> RegisterUser(UserDto userDto)
     {
         return await _httpService.SendAsync(new RequestDto(){
             ApiType = ApiType.POST,
-            Url = $"{SD.UserService_Url}/api/user/register",
+            Uri = $"{SD.UserService_Url}/api/user/register",
             Body = userDto
         }); 
     }

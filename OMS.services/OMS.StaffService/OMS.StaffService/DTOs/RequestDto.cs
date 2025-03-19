@@ -6,6 +6,6 @@ namespace OMS.StaffService.DTOs;
 public class RequestDto
 {
     public ApiType ApiType { get; set; } =  ApiType.GET;
-    public string Url { get; set; }
+    public string Uri { get; set; }
     public object? Body { get; set; }
 }

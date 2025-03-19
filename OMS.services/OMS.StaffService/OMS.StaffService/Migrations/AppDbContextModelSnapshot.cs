@@ -32,8 +32,9 @@ namespace OMS.StaffService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Cell_Phone")
-                        .HasColumnType("int");
+                    b.Property<string>("Cell_Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -62,11 +63,12 @@ namespace OMS.StaffService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NIN")
-                        .HasColumnType("int");
+                    b.Property<long>("NIN")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("Relationship")
-                        .HasColumnType("int");
+                    b.Property<string>("Relationship")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sex")
                         .IsRequired()
@@ -79,8 +81,9 @@ namespace OMS.StaffService.Migrations
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("User_Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("User_Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Staff_Id");
 

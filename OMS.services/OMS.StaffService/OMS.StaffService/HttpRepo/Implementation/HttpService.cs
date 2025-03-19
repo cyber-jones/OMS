@@ -24,7 +24,8 @@ public class HttpService : IHttpService
         HttpRequestMessage httpRequestMessage = new();
 
         httpRequestMessage.Headers.Add("Accept", "application/json");
-
+        httpRequestMessage.RequestUri = new Uri(requestDto.Uri);
+        
         if (requestDto.Body != null) {
             string json = JsonConvert.SerializeObject(requestDto.Body);
             httpRequestMessage.Content = new StringContent(json, Encoding.UTF8, "application/json");

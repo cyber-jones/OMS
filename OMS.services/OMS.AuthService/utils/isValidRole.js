@@ -3,5 +3,8 @@ import { ROLES } from "./SD.js"
 
 
 export const isValidRole = (role) => {
-    ROLES.includes(role) ? true : false;
+    if (role == null) return true;
+
+    const rolesArray = Object.values(ROLES);
+    rolesArray.includes(role) ? true : false;
 }

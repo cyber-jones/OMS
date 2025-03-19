@@ -7,38 +7,25 @@ namespace OMS.StaffService.Models
         [Key]
         public Guid Staff_Id { get; set; }
         [Required]
-        public Guid User_Id { get; set; }
+        public string User_Id { get; set; }
 
 
 
-        [Required]
         public string First_Name { get; set; }
-        [Required]
         public string Last_Name { get; set; }
-        [Required]
         public string Middle_Name { get; set; }
-        [Required]
         public string Email { get; set; }
-        [Required]
-        public int Cell_Phone { get; set; }
-        [Required]
-        public int Relationship { get; set; }
-        [Required]
+        public string Cell_Phone { get; set; }
+        public string Relationship { get; set; }
         public string Address { get; set; }
-        [Required]
         public string State { get; set; }
-        [Required]
-        public int NIN { get; set; }       
-        [Required]
+        public long NIN { get; set; }       
         public string ID_Card { get; set; }
-        [Required]
         public string Sex { get; set; }
-        [Required]
         public string DOB { get; set; }
 
 
 
-        [Required]
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
     }

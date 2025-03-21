@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using OMS.StaffService.Data;
 using OMS.StaffService.DTOs;
 using OMS.StaffService.HttpRepo.Interfaces;
 using OMS.StaffService.Models;
+using OMS.StaffService.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,7 +30,10 @@ namespace OMS.StaffService.Controllers
         }
 
 
+
+
         // GET: api/<StaffController>
+        [Authorize(Roles = "admin")]
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<StaffDto>>> GetStaffs()
         {
@@ -195,6 +200,27 @@ namespace OMS.StaffService.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+        }
+
+
+
+
+
+
+        //Debug route
+        [Authorize]
+        [HttpGet("debug-roles")]
+        public IActionResult DebugRoles()
+        {
+            var user = HttpContext.User;
+            var roles = user.Claims.Where(c => c.Type == "roles").Select(c => c.Value).ToList();
+
+            return Ok(new
+            {
+                User = user.Identity.Name,
+                Roles = roles,
+                IsAuthenticated = user.Identity.IsAuthenticated
+            });
         }
     }
 }

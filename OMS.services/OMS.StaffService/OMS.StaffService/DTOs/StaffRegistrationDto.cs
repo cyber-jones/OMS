@@ -7,21 +7,22 @@ namespace OMS.StaffService.DTOs;
 public class StaffRegistrationDto
 {
     [Required]
-    public string User_Id { get; set; }
-
-
-    [Required]
+    [MaxLength(25)]
     public string First_Name { get; set; }
+    [MaxLength(25)]
     public string Last_Name { get; set; }
+    [MaxLength(25)]
     public string Middle_Name { get; set; }
-    [EmailAddress]
+    [DataType(DataType.EmailAddress)]
     public string Email { get; set; }
-    public int Cell_Phone { get; set; }
+    public string Cell_Phone { get; set; }
     public string Relationship { get; set; }
+    [MaxLength(250)]
     public string Address { get; set; }
     public string State { get; set; }
-    public long NIN { get; set; }
-    public string ID_Card { get; set; }
+    public long NIN { get; set; }    
+    [MaxLength(7)]   
+    public string Work_ID { get; set; }
     public string Sex { get; set; }
     public string DOB { get; set; }
     public string password { get; set; }

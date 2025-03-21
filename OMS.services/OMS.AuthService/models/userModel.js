@@ -16,9 +16,9 @@ const userSchema = new Schema({
         type: String
     },
     roles: {
-        type: [Number],
-        enum: [1001, 2002, 3003, 4004],
-        default: [4004],
+        type: [String],
+        enum: ["admin", "doctor", "staff", "patient"],
+        default: ["patient"],
     },
     refreshToken: {
         type: String,

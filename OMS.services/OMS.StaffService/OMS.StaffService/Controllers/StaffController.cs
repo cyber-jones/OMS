@@ -15,6 +15,7 @@ using OMS.StaffService.Utils;
 namespace OMS.StaffService.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class StaffController : ControllerBase
     {
@@ -33,7 +34,6 @@ namespace OMS.StaffService.Controllers
 
 
         // GET: api/<StaffController>
-        [Authorize(Roles = "admin")]
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<StaffDto>>> GetStaffs()
         {
@@ -53,6 +53,7 @@ namespace OMS.StaffService.Controllers
 
 
 
+        
         // GET api/<StaffController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<StaffDto>> GetStaff(string id)
@@ -80,7 +81,9 @@ namespace OMS.StaffService.Controllers
 
 
 
+
         // POST api/<StaffController>
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpPost]
         public async Task<ActionResult<StaffDto>> NewStaff([FromBody] StaffRegistrationDto staffRegistrationDto)
         {
@@ -118,16 +121,19 @@ namespace OMS.StaffService.Controllers
 
 
 
+
         // PUT api/<StaffController>/5
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpPut("{id}")]
         public async Task<ActionResult<StaffDto>> UpdateStaff(string id, [FromBody] StaffDto staffDto)
         {
             try
             {
-                if (staffDto == null || id.IsNullOrEmpty())
+                if (staffDto == null || id.IsNullOrEmpty() || !ModelState.IsValid)
                     return BadRequest();
 
-                var staff = await _dbContext.Staffs.FirstOrDefaultAsync(p => p.Staff_Id.Equals(Guid.Parse(id)));
+                var staff = await _dbContext.Staffs.AsNoTracking()
+                    .FirstOrDefaultAsync(p => p.Staff_Id.Equals(Guid.Parse(id)));
 
                 if (staff == null)
                     return NotFound();
@@ -146,7 +152,9 @@ namespace OMS.StaffService.Controllers
 
 
 
+
         // PATCH api/<StaffController>/5
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpPatch("{id}")]
         public async Task<ActionResult<StaffDto>> PatchStaff(string id, [FromBody] JsonPatchDocument<StaffDto> patchStaffDto)
         {
@@ -177,7 +185,9 @@ namespace OMS.StaffService.Controllers
 
 
 
+
         // DELETE api/<StaffController>/5
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteStaff(string id)
         {
@@ -208,19 +218,40 @@ namespace OMS.StaffService.Controllers
 
 
         //Debug route
-        [Authorize]
-        [HttpGet("debug-roles")]
-        public IActionResult DebugRoles()
-        {
-            var user = HttpContext.User;
-            var roles = user.Claims.Where(c => c.Type == "roles").Select(c => c.Value).ToList();
+        // [Authorize(Roles = Roles.ADMIN)]
+        // [HttpGet("debug-roles")]
+        // public IActionResult DebugRoles()
+        // {
+        //     var user = HttpContext.User;
+        //     var roles = user.Claims.Where(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Select(c => c.Value).ToList();
 
-            return Ok(new
-            {
-                User = user.Identity.Name,
-                Roles = roles,
-                IsAuthenticated = user.Identity.IsAuthenticated
-            });
-        }
+        //     return Ok(new
+        //     {
+        //         User = user.Identity.Name,
+        //         Roles = roles,
+        //         IsAuthenticated = user.Identity.IsAuthenticated
+        //     });
+
+
+
+        //     // var user = HttpContext.User;
+    
+        //     // // Print all claims
+        //     // var allClaims = user.Claims.ToDictionary(c => c.Type, c => c.Value);
+            
+        //     // // Extract roles manually
+        //     // var roles = user.Claims
+        //     //     .Where(c => c.Type == "roles" || c.Type == ClaimTypes.Role) // Check both types
+        //     //     .Select(c => c.Value)
+        //     //     .ToList();
+
+        //     // return Ok(new
+        //     // {
+        //     //     User = user.Identity?.Name,
+        //     //     Roles = roles,
+        //     //     Claims = allClaims, // Return all claims to debug
+        //     //     IsAuthenticated = user.Identity?.IsAuthenticated
+        //     // });
+        // }
     }
 }

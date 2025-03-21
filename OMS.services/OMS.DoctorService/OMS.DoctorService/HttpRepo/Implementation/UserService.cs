@@ -1,9 +1,9 @@
 using System;
-using OMS.StaffService.DTOs;
-using OMS.StaffService.HttpRepo.Interfaces;
-using OMS.StaffService.Utils;
+using OMS.DoctorService.DTOs;
+using OMS.DoctorService.HttpRepo.Interfaces;
+using OMS.DoctorService.Utils;
 
-namespace OMS.StaffService.HttpRepo.Implemenation;
+namespace OMS.DoctorService.HttpRepo.Implementation;
 
 public class UserService : IUserService
 {

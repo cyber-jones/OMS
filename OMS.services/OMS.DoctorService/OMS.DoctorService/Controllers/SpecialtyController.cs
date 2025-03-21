@@ -73,14 +73,14 @@ namespace OMS.DoctorService.Controllers
 
         // POST api/<SpecialtyController>
         [HttpPost]
-        public async Task<ActionResult<SpecialtyDto>> NewSpecialty([FromBody] SpecialtyDto specialtyDto)
+        public async Task<ActionResult<SpecialtyDto>> NewSpecialty([FromBody] SpecialtyRegistrationDto specialtyRegistrationDto)
         {
             try
             {
-                if (specialtyDto == null)
+                if (specialtyRegistrationDto == null || !ModelState.IsValid)
                     return BadRequest();
 
-                var specialtyModel = _mapper.Map<SpecialtyModel>(specialtyDto);
+                var specialtyModel = _mapper.Map<SpecialtyModel>(specialtyRegistrationDto);
                 await _dbContext.Specialties.AddAsync(specialtyModel);
                 await _dbContext.SaveChangesAsync();
 

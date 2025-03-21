@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +24,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("staff")));
 
-string OMS_UserService_DevUrl = builder.Configuration["OMS.UserService_devUrl"]!;
-SD.UserService_Url = OMS_UserService_DevUrl;
+string OMS_AuthService_devUrl = builder.Configuration["OMS.AuthService_devUrl"]!;
+SD.AuthService_Url = OMS_AuthService_devUrl;
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
@@ -37,17 +38,14 @@ builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 
 
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
 {
     options.SaveToken = true;
     options.RequireHttpsMetadata = false;
     options.TokenValidationParameters = new TokenValidationParameters()
     {
+        // RoleClaimType = "roles",
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
@@ -56,24 +54,24 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("JWT:accessTokenSecret")!))
     };
 
-    options.Events = new JwtBearerEvents()
-    {
-        OnTokenValidated = context =>
-            {
-                var claims = context.Principal?.Claims;
-                Console.WriteLine("Token Validated! Extracted Claims:");
-                foreach (var claim in claims)
-                {
-                    Console.WriteLine($"{claim.Type}: {claim.Value}");
-                }
-                return Task.CompletedTask;
-            },
-            OnAuthenticationFailed = context =>
-            {
-                Console.WriteLine($"Authentication Failed: {context.Exception.Message}");
-                return Task.CompletedTask;
-            }
-    };
+    // options.Events = new JwtBearerEvents()
+    // {
+    //     OnTokenValidated = context =>
+    //     {
+    //         var claims = context.Principal?.Claims;
+    //         Console.WriteLine("Token Validated! Extracted Claims:");
+    //         foreach (var claim in claims)
+    //         {
+    //             Console.WriteLine($"{claim.Type}: {claim.Value}");
+    //         }
+    //         return Task.CompletedTask;
+    //     },
+    //     OnAuthenticationFailed = context =>
+    //     {
+    //         Console.WriteLine($"Authentication Failed: {context.Exception.Message}");
+    //         return Task.CompletedTask;
+    //     }
+    // };
 });
 
 
@@ -81,11 +79,12 @@ builder.Services.AddAuthentication(options =>
 //Map Role Claims for Jwt
 builder.Services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
 {
-    options.TokenValidationParameters.RoleClaimType = "roles"; // Ensure ASP.NET recognizes roles
-});
+    options.TokenValidationParameters.RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"; //  Explicitly tell ASP.NET to recognize "roles"
+    options.TokenValidationParameters.NameClaimType = ClaimValueTypes.Email;
+ });
 
-builder.Services.AddControllers();
 builder.Services.AddAuthorization();
+builder.Services.AddControllers();
 
 
 
@@ -128,7 +127,7 @@ builder.Services.AddSwaggerGen(
 
 builder.Services.AddCors(option => 
     option.AddPolicy(Policies.LOCAL, policy =>
-        policy.WithOrigins([OMS_UserService_DevUrl])
+        policy.WithOrigins([OMS_AuthService_devUrl])
             .WithMethods(["GET, POST, PATCH, DELETE"])
             .WithHeaders(["accept", "content-type", "origin", "X-InclineCount"])
     )

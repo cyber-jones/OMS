@@ -1,26 +1,32 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OMS.DoctorService.Data;
 using OMS.DoctorService.DTOs;
+using OMS.DoctorService.HttpRepo.Interfaces;
 using OMS.DoctorService.Models;
+using OMS.DoctorService.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OMS.DoctorService.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class DoctorController : ControllerBase
     {
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
-        public DoctorController(AppDbContext dbContext, IMapper mapper)
+        public DoctorController(AppDbContext dbContext, IMapper mapper, IUserService userService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _userService = userService;
         }
 
 
@@ -71,17 +77,33 @@ namespace OMS.DoctorService.Controllers
 
 
         // POST api/<DoctorController>
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpPost]
-        public async Task<ActionResult<DoctorDto>> NewDoctor([FromBody] DoctorDto doctorDto)
+        public async Task<ActionResult<DoctorDto>> NewDoctor([FromBody] DoctorRegisterDto doctorRegisterDto)
         {
             try
             {
-                if (doctorDto == null)
+                if (doctorRegisterDto == null || !ModelState.IsValid)
                     return BadRequest();
 
-                var doctorModel = _mapper.Map<DoctorModel>(doctorDto);
+                var doctorModel = _mapper.Map<DoctorModel>(doctorRegisterDto);
                 await _dbContext.Doctors.AddAsync(doctorModel);
-                await _dbContext.SaveChangesAsync();
+                var staffDto = _mapper.Map<DoctorDto>(doctorModel);
+
+                UserDto userDto = new() 
+                {
+                    Email = doctorModel.Email,
+                    Password = doctorRegisterDto.password,
+                    User_Profile_Id = doctorModel.Doctor_Id,
+                    Role = doctorRegisterDto.Role
+                };
+
+                ResponseDto responseDto = await _userService.RegisterUser(userDto);
+
+                if (responseDto.Success) 
+                    await _dbContext.SaveChangesAsync();
+                else
+                    return BadRequest(responseDto);
 
                 return CreatedAtAction(nameof(GetDoctor), new { id = doctorModel }, doctorModel);
             }
@@ -94,15 +116,17 @@ namespace OMS.DoctorService.Controllers
 
 
         // PUT api/<DoctorController>/5
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpPut("{id}")]
         public async Task<ActionResult<DoctorDto>> UpdateDoctor(string id, [FromBody] DoctorDto doctorDto)
         {
             try
             {
-                if (doctorDto == null || id.IsNullOrEmpty())
+                if (doctorDto == null || id.IsNullOrEmpty() || !ModelState.IsValid)
                     return BadRequest();
 
-                var doctor = await _dbContext.Doctors.FirstOrDefaultAsync(p => p.Doctor_Id.Equals(Guid.Parse(id)));
+                var doctor = await _dbContext.Doctors.AsNoTracking()
+                    .FirstOrDefaultAsync(p => p.Doctor_Id.Equals(Guid.Parse(id)));
 
                 if (doctor == null)
                     return NotFound();
@@ -122,6 +146,7 @@ namespace OMS.DoctorService.Controllers
 
 
         // DELETE api/<DoctorController>/5
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteDoctor(string id)
         {

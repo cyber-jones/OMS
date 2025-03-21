@@ -1,6 +1,6 @@
 using System;
 
-namespace OMS.StaffService.Utils;
+namespace OMS.DoctorService.Utils;
 
 public class SD
 {

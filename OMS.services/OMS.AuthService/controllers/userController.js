@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import { RegistrationValidator, LoginValidator } from "../config/validateSchema.js";
 import User from "../models/userModel.js";
 import bcryptjs from 'bcryptjs';
-import { isValidRole } from "../utils/isValidRole.js";
 // import { axiosStaff } from "../config/axiosStaffConfig.js";
 
 
@@ -22,21 +21,16 @@ export const registerUser = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        if (!isValidRole(role))
-            return res.status(400).json({ success: false, message: "Role is not valid!"});
-
-
         const isRegisterd = await User.findOne({ email: value.email });
 
         if (isRegisterd) 
             return res.status(200).json({ success: true, message: "User already exist!"});
     
-
         const passHashed = bcryptjs.hashSync(value.Password, bcryptjs.genSaltSync(10));
         const newUser = new User({ password: passHashed, email: value.Email, user_Profile_Id: value.User_Profile_Id });
 
-        if (role !== null) {
-            newUser.roles.push(role.lowercase());
+        if (role !== null || role !== undefined) {
+            newUser.roles.push(role);
         }
 
         await newUser.save();

@@ -36,9 +36,9 @@ namespace OMS.DoctorService.Models
 
 
         //Medical Licence Number
-        public int MLN { get; set; }
+        public string MLN { get; set; }
         [MaxLength(11)]
-        public int Clinic_Phone { get; set; }
+        public string Clinic_Phone { get; set; }
         public Guid Specialty_Id { get; set; }
         [ForeignKey(nameof(Specialty_Id))]
         public SpecialtyModel? Specialty { get; set; }        

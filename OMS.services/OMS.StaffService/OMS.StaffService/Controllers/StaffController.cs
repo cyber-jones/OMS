@@ -91,6 +91,18 @@ namespace OMS.StaffService.Controllers
             {
                 if (staffRegistrationDto == null || !ModelState.IsValid)
                     return BadRequest();
+                
+                var staff = await _dbContext.Staffs.FirstOrDefaultAsync(s  => s.Email.Equals(staffRegistrationDto.Email));
+
+                if (staff is not null)
+                    return BadRequest("Email already registered!");
+                    
+                if (staff.NIN == staffRegistrationDto.NIN)
+                    return BadRequest("NIN already registered!");
+
+                if (staff.Work_ID == staffRegistrationDto.Work_ID)
+                    return BadRequest("Work ID already registered!");
+            
 
                 var staffModel = _mapper.Map<StaffModel>(staffRegistrationDto);
                 await _dbContext.Staffs.AddAsync(staffModel);
@@ -137,6 +149,12 @@ namespace OMS.StaffService.Controllers
 
                 if (staff == null)
                     return NotFound();
+                    
+                if (staff.NIN == staffDto.NIN)
+                    return BadRequest("NIN already registered!");
+
+                if (staff.Work_ID == staffDto.Work_ID)
+                    return BadRequest("Work ID already registered!");
 
                 var staffModel = _mapper.Map<StaffModel>(staffDto);
                 _dbContext.Staffs.Update(staffModel);

@@ -36,7 +36,10 @@ namespace OMS.DoctorService.Controllers
         {
             try
             {
-                IEnumerable<DoctorModel> doctors = await _dbContext.Doctors.ToListAsync();
+                IEnumerable<DoctorModel> doctors = await _dbContext.Doctors
+                    .Include(d => d.Specialty)
+                        .Include(d => d.Sub_Specialty)
+                            .ToListAsync();
 
                 var doctorDto = _mapper.Map<IEnumerable<DoctorDto>>(doctors);
 

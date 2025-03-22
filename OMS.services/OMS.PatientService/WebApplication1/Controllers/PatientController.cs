@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using OMS.PatientService.DTOs;
+using OMS.PatientService.HtpRepo.Interfaces;
 using WebApplication1.Data;
 using WebApplication1.DTOs;
 using WebApplication1.Models;
@@ -14,13 +16,15 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class PatientController : ControllerBase
     {
-        private readonly AppDbContext _patientDbContext;
+        private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IAuthService _authService;
 
-        public PatientController(AppDbContext patientDbContext, IMapper mapper)
+        public PatientController(AppDbContext dbContext, IMapper mapper, IAuthService authService)
         {
-            _patientDbContext = patientDbContext;
+            _dbContext = dbContext;
             _mapper = mapper;
+            _authService = authService;
         }
 
 
@@ -30,7 +34,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                IEnumerable<PatientModel> patients = await _patientDbContext.Patients.ToListAsync();
+                IEnumerable<PatientModel> patients = await _dbContext.Patients.ToListAsync();
 
                 var patientDto = _mapper.Map<IEnumerable<PatientDto>>(patients);
 
@@ -53,7 +57,7 @@ namespace WebApplication1.Controllers
                 if(id.IsNullOrEmpty())
                     return BadRequest();
 
-                var patient = await _patientDbContext.Patients.FirstOrDefaultAsync(p => p.Patient_Id.Equals(Guid.Parse(id)));
+                var patient = await _dbContext.Patients.FirstOrDefaultAsync(p => p.Patient_Id.Equals(Guid.Parse(id)));
 
                 if (patient == null)
                     return NotFound();
@@ -73,18 +77,40 @@ namespace WebApplication1.Controllers
 
         // POST api/<PatientController>
         [HttpPost]
-        public async Task<ActionResult<PatientDto>> NewPatient([FromBody]  PatientDto patientDto)
+        public async Task<ActionResult<PatientDto>> NewPatient([FromBody]  PatientRegisterDto patientRegisterDto)
         {
             try
             {
-                if (patientDto == null)
+                if (patientRegisterDto == null || !ModelState.IsValid)
                     return BadRequest();
 
-                var patientModel = _mapper.Map<PatientModel>(patientDto);
-                await _patientDbContext.Patients.AddAsync(patientModel);
-                await _patientDbContext.SaveChangesAsync();
+                var patient = await _dbContext.Patients.FirstOrDefaultAsync(s  => s.Email.Equals(patientRegisterDto.Email));
 
-                return CreatedAtAction(nameof(GetPatient), new { id = patientModel.Patient_Id }, patientModel);
+                if (patient is not null)
+                    return BadRequest("Email already registered!");
+                    
+                if (patient.NIN == patientRegisterDto.NIN)
+                    return BadRequest("NIN already registered!");
+
+                var patientModel = _mapper.Map<PatientModel>(patientRegisterDto);
+                await _dbContext.Patients.AddAsync(patientModel);
+                var patientDto = _mapper.Map<PatientDto>(patientModel);
+
+                UserDto userDto = new() 
+                {
+                    Email = patientModel.Email,
+                    Password = patientRegisterDto.password,
+                    User_Profile_Id = patientModel.Patient_Id
+                };
+
+                ResponseDto responseDto = await _authService.RegisterUser(userDto);
+
+                if (responseDto.Success) 
+                    await _dbContext.SaveChangesAsync();
+                else
+                    return BadRequest(responseDto);
+
+                return CreatedAtAction(nameof(GetPatient), new { id = patientDto.Patient_Id }, patientDto);
             }
             catch (Exception ex)
             {
@@ -103,14 +129,14 @@ namespace WebApplication1.Controllers
                 if (patientDto == null || id.IsNullOrEmpty())
                     return BadRequest();
 
-                var patient = await _patientDbContext.Patients.FirstOrDefaultAsync(p => p.Patient_Id.Equals(Guid.Parse(id)));
+                var patient = await _dbContext.Patients.FirstOrDefaultAsync(p => p.Patient_Id.Equals(Guid.Parse(id)));
 
                 if (patient == null)
                     return NotFound();
 
                 var patientModel = _mapper.Map<PatientModel>(patientDto);
-                _patientDbContext.Patients.Update(patientModel);
-                await _patientDbContext.SaveChangesAsync();
+                _dbContext.Patients.Update(patientModel);
+                await _dbContext.SaveChangesAsync();
 
                 return StatusCode(StatusCodes.Status205ResetContent, patientModel);
             }
@@ -131,13 +157,13 @@ namespace WebApplication1.Controllers
                 if (id.IsNullOrEmpty())
                     return BadRequest();
 
-                var patient = await _patientDbContext.Patients.FirstOrDefaultAsync(p => p.Patient_Id.Equals(Guid.Parse(id)));
+                var patient = await _dbContext.Patients.FirstOrDefaultAsync(p => p.Patient_Id.Equals(Guid.Parse(id)));
 
                 if (patient == null)
                     return NotFound();
 
-                _patientDbContext.Patients.Remove(patient);
-                await _patientDbContext.SaveChangesAsync();
+                _dbContext.Patients.Remove(patient);
+                await _dbContext.SaveChangesAsync();
 
                 return NoContent();
             }

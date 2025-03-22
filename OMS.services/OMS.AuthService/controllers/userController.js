@@ -36,7 +36,7 @@ export const registerUser = async (req, res, next) => {
         await newUser.save();
         const { password: pass, refreshToken: refresh, ...rest } = newUser._doc;
 
-        return res.status(201).json({ success: true, message: "User created successfully", user: { ...rest, roles: newUser.roles } });
+        return res.status(201).json({ success: true, message: "User created successfully", body: { ...rest, roles: newUser.roles } });
 
     } catch (err) {
         next(err);
@@ -84,7 +84,7 @@ export const loginUser = async (req, res, next) => {
         const cookieOpt = { httpOnly: true, secure: true, sameSite: "None", maxAge: 1000 * 60 * 60 * 24 * 7 }
 
         res.cookie("jwt", refreshToken, cookieOpt);
-        return res.status(200).json({ success: true, user: { ...rest, accessToken } });
+        return res.status(200).json({ success: true, body: { ...rest, accessToken } });
 
     } catch (err) {
         next(err);

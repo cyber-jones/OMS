@@ -3,7 +3,7 @@ using OMS.DoctorService.DTOs;
 
 namespace OMS.DoctorService.HttpRepo.Interfaces;
 
-public interface IUserService
+public interface IAuthService
 {
     Task<ResponseDto> RegisterUser(UserDto userDto);
 }

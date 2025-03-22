@@ -1,7 +1,7 @@
 using System;
-using OMS.StaffService.Utils;
+using OMS.PatientService.Utils;
 
-namespace OMS.StaffService.DTOs;
+namespace OMS.PatientService.DTOs;
 
 public class RequestDto
 {

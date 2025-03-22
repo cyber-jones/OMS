@@ -10,7 +10,7 @@ namespace WebApplication1.Config
         public AutoMapperConfig()
         {
             CreateMap<PatientModel, PatientDto>().ReverseMap();
-            // CreateMap<PatientRegisterDto, PatientDto>().ReverseMap();
+            CreateMap<PatientRegisterDto, PatientModel>().ReverseMap();
         }
     }
 }

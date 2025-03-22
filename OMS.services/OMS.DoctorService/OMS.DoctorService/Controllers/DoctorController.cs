@@ -20,13 +20,13 @@ namespace OMS.DoctorService.Controllers
     {
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IUserService _userService;
+        private readonly IAuthService _authService;
 
-        public DoctorController(AppDbContext dbContext, IMapper mapper, IUserService userService)
+        public DoctorController(AppDbContext dbContext, IMapper mapper, IAuthService authService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
-            _userService = userService;
+            _authService = authService;
         }
 
 
@@ -89,6 +89,17 @@ namespace OMS.DoctorService.Controllers
                 if (doctorRegisterDto == null || !ModelState.IsValid)
                     return BadRequest();
 
+                var doctor = await _dbContext.Doctors.FirstOrDefaultAsync(s  => s.Email.Equals(doctorRegisterDto.Email));
+
+                if (doctor is not null)
+                    return BadRequest("Email already registered!");
+                    
+                if (doctor.NIN == doctorRegisterDto.NIN)
+                    return BadRequest("NIN already registered!");
+
+                if (doctor.Work_ID == doctorRegisterDto.Work_ID)
+                    return BadRequest("Work ID already registered!");
+
                 var doctorModel = _mapper.Map<DoctorModel>(doctorRegisterDto);
                 await _dbContext.Doctors.AddAsync(doctorModel);
                 var staffDto = _mapper.Map<DoctorDto>(doctorModel);
@@ -98,10 +109,9 @@ namespace OMS.DoctorService.Controllers
                     Email = doctorModel.Email,
                     Password = doctorRegisterDto.password,
                     User_Profile_Id = doctorModel.Doctor_Id,
-                    Role = doctorRegisterDto.Role
                 };
 
-                ResponseDto responseDto = await _userService.RegisterUser(userDto);
+                ResponseDto responseDto = await _authService.RegisterUser(userDto);
 
                 if (responseDto.Success) 
                     await _dbContext.SaveChangesAsync();
@@ -129,9 +139,9 @@ namespace OMS.DoctorService.Controllers
                     return BadRequest();
 
                 var doctor = await _dbContext.Doctors.AsNoTracking()
-                    .FirstOrDefaultAsync(p => p.Doctor_Id.Equals(Guid.Parse(id)));
+                    .FirstOrDefaultAsync(p => p.Doctor_Id.Equals(Guid.Parse(id)));    
 
-                if (doctor == null)
+                if (doctor is null)
                     return NotFound();
 
                 var doctorModel = _mapper.Map<DoctorModel>(doctorDto);

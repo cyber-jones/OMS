@@ -5,11 +5,11 @@ using OMS.DoctorService.Utils;
 
 namespace OMS.DoctorService.HttpRepo.Implementation;
 
-public class UserService : IUserService
+public class AuthService : IAuthService
 {
     private readonly IHttpService _httpService;
 
-    public UserService(IHttpService httpService)
+    public AuthService(IHttpService httpService)
     {
         _httpService = httpService;
     }

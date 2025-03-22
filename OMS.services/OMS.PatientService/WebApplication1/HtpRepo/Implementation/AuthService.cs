@@ -1,15 +1,15 @@
 using System;
-using OMS.StaffService.DTOs;
-using OMS.StaffService.HttpRepo.Interfaces;
-using OMS.StaffService.Utils;
+using OMS.PatientService.DTOs;
+using OMS.PatientService.HtpRepo.Interfaces;
+using OMS.PatientService.Utils;
 
-namespace OMS.StaffService.HttpRepo.Implemenation;
+namespace OMS.PatientService.HtpRepo.Implementation;
 
-public class UserService : IUserService
+public class AuthService : IAuthService
 {
     private readonly IHttpService _httpService;
 
-    public UserService(IHttpService httpService)
+    public AuthService(IHttpService httpService)
     {
         _httpService = httpService;
     }
@@ -23,4 +23,5 @@ public class UserService : IUserService
             Body = userDto
         }); 
     }
+
 }

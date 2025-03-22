@@ -21,13 +21,13 @@ namespace OMS.StaffService.Controllers
     {
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly IUserService _userService;
+        private readonly IAuthService _authService;
 
-        public StaffController(AppDbContext dbContext, IMapper mapper, IUserService userService)
+        public StaffController(AppDbContext dbContext, IMapper mapper, IAuthService authService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
-            _userService = userService;
+            _authService = authService;
         }
 
 
@@ -113,10 +113,9 @@ namespace OMS.StaffService.Controllers
                     Email = staffModel.Email,
                     Password = staffRegistrationDto.password,
                     User_Profile_Id = staffModel.Staff_Id,
-                    Role = staffRegistrationDto.Role
                 };
 
-                ResponseDto responseDto = await _userService.RegisterUser(userDto);
+                ResponseDto responseDto = await _authService.RegisterUser(userDto);
 
                 if (responseDto.Success) 
                     await _dbContext.SaveChangesAsync();
@@ -146,15 +145,6 @@ namespace OMS.StaffService.Controllers
 
                 var staff = await _dbContext.Staffs.AsNoTracking()
                     .FirstOrDefaultAsync(p => p.Staff_Id.Equals(Guid.Parse(id)));
-
-                if (staff == null)
-                    return NotFound();
-                    
-                if (staff.NIN == staffDto.NIN)
-                    return BadRequest("NIN already registered!");
-
-                if (staff.Work_ID == staffDto.Work_ID)
-                    return BadRequest("Work ID already registered!");
 
                 var staffModel = _mapper.Map<StaffModel>(staffDto);
                 _dbContext.Staffs.Update(staffModel);

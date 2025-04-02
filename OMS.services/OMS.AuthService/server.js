@@ -1,14 +1,16 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 import helmet from "helmet";
 import { config } from "dotenv";
-import bodyParser from "body-parser";
+import __dirname from "./config/directoryConfig.js";
 import { connectDb } from "./Data/connect.js";
 import { errorHandler } from "./config/errorHandler.js";
 import cookieParser from "cookie-parser";
 import { corsOptions } from "./config/corsOption.js";
 import userRouter from "./routes/userRouter.js";
 import refreshRouter from "./routes/refreshRouter.js";
+import { reqLogger } from "./config/logConfig.js";
 
 
 const app = express();
@@ -18,13 +20,14 @@ const PORT = process.env.PORT || 7005;
 connectDb(URI);
 
 
+app.use(reqLogger);
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
 app.use(cors(corsOptions));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
+app.use("/", express.static(path.join(__dirname, "public")));
 
 
 app.use("/api/user", userRouter);
@@ -41,7 +44,6 @@ app.all("*", (req, res)=>{
     else 
         res.type("txt").send("404 Not found");
 });
-
 
 app.use(errorHandler);
 

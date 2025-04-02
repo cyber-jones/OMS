@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OMS.PatientService.Models;
 using WebApplication1.Models;
 
 namespace WebApplication1.Data
@@ -10,5 +11,6 @@ namespace WebApplication1.Data
         }
 
         public DbSet<PatientModel> Patients { get; set; }
+        public DbSet<LogModel> Logs { get; set; }
     }
 }

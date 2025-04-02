@@ -10,5 +10,6 @@ namespace OMS.StaffService.Data
         }
 
         public DbSet<StaffModel> Staffs { get; set; }
+        public DbSet<LogModel> Logs { get; set; }
     }
 }

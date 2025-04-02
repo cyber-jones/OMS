@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { RegistrationValidator, LoginValidator } from "../config/validateSchema.js";
+import { RegistrationValidator, LoginValidator } from "../validator/validateSchema.js";
 import User from "../models/userModel.js";
 import bcryptjs from 'bcryptjs';
 // import { axiosStaff } from "../config/axiosStaffConfig.js";

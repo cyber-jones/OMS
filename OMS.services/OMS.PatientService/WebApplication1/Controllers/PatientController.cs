@@ -1,9 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OMS.PatientService.DTOs;
 using OMS.PatientService.HtpRepo.Interfaces;
+using OMS.PatientService.Utils;
 using WebApplication1.Data;
 using WebApplication1.DTOs;
 using WebApplication1.Models;
@@ -19,12 +22,14 @@ namespace WebApplication1.Controllers
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IAuthService _authService;
+        private readonly ILogService _logService;
 
-        public PatientController(AppDbContext dbContext, IMapper mapper, IAuthService authService)
+        public PatientController(AppDbContext dbContext, IMapper mapper, IAuthService authService, ILogService logService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _authService = authService;
+            _logService = logService;
         }
 
 
@@ -94,6 +99,9 @@ namespace WebApplication1.Controllers
 
                 var patientModel = _mapper.Map<PatientModel>(patientRegisterDto);
                 await _dbContext.Patients.AddAsync(patientModel);
+                
+                await _logService.Log(SD.Patient_Created, GetUserEmail());
+
                 var patientDto = _mapper.Map<PatientDto>(patientModel);
 
                 UserDto userDto = new() 
@@ -121,6 +129,7 @@ namespace WebApplication1.Controllers
 
 
         // PUT api/<PatientController>/5
+        [Authorize( Roles = $"{Roles.ADMIN}, {Roles.PATIENT}")]
         [HttpPut("{id}")]
         public async Task<ActionResult<PatientDto>> UpdatePatient(string id, [FromBody] PatientDto patientDto)
         {
@@ -135,7 +144,8 @@ namespace WebApplication1.Controllers
                     return NotFound();
 
                 var patientModel = _mapper.Map<PatientModel>(patientDto);
-                _dbContext.Patients.Update(patientModel);
+
+                await _logService.Log(SD.Patient_Updated, GetUserEmail());
                 await _dbContext.SaveChangesAsync();
 
                 return StatusCode(StatusCodes.Status205ResetContent, patientModel);
@@ -149,6 +159,7 @@ namespace WebApplication1.Controllers
 
 
         // DELETE api/<PatientController>/5
+        [Authorize( Roles = $"{Roles.ADMIN}")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeletePatient(string id)
         {
@@ -163,6 +174,7 @@ namespace WebApplication1.Controllers
                     return NotFound();
 
                 _dbContext.Patients.Remove(patient);
+                await _logService.Log(SD.Patient_Deleted, GetUserEmail());
                 await _dbContext.SaveChangesAsync();
 
                 return NoContent();
@@ -171,6 +183,17 @@ namespace WebApplication1.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+        }
+
+
+
+
+
+
+
+        private string GetUserEmail()
+        {
+            return HttpContext.User.Claims.FirstOrDefault(static u => u.Type == ClaimValueTypes.Email).ToString();
         }
     }
 }

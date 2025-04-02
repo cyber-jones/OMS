@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +23,14 @@ namespace OMS.StaffService.Controllers
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly IAuthService _authService;
+        private readonly ILogService _logService;
 
-        public StaffController(AppDbContext dbContext, IMapper mapper, IAuthService authService)
+        public StaffController(AppDbContext dbContext, IMapper mapper, IAuthService authService, ILogService logService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _authService = authService;
+            _logService = logService;
         }
 
 
@@ -106,6 +109,7 @@ namespace OMS.StaffService.Controllers
 
                 var staffModel = _mapper.Map<StaffModel>(staffRegistrationDto);
                 await _dbContext.Staffs.AddAsync(staffModel);
+                await _logService.Log(SD.Staff_Created, GetUserEmail());
                 var staffDto = _mapper.Map<StaffDto>(staffModel);
 
                 UserDto userDto = new() 
@@ -148,6 +152,7 @@ namespace OMS.StaffService.Controllers
 
                 var staffModel = _mapper.Map<StaffModel>(staffDto);
                 _dbContext.Staffs.Update(staffModel);
+                await _logService.Log(SD.Staff_Updated, GetUserEmail());
                 await _dbContext.SaveChangesAsync();
 
                 return StatusCode(StatusCodes.Status205ResetContent, staffModel);
@@ -162,7 +167,7 @@ namespace OMS.StaffService.Controllers
 
 
         // PATCH api/<StaffController>/5
-        [Authorize(Roles = Roles.ADMIN)]
+        [Authorize(Roles = $"{Roles.ADMIN}")]
         [HttpPatch("{id}")]
         public async Task<ActionResult<StaffDto>> PatchStaff(string id, [FromBody] JsonPatchDocument<StaffDto> patchStaffDto)
         {
@@ -181,6 +186,7 @@ namespace OMS.StaffService.Controllers
                 var updatedStaffModel = _mapper.Map<StaffModel>(staffDto);
                 
                 _dbContext.Staffs.Update(updatedStaffModel);
+                await _logService.Log(SD.Staff_Updated, GetUserEmail());
                 await _dbContext.SaveChangesAsync();
 
                 return StatusCode(StatusCodes.Status205ResetContent, staffDto);
@@ -210,6 +216,7 @@ namespace OMS.StaffService.Controllers
                     return NotFound();
 
                 _dbContext.Staffs.Remove(staff);
+                await _logService.Log(SD.Staff_Deleted, GetUserEmail());
                 await _dbContext.SaveChangesAsync();
 
                 return NoContent();
@@ -261,5 +268,15 @@ namespace OMS.StaffService.Controllers
         //     //     IsAuthenticated = user.Identity?.IsAuthenticated
         //     // });
         // }
+
+
+
+
+
+
+        private string GetUserEmail()
+        {
+            return HttpContext.User.Claims.FirstOrDefault(static u => u.Type == ClaimValueTypes.Email).ToString();
+        }
     }
 }

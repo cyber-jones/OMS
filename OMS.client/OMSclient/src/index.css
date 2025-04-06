@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer components {
+  .button {
+    padding: 4px 12px;
+    color: white;
+    opacity: 80%;
+    border-radius: 8px;
+    transition: opacity 0.4s ease-in;
+    background-color: black;
+  }
+  
+  .button:hover {
+    opacity: 50%;
+    cursor: pointer;
+  }
+}
+

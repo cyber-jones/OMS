@@ -7,32 +7,34 @@ const SideBar = () => {
 
   return (
     <div className='w-[10%] flex flex-col justify-around items-center  bg-gray-100 text-[11px]'>
-        <Link to={oms_url.home}>
+        <Link to={oms_url.dashBoard}>
             <div className='text-center w-full hover:cursor-pointer'>
-                <i class={`bi bi-house-gear-fill ${nav_icons}`}></i>
+                <i className={`bi bi-house-gear-fill ${nav_icons}`}></i>
                 <div>Home</div>
             </div>
         </Link>
-        <div className='text-center w-full hover:cursor-pointer'>
-            <i class={`bi bi-people-fill ${nav_icons}`}></i>
-            <div>Doctors</div>
-        </div>
-        <div className='text-center w-full hover:cursor-pointer'>
-        <i class={`bi bi-building-check ${nav_icons}`}></i>
-            <div>Appointments</div>
-        </div>
-        <Link to={oms_url.specialization}>
+        <Link to={oms_url.consultation}>
             <div className='text-center w-full hover:cursor-pointer'>
-                <i class={`bi bi-person-video3 ${nav_icons}`}></i>
-                <div>Specialization</div>
+                <i className={`bi bi-people-fill ${nav_icons}`}></i>
+                <div>Consultation</div>
             </div>
         </Link>
         <div className='text-center w-full hover:cursor-pointer'>
-            <i class={`bi bi-bandaid-fill ${nav_icons}`}></i>
+        <i className={`bi bi-building-check ${nav_icons}`}></i>
+            <div>Appointments</div>
+        </div>
+        <Link to={oms_url.specialty}>
+            <div className='text-center w-full hover:cursor-pointer'>
+                <i className={`bi bi-person-video3 ${nav_icons}`}></i>
+                <div>Specialties</div>
+            </div>
+        </Link>
+        <div className='text-center w-full hover:cursor-pointer'>
+            <i className={`bi bi-bandaid-fill ${nav_icons}`}></i>
             <div>Drugs</div>
         </div>
         <div className='text-center w-full hover:cursor-pointer'>
-            <i class={`bi bi-gear-wide-connected ${nav_icons}`}></i>
+            <i className={`bi bi-gear-wide-connected ${nav_icons}`}></i>
             <div>Settings</div>
         </div>
     </div>

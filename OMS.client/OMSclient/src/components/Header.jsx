@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header className='static w-full h-1/12 bg-gray-100 flex justify-between items-center'>
         <div className='w-[10%] px-2 flex gap-6 justify-start sm:justify-center items-center'>
-            <i class="bi bi-list text-xl border-3 rounded-md px-2 cursor-pointer sm:hidden block"></i>
+            <i className="bi bi-list text-xl border-3 rounded-md px-2 cursor-pointer sm:hidden block"></i>
             <p className='font-bold text-3xl'>OMS</p>
         </div>
         <div className='flex-1'>

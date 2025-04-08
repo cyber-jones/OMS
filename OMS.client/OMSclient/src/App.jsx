@@ -1,16 +1,23 @@
 import { Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
+import DashBoardComponents from "./components/DashBoardComponents"
 import { oms_url } from "./utils/SD"
-import HomeContent from "./components/HomeContent"
-import Specialization from "./components/Specialization"
+import DashBoardContent from "./pages/DashBoard"
+import Specialty from "./pages/specialty/Specialty"
+import DetailedSpecialty from "./pages/specialty/DetailedSpecialty"
+import Consultation from "./pages/Consultation"
+import Auth from "./pages/Auth"
 
 
 function App() {
 
+
   return (
     <Routes>
-        <Route path={oms_url.home} element={<Home><HomeContent /></Home>} />
-        <Route path={oms_url.specialization} element={<Home><Specialization /></Home>} />
+        <Route path={oms_url.dashBoard} element={<DashBoardComponents><DashBoardContent /></DashBoardComponents>} />
+        <Route path={oms_url.specialty} element={<DashBoardComponents><Specialty /></DashBoardComponents>} />
+        <Route path={`${oms_url.deatiledDSecialty}/:id`} element={<DashBoardComponents><DetailedSpecialty /></DashBoardComponents>} />
+        <Route path={oms_url.consultation} element={<DashBoardComponents><Consultation /></DashBoardComponents>} />
+        <Route path={oms_url.auth} element={<Auth />} />
     </Routes>
   )
 }

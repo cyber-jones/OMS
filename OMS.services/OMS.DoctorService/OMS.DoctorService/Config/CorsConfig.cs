@@ -1,7 +1,7 @@
 using System;
-using OMS.PatientService.Utils;
+using OMS.DoctorService.Utils;
 
-namespace OMS.PatientService.Config;
+namespace OMS.DoctorService.Config;
 
 internal static class CorsConfig
 {

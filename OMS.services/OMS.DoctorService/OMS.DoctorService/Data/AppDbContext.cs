@@ -12,6 +12,7 @@ namespace OMS.DoctorService.Data
 
         public DbSet<DoctorModel> Doctors { get; set; }
         public DbSet<SpecialtyModel> Specialties { get; set; }
+        public DbSet<LogModel> Logs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

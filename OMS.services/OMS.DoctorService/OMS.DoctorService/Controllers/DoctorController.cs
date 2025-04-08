@@ -32,6 +32,7 @@ namespace OMS.DoctorService.Controllers
 
         // GET: api/<DoctorController>
         [HttpGet("all")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<DoctorDto>>> GetDoctors()
         {
             try

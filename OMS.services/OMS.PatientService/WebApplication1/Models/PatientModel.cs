@@ -24,15 +24,11 @@ namespace WebApplication1.Models
         [MaxLength(250)]
         public string Address { get; set; }
         public string State { get; set; }
+        [StringLength(11)]
         public long NIN { get; set; }    
-        [StringLength(7)] 
-        public string Work_ID { get; set; }
         public string Sex { get; set; }
         public string DOB { get; set; }
         public string? Profile_Url { get; set; }
-        [StringLength(11)]
-        public string password { get; set; }
-        public string? Role { get; set; }
 
 
 

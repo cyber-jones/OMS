@@ -19,13 +19,12 @@ namespace WebApplication1.DTOs
         [MaxLength(250)]
         public string Address { get; set; }
         public string State { get; set; }
+        [StringLength(11)]
         public long NIN { get; set; }    
-        [StringLength(7)] 
-        public string Work_ID { get; set; }
         public string Sex { get; set; }
         public string DOB { get; set; }
         public string? Profile_Url { get; set; }
-        [StringLength(4)]
+        [StringLength(7)]
         public string password { get; set; }
         
 

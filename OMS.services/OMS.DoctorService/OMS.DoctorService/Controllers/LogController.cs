@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OMS.DoctorService.Data;
 using OMS.DoctorService.Models;
+using OMS.DoctorService.Utils;
 
 namespace OMS.DoctorService.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = Roles.ADMIN)]
     [ApiController]
     public class LogController : ControllerBase
     {

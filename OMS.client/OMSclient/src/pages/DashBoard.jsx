@@ -1,6 +1,7 @@
 import React from 'react'
 
 const DashBoard = () => {
+  
   return (
     <section className='w-[95%] h-11/12'>
         <div className='w-full flex justify-around items-center h-6/12'>

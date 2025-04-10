@@ -21,7 +21,7 @@ export const registerUser = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const isRegisterd = await User.findOne({ email: value.email });
+        const isRegisterd = await User.findOne({ email: value.Email });
 
         if (isRegisterd) 
             return res.status(200).json({ success: true, message: "User already exist!"});
@@ -29,7 +29,7 @@ export const registerUser = async (req, res, next) => {
         const passHashed = bcryptjs.hashSync(value.Password, bcryptjs.genSaltSync(10));
         const newUser = new User({ password: passHashed, email: value.Email, user_Profile_Id: value.User_Profile_Id });
 
-        if (role !== null || role !== undefined) {
+        if (role !== "patient") {
             newUser.roles.push(role);
         }
 
@@ -54,12 +54,12 @@ export const loginUser = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const user = await User.findOne({ email: value.email });
+        const user = await User.findOne({ email: value.Email });
 
         if (!user) 
-            return res.status(200).json({ success: true, message: "Email has not been registered"});
+            return res.status(400).json({ success: false, message: "Email has not been registered"});
     
-        var isValidPassword = bcryptjs.compare(value.password, user.password);
+        var isValidPassword = bcryptjs.compareSync(value.Password, user.password);
         if (!isValidPassword)
             return res.status(400).json({ success: false, message: "Incorrect Password" });
         

@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OMS.PatientService.Models;
+using OMS.PatientService.Utils;
 using WebApplication1.Data;
 
 namespace OMS.PatientService.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = Roles.ADMIN)]
     [ApiController]
     public class LogController : ControllerBase
     {

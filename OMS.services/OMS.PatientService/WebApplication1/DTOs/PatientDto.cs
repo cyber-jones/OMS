@@ -25,7 +25,7 @@ namespace WebApplication1.DTOs
         public string Address { get; set; }
         public string State { get; set; }
         [StringLength(11)]
-        public long NIN { get; set; }    
+        public string NIN { get; set; }    
         public string Sex { get; set; }
         public string DOB { get; set; }
         public string? Profile_Url { get; set; }

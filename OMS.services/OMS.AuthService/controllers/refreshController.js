@@ -20,11 +20,14 @@ export const getRefresh = async (req, res, next) => {
             if (err || userFromDb._id.toString() !== user.id.toString()) 
                 return res.status(403).json({ success: false, message: "Forbidden!" });
 
-            const roles = Object.values(userFromDb.roles).find(Boolean);
-            const accessToken = jwt.sign({ id: userFromDb._id, email: userFromDb.email, roles }, process.env.ACCESS_TOKEN_SECRETE, { expiresIn: "1h"});
+            const accessToken = jwt.sign(
+                { id: userFromDb._id, email: userFromDb.email, roles: userFromDb.roles }, 
+                process.env.ACCESS_TOKEN_SECRETE, 
+                { expiresIn: "1h", issuer: process.env.ISSUER, audience: process.env.AUDIENCE }
+            );
 
             const { password: password, ...rest } = userFromDb._doc;
-            res.status(200).json({ success: true, user: { ...rest, roles, accessToken } });
+            res.status(200).json({ success: true, user: { ...rest, accessToken } });
         });
     } catch (err) {
         next(err);

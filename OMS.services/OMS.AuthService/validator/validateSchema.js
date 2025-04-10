@@ -10,6 +10,6 @@ export const RegistrationValidator = Joi.object({
 
 
 export const LoginValidator = Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().length(4).required(),
+    Email: Joi.string().email().required(),
+    Password: Joi.string().length(4).required(),
 });

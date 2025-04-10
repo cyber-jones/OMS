@@ -16,6 +16,7 @@ using WebApplication1.Models;
 namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class PatientController : ControllerBase
     {
@@ -82,6 +83,7 @@ namespace WebApplication1.Controllers
 
         // POST api/<PatientController>
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<PatientDto>> NewPatient([FromBody]  PatientRegisterDto patientRegisterDto)
         {
             try
@@ -89,18 +91,16 @@ namespace WebApplication1.Controllers
                 if (patientRegisterDto == null || !ModelState.IsValid)
                     return BadRequest();
 
-                var patient = await _dbContext.Patients.FirstOrDefaultAsync(s  => s.Email.Equals(patientRegisterDto.Email));
+                var patient = await _dbContext.Patients.FirstOrDefaultAsync(p  => p.Email.Equals(patientRegisterDto.Email) || p.NIN.Equals(patientRegisterDto.NIN));
 
-                if (patient is not null)
+                if (patient is not null) 
                     return BadRequest("Email already registered!");
                     
-                if (patient.NIN == patientRegisterDto.NIN)
-                    return BadRequest("NIN already registered!");
 
                 var patientModel = _mapper.Map<PatientModel>(patientRegisterDto);
                 await _dbContext.Patients.AddAsync(patientModel);
                 
-                await _logService.Log(SD.Patient_Created, GetUserEmail());
+                await _logService.Log(SD.Patient_Created, patientRegisterDto.Email);
 
                 var patientDto = _mapper.Map<PatientDto>(patientModel);
 
@@ -108,7 +108,8 @@ namespace WebApplication1.Controllers
                 {
                     Email = patientModel.Email,
                     Password = patientRegisterDto.password,
-                    User_Profile_Id = patientModel.Patient_Id
+                    User_Profile_Id = patientModel.Patient_Id,
+                    Role = Roles.PATIENT
                 };
 
                 ResponseDto responseDto = await _authService.RegisterUser(userDto);

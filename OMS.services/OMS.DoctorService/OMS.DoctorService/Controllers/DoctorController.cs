@@ -32,7 +32,6 @@ namespace OMS.DoctorService.Controllers
 
         // GET: api/<DoctorController>
         [HttpGet("all")]
-        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<DoctorDto>>> GetDoctors()
         {
             try
@@ -90,16 +89,12 @@ namespace OMS.DoctorService.Controllers
                 if (doctorRegisterDto == null || !ModelState.IsValid)
                     return BadRequest();
 
-                var doctor = await _dbContext.Doctors.FirstOrDefaultAsync(s  => s.Email.Equals(doctorRegisterDto.Email));
+                var doctor = await _dbContext.Doctors.
+                    FirstOrDefaultAsync(p  => p.Email.Equals(doctorRegisterDto.Email) || p.NIN.Equals(doctorRegisterDto.NIN) || p.Work_ID.Equals(doctorRegisterDto.Work_ID));
 
                 if (doctor is not null)
                     return BadRequest("Email already registered!");
-                    
-                if (doctor.NIN == doctorRegisterDto.NIN)
-                    return BadRequest("NIN already registered!");
 
-                if (doctor.Work_ID == doctorRegisterDto.Work_ID)
-                    return BadRequest("Work ID already registered!");
 
                 var doctorModel = _mapper.Map<DoctorModel>(doctorRegisterDto);
                 await _dbContext.Doctors.AddAsync(doctorModel);
@@ -110,6 +105,7 @@ namespace OMS.DoctorService.Controllers
                     Email = doctorModel.Email,
                     Password = doctorRegisterDto.password,
                     User_Profile_Id = doctorModel.Doctor_Id,
+                    Role = Roles.DOCTOR
                 };
 
                 ResponseDto responseDto = await _authService.RegisterUser(userDto);

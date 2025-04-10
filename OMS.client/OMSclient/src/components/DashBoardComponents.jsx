@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './header'
 import SideBar from './SideBar'
 
 
 const DashBoardComponents = ({ children }) => {
+  const [sideNav, setSideNav] = useState(true);
   return (
     <div className='bg-white w-full h-screen font-mono'>
-      <Header />
+      <Header sideNav={sideNav} setSideNav={setSideNav}/>
       <div className='flex h-11/12 w-full'>
-        <SideBar />
-        <div className='w-[90%] flex justify-center items-center'>
+        <SideBar sideNav={sideNav}/>
+        <div className={`md:w-[90%] w-full flex justify-center items-center`}>
           {children}
         </div>
       </div>

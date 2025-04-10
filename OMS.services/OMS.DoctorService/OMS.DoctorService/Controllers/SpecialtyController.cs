@@ -1,16 +1,19 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OMS.DoctorService.Data;
 using OMS.DoctorService.DTOs;
 using OMS.DoctorService.Models;
+using OMS.DoctorService.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OMS.DoctorService.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class SpecialtyController : ControllerBase
     {
@@ -73,6 +76,7 @@ namespace OMS.DoctorService.Controllers
 
         // POST api/<SpecialtyController>
         [HttpPost]
+        [Authorize( Roles = Roles.ADMIN)]
         public async Task<ActionResult<SpecialtyDto>> NewSpecialty([FromBody] SpecialtyRegistrationDto specialtyRegistrationDto)
         {
             try
@@ -96,6 +100,7 @@ namespace OMS.DoctorService.Controllers
 
         // PUT api/<SpecialtyController>/5
         [HttpPut("{id}")]
+        [Authorize( Roles = Roles.ADMIN)]
         public async Task<ActionResult<DoctorDto>> UpdateSpecialty(string id, [FromBody] SpecialtyDto specialtyDto)
         {
             try
@@ -124,6 +129,7 @@ namespace OMS.DoctorService.Controllers
 
         // DELETE api/<SpecialtyController>/5
         [HttpDelete("{id}")]
+        [Authorize( Roles = Roles.ADMIN)]
         public async Task<ActionResult> DeletePatient(string id)
         {
             try

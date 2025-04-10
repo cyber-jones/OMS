@@ -7,21 +7,21 @@ import useAxiosAuthorization from './useAxiosAuth';
 
 
 
-const useDoctor = () => {
+const useDrug = () => {
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-    const [doctors, setDoctors] = useState([]);
-    const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
+    const [drugs, setDrugs] = useState([]);
+    const axiosAuth = useAxiosAuthorization(oms_server_dev_url.drug);
 
-    const getDoctors = async () => {
+    const getDrugs = async () => {
         setLoading(true)
         try {
-            const res = await axiosAuth.get("/doctor/all");
+            const res = await axiosAuth.get("/drug/all");
             console.log(res)
             if (res.status !== 200) 
                 enqueueSnackbar(res?.statusText, { variant: "error" });
             
-            setDoctors(res.data);
+            setDrugs(res.data);
         } catch (err) {
             enqueueSnackbar(err?.response?.statusText, { variant: "error" });
         } finally {
@@ -30,11 +30,11 @@ const useDoctor = () => {
     }
 
     useEffect(() => {
-        getDoctors();
+        getDrugs();
     }, []);
 
-    return { doctors, loading };
+    return { drugs, loading };
 }
 
 
-export default useDoctor;
+export default useDrug;

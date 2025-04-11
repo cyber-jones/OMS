@@ -8,6 +8,7 @@ import Consultation from "./pages/Consultation";
 import Auth from "./pages/Auth";
 import IsAuth from "./components/authorize/IsAuth";
 import Drugs from "./pages/drugs/Drugs";
+import Settings from "./pages/settings/Settings";
 
 function App() {
   return (
@@ -50,6 +51,14 @@ function App() {
           element={
             <DashBoardComponents>
               <Drugs />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.settings}
+          element={
+            <DashBoardComponents>
+              <Settings />
             </DashBoardComponents>
           }
         />

@@ -15,7 +15,7 @@ import { reqLogger } from "./config/logConfig.js";
 
 const app = express();
 config();
-const URI = process.env.MONGOOSE_PRODUCTION_URI;
+const URI = process.env.MONGOOSE_DEV_URI;
 const PORT = process.env.PORT || 7005;
 connectDb(URI);
 

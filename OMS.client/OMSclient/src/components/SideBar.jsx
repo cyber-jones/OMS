@@ -6,7 +6,7 @@ const SideBar = ({ sideNav }) => {
     const nav_icons = "text-lg md:text-2xl hover:text-4xl transition-all ease-in";
 
   return (
-    <div className={`${sideNav ? "md:w-[10%] flex flex-col h-11/12 justify-around items-center bg-gray-100 text-[11px] w-[150px] transition-all duration-700" : "w-[0px] h- scale-x-0 h-11/12 flex flex-col justify-around items-center bg-gray-100 text-[11px] transition-all duration-700"}`}>
+    <div className={`${sideNav ? "md:w-[10%] flex flex-col h-full justify-around items-center bg-gray-100 text-[11px] w-[150px] transition-all duration-700" : "w-[0px] h- scale-x-0 h-11/12 flex flex-col justify-around items-center bg-gray-100 text-[11px] transition-all duration-700"}`}>
         <Link to={oms_url.dashBoard}>
             <div className='text-center w-full hover:cursor-pointer'>
                 <i className={`bi bi-house-gear-fill ${nav_icons}`}></i>
@@ -35,10 +35,12 @@ const SideBar = ({ sideNav }) => {
                 <div>Drugs</div>
             </div>
         </Link>
-        <div className='text-center w-full hover:cursor-pointer'>
-            <i className={`bi bi-gear-wide-connected ${nav_icons}`}></i>
-            <div>Settings</div>
-        </div>
+        <Link to={oms_url.settings}>
+            <div className='text-center w-full hover:cursor-pointer'>
+                <i className={`bi bi-gear-wide-connected ${nav_icons}`}></i>
+                <div>Settings</div>
+            </div>
+        </Link>
     </div>
   )
 }

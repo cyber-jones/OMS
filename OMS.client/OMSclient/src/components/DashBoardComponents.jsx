@@ -10,7 +10,7 @@ const DashBoardComponents = ({ children }) => {
       <Header sideNav={sideNav} setSideNav={setSideNav}/>
       <div className='flex h-11/12 w-full'>
         <SideBar sideNav={sideNav}/>
-        <div className={`md:w-[90%] w-full flex justify-center items-center`}>
+        <div className={`md:w-[90%] w-full h-full flex justify-center items-center`}>
           {children}
         </div>
       </div>

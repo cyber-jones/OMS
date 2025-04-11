@@ -7,7 +7,7 @@ const IsAuth = ({ role }) => {
   const { token, user } = useSelector((state) => state.auth);
   const location = useLocation();
 
-  return token !== null && user?.roles.includes(role) ? (
+  return user !== null && token !== null && user?.roles.includes(role) ? (
     <Outlet />
   ) : (
     <Navigate to={oms_url.auth} state={{ from: location }} />

@@ -1,18 +1,14 @@
-import { useSelector } from "react-redux";
-// import { useEffect } from "react";
-import useRefresh from "./useRefresh";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { oms_url } from "../utils/SD";
-import { setUser } from "../redux/auth/authSlice";
+import { logOut, setAuthUser } from "../redux/auth/authUserSlice";
+import { useSnackbar } from "notistack";
 
 
 
 const useAxiosAuthorization = (url) => {
-    const { token } = useSelector(state => state.auth);
-    const refresh = useRefresh();
-    const navigate = useNavigate();
-    const dispatch = useSelector(state => state.auth);
+    const { token } = useSelector(state => state.authUser);
+    const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar();
 
     const axiosAuth = axios.create({
         baseURL: url,
@@ -35,18 +31,27 @@ const useAxiosAuthorization = (url) => {
             prevReq._retry = true;
 
             try {
-                const refreshToken = await refresh();
-                prevReq.headers.Authorization = `Bearer ${refreshToken}`;
+                const res = await axiosAuth.get("/refresh");
+    
+                if (res?.status === 401 || res?.status === 403 && res) {
+                    enqueueSnackbar(res?.data?.message, { variant: "error" });
+                    dispatch(logOut());
+                }
+    
+                console.log(res);
+                const { accessToken: token, ...rest } = res.data.user;
+                dispatch(setAuthUser({ authUser: rest, accessToken: token }));
+                prevReq.headers.Authorization = `Bearer ${token}`;
 
                 return axiosAuth(prevReq);
             } catch (err) {
+                enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
                 console.log("Expired");
-                dispatch(setUser({ user: null, accessToken: null }))
-                navigate(oms_url.auth);
+                dispatch(logOut())
                 return Promise.reject(err);
             }
         }
-
+        return Promise.reject(error);
     });
 
     return axiosAuth;

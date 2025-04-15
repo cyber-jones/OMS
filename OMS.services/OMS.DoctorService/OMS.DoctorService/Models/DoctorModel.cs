@@ -26,7 +26,7 @@ namespace OMS.DoctorService.Models
         [MaxLength(250)]
         public string Address { get; set; }
         public string State { get; set; }
-        public long NIN { get; set; }    
+        public string NIN { get; set; }    
         [StringLength(7)]   
         public string Work_ID { get; set; }
         public string Sex { get; set; }
@@ -45,7 +45,7 @@ namespace OMS.DoctorService.Models
         public Guid? Sub_Specialty_Id { get; set; }
         [ForeignKey(nameof(Sub_Specialty_Id))]
         public SpecialtyModel? Sub_Specialty { get; set; }
-        public string Certificate_Url { get; set; }
+        public string? Certificate_Url { get; set; }
 
 
         //Consultation Time

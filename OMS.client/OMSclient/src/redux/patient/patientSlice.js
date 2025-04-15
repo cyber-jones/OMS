@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const patientSlice = createSlice({
-    name: "patient",
-    initialState: { patient: null },
+    name: "patients",
+    initialState: { patients: null },
     reducers: {
         setPatient: (state, action) => {
-            state.patient = action.payload;
+            state.patients = action.payload;
         }
     }
 });

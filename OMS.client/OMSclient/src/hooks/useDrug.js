@@ -18,12 +18,14 @@ const useDrug = () => {
         try {
             const res = await axiosAuth.get("/drug/all");
             console.log(res)
-            if (res.status !== 200) 
-                enqueueSnackbar(res?.statusText, { variant: "error" });
+            if (res?.status !== 200 && res) {
+                enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });
+                return;
+            }
             
-            setDrugs(res.data);
+            setDrugs(res?.data);
         } catch (err) {
-            enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+            enqueueSnackbar(err?.response?.statusText || err.message, { variant: "error" });
         } finally {
             setLoading(false)
         }

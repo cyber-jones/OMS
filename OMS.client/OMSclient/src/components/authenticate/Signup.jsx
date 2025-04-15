@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Input from "../Input";
-import TextArea from "../TextArea";
+import Input from "../Inputs/Input";
+import TextArea from "../Inputs/TextArea";
 import { useSnackbar } from "notistack";
 import { axioAnonymous } from "../../data/axios";
 import { oms_server_dev_url, oms_url } from "../../utils/SD";
@@ -41,7 +41,7 @@ const Signup = () => {
     }
   };
 
-  console.log(formData);
+
   return (
     <form className="flex flex-col justify-center items-center w-full gap-3" onSubmit={(e) => handleSignup(e)}>
       {/* <p className='text-2xl font-bold '>SignUp Here!</p> */}

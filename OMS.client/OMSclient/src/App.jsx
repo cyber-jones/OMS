@@ -9,6 +9,11 @@ import Auth from "./pages/Auth";
 import IsAuth from "./components/authorize/IsAuth";
 import Drugs from "./pages/drugs/Drugs";
 import Settings from "./pages/settings/Settings";
+import RegisterDoctor from "./pages/settings/register/RegisterDoctor";
+import NotFound from "./pages/NotFound";
+import RegisterStaff from "./pages/settings/register/RegisterStaff";
+import RegisterSpecialty from "./pages/settings/register/RegisterSpecialty";
+import RegisterDrug from "./pages/settings/register/RegisterDrug";
 
 function App() {
   return (
@@ -62,8 +67,51 @@ function App() {
             </DashBoardComponents>
           }
         />
+        <Route
+          path={oms_url.registerDoctor}
+          element={
+            <DashBoardComponents>
+              <RegisterDoctor />
+            </DashBoardComponents>
+          }
+        />
+      </Route>
+      <Route element={<IsAuth role={Roles.ADMIN}/>}>
+        <Route
+          path={oms_url.registerDoctor}
+          element={
+            <DashBoardComponents>
+              <RegisterDoctor />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.registerStaff}
+          element={
+            <DashBoardComponents>
+              <RegisterStaff />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.registerSpecialty}
+          element={
+            <DashBoardComponents>
+              <RegisterSpecialty />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.registerDrug}
+          element={
+            <DashBoardComponents>
+              <RegisterDrug />
+            </DashBoardComponents>
+          }
+        />
       </Route>
       <Route path={oms_url.auth} element={<Auth />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

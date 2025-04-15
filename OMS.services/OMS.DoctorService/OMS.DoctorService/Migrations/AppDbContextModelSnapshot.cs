@@ -45,7 +45,6 @@ namespace OMS.DoctorService.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.Property<string>("Certificate_Url")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Clinic_Phone")
@@ -86,8 +85,9 @@ namespace OMS.DoctorService.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<long>("NIN")
-                        .HasColumnType("bigint");
+                    b.Property<string>("NIN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Profile_Url")
                         .HasColumnType("nvarchar(max)");
@@ -125,6 +125,28 @@ namespace OMS.DoctorService.Migrations
                     b.HasIndex("Sub_Specialty_Id");
 
                     b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("OMS.DoctorService.Models.LogModel", b =>
+                {
+                    b.Property<Guid>("Log_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Log_Id");
+
+                    b.ToTable("Logs");
                 });
 
             modelBuilder.Entity("OMS.DoctorService.Models.SpecialtyModel", b =>

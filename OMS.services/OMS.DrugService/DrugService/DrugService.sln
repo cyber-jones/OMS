@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMS.DrugService", "OMS.DrugService.csproj", "{09C5C5F5-D8EE-41C9-5270-3A33F120EA84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09C5C5F5-D8EE-41C9-5270-3A33F120EA84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09C5C5F5-D8EE-41C9-5270-3A33F120EA84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09C5C5F5-D8EE-41C9-5270-3A33F120EA84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09C5C5F5-D8EE-41C9-5270-3A33F120EA84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9518977E-D2D7-4801-9666-298BC87B6EE2}
+	EndGlobalSection
+EndGlobal

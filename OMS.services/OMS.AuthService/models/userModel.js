@@ -20,6 +20,10 @@ const userSchema = new Schema({
         enum: ["admin", "doctor", "staff", "patient"],
         default: ["patient"],
     },
+    accType: {
+        required: true,
+        type: String
+    },
     refreshToken: {
         type: String,
     },

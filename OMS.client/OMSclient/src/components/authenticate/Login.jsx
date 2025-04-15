@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Input from "../Input";
+import Input from "../Inputs/Input";
 import { useSnackbar } from "notistack";
 import { axioAnonymous } from "../../data/axios";
 import { oms_server_dev_url, oms_url } from "../../utils/SD";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux/auth/authSlice";
+import { setAuthUser } from "../../redux/auth/authUserSlice";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
@@ -36,7 +36,7 @@ const Login = () => {
         return enqueueSnackbar(res?.data?.message, { variant: "error" });
 
       const { accessToken: access, ...data } = res.data.body;
-      dispatch(setUser({ user: data, accessToken: access }));
+      dispatch(setAuthUser({ authUser: data, accessToken: access }));
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       navigete(prevLoc, { replace: true });

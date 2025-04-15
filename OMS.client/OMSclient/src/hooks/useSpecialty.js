@@ -17,12 +17,15 @@ const useSpecialty = () => {
         setLoading(true)
         try {
             const res = await axiosAuth.get("/specialty/all");
-            if (res?.status !== 200) 
-                enqueueSnackbar(res.statusText, { variant: "error" });
-            
+            if (res?.status !== 200 && res) {
+                enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });
+                return;
+            }
+
             setSpecialties(res?.data)
         } catch (err) {
-            enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+            console.log(err);
+            enqueueSnackbar(err?.response?.statusText || err.message, { variant: "error" });
         } finally {
             setLoading(false);
         }

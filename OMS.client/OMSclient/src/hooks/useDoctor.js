@@ -18,12 +18,14 @@ const useDoctor = () => {
         try {
             const res = await axiosAuth.get("/doctor/all");
             console.log(res)
-            if (res.status !== 200) 
-                enqueueSnackbar(res?.statusText, { variant: "error" });
+            if (res?.status !== 200 && res) {
+                enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });
+                return;
+            }
             
-            setDoctors(res.data);
+            setDoctors(res?.data);
         } catch (err) {
-            enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+            enqueueSnackbar(err?.response?.statusText || err.message, { variant: "error" });
         } finally {
             setLoading(false)
         }

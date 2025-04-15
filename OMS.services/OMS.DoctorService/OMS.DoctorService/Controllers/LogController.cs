@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OMS.DoctorService.Data;
@@ -22,7 +21,7 @@ namespace OMS.DoctorService.Controllers
 
 
         // GET: api/<LogController>
-        [HttpGet("patients")]
+        [HttpGet("patient")]
         public async Task<ActionResult<IEnumerable<LogModel>>> GetLogs()
         {
             try

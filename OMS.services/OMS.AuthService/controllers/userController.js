@@ -27,7 +27,7 @@ export const registerUser = async (req, res, next) => {
             return res.status(200).json({ success: true, message: "User already exist!"});
     
         const passHashed = bcryptjs.hashSync(value.Password, bcryptjs.genSaltSync(10));
-        const newUser = new User({ password: passHashed, email: value.Email, user_Profile_Id: value.User_Profile_Id });
+        const newUser = new User({ password: passHashed, email: value.Email, accType: value.AccType, user_Profile_Id: value.User_Profile_Id });
 
         if (role !== "patient") {
             newUser.roles.push(role);

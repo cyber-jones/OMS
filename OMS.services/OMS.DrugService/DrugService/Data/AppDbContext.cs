@@ -1,5 +1,7 @@
 ﻿using DrugService.Models;
 using Microsoft.EntityFrameworkCore;
+using OMS.DrugService.Config;
+using OMS.DrugService.Models;
 
 namespace DrugService.Data
 {
@@ -10,5 +12,13 @@ namespace DrugService.Data
         }
 
         public DbSet<DrugModel> Drugs { get; set; }
+        public DbSet<LogModel> Logs { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new DrugConfig());
+        }
     }
 }

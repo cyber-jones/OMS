@@ -1,11 +1,12 @@
 import {Router} from 'express';
 import { getRefresh } from '../controllers/refreshController.js';
+import { verifyAccess } from '../middlewares/verifyAccess.js';
 const refreshRouter = Router();
 
 
 
 
-refreshRouter.get("/refresh", getRefresh);
+refreshRouter.get("/refresh", verifyAccess, getRefresh);
 
 
 

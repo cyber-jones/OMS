@@ -22,7 +22,7 @@ namespace OMS.DoctorService.DTOs
         [MaxLength(250)]
         public string Address { get; set; }
         public string State { get; set; }
-        public long NIN { get; set; }    
+        public string NIN { get; set; }    
         [StringLength(7)]   
         public string Work_ID { get; set; }
         public string Sex { get; set; }
@@ -39,13 +39,12 @@ namespace OMS.DoctorService.DTOs
         public string Clinic_Phone { get; set; }
         public Guid Specialty_Id { get; set; }        
         public Guid Sub_Specialty_Id { get; set; }
-        public string Certificate_Url { get; set; }
+        public string? Certificate_Url { get; set; }
 
 
         //Consultation Time
         public string? CT_Start { get; set; }
         public string? CT_End { get; set; }
-        public bool Is_Active { get; set; } = false;
 
 
         public DateTime CreatedAt { get; set; }

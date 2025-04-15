@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const doctorSlice = createSlice({
-    name: "doctor",
-    initialState: { doctor: null, specialty: null },
+    name: "doctors",
+    initialState: { doctors: null, specialty: null },
     reducers: {
         setDoctor: (state, action) => {
-            state.doctor = action.payload;
+            state.doctors = action.payload;
         },
         setSpecialty: (state, action) => {
             state.specialty = action.payload;

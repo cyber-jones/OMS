@@ -16,7 +16,6 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-SD.AuthService_Dev_Url = builder.Configuration["OMS.AuthService_devUrl"]!;
 SD.Client_Dev_Url = builder.Configuration["OMS.Client_devUrl"]!;
 
 // Add services to the container.

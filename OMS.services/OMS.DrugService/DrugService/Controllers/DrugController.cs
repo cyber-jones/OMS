@@ -2,15 +2,18 @@
 using DrugService.Data;
 using DrugService.DTOs;
 using DrugService.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using OMS.DrugService.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DrugService.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class DrugController : ControllerBase
     {
@@ -72,6 +75,7 @@ namespace DrugService.Controllers
 
 
         // POST api/<DrugController>
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpPost] 
         public async Task<ActionResult<DrugDto>> NewDdrug([FromBody] DrugDto drugDto)
         {
@@ -95,6 +99,7 @@ namespace DrugService.Controllers
 
 
         // PUT api/<DrugController>/5
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpPut("{id}")]
         public async Task<ActionResult<DrugDto>> UpdateDrug(string id, [FromBody] DrugDto drugDto)
         {
@@ -123,6 +128,7 @@ namespace DrugService.Controllers
 
 
         // DELETE api/<DrugController>/5
+        [Authorize(Roles = Roles.ADMIN)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteDrug(string id)
         {

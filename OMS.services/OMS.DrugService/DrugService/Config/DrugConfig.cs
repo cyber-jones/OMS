@@ -13,6 +13,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
         builder.HasData(new List<DrugModel>()
         {
             new() {
+                Drug_Id = Guid.Parse("01dbd3dd-35c2-48e5-a611-bd7d5fe3cc18"),
                 Drug_Name = "Atorvastatin",
                 Manufacturer = "Pfizer Inc.",
                 Image =
@@ -25,9 +26,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Consult your doctor before use.",
                 Category = "HMG-CoA reductase inhibitors, or statins.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("0454ee7a-cd98-40bf-aaf0-c35ae7de7abb"),
                 Drug_Name = "Amoxicillin",
                 Manufacturer = "GlaxoSmithKline plc",
                 Image =
@@ -40,9 +43,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Complete the full course as prescribed.",
                 Category = "antibiotics",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("048e2deb-2827-4515-b1ad-27443f1cace0"),
                 Drug_Name = "Lisinopril",
                 Manufacturer = "AstraZeneca plc",
                 Image =
@@ -55,9 +60,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Monitor blood pressure regularly.",
                 Category = "blood pressure ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("0e18b850-5379-4d79-bb78-65401701d8e2"),
                 Drug_Name = "Metformin",
                 Manufacturer = " Merck & Co., Inc.",
                 Image =
@@ -70,9 +77,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Follow your diet and exercise program.",
                 Category = " Diabetes",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("136c0bc5-5303-46fb-aed4-c1deebd3f78b"),
                 Drug_Name = "Omeprazole",
                 Manufacturer = "Novartis AG",
                 Image =
@@ -85,9 +94,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Do not exceed the recommended dose.",
                 Category = "gastroesophageal ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("1b3fc741-74d0-41e7-933b-cc623768d863"),
                 Drug_Name = "Amlodipine",
                 Manufacturer = "Pfizer Inc.",
                 Image =
@@ -100,9 +111,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Avoid sudden discontinuation.",
                 Category = " blood pressure",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("1bfe06a0-4b21-486d-8d07-ca72ba9278fb"),
                 Drug_Name = "Zolpidem",
                 Manufacturer = "Sanofi S.A.",
                 Image =
@@ -115,9 +128,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Use only when you can get a full night's sleep.",
                 Category = "Insomnia ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("1c893513-0956-4cb4-8eae-3fbe42a82943"),
                 Drug_Name = "Clonazepam",
                 Manufacturer = "F. Hoffmann-La Roche AG",
                 Image =
@@ -130,9 +145,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "May be habit-forming, use as prescribed.",
                 Category = "depression ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("1d2012b0-b8d0-4640-b2df-31459cef3ba2"),
                 Drug_Name = "Montelukast",
                 Manufacturer = "Merck & Co., Inc.",
                 Image =
@@ -145,9 +162,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Not for use in an acute asthma attack",
                 Category = "allergy ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("1fa3d194-9491-40bf-9e24-84472516c14f"),
                 Drug_Name = "Gabapentin",
                 Manufacturer = "Pfizer Inc.",
                 Image =
@@ -160,9 +179,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Avoid alcohol while taking this medication.",
                 Category = "anticonvulsants",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("227cdab3-1c65-416d-8603-cb399c750a31"),
                 Drug_Name = "Albuterol",
                 Manufacturer = "Teva Pharmaceutical Industries Ltd.",
                 Image =
@@ -175,9 +196,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = " Use only as prescribed by your doctor.",
                 Category = "Inhaler",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("22d24e79-9dba-4805-b7da-73aac3f8e552"),
                 Drug_Name = "Loratadine",
                 Manufacturer = "Bayer AG",
                 Image =
@@ -190,9 +213,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = " Do not exceed the recommended dose.",
                 Category = " Antihistamine",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("23822b9e-8dfe-4065-80d4-ecf68015a579"),
                 Drug_Name = "Ibuprofen",
                 Manufacturer = " Johnson & Johnson",
                 Image =
@@ -205,9 +230,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Do not exceed the recommended dose.",
                 Category = " inflammatory",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("2456fc1e-37c8-46db-87f6-e15089dd8dda"),
                 Drug_Name = "Warfarin",
                 Manufacturer = "Bristol-Myers Squibb Company",
                 Image = "https =//www.careformulationlabs.com/uploaded_files/warfarin-5.png",
@@ -219,9 +246,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Regular blood tests are required.",
                 Category = "blood pressure",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             }, 
             new() {
+                Drug_Id = Guid.Parse("26507701-358c-4466-85c3-5906a6ccb15b"),
                 Drug_Name = "Cetirizine",
                 Manufacturer = "UCB S.A.",
                 Image =
@@ -234,9 +263,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Do not use machinery if drowsy.",
                 Category = "Antihistamine",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("29ed605c-76c1-4c10-a2d7-962227a5e035"),
                 Drug_Name = "Sertraline",
                 Manufacturer = " Pfizer Inc.",
                 Image =
@@ -249,9 +280,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "May take several weeks to feel the full benefit.",
                 Category = "depression",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("2a244008-1dfe-4817-bf98-7060e69332ab"),
                 Drug_Name = "Tramadol",
                 Manufacturer = " Janssen Pharmaceuticals",
                 Image =
@@ -264,9 +297,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Can be habit-forming, use only as prescribed.",
                 Category = "Pain Killer ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("2fced847-3d4b-4cad-99da-8a0a08660b80"),
                 Drug_Name = "Tamsulosin",
                 Manufacturer = " Boehringer Ingelheim GmbH",
                 Image =
@@ -279,9 +314,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = " Take 30 minutes after the same meal each day.",
                 Category = " Gynaecology",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("30a99895-c7f9-4f97-8cb7-03c03a891411"),
                 Drug_Name = "Oxycodone",
                 Manufacturer = " Purdue Pharma L.P.",
                 Image =
@@ -294,9 +331,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "High potential for abuse, use as prescribed.",
                 Category = "Pain Killer",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("31470cfa-e8c5-41ba-ac1d-8ad4a50928d3"),
                 Drug_Name = "Prednisone",
                 Manufacturer = " Mylan N.V.",
                 Image =
@@ -309,9 +348,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = " Do not stop taking abruptly.",
                 Category = "corticosteroid",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("345fb265-fc39-491a-9521-9cce3aabbe8d"),
                 Drug_Name = "Fluoxetine",
                 Manufacturer = "Eli Lilly and Company",
                 Image =
@@ -324,9 +365,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "May take several weeks to feel the full effect.",
                 Category = " depression",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("35b2570a-f47e-4eaa-85c5-55362fb4fb15"),
                 Drug_Name = "Metoprolol",
                 Manufacturer = " AstraZeneca plc",
                 Image =
@@ -339,9 +382,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = " Do not stop taking abruptly",
                 Category = " blood pressure",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("3b958543-2a83-4bfc-b97b-2fa114e0e00e"),
                 Drug_Name = "Furosemide",
                 Manufacturer = " Sanofi S.A.",
                 Image =
@@ -354,9 +399,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Monitor electrolyte levels regularly.",
                 Category = " oop diuretics",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("3622ff82-b5bf-41e2-b3c8-bbe9afb633fb"),
                 Drug_Name = "Duloxetine",
                 Manufacturer = "Eli Lilly and Company",
                 Image =
@@ -369,9 +416,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "May take several weeks to feel the full effect.",
                 Category = "depression ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("3c838a0b-e152-4a19-bc53-5e6d157ea749"),
                 Drug_Name = "Simvastatin",
                 Manufacturer = " Merck & Co., Inc.",
                 Image =
@@ -384,9 +433,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Follow a cholesterol-lowering diet plan.",
                 Category = "cholesterol ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("3d2b42fc-6443-4aa6-bc8f-aced3566930a"),
                 Drug_Name = "Losartan",
                 Manufacturer = " Bayer AG",
                 Image =
@@ -399,9 +450,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Monitor blood pressure regularly.",
                 Category = "blood pressure ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("4105d68b-74e4-458c-94ec-25bc5ce07cf7"),
                 Drug_Name = "Clopidogrel",
                 Manufacturer = " Sanofi S.A",
                 Image =
@@ -414,9 +467,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Regular blood tests are required.",
                 Category = "antiplatelet",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("41b7caed-1d30-4559-99fe-6c860be5e699"),
                 Drug_Name = "Hydrocodone",
                 Manufacturer = " AbbVie Inc.",
                 Image =
@@ -429,9 +484,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "High potential for abuse, use as prescribed.",
                 Category = "Pain killer ",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("44338b3b-fdb6-4358-9f76-b86527ba8125"),
                 Drug_Name = "Trazodone",
                 Manufacturer = " Teva Pharmaceutical Industries Ltd.",
                 Image =
@@ -444,9 +501,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "May take several weeks to feel the full effect.",
                 Category = " Depression",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             new() {
+                Drug_Id = Guid.Parse("4902693b-9a64-4164-84ef-6ee83f2834d9"),
                 Drug_Name = "Ranitidine",
                 Manufacturer = "GlaxoSmithKline plc",
                 Image =
@@ -459,12 +518,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Use as directed by your doctor.",
                 Category = " H2 blockers",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN
             },
             // ------ Dermatology  ------- \\
             new() {
                 Image =
                 "https =//tiimg.tistatic.com/fp/1/006/419/tazarotene-cream-0-1--641.jpg",
+                Drug_Id = Guid.Parse("4a8125db-978f-4e06-8a8e-e9baabe70240"),
                 Drug_Name = "Tazarotene",
                 Description = "This medication is a retinoid, prescribed for psoriasis and acne. It may decrease skin inflammation and skin changes associated with psoriasis.",
                 Consume_Type = "Adult = Topical- As 0.05 or 0.1% cream/gel = Apply once in the evening.",
@@ -473,11 +534,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-02-02",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
             new() {
                 Image = "https =//i.postimg.cc/D0VJ7Lr1/iso.jpg",
+                Drug_Id = Guid.Parse("4b440830-4046-4aea-9383-cf2bfabd9180"),
                 Drug_Name = "Isotretinoin ",
                 Description =
                  "This medication is a retinoid, prescribed for acne and other skin disorders. It reduces skin oil production, changing the characteristics of the skin oil, and preventing abnormal hardening of the skin.",
@@ -488,11 +551,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
             new() {
                 Image = "https =//i.postimg.cc/JhvtQZdS/mino.png",
+                Drug_Id = Guid.Parse("4bf2e9d6-cdac-4941-85c2-2721f21273fb"),
                 Drug_Name = "Minocycline",
                 Description =
                 "Minocycline is a broad spectrum tetracycline antibiotic. It acts by inhibiting the growth of bacteria in the body, It may be effective in other infections as well, however several bacteria have developed resistance to the drug, It may be used in patients who are allergic to the penicillin group of drugs as an alternative.",
@@ -504,11 +569,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-02-02",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
             new() {
                 Image = "https =//i.postimg.cc/L6x9TjJv/calamine.jpg",
+                Drug_Id = Guid.Parse("4bffbb3b-f70b-4013-90dd-6c2b34c7d0eb"),
                 Drug_Name = "Calamine Lotion",
                 Description =
                 "This medication is an anti-itch medication that contains mixture of zinc oxide (ZnO) with about 0.5% iron (III) oxide, prescribed for itching skin conditions. This medication in some cases is used as a mild antiseptic to arrest infections caused by scratching the affected area. Calamine is proved to be an effective medication in acne treatment.",
@@ -518,11 +585,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
             new() {
                 Image = "https =//i.postimg.cc/K8K2DwSv/dim.jpg",
+                Drug_Id = Guid.Parse("4d39a332-77fa-4572-aa34-d8e80eae2254"),
                 Drug_Name = "Dimethicone",
                 Description =
                 "This medication is an emollient, prescribed for pediculosis, and other skin conditions.",
@@ -533,11 +602,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2024-12-20",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
             new() {
                 Image = "https =//i.postimg.cc/90x6GtL7/ss.jpg",
+                Drug_Id = Guid.Parse("4d53b46d-c39a-4616-8e88-6f3f81b93315"),
                 Drug_Name = "Sucralfate",
                 Description =
                 "This medication is a gastric protective agent, prescribed for intestinal ulcers.",
@@ -549,11 +620,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-02-02",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
             new() {
                 Image = "https =//i.postimg.cc/WbgzwdMH/adap.jpg",
+                Drug_Id = Guid.Parse("4dcc4249-46c1-49e6-8d19-89a7d3147069"),
                 Drug_Name = "Adapalene",
                 Description =
                  "Adapalene is a topical retinoid-like compound used to treat mild to moderate acne by preventing the formation of pimples acting deeply in the source.It also prevents the formation of new() acne by restoring skin texture and tone.",
@@ -565,12 +638,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
 
             new() {
                 Image = "https =//i.postimg.cc/NjNxBC5T/nad.png",
+                Drug_Id = Guid.Parse("52f52831-43f2-48e9-909a-2545ad662891"),
                 Drug_Name = "Nadifloxacin",
                 Description =
                  "This medication is a topical antibiotic, prescribed for acne vulgaris. It inhibits the enzyme DNA gyrase that is involved in bacterial replication.",
@@ -582,12 +657,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-02-02",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
 
             new() {
                 Image = "https =//i.postimg.cc/nhMDYFhj/oxy.jpg",
+                Drug_Id = Guid.Parse("537f4369-cb6f-4668-82ba-eb1dc94443c5"),
                 Drug_Name = "Oxytetracycline",
                 Description =
                  "This medication is an antibiotic, prescribed for various infections such as acne, dermatitis, gonorrhea, etc.",
@@ -599,12 +676,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-02-02",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
             new() {
                 Image =
                 "https =//5.imimg.com/data5/FY/GY/MY-39084219/nadifloxacin-cream-500x500.jpg",
+                Drug_Id = Guid.Parse("555863b7-49e4-4544-87af-a7783cdea340"),
                 Drug_Name = "Nadifloxacin",
                 Description =
                  "This medication is a topical antibiotic, prescribed for acne vulgaris. It inhibits the enzyme DNA gyrase that is involved in bacterial replication.",
@@ -615,6 +694,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2024-12-20",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dermatology",
             },
@@ -623,6 +703,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
             new() {
                 Image =
                 "https =//www.empr.com/wp-content/uploads/sites/7/2018/12/ac752944889a4c6494dae4f478ea8237-nesina_405478.jpg",
+                Drug_Id = Guid.Parse("555863b7-eb9d-4668-909a-11e5cbae5643"),
                 Drug_Name = "Alogliptin",
                 Description =
                  "Alogliptin is prescribed to reduce high blood sugar level in patients with type 2 diabetes along with diet control and exercise.It should not be used in treating diabetic ketoacidosis or type 1 diabetes.  ",
@@ -634,12 +715,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Diabetes",
             },
             new() {
                 Image =
                 "https =//5.imimg.com/data5/ZJ/FV/VB/SELLER-104814248/alogliptin-500x500.jpg",
+                Drug_Id = Guid.Parse("56c385a7-eb9d-49da-8d5e-be81ce4c141a"),
                 Drug_Name = "Alogliptin and Metformin",
                 Description =
                  "Alogliptin and Metformin combination is used along with diet and exercise to improve blood sugar control or to treat hyperglycemia in patients with type 2 diabetes.High blood sugar level can cause damage to the eyes, kidney, and nerves.This combination medication contains alogliptin, a dipeptidyl-peptidase-4 (DPP-4) inhibitor and metformin, a biguanide.",
@@ -650,12 +733,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Diabetes",
             },  
             new() {
                 Image =
                 "https =//www.empr.com/wp-content/uploads/sites/7/2018/12/5a26069609d944038725ae95e761a5f1-oseni_405485.jpg",
+                Drug_Id = Guid.Parse("588b3f8d-a353-479f-ad9a-d2006eb52a12"),
                 Drug_Name = "Alogliptin and Pioglitazone",
                 Description =
                  "Alogliptin and Pioglitazone combination is used to treat high blood sugar level in patients with type 2 diabetes along with diet control and exercise. This combination should not be used to treat type 1 diabetes.This combination medication contains pioglitazone, a thiazolidinedione agent and alogliptin, a DPP-4 inhibitor.",
@@ -667,12 +752,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Diabetes",
             },
             new() {
                 Image =
                 "https =//5.imimg.com/data5/MR/OX/MY-18174683/sulisent-28canagliflozin-100mg-29-tablet-500x500.jpg",
+                Drug_Id = Guid.Parse("5895021f-292a-4233-8b46-11e5cbae5643"),
                 Drug_Name = "Canagliflozin",
                 Description =
                  "This medication is an antidiabetic (sodium glucose co-transporter 2 (SGLT2) inhibitor), prescribed for type 2 diabetes mellitus along with diet and exercise. For patients with type 2 diabetes along with diabetic kidney disease, physicians should consider using an SGLT2 inhibitor when the eGFR is at or above 30, especially with albuminuria above 300 mg/g, to lower renal and CV risk as per A.D.A recommendations.",
@@ -683,12 +770,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Diabetes",
             },
             new() {
                 Image =
                 "https =//encrypted-tbn0.gstatic.com/images?q=tbn =ANd9GcSKl6UBEBhkp0cUc7ciO3VVRoBjtAf7cA-QPOTggzDmit4AYegpA3mcl9haEtf6nfB5diw&usqp=CAU",
+                Drug_Id = Guid.Parse("5e0cfa38-c8a9-463c-830a-c516bcd39645"),
                 Drug_Name = "Diabinese",
                 Description =
                  "This medication is a sulfonylurea antidiabetic drug, prescribed for type 2 diabetes. This medication helps to keep blood sugar levels under control.",
@@ -700,12 +789,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Diabetes",
             },
             new() {
                 Image =
                 "https =//www.prestoimages.net/store30/rd14324/14324_pd3794145_1_.jpg",
+                Drug_Id = Guid.Parse("607f81c3-6d7e-45ca-9a5d-2aca5ee75bb0"),
                 Drug_Name = "Colesevelam HCL",
                 Description =
                  "This medication is a bile acid sequestrant, prescribed for familial hypercholesterolesmia and type 2 diabetes with other medications.",
@@ -717,12 +808,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Diabetes",
             },
             new() {
                 Image =
                 "https =//emedz.net/blog/wp-content/uploads/2020/01/Steglatro-ertugliflozin-696x484.jpg",
+                Drug_Id = Guid.Parse("625b58c4-6354-4302-9cce-e846deefd3b4"),
                 Drug_Name = "Steglatro",
                 Description =
                  "Ertugliflozin tablet is a sodium glucose co-transporter 2 (SGLT2) inhibitor which is prescribed for adult patients with type 2 diabetes as an adjunct therapy to diet control and exercise with a focus to improve glycemic control.It is prescribed either as a monotherapy or in combination with metformin or sitagliptin.  ",
@@ -734,12 +827,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Diabetes",
             },
             new() {
                 Image =
                 "https =//5.imimg.com/data5/SELLER/Default/2021/2/KR/IZ/EH/123113767/byetta-10mcg-500x500.jpg",
+                Drug_Id = Guid.Parse("634863c9-8731-432b-8993-389062c3a743"),
                 Drug_Name = "Byetta",
                 Description =
                  "This medication is a incretin mimetic, prescribed for type 2 diabetes with diet and exercise, either alone or with other medications. For patients with chronic kidney disease who are at elevated risk for CV events, a glucagon-like peptide 1 receptor agonist may lower risk for albuminuria progression and/or CV events, according to new() (2019)recommendations of The American Diabetes Association It works by stimulating the pancreas to secrete insulin in hyperglycemic condition.  ",
@@ -751,12 +846,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Diabetes",
             },
             new() {
                 Image =
                 "https =//5.imimg.com/data5/QY/WA/MY-29865653/glibenclamide-tablets-500x500.jpg",
+                Drug_Id = Guid.Parse("6694147d-65c9-4db4-9896-8a02e8319177"),
                 Drug_Name = "Glibenclamide",
                 Description =
                  "TGlibenclamide is an oral hypoglycemic (glucose lowering) drug used to control blood sugar levels in patients with type 2 diabetes in addition to diet and exercise.It belongs to the chemical group of sulfonylureas",
@@ -768,6 +865,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Diabetes",
             },
@@ -776,6 +874,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
 
             new() {
                 Image = "https =//i.postimg.cc/Z5Y1wQGy/Ademetionine.jpg",
+                Drug_Id = Guid.Parse("71d1df18-9c3e-4599-affe-c54a325a592e"),
                 Drug_Name = "Ademetionine",
                 Description =
                  "Ademetionine is used for treating chronic liver disease such as intrahepatic cholestasis.",
@@ -786,11 +885,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Depression",
             },
             new() {
                 Image = "https =//i.postimg.cc/KYkpVhJ4/Alprazolam.jpg",
+                Drug_Id = Guid.Parse("7205d1c2-3503-49f8-b4b4-07d47f98cb52"),
                 Drug_Name = "Alprazolam",
                 Description =
                  "This medication is a benzodiazepine, prescribed for anxiety and panic disorders.",
@@ -802,12 +903,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Depression",
             },
 
             new() {
                 Image = "https =//i.postimg.cc/TYtk33sp/Amitriptyline.jpg",
+                Drug_Id = Guid.Parse("732a381c-b456-444b-aba7-628c90aa9264"),
                 Drug_Name = "Amitriptyline",
                 Description =
                  "This medication is a tricyclic antidepressant, prescribed for depression.",
@@ -819,12 +922,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Depression",
             },
             // ------- Dental  ------- \\
             new() {
                 Image = "https =//i.postimg.cc/nrDHcWFL/Chlorhexidine.jpg",
+                Drug_Id = Guid.Parse("74aee27c-15af-480d-966b-a2377f2ce712"),
                 Drug_Name = "Chlorhexidine",
                 Description =
                  "This medication is a chemical antiseptic, prescribed for gingivitis, cleansing skin and wound areas.",
@@ -835,11 +940,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dental",
             },
             new() {
                 Image = "https =//i.postimg.cc/W4ztcXkd/Feracrylum.jpg",
+                Drug_Id = Guid.Parse("753752f9-ea3a-48fe-aaae-9c85c754131b"),
                 Drug_Name = "Feracrylum",
                 Description =
                  "Feracrylum is used as a hemostatic (to stop bleeding) and an anti-septic for the management of post-operative wounds, cuts.",
@@ -850,11 +957,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dental",
             },
             new() {
                 Image = "https =//i.postimg.cc/FH7Q9qTX/Gensparin.jpg",
+                Drug_Id = Guid.Parse("7ad75bb3-b7e9-49f5-86da-a0866431991f"),
                 Drug_Name = "Gensparin",
                 Description =
                  "Gensparin prevents the formation of blood clots and is hence used for the treatment of thrombolytic disorders.",
@@ -864,11 +973,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dental",
             },
             new() {    
                 Image = "https =//i.postimg.cc/3r1M276H/Multivitamin.jpg",
+                Drug_Id = Guid.Parse("7cdea7f7-aa7b-4671-82d4-cc34a49e7966"),
                 Drug_Name = "Multivitamin",
                 Description =
                  "This medication is an essential nutrient, prescribed for patients with vitamin deficiency.  Normally provided in combination with dietary minerals.",
@@ -878,6 +989,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Dental",
             },
@@ -885,6 +997,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
              //_ -_---- Fracture ------ \\
             new() {
                 Image = "https =//i.postimg.cc/MGStsfM3/Abaloparatide.jpg",
+                Drug_Id = Guid.Parse("8941f8e0-e770-4ce9-97d1-3a709a296a33"),
                 Drug_Name = "Abaloparatide",
                 Description =
                  "Abaloparatide is prescribed to treat osteoporosis in postmenopausal women who are at a high risk for fracture.",
@@ -896,12 +1009,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Fracture",
             },
 
             new() {
                 Image = "https =//i.postimg.cc/C5XsbRpN/Aspirin-and-Oxycodone.jpg",
+                Drug_Id = Guid.Parse("8b4f83cb-17a1-4075-858a-1471de2f4d30"),
                 Drug_Name = "Aspirin and Oxycodone ",
                 Description =
                  "This combination medication is used to relieve moderate to severe pain.",
@@ -913,12 +1028,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Fracture",
             },
 
             new() {
                 Image = "https =//i.postimg.cc/g0syNSPr/Metamizole.jpg",
+                Drug_Id = Guid.Parse("90307545-dbae-41b1-ba24-1358c45565bb"),
                 Drug_Name = "Metamizole",
                 Description =
                  "Metamizole is a painkiller used for the treatment of fever, headache, toothache, postoperative pain and other painful conditions.",
@@ -929,6 +1046,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Fracture",
             },
@@ -937,6 +1055,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
             new() {
                 Image =
                 "https =//new()assets.apollo247.com/pub/media/catalog/product/s/u/sus0048.jpg",
+                Drug_Id = Guid.Parse("95016060-381d-4eee-96ce-1f9717e8f89c"),
                 Drug_Name = "Progesterone",
                 Description =
                  "This medication is a hormone, prescribed for replacement therapy in women who have passed menopause. It is also used to prevent uterine cancer.",
@@ -947,11 +1066,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Women Care",
             },
             new() {
                 Image = "https =//i.postimg.cc/rpZgNVWK/de.jpg",
+                Drug_Id = Guid.Parse("95987b69-82d8-4c1c-8847-6a7718536705"),
                 Drug_Name = "Dehydroepiandrosterone",
                 Description =
                  "Adrenal insufficiency, where the adrenal gland does not produce enough hormones, To improve aging skin, Depression",
@@ -962,11 +1083,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Women Care",
             },
             new() {
                 Image = "https =//i.postimg.cc/8zB0Mgt6/es.jpg",
+                Drug_Id = Guid.Parse("95ca7d10-8d4c-4abf-8fa8-e4f2675b6ed5"),
                 Drug_Name = "Estrogen",
                 Manufacturer = " Bayer AG",
                 Description =
@@ -978,10 +1101,12 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Expiry_Date = "2025-12-23",
                 Disclaimer = "Use as directed by your doctor.",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
                 Category = "Women Care",
             },
             new() {
+                Drug_Id = Guid.Parse("95cd4507-2ee5-45a8-8e2d-eeac6ba9559b"),
                 Drug_Name = "Skin Rejuvenation Cream",
                 Manufacturer = "BeautyCo",
                 Image =
@@ -995,9 +1120,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 "Consult with a dermatologist before use if you have sensitive skin.",
                 Category = "women care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("98257419-c322-4348-bad2-59fc2bc251f0"),
                 Drug_Name = "Whisper Choice Ultra-Thin Pads",
                 Manufacturer = "Whisper",
                 Image =
@@ -1010,9 +1137,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Always read the label. Use only as directed.",
                 Category = "women care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("99dd0620-250a-4cd2-9236-95c9bdb4d8a5"),
                 Drug_Name = "Sofy Bodyfit Overnight Pads",
                 Manufacturer = "ComfortPlus",
                 Image =
@@ -1025,9 +1154,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Always read the label. Use only as directed.",
                 Category = "women care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("9e89c5c1-db3a-42f0-b867-730b9ea5e2f1"),
                 Drug_Name = "Preganew()s",
                 Manufacturer = "Mankind Pharma",
                 Image =
@@ -1041,9 +1172,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 "This product is not a substitute for professional medical advice. Consult a healthcare provider for any health-related questions.",
                 Category = "women care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("9ea2bbf5-263b-4d5f-bea6-508a3295983c"),
                 Drug_Name = "V Wash",
                 Manufacturer = "CleanCare",
                 Image =
@@ -1056,12 +1189,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "For external use only. Discontinue use if irritation occurs.",
                 Category = "women care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
 
             // ------- Women Care End ----- \\
             // -------PERSONAL CARE ---------\\
             new() {
+                Drug_Id = Guid.Parse("9efceda5-b6b8-40d2-9ecf-4d48aa19a2e1"),
                 Drug_Name = "Herbal Hair Oil",
                 Manufacturer = "Nature's Essence",
                 Image =
@@ -1074,9 +1209,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "For external use only. Keep out of reach of children.",
                 Category = "personal care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("a0160ae6-6fbf-4d35-90fd-246936583349"),
                 Drug_Name = "Vaseline Sun Protection SPF 30 Body Lotion",
                 Manufacturer = "EcoBeauty",
                 Image =
@@ -1092,9 +1229,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
 
                 Category = "personal care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("a424b19d-387e-4f66-a790-9fbe53a947ae"),
                 Drug_Name = "Sunscreen SPF 50",
                 Manufacturer = "SunGuard",
                 Image =
@@ -1107,9 +1246,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Apply generously before sun exposure.",
                 Category = "personal care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("a52e0262-522a-4f2f-a3a8-c872bf13deae"),
                 Drug_Name = "head and shoulders Shampoo",
                 Manufacturer = "head and shoulders",
                 Image =
@@ -1122,9 +1263,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "For external use only. Avoid contact with eyes.",
                 Category = "personal care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("a6951bd4-5d28-4fc0-8293-f26cd35d5097"),
                 Drug_Name = "Dove Anti-Dandruff Shampoo",
                 Manufacturer = "Dove",
                 Image =
@@ -1138,12 +1281,14 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 "For external use only. Rinse thoroughly if contact with eyes occurs.",
                 Category = "personal care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             // // -------PERSONAL CARE End---------\\
 
             // // const babyCareProducts = [
             new() {
+                Drug_Id = Guid.Parse("a7280712-e04c-4790-8216-5cd919f1dbad"),
                 Drug_Name = "Citaphil Baby Shampoo",
                 Manufacturer = "GentleCare",
                 Image =
@@ -1155,9 +1300,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Rinse thoroughly to avoid residue.",
                 Category = "Baby Care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("a9387756-7981-4e40-9ddf-dfd332943079"),
                 Drug_Name = "Johnson's Coconut Oil Baby Body Lotion",
                 Manufacturer = "SoftSkin",
                 Image =
@@ -1169,9 +1316,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Test on small area before use.",
                 Category = "Baby Care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("aa10651e-dc26-40b8-b441-74b9ab025eac"),
                 Drug_Name = "Jphnson's Baby Wipes",
                 Manufacturer = "CleanBaby",
                 Image = "https =//m.media-amazon.com/images/I/61jXR7o-W7L.jpg",
@@ -1182,9 +1331,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Use only as directed. Discontinue if irritation occurs.",
                 Category = "Baby Care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("b674f064-96bf-4078-ade0-9c39e590477d"),
                 Drug_Name = "Pappers All round Protection",
                 Manufacturer = "HappyTeeth",
                 Image =
@@ -1197,9 +1348,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 "Change diapers frequently to avoid prolonged exposure to moisture. If irritation occurs, discontinue use and consult a pediatrician.",
                 Category = "Baby Care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("bc29b5dc-d59f-4466-8e2a-7501ab9af260"),
                 Drug_Name = "Manypoko Standard",
                 Manufacturer = "SunSafe",
                 Image =
@@ -1212,9 +1365,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 "Change diapers frequently to avoid prolonged exposure to moisture. If irritation occurs, discontinue use and consult a pediatrician.",
                 Category = "Baby Care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("c052045e-3862-49bb-a003-ed49fa7e998a"),
                 Drug_Name = "Himalaya baby Massage Oil",
                 Manufacturer = "BathTime",
                 Image =
@@ -1226,9 +1381,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Avoid contact with eyes. Rinse thoroughly.",
                 Category = "Baby Care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("c3cbf42e-9e95-4388-a23b-a8ba8f01ce96"),
                 Drug_Name = "Johnson's Non-Sticky Oil ",
                 Manufacturer = "TenderTouch",
                 Image =
@@ -1240,9 +1397,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Test on a small area before full application.",
                 Category = "Baby Care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("c752559f-6a87-4d7f-a7f3-e33d49d27e1e"),
                 Drug_Name = "Vapor Rub",
                 Manufacturer = "BreatheEasy",
                 Image = "https =//m.media-amazon.com/images/I/71bBjtfhfVL.jpg",
@@ -1253,11 +1412,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "For external use only. Do not apply to broken skin.",
                 Category = "Baby Care",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             // // ];
             //_ /_/ ------------ Ayurveda -------------\\
             new() {
+                Drug_Id = Guid.Parse("d0578e48-ddb2-42a0-8263-28e07f988209"),
                 Drug_Name = "Triphala Churna",
                 Manufacturer = "Patanjali Ayurved Limited",
                 Image =
@@ -1270,9 +1431,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Consult a healthcare professional before use.",
                 Category = "Ayurveda",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("d1ac7ec4-2aee-4b8a-b483-27d906ca159c"),
                 Drug_Name = "Ashwagandha Capsules",
                 Manufacturer = "Himalaya Wellness",
                 Image =
@@ -1286,9 +1449,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Not recommended for pregnant or nursing women.",
                 Category = "Ayurveda",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("d4f45f18-db0e-43dd-b3fd-dfd41f25d457"),
                 Drug_Name = "Neem Face Wash",
                 Manufacturer = "Himalaya Wellness",
                 Image = "https =//m.media-amazon.com/images/I/51tXjE2WQQL.jpg",
@@ -1301,9 +1466,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 "Avoid contact with eyes; rinse thoroughly with water if contact occurs.",
                 Category = "Ayurveda",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("d78d6ff1-004c-4b6b-8d08-0294007af0b3"),
                 Drug_Name = "Trikatu Churna",
                 Manufacturer = "Baidyanath",
                 Image = "https =//m.media-amazon.com/images/I/81fbE1aS5mL.jpg",
@@ -1315,9 +1482,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Consult a qualified healthcare practitioner before use.",
                 Category = "Ayurveda",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("eae5cc5e-5e6b-4f80-ae1f-9d86b3862ab8"),
                 Drug_Name = "Amla Juice",
                 Manufacturer = "Patanjali Ayurved Limited",
                 Image =
@@ -1331,11 +1500,13 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                  "Best consumed as per recommended dosage; excessive consumption may lead to digestive discomfort.",
                 Category = "Ayurveda",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             // ------------ Ayurveda End-------------\\
             // ------------ Health Devices -------------\\
             new() {
+                Drug_Id = Guid.Parse("eb44a1c5-bb90-4219-9f42-9dd1699e2b54"),
                 Drug_Name = "Blood Pressure Monitor",
                 Manufacturer = "HealthTech Inc.",
                 Image = "https =//m.media-amazon.com/images/I/71-qOprKrIL.jpg",
@@ -1346,9 +1517,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Consult a healthcare professional for medical advice.",
                 Category = "Health Devices",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("f1c371bd-8b67-465b-b0a4-f6d196842fc7"),
                 Drug_Name = "Glucometer",
                 Manufacturer = "FitLife Technologies",
                 Image = "https =//m.media-amazon.com/images/I/317TDpZziaL.jpg",
@@ -1360,9 +1533,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Consult a healthcare professional for medical advice.",
                 Category = "Health Devices",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("f42f502a-5659-41b6-9d43-26e906e15c69"),
                 Drug_Name = "Digital Thermometer",
                 Manufacturer = "MediSense Innovations",
                 Image =
@@ -1374,10 +1549,12 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Read instructions carefully before use.",
                 Category = "Health Devices",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
               //_ -_------------Nutritional Drinks & Supplements---------\\
             new() {
+                Drug_Id = Guid.Parse("f71859d1-52e9-4155-bc70-2fb71cb97c72"),
                 Drug_Name = "Protein Powder",
                 Manufacturer = "FitnessNutri",
                 Image = "https =//m.media-amazon.com/images/I/61ZKpqtTJ2L.jpg",
@@ -1389,8 +1566,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                  "C_onsult your doctor before starting any new() supplement regimen.",
                 Category = "Nutritional Drinks & Supplements",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
-            },  new() {
+            },  
+            new() {
+                Drug_Id = Guid.Parse("fd71f163-dd72-44cf-810d-c88599b076e6"),
                 Drug_Name = "Multivitamin Tablets",
                 Manufacturer = "HealthPlus",
                 Image =
@@ -1403,9 +1583,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Keep out of reach of children.",
                 Category = "Nutritional Drinks & Supplements",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("fd73a2ef-e3df-4b86-bf2b-9b268dbaefb0"),
                 Drug_Name = "Fish Oil Capsules",
                 Manufacturer = "OmegaHealth",
                 Image =
@@ -1418,9 +1600,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Store in a cool, dry place.",
                 Category = "Nutritional Drinks & Supplements",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("fed00935-9d29-4340-b877-1d08c99b64a0"),
                 Drug_Name = "Energy Drink Mix",
                 Manufacturer = "BoostEnergy",
                 Image =
@@ -1434,9 +1618,11 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                  "Not recommended for pregnant women or individuals sensitive to caffeine.",
                 Category = "Nutritional Drinks & Supplements",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
             new() {
+                Drug_Id = Guid.Parse("ff75f7ff-ae64-4362-bd2d-c69cfb755a5c"),
                 Drug_Name = "Probiotic Yogurt",
                 Manufacturer = "BioHealth",
                 Image =
@@ -1449,6 +1635,7 @@ public class DrugConfig : IEntityTypeConfiguration<DrugModel>
                 Disclaimer = "Refrigerate after opening.",
                 Category = "Nutritional Drinks & Supplements",
                 Count_In_Stock = 100,
+                Created_At = new DateTime(2025, 04, 16),
                 Created_By = Roles.ADMIN,
             },
         });

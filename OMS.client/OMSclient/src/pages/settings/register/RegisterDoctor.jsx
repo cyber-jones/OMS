@@ -7,6 +7,11 @@ import { oms_server_dev_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import useSpecialty from "../../../hooks/useSpecialty";
 
+
+
+
+
+
 const RegisterDoctor = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -49,6 +54,12 @@ const RegisterDoctor = () => {
     }
   };
   console.log(formData);
+
+
+
+
+
+
 
   return (
     <form

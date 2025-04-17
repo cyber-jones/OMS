@@ -18,7 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 SD.AuthService_Dev_Url = builder.Configuration["OMS.AuthService_devUrl"]!;
 SD.Client_Dev_Url = builder.Configuration["OMS.Client_devUrl"]!;
-Console.WriteLine(SD.Client_Dev_Url);
+
 // Add services to the container.
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()

@@ -8,6 +8,7 @@ namespace OMS.DoctorService.Models
     public class DoctorModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Doctor_Id { get; set; }
 
 

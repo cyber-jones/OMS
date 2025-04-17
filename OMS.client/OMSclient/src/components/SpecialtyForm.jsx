@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = ({ handleSubmit, name, handleChange, loading }) => {
+const SpecialtyForm = ({ handleSubmit, name, handleChange, loading }) => {
   return (
     <form
       onSubmit={handleSubmit}
@@ -45,4 +45,4 @@ const Form = ({ handleSubmit, name, handleChange, loading }) => {
   );
 };
 
-export default Form;
+export default SpecialtyForm;

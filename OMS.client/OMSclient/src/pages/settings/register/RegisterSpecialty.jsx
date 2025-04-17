@@ -4,6 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { oms_server_dev_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 
+
+
+
+
+
+
+
 const RegisterSpecialty = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -38,6 +45,12 @@ const RegisterSpecialty = () => {
   };
   console.log(formData);
 
+
+
+
+
+
+  
   return (
     <form
       onSubmit={handleSubmit}

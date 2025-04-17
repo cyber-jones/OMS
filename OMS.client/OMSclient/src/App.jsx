@@ -36,7 +36,7 @@ function App() {
           }
         />
         <Route
-          path={`${oms_url.deatiledDSecialty}/:id`}
+          path={`${oms_url.specialty}/:id`}
           element={
             <DashBoardComponents>
               <DetailedSpecialty />
@@ -56,6 +56,14 @@ function App() {
           element={
             <DashBoardComponents>
               <Drugs />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={`${oms_url.drug}/:id`}
+          element={
+            <DashBoardComponents>
+              <DetailedSpecialty />
             </DashBoardComponents>
           }
         />

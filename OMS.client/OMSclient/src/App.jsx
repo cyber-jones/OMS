@@ -14,6 +14,29 @@ import NotFound from "./pages/NotFound";
 import RegisterStaff from "./pages/settings/register/RegisterStaff";
 import RegisterSpecialty from "./pages/settings/register/RegisterSpecialty";
 import RegisterDrug from "./pages/settings/register/RegisterDrug";
+import DetailedDrug from "./pages/drugs/DetailedDrug";
+import DoctorList from "./pages/settings/list/DoctorList";
+import UpdateDoctor from "./pages/settings/update/UpdateDoctor";
+import PatientList from "./pages/settings/list/PatientList";
+import UpdateStaff from "./pages/settings/update/UpdateStaff";
+import UpdatePatient from "./pages/settings/update/UpdatePatient";
+import StaffList from "./pages/settings/list/StaffList";
+import DrugList from "./pages/settings/list/DrugList";
+import UpdateDrug from "./pages/settings/update/UpdateDrug";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function App() {
   return (
@@ -63,7 +86,7 @@ function App() {
           path={`${oms_url.drug}/:id`}
           element={
             <DashBoardComponents>
-              <DetailedSpecialty />
+              <DetailedDrug />
             </DashBoardComponents>
           }
         />
@@ -114,6 +137,70 @@ function App() {
           element={
             <DashBoardComponents>
               <RegisterDrug />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.doctorList}
+          element={
+            <DashBoardComponents>
+              <DoctorList />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.updateDoctor+"/:id"}
+          element={
+            <DashBoardComponents>
+              <UpdateDoctor />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.patientList}
+          element={
+            <DashBoardComponents>
+              <PatientList />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.updatePatient+"/:id"}
+          element={
+            <DashBoardComponents>
+              <UpdatePatient />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.staffList}
+          element={
+            <DashBoardComponents>
+              <StaffList />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.updateStaff+"/:id"}
+          element={
+            <DashBoardComponents>
+              <UpdateStaff />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.drugList}
+          element={
+            <DashBoardComponents>
+              <DrugList />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.updateDrug+"/:id"}
+          element={
+            <DashBoardComponents>
+              <UpdateDrug />
             </DashBoardComponents>
           }
         />

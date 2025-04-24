@@ -18,7 +18,7 @@ const Header = ({ sideNav, setSideNav}) => {
             <input className='px-8 py-3 focus:outline-0 ml-3 w-[300px] text-sm' type='text' placeholder='Search Patient' /> 
         </div>
         <div className='min-w-[40%] md:min-w-[20%] h-full flex justify-center items-center gap-2'>
-          <p className='text-[15px] md:text-md font-light'>{ !loading ? `${user?.first_Name} ${user?.last_Name}` : "Loading..." }</p>
+          <p className='text-[10px] md:text-[15px] font-light'>{ !loading && user !== null ? `${user?.first_Name} ${user?.last_Name}` : "Loading..." }</p>
           <div className='w-[17%] md:w-[12%] h-[40%] md:h-7/12 rounded-full bg-black'></div>
         </div>
     </header>

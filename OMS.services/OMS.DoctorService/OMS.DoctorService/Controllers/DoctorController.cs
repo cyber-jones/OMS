@@ -62,7 +62,10 @@ namespace OMS.DoctorService.Controllers
                 if (id.IsNullOrEmpty())
                     return BadRequest();
 
-                var doctor = await _dbContext.Doctors.FirstOrDefaultAsync(p => p.Doctor_Id.Equals(Guid.Parse(id)));
+                var doctor = await _dbContext.Doctors
+                    .Include(d => d.Specialty)
+                        .Include(d => d.Sub_Specialty)
+                            .FirstOrDefaultAsync(p => p.Doctor_Id.Equals(Guid.Parse(id)));
 
                 if (doctor == null)
                     return NotFound();
@@ -93,7 +96,7 @@ namespace OMS.DoctorService.Controllers
                     FirstOrDefaultAsync(p  => p.Email.Equals(doctorRegisterDto.Email) || p.NIN.Equals(doctorRegisterDto.NIN) || p.Work_ID.Equals(doctorRegisterDto.Work_ID));
 
                 if (doctor is not null)
-                    return BadRequest("Email already registered!");
+                    return BadRequest("Email, NIN, Work ID has already registered!");
 
 
                 var doctorModel = _mapper.Map<DoctorModel>(doctorRegisterDto);

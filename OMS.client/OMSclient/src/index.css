@@ -7,11 +7,10 @@
 @layer components {
   .button {
     padding: 4px 12px;
-    color: white;
     opacity: 80%;
     border-radius: 8px;
     transition: opacity 0.4s ease-in;
-    background-color: black;
+    font-size: 12px;
   }
   
   .button:hover {

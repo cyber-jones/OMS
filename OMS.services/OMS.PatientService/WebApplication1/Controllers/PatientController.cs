@@ -91,10 +91,11 @@ namespace WebApplication1.Controllers
                 if (patientRegisterDto == null || !ModelState.IsValid)
                     return BadRequest();
 
-                var patient = await _dbContext.Patients.FirstOrDefaultAsync(p  => p.Email.Equals(patientRegisterDto.Email) || p.NIN.Equals(patientRegisterDto.NIN));
+                var patient = await _dbContext.Patients.
+                    FirstOrDefaultAsync(p  => p.Email.Equals(patientRegisterDto.Email) || p.NIN.Equals(patientRegisterDto.NIN));
 
                 if (patient is not null) 
-                    return BadRequest("Email already registered!");
+                    return BadRequest("Email or NIN has already registered!");
                     
 
                 var patientModel = _mapper.Map<PatientModel>(patientRegisterDto);
@@ -139,7 +140,8 @@ namespace WebApplication1.Controllers
                 if (patientDto == null || id.IsNullOrEmpty())
                     return BadRequest();
 
-                var patient = await _dbContext.Patients.FirstOrDefaultAsync(p => p.Patient_Id.Equals(Guid.Parse(id)));
+                var patient = await _dbContext.Patients.AsNoTracking()
+                    .FirstOrDefaultAsync(p => p.Patient_Id.Equals(Guid.Parse(id)));
 
                 if (patient == null)
                     return NotFound();

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using OMS.DrugService.DTOs;
 using OMS.DrugService.Utils;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -77,18 +78,18 @@ namespace DrugService.Controllers
         // POST api/<DrugController>
         [Authorize(Roles = Roles.ADMIN)]
         [HttpPost] 
-        public async Task<ActionResult<DrugDto>> NewDdrug([FromBody] DrugDto drugDto)
+        public async Task<ActionResult<DrugRegisterDto>> NewDdrug([FromBody] DrugRegisterDto drugRegisterDto)
         {
             try
             {
-                if (drugDto == null)
+                if (drugRegisterDto == null || !ModelState.IsValid)
                     return BadRequest();
 
-                var drugModel = _mapper.Map<DrugModel>(drugDto);
+                var drugModel = _mapper.Map<DrugModel>(drugRegisterDto);
                 await _dbContext.Drugs.AddAsync(drugModel);
                 await _dbContext.SaveChangesAsync();
 
-                return CreatedAtAction(nameof(GetDrug), new { id = drugModel.Drug_Id }, drugModel);
+                return CreatedAtAction(nameof(GetDrug), new { id = drugModel.Drug_Id }, drugRegisterDto);
             }
             catch (Exception ex)
             {
@@ -105,12 +106,13 @@ namespace DrugService.Controllers
         {
             try
             {
-                if (drugDto == null || id.IsNullOrEmpty())
+                if (drugDto == null || id.IsNullOrEmpty() || !ModelState.IsValid)
                     return BadRequest();
 
-                var patient = await _dbContext.Drugs.FirstOrDefaultAsync(p => p.Drug_Id.Equals(Guid.Parse(id)));
+                var drug = await _dbContext.Drugs.AsNoTracking()
+                .FirstOrDefaultAsync(p => p.Drug_Id.Equals(Guid.Parse(id)));
 
-                if (patient == null)
+                if (drug == null)
                     return NotFound();
 
                 var drugModel = _mapper.Map<DrugModel>(drugDto);

@@ -63,7 +63,7 @@ const Login = () => {
       <Input
         type={"password"}
         name={"Password"}
-        label={"password"}
+        label={"Password"}
         handleChange={handleChange}
         width="w-full"
       />

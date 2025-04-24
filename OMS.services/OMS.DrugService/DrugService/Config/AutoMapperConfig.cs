@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DrugService.DTOs;
 using DrugService.Models;
+using OMS.DrugService.DTOs;
 
 namespace DrugService.Config
 {
@@ -8,7 +9,8 @@ namespace DrugService.Config
     {
         public AutoMapperConfig()
         {
-            CreateMap<DrugModel, DrugDto>();
+            CreateMap<DrugModel, DrugDto>().ReverseMap();
+            CreateMap<DrugModel, DrugRegisterDto>().ReverseMap();
         }
     }
 }

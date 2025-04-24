@@ -117,8 +117,9 @@ const RegisterDoctor = () => {
           className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
         >
           <option>--select address state</option>
-          <option value={"Male"}>Lagos</option>
-          <option value={"Female"}>Ikeja</option>
+          <option value={"Lagos"}>Lagos</option>
+          <option value={"Ikeja"}>Ikeja</option>
+          <option value={"Abuja"}>Abuja</option>
         </select>
       </label>
       <Input2

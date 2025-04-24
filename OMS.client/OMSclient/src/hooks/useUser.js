@@ -10,7 +10,7 @@ import { setUser } from '../redux/user/userSlice';
 
 
 const useUser = () => {
-    const [user, setThisUser] = useState({});
+    const [user, setThisUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const { authUser } = useSelector(state => state.authUser);

@@ -13,6 +13,12 @@ export const oms_url = {
     doctorList: "/doctor/all",
     staffList: "/staff/all",
     patientList: "/patient/all",
+    drugList: "/drug/all",
+    updateDoctor: "/update/doctor",
+    updateStaff: "/update/staff",
+    updateDrug: "/update/drug",
+    updateSpecialty: "/update/specialty",
+    updatePatient: "/update/patient",
 }
 
 

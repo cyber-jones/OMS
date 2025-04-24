@@ -3,17 +3,15 @@ import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { oms_server_dev_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
-
-
-
-
-
+import { useSelector } from "react-redux";
 
 const RegisterDrug = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [ImageUrl, setImageUrl] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
+  const { user } = useSelector((state) => state.user);
   const axiosAuth = useAxiosAuthorization(oms_server_dev_url.drug);
 
   const handleChange = (e) => {
@@ -23,11 +21,29 @@ const RegisterDrug = () => {
     });
   };
 
+  const handleImageUrl = (e) => {
+    const file = e.target.files[0];
+    if (!file.type.startsWith("image/")) {
+      enqueueSnackbar("Please select an image file", { variant: "error" });
+      return;
+    }
+
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setImageUrl(fileReader.result);
+    };
+    fileReader.readAsDataURL(file);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosAuth.post("/drug", formData);
+      const res = await axiosAuth.post("/drug", {
+        ...formData,
+        Created_By: `${user?.first_Name} ${user?.middle_Name} ${user?.last_Name}`,
+        Image: ImageUrl,
+      });
       console.log(res);
       if (res?.status !== 201)
         return enqueueSnackbar(res.statusText, { variant: "error" });
@@ -41,11 +57,7 @@ const RegisterDrug = () => {
       setLoading(false);
     }
   };
-  console.log(formData);
 
-
-
-  
   return (
     <form
       onSubmit={handleSubmit}
@@ -90,6 +102,15 @@ const RegisterDrug = () => {
           className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
         />
       </label>
+      <label htmlFor="Manufacturer" className="w-11/12 md:w-6/12">
+        <p className="font-semibold">Manufacturer:</p>
+        <input
+          id="Manufacturer"
+          type="text"
+          onChange={(e) => handleChange(e)}
+          className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+        />
+      </label>
       <label htmlFor="Category" className="w-11/12 md:w-6/12">
         <p className="font-medium">Category:</p>
         <select
@@ -109,7 +130,9 @@ const RegisterDrug = () => {
           <option value={"Personal care"}>Personal care</option>
           <option value={"Baby care"}>Baby care</option>
           <option value={"Ayurveda"}>Ayurveda</option>
-          <option value={"Nutritional Drinks & Supplements"}>Nutritional Drinks & Supplements</option>
+          <option value={"Nutritional Drinks & Supplements"}>
+            Nutritional Drinks & Supplements
+          </option>
           <option value={"Statins"}>Statins</option>
           <option value={"Antibiotics"}>Antibiotics</option>
           <option value={"Blood pressure"}>Blood pressure</option>
@@ -150,6 +173,15 @@ const RegisterDrug = () => {
           id="Count_In_Stock"
           type="number"
           onChange={(e) => handleChange(e)}
+          className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+        />
+      </label>
+      <label htmlFor="Image" className="w-11/12 md:w-6/12">
+        <p className="font-semibold">Count In Stock:</p>
+        <input
+          id="Image"
+          type="file"
+          onChange={handleImageUrl}
           className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
         />
       </label>

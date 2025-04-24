@@ -44,7 +44,7 @@ const DetailedDrug = () => {
   return (
        <>
           {!loading && drug ? (
-            <div className="w-[90%] md:w-[50%] p-20 bg-gray-300 rounded-lg shadow-lg">
+            <div className="w-[90%] md:w-[50%] p-7 md:p-20 bg-gray-300 rounded-lg shadow-lg">
               <h1 className="text-xl md:text-3xl font-bold mb-6">{drug?.drug_Name}</h1>
               <p className="font-sans">{drug?.description}</p>
             </div>

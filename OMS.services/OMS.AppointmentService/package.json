@@ -1,5 +1,5 @@
 {
-  "name": "oms.consultationservice",
+  "name": "oms.appointmentservice",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -19,7 +19,8 @@
     "helmet": "^8.1.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.13.2"
+    "mongoose": "^8.13.2",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "dotenv": "^16.5.0",

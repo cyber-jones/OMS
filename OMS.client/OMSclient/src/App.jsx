@@ -23,6 +23,8 @@ import UpdatePatient from "./pages/settings/update/UpdatePatient";
 import StaffList from "./pages/settings/list/StaffList";
 import DrugList from "./pages/settings/list/DrugList";
 import UpdateDrug from "./pages/settings/update/UpdateDrug";
+import SpecialtyList from "./pages/settings/list/SpecialtyList";
+import UpdateSpecialty from "./pages/settings/update/UpdateSpecialty";
 
 
 
@@ -201,6 +203,22 @@ function App() {
           element={
             <DashBoardComponents>
               <UpdateDrug />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.specialtyList}
+          element={
+            <DashBoardComponents>
+              <SpecialtyList />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.updateSpecialty+"/:id"}
+          element={
+            <DashBoardComponents>
+              <UpdateSpecialty />
             </DashBoardComponents>
           }
         />

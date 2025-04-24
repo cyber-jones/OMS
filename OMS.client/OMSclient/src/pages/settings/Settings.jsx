@@ -72,6 +72,13 @@ const Settings = () => {
           <i class="bi bi-bandaid-fill text-4xl text-cyan-400"></i>
           <p className="text-md">Drug List</p>
         </Link>
+        <Link
+          to={oms_url.specialtyList}
+          className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-stone-800 h-[100px] rounded-lg flex justify-center items-center gap-7"
+        >
+          <i class="bi bi-person-video3 text-4xl text-stone-800"></i>
+          <p className="text-md">Specialty List</p>
+        </Link>
         <div
           onClick={handleLogout}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-red-400 h-[100px] rounded-lg flex justify-center items-center gap-7"

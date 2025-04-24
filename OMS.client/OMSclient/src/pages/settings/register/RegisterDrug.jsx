@@ -189,12 +189,12 @@ const RegisterDrug = () => {
         {loading ? (
           <button
             disabled={loading}
-            className="md:w-5/12 w-full py-4 bg-yellow-950 rounded-3xl text-lg text-white transition-all ease-in duration-500 cursor-pointer md:float-right"
+            className="md:w-5/12 w-full py-4 uppercase bg-yellow-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer md:float-right"
           >
             Loading...
           </button>
         ) : (
-          <button className="md:w-5/12 w-full py-4 bg-green-900 hover:bg-green-950 rounded-3xl text-lg text-white transition-all ease-in duration-500 cursor-pointer md:float-right">
+          <button className="md:w-5/12 w-full py-4 uppercase bg-green-900 hover:bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer md:float-right">
             Create
           </button>
         )}

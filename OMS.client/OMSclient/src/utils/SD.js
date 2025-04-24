@@ -14,6 +14,7 @@ export const oms_url = {
     staffList: "/staff/all",
     patientList: "/patient/all",
     drugList: "/drug/all",
+    specialtyList: "/specialty/all",
     updateDoctor: "/update/doctor",
     updateStaff: "/update/staff",
     updateDrug: "/update/drug",

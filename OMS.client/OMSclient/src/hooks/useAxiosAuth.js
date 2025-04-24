@@ -35,7 +35,7 @@ const useAxiosAuthorization = (url) => {
     
                 if (res?.status === 401 || res?.status === 403 && res) {
                     enqueueSnackbar(res?.data?.message, { variant: "error" });
-                    dispatch(logOut());
+                    return dispatch(logOut());
                 }
     
                 console.log(res);
@@ -45,7 +45,8 @@ const useAxiosAuthorization = (url) => {
 
                 return axiosAuth(prevReq);
             } catch (err) {
-                enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
+                // enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
+                enqueueSnackbar("Session Expired!", { variant: "error" });
                 console.log("Expired");
                 dispatch(logOut())
                 return Promise.reject(err);

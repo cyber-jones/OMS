@@ -1,19 +1,19 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { oms_server_dev_url, oms_url } from "../../../utils/SD";
-import useDrug from "../../../hooks/useDrug";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import { useSnackbar } from "notistack";
+import useSpecialty from "../../../hooks/useSpecialty";
 
-const DrugList = () => {
-  const { loading, drugs } = useDrug();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.drug   );
+const SpecialtyList = () => {
+  const { loading, specialties } = useSpecialty();
+  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate()
 
     const handleDelete = async (id) => {
       try {
-          const res = await axiosAuth.delete("/drug/" + id);
+          const res = await axiosAuth.delete("/specialty/" + id);
           console.log(res);
           if (res?.status !== 204 && !res?.data)
             return enqueueSnackbar(res.statusText, { variant: "error" });
@@ -33,40 +33,24 @@ const DrugList = () => {
         <thead>
           <tr>
             <th className="border border-gray-300 h-12">Name</th>
-            <th className="border border-gray-300 h-12">{"Price (N)"}</th>
-            <th className="border border-gray-300 h-12">Manufacturer</th>
-            <th className="border border-gray-300 h-12 hidden lg:block">
-              Count
-            </th>
-            <th className="border border-gray-300 h-12">Category</th>
-            <th className="border border-gray-300 h-12 hidden lg:block px-2">
-              Expiry
-            </th>
+            <th className="border border-gray-300 h-12">Description</th>
+            <th className="border border-gray-300 h-12">Created Date</th>
           </tr>
         </thead>
         <tbody>
-          {!loading && drugs ? (
-            drugs.map((drug, index) => (
+          {!loading && specialties ? (
+            specialties.map((specialty, index) => (
               <tr key={index}>
                 <td className="border border-gray-300 h-12">
-                  {drug?.drug_Name}
+                  {specialty?.name}
                 </td>
-                <td className="border border-gray-300 h-12">{drug?.price}</td>
+                <td className="border border-gray-300 h-12">{specialty?.description.slice(0, 20)}...</td>
                 <td className="border border-gray-300 h-12">
-                  {drug?.manufacturer}
-                </td>
-                <td className="border border-gray-300 h-12 hidden lg:block">
-                  {drug?.count_In_Stock}
-                </td>
-                <td className="border border-gray-300 h-12">
-                  {drug?.category}
-                </td>
-                <td className="border border-gray-300 h-12 hidden lg:block px-2">
-                  {drug?.expiry_Date}
+                  {new Date(specialty?.createdAt).toDateString()}
                 </td>
                 <td className="border border-gray-300 h-12 px-2">
                   <Link
-                    to={oms_url.updateDrug + "/" + drug?.drug_Id}
+                    to={oms_url.updateSpecialty + "/" + specialty?.specialty_Id}
                     className="bg-blue-600 text-white px-2 py-1 text-sm hover:bg-blue-900 cursor-pointer rounded-lg"
                   >
                     <i className="bi bi-pencil-fill text-[12px]"></i>
@@ -75,7 +59,7 @@ const DrugList = () => {
                 <td className="border border-gray-300 h-12 px-2">
                   <button
                     type="button"
-                    onClick={() => handleDelete(drug?.drug_Id)}
+                    onClick={() => handleDelete(specialty?.specialty_Id)}
                     className="bg-red-600 text-white px-2 py-1 text-sm hover:bg-red-900 cursor-pointer rounded-lg"
                   >
                     <i className="bi bi-trash-fill text-[12px]"></i>
@@ -94,4 +78,4 @@ const DrugList = () => {
   );
 };
 
-export default DrugList;
+export default SpecialtyList;

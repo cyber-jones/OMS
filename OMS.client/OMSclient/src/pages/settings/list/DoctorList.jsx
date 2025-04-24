@@ -7,7 +7,7 @@ const DoctorList = () => {
   const { loading, doctors } = useDoctor();
   return (
     <div className="w-[95%] h-11/12 text-center">
-      <table className="border-collapse border border-gray-400 w-full font-sans text-[10px] md:text-lg">
+      <table className="border-collapse border border-gray-400 w-full font-sans text-[10px] md:text-[14px]">
         <thead>
           <tr>
             <th className="border border-gray-300 h-12">First Name</th>

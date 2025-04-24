@@ -157,12 +157,12 @@ const RegisterStaff = () => {
       {loading ? (
         <button
           disabled={loading}
-          className="w-10/12 py-4 bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer"
+          className="w-10/12 py-4 uppercase bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer"
         >
           Loading...
         </button>
       ) : (
-        <button className="w-10/12 py-4 bg-green-900 hover:bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer">
+        <button className="w-10/12 py-4 uppercase bg-green-900 hover:bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer">
           Submit
         </button>
       )}

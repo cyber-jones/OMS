@@ -14,6 +14,7 @@ import useSpecialty from "../../../hooks/useSpecialty";
 
 const RegisterDoctor = () => {
   const [formData, setFormData] = useState({});
+  const [CertificateUrl, setCertificateUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
@@ -27,6 +28,21 @@ const RegisterDoctor = () => {
     });
   };
 
+
+  const handleCertificateImageUrl = (e) => {
+    const file = e.target.files[0];
+
+    if (!file.type.startsWith("image/")) {
+      enqueueSnackbar("Please select an image file", { variant: "error" });
+      return;
+    }
+
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setCertificateUrl(fileReader.result);
+    }
+    fileReader.readAsDataURL(file);
+  }
   // useEffect(()=> {
   //   let val = Object.keys(formData);
   //   val.forEach(key => {
@@ -39,7 +55,7 @@ const RegisterDoctor = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosAuth.post("/doctor", formData);
+      const res = await axiosAuth.post("/doctor", {...formData, Certificate_Url: CertificateUrl});
       console.log(res);
       if (res?.status !== 201)
         return enqueueSnackbar(res.statusText, { variant: "error" });
@@ -214,6 +230,16 @@ const RegisterDoctor = () => {
         type={"file"}
         handleChange={handleChange}
       />
+      <label htmlFor="Certificate_Url" className="w-full">
+        <p className="font-medium">Upload Certificate:</p>
+        <input
+          id="Certificate_Url"
+          type="file"
+          accept="image/*"
+          onChange={(e) => handleCertificateImageUrl(e)}
+          className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+        />
+      </label>
       <Input2
         name={"CT_Start"}
         label={"CT- (start)"}
@@ -236,12 +262,12 @@ const RegisterDoctor = () => {
         {loading ? (
           <button
             disabled={loading}
-            className="w-10/12 py-4 bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer"
+            className="w-10/12 py-4 uppercase bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer"
           >
             Loading...
           </button>
         ) : (
-          <button className="w-10/12 py-4 bg-green-900 hover:bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer">
+          <button className="w-10/12 py-4 uppercase bg-green-900 hover:bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer">
             Submit
           </button>
         )}

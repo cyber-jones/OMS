@@ -108,12 +108,14 @@ namespace OMS.DoctorService.Controllers
                 if (specialtyDto == null || id.IsNullOrEmpty())
                     return BadRequest();
 
-                var patient = await _dbContext.Specialties.FirstOrDefaultAsync(p => p.Specialty_Id.Equals(Guid.Parse(id)));
+                var specialty = await _dbContext.Specialties.FirstOrDefaultAsync(p => p.Specialty_Id.Equals(Guid.Parse(id)));
 
-                if (patient == null)
+                if (specialty == null)
                     return NotFound();
 
                 var specialtyModel = _mapper.Map<SpecialtyModel>(specialtyDto);
+                specialtyModel.UpdatedAt = DateTime.Now;
+                
                 _dbContext.Specialties.Update(specialtyModel);
                 await _dbContext.SaveChangesAsync();
 

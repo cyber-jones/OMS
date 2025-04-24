@@ -296,12 +296,12 @@ const UpdateDrug = () => {
             {loading ? (
               <button
                 disabled={loading}
-                className="md:w-5/12 w-full py-4 bg-yellow-950 rounded-3xl text-lg text-white transition-all ease-in duration-500 cursor-pointer md:float-right"
+                className="md:w-5/12 w-full py-4 uppercase bg-yellow-950 rounded-3xl text-lg text-white transition-all ease-in duration-500 cursor-pointer md:float-right"
               >
                 Loading...
               </button>
             ) : (
-              <button className="md:w-5/12 w-full py-4 bg-yellow-900 hover:bg-yellow-950 uppercase rounded-3xl text-lg text-white transition-all ease-in duration-500 cursor-pointer md:float-right">
+              <button className="md:w-5/12 w-full py-4 uppercase bg-yellow-900 hover:bg-yellow-950 rounded-3xl text-lg text-white transition-all ease-in duration-500 cursor-pointer md:float-right">
                 Update
               </button>
             )}

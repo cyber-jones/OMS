@@ -6,16 +6,23 @@ import { oms_server_dev_url, oms_url } from "../../utils/SD";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../../redux/auth/authUserSlice";
+import useSocket from "../../hooks/useSocket";
+import connectSocket from "../../config/socket.io.config";
+
+
 
 const Login = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const { setSocket } = useSocket();
   const navigete = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const prevLoc = location.state?.from?.pathname || oms_url.dashBoard;
 
+ 
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -38,10 +45,14 @@ const Login = () => {
       const { accessToken: access, ...data } = res.data.body;
       dispatch(setAuthUser({ authUser: data, accessToken: access }));
 
+      const socket = connectSocket(data._id);
+      setSocket(socket);
+
       enqueueSnackbar(res.statusText, { variant: "success" });
       navigete(prevLoc, { replace: true });
+
     } catch (err) {
-      enqueueSnackbar(err?.response?.data?.message, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
     } finally {
       setLoading(false);
     }
@@ -70,12 +81,12 @@ const Login = () => {
       {loading ? (
         <button
           disabled={loading}
-          className="w-[80%] py-4 bg-green-950 rounded-3xl mt-7 text-lg text-white transition-all ease-in duration-500 cursor-pointer"
+          className="w-[80%] py-4 uppercase bg-green-950 rounded-3xl mt-7 text-lg text-white transition-all ease-in duration-500 cursor-pointer"
         >
           Logging in...
         </button>
       ) : (
-        <button className="w-[80%] py-4 bg-green-900 hover:bg-green-950 rounded-3xl mt-7 text-lg text-white transition-all ease-in duration-500 cursor-pointer">
+        <button className="w-[80%] py-4 uppercase bg-green-900 hover:bg-green-950 rounded-3xl mt-7 text-lg text-white transition-all ease-in duration-500 cursor-pointer">
           Login
         </button>
       )}

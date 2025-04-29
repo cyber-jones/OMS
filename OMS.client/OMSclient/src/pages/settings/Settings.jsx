@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { oms_url } from "../../utils/SD";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/auth/authUserSlice";
+import useSocket from "../../hooks/useSocket";
 
 const Settings = () => {
+  const { disconnectSocket } = useSocket()
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    disconnectSocket();
     dispatch(logOut());
     navigate(oms_url.auth);
   };

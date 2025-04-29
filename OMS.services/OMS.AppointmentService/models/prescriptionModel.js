@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 
 
 
-const appointmentSchema = new Schema({
+const prescriptionSchema = new Schema({
     doctor_Id: {
         required: true,
         unique: true,
@@ -14,16 +14,20 @@ const appointmentSchema = new Schema({
         unique: true,
         type: String
     },
-    date: {
+    drug_Ids: {
         required: true,
-        type: Date
+        type: [String]
     },
-    approved: {
+    prescription: {
+        required: true,
+        type: String
+    },
+    status: {
         required: true,
         type: String
     }
 }, { timestamps: true });
 
-const appointment = model("Appointment", appointmentSchema);
+const prescription = model("Prescription", prescriptionSchema);
 
-export default appointment;
+export default prescription;

@@ -34,7 +34,7 @@ const useAxiosAuthorization = (url) => {
                 const res = await axiosAuth.get("/refresh");
     
                 if (res?.status === 401 || res?.status === 403 && res) {
-                    enqueueSnackbar(res?.data?.message, { variant: "error" });
+                    // enqueueSnackbar(res?.data?.message, { variant: "error" });
                     return dispatch(logOut());
                 }
     
@@ -46,7 +46,7 @@ const useAxiosAuthorization = (url) => {
                 return axiosAuth(prevReq);
             } catch (err) {
                 // enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
-                enqueueSnackbar("Session Expired!", { variant: "error" });
+                enqueueSnackbar("Session Expired!", { variant: "warning" });
                 console.log("Expired");
                 dispatch(logOut())
                 return Promise.reject(err);

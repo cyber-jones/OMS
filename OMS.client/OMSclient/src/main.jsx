@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { SnackbarProvider } from 'notistack'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 import { BrowserRouter } from 'react-router-dom'
+import { SocketProvider } from './context/SocketContext.jsx'
 
 
 // eslint-disable-next-line no-undef
@@ -19,9 +20,11 @@ createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Provider store={store}>
       <PersistGate loading={null} persistor={presistor}>
-        <SnackbarProvider>
-          <App />
-        </SnackbarProvider>
+        <SocketProvider>
+          <SnackbarProvider>
+            <App />
+          </SnackbarProvider>
+        </SocketProvider>
       </PersistGate>
     </Provider>
   </BrowserRouter>,

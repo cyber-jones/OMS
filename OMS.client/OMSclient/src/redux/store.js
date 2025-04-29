@@ -1,9 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authUserSlice from "./auth/authUserSlice";
 import userSlice from "./user/userSlice";
-import doctorSlice from "./doctor/doctorSlice";
-import patientSlice from "./patient/patientSlice";
-import staffSlice from "./staff/staffSlice";
+import chatSlice from "./chat/chatSlice";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import persistStore from "redux-persist/es/persistStore";
@@ -13,9 +11,7 @@ import persistStore from "redux-persist/es/persistStore";
 const rootRedure = combineReducers({ 
     authUser: authUserSlice, 
     user: userSlice, 
-    doctors: doctorSlice, 
-    patients: patientSlice, 
-    staff: staffSlice 
+    chat: chatSlice,
 });
 
 const persistedReducer = persistReducer({ key: "root", storage, version: 1 }, rootRedure);

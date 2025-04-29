@@ -172,12 +172,12 @@ const Signup = () => {
           {loading ? (
             <button
               disabled={loading}
-              className="w-full py-4 bg-yellow-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer"
+              className="w-full py-4 bg-yellow-950 uppercase rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer"
             >
               Loading...
             </button>
           ) : (
-            <button className="w-full py-4 bg-yellow-900 hover:bg-yellow-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer">
+            <button className="w-full py-4 bg-yellow-900 uppercase hover:bg-yellow-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer">
               Submit
             </button>
           )}

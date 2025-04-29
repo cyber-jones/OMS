@@ -15,7 +15,7 @@ namespace OMS.DoctorService.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
-    [ApiController]
+    [ApiController] 
     public class DoctorController : ControllerBase
     {
         private readonly AppDbContext _dbContext;
@@ -145,6 +145,8 @@ namespace OMS.DoctorService.Controllers
                     return NotFound();
 
                 var doctorModel = _mapper.Map<DoctorModel>(doctorDto);
+                doctorModel.UpdatedAt = DateTime.Now;
+                
                 _dbContext.Doctors.Update(doctorModel);
                 await _dbContext.SaveChangesAsync();
 

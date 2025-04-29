@@ -29,6 +29,7 @@ export const oms_server_dev_url = {
     patient: "http://localhost:7001/api",
     auth: "http://localhost:7005/api",
     drug: "http://localhost:7003/api",
+    appointment: "http://localhost:7006/api",
 }
 
 
@@ -38,3 +39,6 @@ export const Roles = {
     DOCTOR: "doctor",
     STAFF: "staff"
 }
+
+
+export const socket_connect_dev_url = "http://localhost:7006";

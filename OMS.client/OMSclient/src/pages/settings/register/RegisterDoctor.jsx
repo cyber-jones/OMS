@@ -224,12 +224,6 @@ const RegisterDoctor = () => {
         type={"text"}
         handleChange={handleChange}
       />
-      <Input2
-        name={"Certificate_Url"}
-        label={"Uplaod Certificate:"}
-        type={"file"}
-        handleChange={handleChange}
-      />
       <label htmlFor="Certificate_Url" className="w-full">
         <p className="font-medium">Upload Certificate:</p>
         <input

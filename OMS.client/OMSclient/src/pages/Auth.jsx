@@ -9,16 +9,16 @@ const Auth = () => {
 
   const handleLoginRef = () => {
     loginRef.current.className =
-      "bg-black text-white w-[50%] rounded-3xl py-1 transition-all duration-1000 ease-in-out";
+      "bg-black text-white w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
     signupnRef.current.className =
-      "w-[50%] rounded-3xl py-1 transition-all duration-1000 ease-in-out";
+      "w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
     setIsLogin(true);
   };
   const handleSignupRef = () => {
     signupnRef.current.className =
-      "bg-black text-white w-[50%] rounded-3xl py-1 transition-all duration-1000 ease-in-out";
+      "bg-black text-white w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
     loginRef.current.className =
-      "w-[50%] rounded-3xl py-1 transition-all duration-1000 ease-in-out";
+      "w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
     setIsLogin(false);
   };
 

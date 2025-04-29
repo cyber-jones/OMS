@@ -64,7 +64,7 @@ const RegisterDrug = () => {
       className="w-[95%] h-11/12 flex flex-col justify-start items-center gap-8 font-sans overflow-y-scroll"
     >
       <h1 className="w-11/12 md:w-6/12 text-2xl text-blue-600 mb-8">
-        Create New Drug
+        New Drug
       </h1>
       <label htmlFor="Drug_Name" className="w-11/12 md:w-6/12">
         <p className="font-semibold">Drug Name:</p>
@@ -177,7 +177,7 @@ const RegisterDrug = () => {
         />
       </label>
       <label htmlFor="Image" className="w-11/12 md:w-6/12">
-        <p className="font-semibold">Count In Stock:</p>
+        <p className="font-semibold">Drug Image:</p>
         <input
           id="Image"
           type="file"

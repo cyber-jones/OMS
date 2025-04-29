@@ -29,14 +29,14 @@ const RegisterSpecialty = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosAuth.post("/doctor", formData);
+      const res = await axiosAuth.post("/specialty", formData);
       console.log(res);
       if (res?.status !== 201)
         return enqueueSnackbar(res.statusText, { variant: "error" });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       setFormData({});
-      navigete(oms_url.doctorList);
+      navigete(oms_url.specialtyList);
     } catch (err) {
       enqueueSnackbar(err?.response?.statusText, { variant: "error" });
     } finally {
@@ -57,7 +57,7 @@ const RegisterSpecialty = () => {
       className="w-[95%] h-11/12 flex flex-col justify-start items-center gap-8 font-sans"
     >
       <h1 className="w-11/12 md:w-6/12 text-2xl text-blue-600 mb-8">
-        Create New Specialty
+        New Specialty
       </h1>
       <label htmlFor="Name" className="w-11/12 md:w-6/12">
         <p className="font-semibold">Specialty Name:</p>

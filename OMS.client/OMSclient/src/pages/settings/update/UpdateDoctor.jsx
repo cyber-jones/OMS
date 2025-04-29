@@ -112,7 +112,7 @@ const UpdateDoctor = () => {
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];
-    console.log(file);
+
     if (!file.type.startsWith("image/")) {
       enqueueSnackbar("Please select an image file", { variant: "error" });
       return;
@@ -121,10 +121,8 @@ const UpdateDoctor = () => {
     const fileReader = new FileReader();
     fileReader.onload = () => {
       setCertificateUrl(fileReader.result);
-      console.log(fileReader.result);
     }
     fileReader.readAsDataURL(file);
-    console.log(CertificateUrl);
   }
 
   const handleSubmit = async (e) => {

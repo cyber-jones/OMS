@@ -2,11 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { logOut, setAuthUser } from "../redux/auth/authUserSlice";
 import { useSnackbar } from "notistack";
+import useSocket from "./useSocket";
 
 
 
 const useAxiosAuthorization = (url) => {
     const { token } = useSelector(state => state.authUser);
+    const { disconnectSocket } = useSocket()
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -35,6 +37,7 @@ const useAxiosAuthorization = (url) => {
     
                 if (res?.status === 401 || res?.status === 403 && res) {
                     // enqueueSnackbar(res?.data?.message, { variant: "error" });
+                    disconnectSocket();
                     return dispatch(logOut());
                 }
     
@@ -47,7 +50,7 @@ const useAxiosAuthorization = (url) => {
             } catch (err) {
                 // enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
                 enqueueSnackbar("Session Expired!", { variant: "warning" });
-                console.log("Expired");
+                disconnectSocket();
                 dispatch(logOut())
                 return Promise.reject(err);
             }

@@ -28,7 +28,15 @@ const Header = ({ sideNav, setSideNav }) => {
             ? `${user?.first_Name} ${user?.last_Name}`
             : "Loading..."}
         </p>
-        <div className="w-[30px] md:w-[35px] h-[30px] md:h-[35px] rounded-full bg-black mr-3"></div>
+        <div className="w-[30px] md:w-[35px] h-[30px] md:h-[35px] rounded-full bg-black mr-3">
+          { user && user?.profile_Url !== null ? (
+            <img src={user?.profile_Url} alt="profile" />
+          ) : user?.sex == "Male" ? (
+            <img src="/images/profile-masculine.jpeg" alt="profile" />
+          ) : (
+            <img src="/images/profile-femine.jpeg" alt="profile" />
+          )}
+        </div>
       </div>
     </header>
   );

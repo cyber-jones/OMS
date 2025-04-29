@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Input2 from "../../../components/Inputs/Input2";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import useSpecialty from "../../../hooks/useSpecialty";
 const RegisterDoctor = () => {
   const [formData, setFormData] = useState({});
   const [CertificateUrl, setCertificateUrl] = useState("");
+  const imageRef = useRef();
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
@@ -224,16 +225,6 @@ const RegisterDoctor = () => {
         type={"text"}
         handleChange={handleChange}
       />
-      <label htmlFor="Certificate_Url" className="w-full">
-        <p className="font-medium">Upload Certificate:</p>
-        <input
-          id="Certificate_Url"
-          type="file"
-          accept="image/*"
-          onChange={(e) => handleCertificateImageUrl(e)}
-          className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
-        />
-      </label>
       <Input2
         name={"CT_Start"}
         label={"CT- (start)"}
@@ -252,6 +243,24 @@ const RegisterDoctor = () => {
         type={"text"}
         handleChange={handleChange}
       />
+      <label htmlFor="Certificate_Url" className="w-full">
+        <p className="font-medium">Upload Certificate:</p>
+        <input
+          id="Certificate_Url"
+          type="file"
+          accept="image/*"
+          hidden
+          ref={imageRef}
+          onChange={(e) => handleCertificateImageUrl(e)}
+          className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+        />
+        <img
+          onClick={() => imageRef.current.click()}
+          src={CertificateUrl ? CertificateUrl : "/images/image-insert.png"}
+          className="cursor-pointer"
+          alt="certi-image"
+        />
+      </label>
       <div className="w-full">
         {loading ? (
           <button

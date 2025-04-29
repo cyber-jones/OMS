@@ -10,7 +10,7 @@ const Drugs = () => {
   return (
     <div className="w-[95%] h-11/12 flex justify-center items-center">
       {!loading && drugs ? (
-        <div className="w-full md:w-[70%] py-3 h-11/12 grid grid-cols-1 gap-4 bg-white place-content-start place-items-center scroll-smooth overflow-y-scroll">
+        <div className="w-full md:w-[70%] py-3 font-serif h-11/12 grid grid-cols-1 gap-4 bg-white place-content-start place-items-center scroll-smooth overflow-y-scroll">
           {drugs.map((drug, index) => (
             <Link
               to={`${oms_url.drug}/${drug?.drug_Id}`}

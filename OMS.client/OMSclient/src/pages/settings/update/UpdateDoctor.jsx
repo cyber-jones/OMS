@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input3 from "../../../components/Inputs/Input3";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
@@ -58,6 +58,7 @@ const UpdateDoctor = () => {
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
+  const imageRef = useRef();
   const { id } = useParams();
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
@@ -110,25 +111,7 @@ const UpdateDoctor = () => {
   }, []);
 
 
-  const handleImageUrl = (e) => {
-    const file = e.target.files[0];
-
-    if (!file.type.startsWith("image/")) {
-      enqueueSnackbar("Please select an image file", { variant: "error" });
-      return;
-    }
-
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setCertificateUrl(fileReader.result);
-    }
-    fileReader.readAsDataURL(file);
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
+  useEffect(() => {
     setFormData({
       Doctor_Id: Doctor_Id,
       Address: Address,
@@ -151,6 +134,47 @@ const UpdateDoctor = () => {
       Certificate_Url: CertificateUrl,
       Clinic_Phone: ClinicPhone
     });
+    }, [
+      FirstName,
+      Address,
+      CT_End,
+      CellPhone,
+      DOB,
+      CT_Start,
+      MidddleName,
+      LastName,
+      MLN,
+      Relationship,
+      SpecialtyId,
+      SubSpecialtyId,
+      NIN,
+      CertificateUrl,
+      State,
+      ClinicPhone,
+      Sex,
+      WorkID,
+      Email
+    ]);
+
+
+  const handleImageUrl = (e) => {
+    const file = e.target.files[0];
+
+    if (!file.type.startsWith("image/")) {
+      enqueueSnackbar("Please select an image file", { variant: "error" });
+      return;
+    }
+
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setCertificateUrl(fileReader.result);
+    }
+    fileReader.readAsDataURL(file);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
     try {
       const res = await axiosAuth.put("/doctor/"+id, formData);
@@ -336,16 +360,6 @@ const UpdateDoctor = () => {
             value={ClinicPhone}
             handleChange={(e) => ClinicPhone(e.target.value)}
           />
-          <label htmlFor="Certificate_Url" className="w-full">
-          <p className="font-medium">Upload Certificate:</p>
-            <input
-              id="Certificate_Url"
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUrl(e)}
-              className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
-            />
-          </label>
           <Input3
             name={"CT_Start"}
             label={"CT- (start)"}
@@ -360,6 +374,24 @@ const UpdateDoctor = () => {
             value={CT_End}
             handleChange={(e) => setCT_End(e.target.value)}
           />
+          <label htmlFor="Certificate_Url" className="w-full">
+          <p className="font-medium">Upload Certificate:</p>
+            <input
+              id="Certificate_Url"
+              type="file"
+              accept="image/*"
+              hidden
+              ref={imageRef}
+              onChange={(e) => handleImageUrl(e)}
+              className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+            />
+            <img
+              onClick={() => imageRef.current.click()}
+              src={CertificateUrl ? CertificateUrl : "/images/image-insert.png"}
+              className="cursor-pointer"
+              alt="certi-image"
+            />
+          </label>
           <div className="w-full">
             {loading ? (
               <button

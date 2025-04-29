@@ -21,7 +21,10 @@ io.on("connection", socket => {
     socket.emit("list-of-online-users", users);
 
     socket.on("disconnect", () => {
+        console.log("A user disconnected", socket.id);
+        
         socket.broadcast.emit("new-disconnection", authUserId);
+        delete users[authUserId];
     });
 });
 

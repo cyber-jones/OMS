@@ -2,6 +2,7 @@ export const oms_url = {
     dashBoard: "/dashboard",
     specialty: "/specialty",
     consultation: "/consultation",
+    profile: "/profile",
     login: "/login",
     auth: "/auth",
     drug: "/drug",

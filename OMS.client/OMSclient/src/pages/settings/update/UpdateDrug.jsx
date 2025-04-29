@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input3 from "../../../components/Inputs/Input3";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
@@ -41,6 +41,7 @@ const UpdateDrug = () => {
   const [ImageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const imageRef = useRef();
   const navigete = useNavigate();
   const { id } = useParams();
   const { user } = useSelector((state) => state.user);
@@ -288,8 +289,17 @@ const UpdateDrug = () => {
             <input
               id="Image"
               type="file"
+              accept="image/*"
+              hidden
+              ref={imageRef}
               onChange={handleImageUrl}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+            />
+            <img
+              onClick={() => imageRef.current.click()}
+              src={ImageUrl ? ImageUrl : "/images/image-insert.png"}
+              className="cursor-pointer"
+              alt="drug-image"
             />
           </label>
           <div className="w-11/12 md:w-6/12">

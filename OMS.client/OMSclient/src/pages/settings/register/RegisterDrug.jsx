@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { oms_server_dev_url, oms_url } from "../../../utils/SD";
@@ -9,6 +9,7 @@ const RegisterDrug = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [ImageUrl, setImageUrl] = useState(null);
+  const imageRef = useRef();
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
   const { user } = useSelector((state) => state.user);
@@ -181,8 +182,17 @@ const RegisterDrug = () => {
         <input
           id="Image"
           type="file"
+          hidden
+          accept="image/*"
+          ref={imageRef}
           onChange={handleImageUrl}
           className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+        />
+        <img
+          onClick={() => imageRef.current.click()}
+          src={ImageUrl ? ImageUrl : "/images/image-insert.png"}
+          className="cursor-pointer"
+          alt="drug-image"
         />
       </label>
       <div className="w-11/12 md:w-6/12">

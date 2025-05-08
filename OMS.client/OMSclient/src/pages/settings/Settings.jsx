@@ -4,6 +4,7 @@ import { oms_url } from "../../utils/SD";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/auth/authUserSlice";
 import useSocket from "../../hooks/useSocket";
+import { chatLogOut } from "../../redux/chat/chatSlice";
 
 const Settings = () => {
   const { disconnectSocket } = useSocket()
@@ -12,6 +13,7 @@ const Settings = () => {
 
   const handleLogout = () => {
     disconnectSocket();
+    dispatch(chatLogOut());
     dispatch(logOut());
     navigate(oms_url.auth);
   };

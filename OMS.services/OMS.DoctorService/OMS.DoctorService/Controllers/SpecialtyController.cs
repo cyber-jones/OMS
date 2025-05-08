@@ -33,7 +33,10 @@ namespace OMS.DoctorService.Controllers
         {
             try
             {
-                IEnumerable<SpecialtyModel> doctors = await _dbContext.Specialties.ToListAsync();
+                IEnumerable<SpecialtyModel> doctors = await _dbContext
+                    .Specialties
+                        .OrderBy(s => s.Name)
+                            .ToListAsync();
 
                 var specialtyDto = _mapper.Map<IEnumerable<SpecialtyDto>>(doctors);
 

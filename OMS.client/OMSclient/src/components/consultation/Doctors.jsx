@@ -1,13 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import useDoctor from "../../hooks/useDoctor";
 import Circle from "../loading/Circle";
 import { setSelectedUser } from "../../redux/chat/chatSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+
 const Doctors = () => {
   const { doctors, loading } = useDoctor();
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const { selectedUser } = useSelector(state => state.chat);
+  // const { socket } = useSocket();
+  const { selectedUser, onlineUsers } = useSelector(
+    (state) => state.chat
+  );
   const dispatch = useDispatch();
 
   const handleSelectUser = (user) => {
@@ -15,7 +20,11 @@ const Doctors = () => {
   };
 
   useEffect(() => {
-    const handleCheckWidth = () => setScreenWidth(window.innerWidth)
+    console.log("Online users", onlineUsers);
+  }, []);
+
+  useEffect(() => {
+    const handleCheckWidth = () => setScreenWidth(window.innerWidth);
 
     window.addEventListener("resize", handleCheckWidth);
 
@@ -23,8 +32,20 @@ const Doctors = () => {
   }, []);
 
   return (
-    <div className={`${selectedUser && screenWidth < 768 ? "hidden" : "block"} md:w-[30%] w-full h-full bg-gray-200 overflow-y-scroll rounded-tl-2xl`}>
+    <div
+      className={`${
+        selectedUser && screenWidth < 768 ? "hidden" : "block"
+      } md:w-[30%] w-full h-full bg-gray-200 overflow-y-scroll rounded-tl-2xl`}
+    >
       <p className="text-2xl md:text-3xl font-extrabold ml-8 my-5">Chats</p>
+      <div className="w-full text-sm px-4 flex justify-end gap-4 py-3">
+        <button className="px-2 py-0.5 border border-blue-900 rounded-md cursor-pointer">
+          All
+        </button>
+        <button className="px-2 py-0.5 border border-blue-900 rounded-md cursor-pointer">
+          Online
+        </button>
+      </div>
       {!loading && doctors ? (
         doctors.map((doctor, index) => (
           <div

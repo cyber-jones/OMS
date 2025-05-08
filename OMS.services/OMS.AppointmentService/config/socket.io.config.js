@@ -16,13 +16,15 @@ io.on("connection", socket => {
     const authUserId = socket.handshake.query.authUserId
     users[authUserId] = socket.id;
 
+    console.log(users);
+
     socket.broadcast.emit("new-connection", authUserId);
 
-    socket.emit("list-of-online-users", users);
+    socket.emit("list-of-online-users", Object.keys(users));
 
     socket.on("disconnect", () => {
         console.log("A user disconnected", socket.id);
-        
+
         socket.broadcast.emit("new-disconnection", authUserId);
         delete users[authUserId];
     });

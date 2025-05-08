@@ -34,13 +34,15 @@ namespace DrugService.Controllers
         {
             try
             {
-                IEnumerable<DrugModel> patients = await _dbContext.Drugs.ToListAsync();
+                IEnumerable<DrugModel> patients = await _dbContext.Drugs
+                    .OrderBy(d => d.Drug_Name)
+                        .ToListAsync();
 
                 var drugsDto = _mapper.Map<IEnumerable<DrugDto>>(patients);
 
                 return Ok(drugsDto);
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }

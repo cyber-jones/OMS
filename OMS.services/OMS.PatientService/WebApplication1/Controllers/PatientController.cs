@@ -40,7 +40,9 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                IEnumerable<PatientModel> patients = await _dbContext.Patients.ToListAsync();
+                IEnumerable<PatientModel> patients = await _dbContext
+                    .Patients.OrderBy(p => p.First_Name)
+                        .ToListAsync();
 
                 var patientDto = _mapper.Map<IEnumerable<PatientDto>>(patients);
 

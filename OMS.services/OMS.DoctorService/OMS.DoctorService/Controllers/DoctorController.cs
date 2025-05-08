@@ -39,7 +39,8 @@ namespace OMS.DoctorService.Controllers
                 IEnumerable<DoctorModel> doctors = await _dbContext.Doctors
                     .Include(d => d.Specialty)
                         .Include(d => d.Sub_Specialty)
-                            .ToListAsync();
+                            .OrderBy(d => d.First_Name)
+                                .ToListAsync();
 
                 var doctorDto = _mapper.Map<IEnumerable<DoctorDto>>(doctors);
 

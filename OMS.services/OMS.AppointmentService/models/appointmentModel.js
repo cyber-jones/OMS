@@ -19,11 +19,11 @@ const appointmentSchema = new Schema({
         type: Date
     },
     approved: {
-        required: true,
-        type: String
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true });
 
-const appointment = model("Appointment", appointmentSchema);
+const Appointment = model("Appointment", appointmentSchema);
 
-export default appointment;
+export default Appointment;

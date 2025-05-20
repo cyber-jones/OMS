@@ -25,25 +25,12 @@ import DrugList from "./pages/settings/list/DrugList";
 import UpdateDrug from "./pages/settings/update/UpdateDrug";
 import SpecialtyList from "./pages/settings/list/SpecialtyList";
 import UpdateSpecialty from "./pages/settings/update/UpdateSpecialty";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import IsLoggedIn from "./components/authorize/IsLoggedIn";
 
 function App() {
   return (
     <Routes>
-      <Route element={<IsAuth role={Roles.PATIENT}/>}>
+      <Route element={<IsAuth role={Roles.PATIENT} />}>
         <Route
           path={oms_url.dashBoard}
           element={
@@ -109,7 +96,7 @@ function App() {
           }
         />
       </Route>
-      <Route element={<IsAuth role={Roles.ADMIN}/>}>
+      <Route element={<IsAuth role={Roles.ADMIN} />}>
         <Route
           path={oms_url.registerDoctor}
           element={
@@ -151,7 +138,7 @@ function App() {
           }
         />
         <Route
-          path={oms_url.updateDoctor+"/:id"}
+          path={oms_url.updateDoctor + "/:id"}
           element={
             <DashBoardComponents>
               <UpdateDoctor />
@@ -167,7 +154,7 @@ function App() {
           }
         />
         <Route
-          path={oms_url.updatePatient+"/:id"}
+          path={oms_url.updatePatient + "/:id"}
           element={
             <DashBoardComponents>
               <UpdatePatient />
@@ -183,7 +170,7 @@ function App() {
           }
         />
         <Route
-          path={oms_url.updateStaff+"/:id"}
+          path={oms_url.updateStaff + "/:id"}
           element={
             <DashBoardComponents>
               <UpdateStaff />
@@ -199,7 +186,7 @@ function App() {
           }
         />
         <Route
-          path={oms_url.updateDrug+"/:id"}
+          path={oms_url.updateDrug + "/:id"}
           element={
             <DashBoardComponents>
               <UpdateDrug />
@@ -215,7 +202,7 @@ function App() {
           }
         />
         <Route
-          path={oms_url.updateSpecialty+"/:id"}
+          path={oms_url.updateSpecialty + "/:id"}
           element={
             <DashBoardComponents>
               <UpdateSpecialty />
@@ -223,7 +210,9 @@ function App() {
           }
         />
       </Route>
-      <Route path={oms_url.auth} element={<Auth />} />
+      <Route element={<IsLoggedIn />}>
+        <Route path={oms_url.auth} element={<Auth />} />
+      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -6,6 +6,7 @@ import { oms_server_dev_url, oms_url } from "../../utils/SD";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../../redux/auth/authUserSlice";
+import useSocket from "../../hooks/useSocket";
 
 
 
@@ -19,6 +20,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const prevLoc = location.state?.from?.pathname || oms_url.dashBoard;
+  const { connectSocket } = useSocket();
 
  
   
@@ -43,7 +45,7 @@ const Login = () => {
 
       const { accessToken: access, ...data } = res.data.body;
       dispatch(setAuthUser({ authUser: data, accessToken: access }));
-      localStorage.setItem("authUser_Id", data._id);
+      connectSocket(res.data.body.user_Profile_Id);
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       navigete(prevLoc, { replace: true });

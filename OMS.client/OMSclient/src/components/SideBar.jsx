@@ -10,7 +10,7 @@ const SideBar = ({ sideNav }) => {
         <Link to={oms_url.dashBoard}>
             <div className='text-center w-full hover:cursor-pointer'>
                 <i className={`bi bi-house-gear-fill ${nav_icons}`}></i>
-                <div>Home</div>
+                <div>Dashboard</div>
             </div>
         </Link>
         <Link to={oms_url.consultation}>

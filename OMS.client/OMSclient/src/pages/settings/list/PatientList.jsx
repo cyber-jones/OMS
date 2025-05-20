@@ -5,6 +5,8 @@ import usePatient from "../../../hooks/usePatient";
 
 const PatientList = () => {
   const { loading, patients } = usePatient();
+
+  
   return (
     <div className="w-[95%] h-11/12 text-center">
       <table className="border-collapse border border-gray-400 w-full font-sans text-[10px] md:text-[14px]">

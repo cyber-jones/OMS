@@ -1,4 +1,3 @@
-import React from "react";
 import useDoctor from "../../../hooks/useDoctor";
 import { Link } from "react-router-dom";
 import { oms_url } from "../../../utils/SD";

@@ -1,12 +1,10 @@
-import React from "react";
 import Chat from "../components/consultation/Chat";
-import Doctors from "../components/consultation/Doctors";
+import Users from "../components/consultation/Users";
 
 const Consultation = () => {
-
   return (
     <div className="w-full md:w-11/12 h-full md:h-11/12 flex md:shadow-2xl">
-      <Doctors />
+      <Users />
       <Chat />
     </div>
   );

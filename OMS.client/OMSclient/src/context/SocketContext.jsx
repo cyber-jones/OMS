@@ -1,50 +1,37 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useEffect, useState } from "react";
-import { useSnackbar } from "notistack";
-import connectSocket from "../config/socket.io.config";
-import { useDispatch, useSelector } from "react-redux";
-import { setOnlineUsers } from "../redux/chat/chatSlice";
+import { socket_connect_dev_url } from "../utils/SD";
+import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 
 const SocketContext = createContext({});
 
 export const SocketProvider = ({ children }) => {
-  const { enqueueSnackbar } = useSnackbar();
-  const dispatch = useDispatch();
-  const { onlineUsers } = useSelector(state => state.chat) 
-  const [socket, setSocket] = useState(
-    connectSocket(localStorage.getItem("authUser_Id"))
-  );
+  const [socket, setSocket] = useState(null);
+  const { authUser } = useSelector(state => state.authUser);
 
   const disconnectSocket = () => {
-    socket.disconnect();
-    localStorage.removeItem("authUser_Id");
+    if (socket && socket.connected)
+      socket.disconnect();
+    setSocket(null);
   };
 
-  useEffect(() => {
-    socket.on("new-connection", (authUserId) => {
-        enqueueSnackbar("Connected: " + authUserId, { variant: "success" });
-    });
+  const connectSocket = (Id) => {
+    const newSocket = io(socket_connect_dev_url, { query: { userId: Id } });
+    newSocket.connect();
+    
+    setSocket(connectSocket);
+  }
 
-    socket.on("new-disconnection", (authUserId) => {
-        enqueueSnackbar("Disconnected: " + authUserId, { variant: "warning" });
-    });
+  // useEffect(() => {
+  //   connectSocket(authUser?.user_Profile_Id);
+  // }, []);
 
-    socket.on("list-of-online-users", (users) => {
-        dispatch(setOnlineUsers(users));
-        console.log("Online-users", users);
-    });
 
-    console.log("Online users", onlineUsers);
-    // const offConnection = () => {
-    //     socket.off("new-connection");
-    //     socket.off("new-disconnection");
-    //     socket.off("list-of-online-users");
-    // }
-
-    // return offConnection();
-  }, [socket, dispatch, enqueueSnackbar, onlineUsers]);
+  console.log(socket);
 
   return (
-    <SocketContext.Provider value={{ socket, setSocket, disconnectSocket }}>
+    <SocketContext.Provider value={{ socket, setSocket, connectSocket, disconnectSocket }}>
       {children}
     </SocketContext.Provider>
   );

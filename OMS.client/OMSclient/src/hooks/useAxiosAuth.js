@@ -8,7 +8,7 @@ import useSocket from "./useSocket";
 
 const useAxiosAuthorization = (url) => {
     const { token } = useSelector(state => state.authUser);
-    const { disconnectSocket } = useSocket()
+    const { disconnectSocket } = useSocket();
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -16,7 +16,7 @@ const useAxiosAuthorization = (url) => {
         baseURL: url,
         headers: { "Content-Type": "application/json" },
         withCredentials: true
-      });
+    });
 
     axiosAuth.interceptors.request.use((config) => {
         console.log("Interceptors", config);

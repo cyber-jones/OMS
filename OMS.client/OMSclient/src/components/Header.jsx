@@ -2,9 +2,12 @@ import React from "react";
 import useUser from "../hooks/useUser";
 
 
+
+
 const Header = ({ sideNav, setSideNav }) => {
   const { loading, user } = useUser();
 
+  
 
   return (
     <header className="static w-full h-1/12 bg-gray-100 flex justify-between items-center">

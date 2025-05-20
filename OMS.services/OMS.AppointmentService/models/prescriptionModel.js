@@ -1,3 +1,4 @@
+import { bool } from "joi";
 import { Schema, model } from "mongoose";
 
 
@@ -22,12 +23,12 @@ const prescriptionSchema = new Schema({
         required: true,
         type: String
     },
-    status: {
-        required: true,
-        type: String
+    approved: {
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true });
 
-const prescription = model("Prescription", prescriptionSchema);
+const Prescription = model("Prescription", prescriptionSchema);
 
-export default prescription;
+export default Prescription;

@@ -1,19 +1,46 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedUser } from "../../redux/chat/chatSlice";
+import { setMessages, setSelectedUser } from "../../redux/chat/chatSlice";
 import { useSnackbar } from "notistack";
+import useSocket from "../../hooks/useSocket";
+
+
 
 const Chat = () => {
   const { selectedUser, messages } = useSelector((state) => state.chat);
+  const { authUser } = useSelector((state) => state.authUser);
   const [text, setText] = useState(null);
   const [image, setImage] = useState(null);
+  const { socket } = useSocket();
+  const { onlineUsers } = useSelector(
+    (state) => state.chat
+  );
   const imageRef = useRef();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
+
+
   const handleSendMessage = () => {
-    console.log({ text, image });
+    const senderId =  authUser?.user_Profile_Id;
+    const recieverId =  selectedUser?.patient_Id || selectedUser?.doctor_Id || selectedUser?.staff_Id;
+
+    const newMessage = { sender_Id: senderId, reciever_Id: recieverId, text: text, image: image };
+    console.log(newMessage);
+    socket.emit("new-message", newMessage);
   };
+
+
+  useState(() => {
+    if (!socket) return;
+
+    socket.on("send-message", message => {
+      setMessages([...messages, message]);
+    });
+
+    return () => socket.off("send-message");
+
+  }, [socket]);
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];
@@ -48,17 +75,19 @@ const Chat = () => {
           } h-full justify-start items-center flex-col bg-gray-200 rounded-br-2xl`}
         >
           <div className="w-full h-14 flex gap-5 px-2 items-center">
-            <div className="w-10 h-10 bg-gray-950 rounded-full"></div>
+            <div className="w-12 h-12 bg-gray-950 rounded-full">
+            {  onlineUsers?.includes(selectedUser?.patient_Id || selectedUser?.doctor_Id || selectedUser?.staff_Id) ? <div className="relative w-4 h-4 bg-green-500 rounded-full left-7 top-9"></div> : <div className="relative w-4 h-4 bg-red-500 rounded-full left-7 top-9"></div> }
+            </div>
             <div>
               <strong>
                 {selectedUser?.first_Name} {selectedUser?.last_Name}
               </strong>
-              <p className="text-sm">Online</p>
+              <p className="text-sm">{ onlineUsers?.includes(selectedUser?.patient_Id || selectedUser?.doctor_Id || selectedUser?.staff_Id) ? "online" : "Offline" }</p>
             </div>
             <div className="flex flex-1 justify-end items-center gap-5 px-4">
               <p className="text-sm">
                 {selectedUser ? "" : "Specialty: "}
-                <i>{selectedUser?.specialty.name}</i>
+                <i>{selectedUser?.specialty?.name}</i>
               </p>
               <i
                 onClick={() => dispatch(setSelectedUser(null))}
@@ -72,7 +101,7 @@ const Chat = () => {
             ) : (
               <div className="w-full flex flex-col justify-center items-center h-full">
                 <i className="bi bi-chat-left-dots text-[100px] text-pink-500 animate-bounce"></i>
-                <p className="text-4xl mt-5"><strong>HI</strong> Dr {selectedUser?.last_Name}</p>
+                <p className="text-4xl mt-5"><strong>HI</strong> {selectedUser?.doctor_Id ? "Dr" : null} {selectedUser?.last_Name}</p>
               </div>
             )}
           </div>

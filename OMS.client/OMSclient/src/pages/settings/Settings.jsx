@@ -1,13 +1,13 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { oms_url } from "../../utils/SD";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/auth/authUserSlice";
-import useSocket from "../../hooks/useSocket";
 import { chatLogOut } from "../../redux/chat/chatSlice";
+import useSocket from "../../hooks/useSocket";
+import { userLogout } from "../../redux/user/userSlice";
 
 const Settings = () => {
-  const { disconnectSocket } = useSocket()
+  const { disconnectSocket } = useSocket();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,6 +15,7 @@ const Settings = () => {
     disconnectSocket();
     dispatch(chatLogOut());
     dispatch(logOut());
+    dispatch(userLogout(null));
     navigate(oms_url.auth);
   };
 

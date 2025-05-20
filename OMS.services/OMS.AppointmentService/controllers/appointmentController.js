@@ -2,7 +2,7 @@ import Appointment from "../models/appointmentModel";
 import { AppointmentValidator } from "../validators/validateSchema";
 
 
-export const getAppointMents = async (req, res, next) => {
+export const getAllAppointments = async (req, res, next) => {
     try {
         const appointments = await Appointment.find();
         return res.status(200).json({ success: true, appointments });
@@ -12,7 +12,37 @@ export const getAppointMents = async (req, res, next) => {
 }  
 
 
-export const postAppointMent = async (req, res, next) => {
+export const getAppointmentById = async (req, res, next) => {
+    try {
+        const appointment = await Appointment.findById(req.params.id);
+        return res.status(200).json({ success: true, appointment });
+    } catch (err) {
+        next(err);
+    }
+}  
+
+
+export const getAppointmentsBydoctor_Id = async (req, res, next) => {
+    try {
+        const appointments = await Appointment.find({ doctor_Id: req.params.doctor_Id });
+        return res.status(200).json({ success: true, appointments });
+    } catch (err) {
+        next(err);
+    }
+}  
+
+
+export const getAppointmentsByPatientId = async (req, res, next) => {
+    try {
+        const appointments = await Appointment.find({ patient_Id: req.params.patient_Id });
+        return res.status(200).json({ success: true, appointments });
+    } catch (err) {
+        next(err);
+    }
+}  
+
+
+export const postAppointment = async (req, res, next) => {
     try {
         const { error, value } = AppointmentValidator.validate(req.body);
 
@@ -33,7 +63,7 @@ export const postAppointMent = async (req, res, next) => {
 }  
 
 
-export const updateAppointMent = async (req, res, next) => {
+export const updateAppointment = async (req, res, next) => {
     try {
         const { error, value } = AppointmentValidator.validate(req.body);
 
@@ -49,7 +79,7 @@ export const updateAppointMent = async (req, res, next) => {
 }  
 
 
-export const approveAppointMent = async (req, res, next) => {
+export const approveAppointment = async (req, res, next) => {
     try {
         const findAppointment = await Appointment.findById(req.params.id);
 
@@ -57,6 +87,7 @@ export const approveAppointMent = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "This appointment has been approved!" });
 
         findAppointment.approved = true;
+        findAppointment.approvedBy = req.body;
         await findAppointment.save();
 
         return res.status(205).json({ success: true, updateAppointment, message: "Appointement approved successfully" });
@@ -66,7 +97,7 @@ export const approveAppointMent = async (req, res, next) => {
 }  
 
 
-export const disapproveAppointMent = async (req, res, next) => {
+export const disapproveAppointment = async (req, res, next) => {
     try {
         const findAppointment = await Appointment.findById(req.params.id);
 
@@ -74,6 +105,7 @@ export const disapproveAppointMent = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "This appointment isn't approved!" });
 
         findAppointment.approved = false;
+        findAppointment.disapprovedBy = req.body;
         await findAppointment.save();
 
         return res.status(205).json({ success: true, updateAppointment, message: "Appointement disapproved successfully" });
@@ -83,7 +115,7 @@ export const disapproveAppointMent = async (req, res, next) => {
 }  
 
 
-export const deleteAppointMent = async (req, res, next) => {
+export const deleteAppointment = async (req, res, next) => {
     try {
         await Appointment.findByIdAndDelete(req.params.id);
         return res.status(204).json({ success: true, message: "Appointement deleted successfully" });

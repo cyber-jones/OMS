@@ -45,7 +45,7 @@ export const updatePrescription = async (req, res, next) => {
 }  
 
 
-export const approveAppointMent = async (req, res, next) => {
+export const approvePrescription = async (req, res, next) => {
     try {
         const findPrescription = await Prescription.findById(req.params.id);
 
@@ -53,6 +53,7 @@ export const approveAppointMent = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "This Prescription has been approved!" });
 
         findPrescription.approved = true;
+        findPrescription.approvedBy = req.body;
         await findPrescription.save();
 
         return res.status(205).json({ success: true, findPrescription, message: "Prescription approved successfully" });
@@ -70,6 +71,7 @@ export const disapprovePrescription = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "This Prescription isn't approved!" });
 
         findPrescription.approved = false;
+        findPrescription.disapprovedBy = req.body;
         await findPrescription.save();
 
         return res.status(205).json({ success: true, findPrescription, message: "Appointement disapproved successfully" });

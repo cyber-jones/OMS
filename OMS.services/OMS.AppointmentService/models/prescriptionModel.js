@@ -26,7 +26,13 @@ const prescriptionSchema = new Schema({
     approved: {
         type: Boolean,
         default: false
-    }
+    },
+        approvedBy: {
+        type: String,
+    },
+    disapprovedBy: {
+        type: String,
+    } 
 }, { timestamps: true });
 
 const Prescription = model("Prescription", prescriptionSchema);

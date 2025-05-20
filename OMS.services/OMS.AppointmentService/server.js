@@ -11,6 +11,10 @@ import { errorHandler } from "./config/errorHandler.js";
 import cookieParser from "cookie-parser";
 import { corsOptions } from "./config/corsOption.js";
 import { reqLogger } from "./config/logConfig.js";
+import appointmentRouter from "./routes/appointmentRoute.js";
+import { verifyAccess } from "./middlewares/verifyAccess.js";
+import messageRouter from "./routes/messageRoute.js";
+import prescriptionRouter from "./routes/prescriptionRoute.js";
 
 
 
@@ -31,8 +35,10 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 
 
-// app.use("/api/user", userRouter);
-// app.use("/api", refreshRouter);
+app.use(verifyAccess);
+app.use("/api/appointment", appointmentRouter);
+app.use("/api/message", messageRouter);
+app.use("/api/prescription", prescriptionRouter);
 
 
 // app.all("*", (req, res)=>{

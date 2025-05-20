@@ -21,7 +21,13 @@ const appointmentSchema = new Schema({
     approved: {
         type: Boolean,
         default: false
-    }
+    },
+    approvedBy: {
+        type: String,
+    },
+    disapprovedBy: {
+        type: String,
+    }  
 }, { timestamps: true });
 
 const Appointment = model("Appointment", appointmentSchema);

@@ -82,7 +82,7 @@ function App() {
           }
         />
         <Route
-          path={oms_url.drug}
+          path={oms_url.drugs}
           element={
             <DashBoardComponents>
               <Drugs />

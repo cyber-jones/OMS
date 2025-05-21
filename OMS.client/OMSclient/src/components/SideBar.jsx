@@ -37,7 +37,7 @@ const SideBar = ({ sideNav }) => {
           <div>Specialties</div>
         </div>
       </Link>
-      <Link to={oms_url.drug}>
+      <Link to={oms_url.drugs}>
         <div className="text-center w-full hover:cursor-pointer">
           <i className={`bi bi-bandaid-fill ${nav_icons}`}></i>
           <div>Drugs</div>

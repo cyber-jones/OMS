@@ -1,101 +1,100 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { oms_server_dev_url, oms_url } from "../../../utils/SD";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useMemo, useState } from "react";
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from "material-react-table";
+import { useNavigate } from "react-router-dom";
+import { oms_url } from "../../../utils/SD";
 import useDrug from "../../../hooks/useDrug";
-import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
-import { useSnackbar } from "notistack";
-import confirmAction from "../../../utils/confirmAction";
+import { drugData } from "../../../data/oms.data";
+import Circle from "../../../components/loading/Circle";
 
 const DrugList = () => {
   const { loading, drugs } = useDrug();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.drug   );
-  const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [data, setData] = useState(drugData);
 
-    const handleDelete = async (id, name) => {
-      if (confirmAction(name)) {
-        try {
-          const res = await axiosAuth.delete("/drug/" + id);
-          console.log(res);
-          if (res?.status !== 204 && !res?.data)
-            return enqueueSnackbar(res.statusText, { variant: "error" });
+  useEffect(() => {
+    if (!loading) setData([...drugs]);
+  }, [drugs]);
 
-          enqueueSnackbar(res.statusText + ": Deleted", { variant: "success" });
-          navigate(oms_url.drugList);
-        } catch (err) {
-          enqueueSnackbar(err?.response?.statusText, { variant: "error" });
-        }
-      }
+  //should be memoized or stable
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "drug_Name", //access nested data with dot notation
+        header: "Drug Name",
+        size: 150,
+      },
+      {
+        accessorKey: "category",
+        header: "Category",
+        size: 150,
+      },
+      {
+        accessorKey: "count_In_Stock",
+        header: "Count In Stock",
+        size: 150,
+      },
+      {
+        accessorKey: "manufacturer", //normal accessorKey
+        header: "Manufacturer",
+        size: 150,
+      },
+      {
+        accessorKey: "price",
+        header: "Price",
+        size: 150,
+      },
+      {
+        accessorKey: "created_By",
+        header: "Created By",
+        size: 150,
+      },
+      {
+        accessorKey: "expiry_Date",
+        header: "Expiry Date",
+        size: 150,
+      },
+    ],
+    []
+  );
 
-      return;
-    }
-
- 
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    muiTableBodyRowProps: ({ row }) => ({
+      onClick: () => {
+        navigate(oms_url.drug + "/" + row.original.drug_Id);
+      },
+      sx: {
+        cursor: "pointer", //you might want to change the cursor too when adding an onClick
+      },
+    }),
+  });
 
   return (
-    <div className="w-[95%] h-11/12 text-center overflow-auto">
-      <table className="border-collapse border border-gray-400 w-full font-sans text-[10px] md:text-[14px]">
-        <thead>
-          <tr>
-            <th className="border border-gray-300 h-12">Name</th>
-            <th className="border border-gray-300 h-12">{"Price (N)"}</th>
-            <th className="border border-gray-300 h-12">Manufacturer</th>
-            <th className="border border-gray-300 h-12 hidden lg:block">
-              Count
-            </th>
-            <th className="border border-gray-300 h-12">Category</th>
-            <th className="border border-gray-300 h-12 hidden lg:block px-2">
-              Expiry
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {!loading && drugs ? (
-            drugs.map((drug, index) => (
-              <tr key={index}>
-                <td className="border border-gray-300 h-12">
-                  {drug?.drug_Name}
-                </td>
-                <td className="border border-gray-300 h-12">{drug?.price}</td>
-                <td className="border border-gray-300 h-12">
-                  {drug?.manufacturer}
-                </td>
-                <td className="border border-gray-300 h-12 hidden lg:block">
-                  {drug?.count_In_Stock}
-                </td>
-                <td className="border border-gray-300 h-12">
-                  {drug?.category}
-                </td>
-                <td className="border border-gray-300 h-12 hidden lg:block px-2">
-                  {drug?.expiry_Date}
-                </td>
-                <td className="border border-gray-300 h-12 px-2">
-                  <Link
-                    to={oms_url.updateDrug + "/" + drug?.drug_Id}
-                    className="bg-blue-600 text-white px-2 py-1 text-sm hover:bg-blue-900 cursor-pointer rounded-lg"
-                  >
-                    <i className="bi bi-pencil-fill text-[12px]"></i>
-                  </Link>
-                </td>
-                <td className="border border-gray-300 h-12 px-2">
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(drug?.drug_Id, drug?.drug_Name)}
-                    className="bg-red-600 text-white px-2 py-1 text-sm hover:bg-red-900 cursor-pointer rounded-lg"
-                  >
-                    <i className="bi bi-trash-fill text-[12px]"></i>
-                  </button>
-                </td>
-              </tr>
-            ))
+    <>
+      {!loading ? (
+        <div className="w-[95%] h-11/12">
+          <p className="text-3xl font-semibold text-blue-500 mb-5">All Drugs</p>
+          {data.length > 0 ? (
+            <div className="w-full h-11/12 overflow-auto">
+              <MaterialReactTable table={table} />
+            </div>    
           ) : (
-            <tr className="border border-gray-300 ...">
-              <td>Loading...</td>
-            </tr>
+            <p className="text-center text-red-500 text-2xl mt-10">
+              No Data found
+            </p>
           )}
-        </tbody>
-      </table>
-    </div>
+        </div>
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <Circle />
+        </div>
+      )}
+    </>
   );
 };
 

@@ -8,13 +8,13 @@ import useAxiosAuthorization from './useAxiosAuth';
 
 
 const useDoctor = () => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const [doctors, setDoctors] = useState([]);
     const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
 
     const getDoctors = async () => {
-        // setLoading(true)
+        setLoading(true);
         try {
             const res = await axiosAuth.get("/doctor/all");
             console.log(res)

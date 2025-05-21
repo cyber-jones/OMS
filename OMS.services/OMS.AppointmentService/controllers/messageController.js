@@ -1,5 +1,5 @@
-import Message from "../models/messageModel";
-import { MessageValidator } from "../validators/validateSchema";
+import Message from "../models/messageModel.js";
+import { MessageValidator } from "../validators/validateSchema.js";
 
 
 

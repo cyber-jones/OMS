@@ -41,7 +41,7 @@ app.use("/api/message", messageRouter);
 app.use("/api/prescription", prescriptionRouter);
 
 
-// app.all("*", (req, res)=>{
+// app.all("*", (req, res) => {
 //     res.status(404);
 
 //     if(req.accepts("html"))

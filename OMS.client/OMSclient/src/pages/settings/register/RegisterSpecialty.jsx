@@ -56,7 +56,7 @@ const RegisterSpecialty = () => {
       onSubmit={handleSubmit}
       className="w-[95%] h-11/12 flex flex-col justify-start items-center gap-8 font-sans"
     >
-      <h1 className="w-11/12 md:w-6/12 text-2xl text-blue-600 mb-8">
+      <h1 className="w-11/12 md:w-6/12 text-2xl text-blue-600 mb-8 font-semibold">
         New Specialty
       </h1>
       <label htmlFor="Name" className="w-11/12 md:w-6/12">

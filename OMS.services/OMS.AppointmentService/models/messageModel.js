@@ -6,12 +6,10 @@ import { Schema, model } from "mongoose";
 const messageSchema = new Schema({
     sender_Id: {
         required: true,
-        unique: true,
         type: String
     },
     reciever_Id: {
         required: true,
-        unique: true,
         type: String
     },
     text: {
@@ -22,6 +20,6 @@ const messageSchema = new Schema({
     }
 }, { timestamps: true });
 
-const Messages = model("Message", messageSchema);
+const Message = model("Message", messageSchema);
 
 export default Message;

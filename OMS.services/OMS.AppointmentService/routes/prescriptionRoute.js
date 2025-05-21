@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { approvePrescription, deletePrescription, disapprovePrescription, getPrescriptions, postPrescription, updatePrescription } from '../controllers/prescriptionController';
-import { verifyRoles } from '../middlewares/verifyRoles';
-import { ROLES } from '../utils/SD';
+import { approvePrescription, deletePrescription, disapprovePrescription, getPrescriptions, postPrescription, updatePrescription } from '../controllers/prescriptionController.js';
+import { verifyRoles } from '../middlewares/verifyRoles.js';
+import { ROLES } from '../utils/SD.js';
 const prescriptionRouter = Router();
 
 

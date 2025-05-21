@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { deleteMessage, getAllMessages, getUserMessages, getUserPrivateMessages } from '../controllers/messageController';
-import { verifyRoles } from '../middlewares/verifyRoles';
-import { ROLES } from '../utils/SD';
+import { deleteMessage, getAllMessages, getUserMessages, getUserPrivateMessages, postMessage } from '../controllers/messageController.js';
+import { verifyRoles } from '../middlewares/verifyRoles.js';
+import { ROLES } from '../utils/SD.js';
 const messageRouter = Router();
 
 

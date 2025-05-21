@@ -1,5 +1,5 @@
-import Appointment from "../models/appointmentModel";
-import { AppointmentValidator } from "../validators/validateSchema";
+import Appointment from "../models/appointmentModel.js";
+import { AppointmentValidator, ApprovalValidator } from "../validators/validateSchema.js";
 
 
 export const getAllAppointments = async (req, res, next) => {
@@ -16,6 +16,16 @@ export const getAppointmentById = async (req, res, next) => {
     try {
         const appointment = await Appointment.findById(req.params.id);
         return res.status(200).json({ success: true, appointment });
+    } catch (err) {
+        next(err);
+    }
+}  
+
+
+export const getAppointmentsBySpecialty_Id = async (req, res, next) => {
+    try {
+        const appointments = await Appointment.find({ doctor_Id: req.params.specialty_Id });
+        return res.status(200).json({ success: true, appointments });
     } catch (err) {
         next(err);
     }
@@ -81,13 +91,18 @@ export const updateAppointment = async (req, res, next) => {
 
 export const approveAppointment = async (req, res, next) => {
     try {
+        const { error, value } = ApprovalValidator.validate(req.body);
+
+        if (error)
+            return res.status(400).json({ success: false, message: error.message });
+
         const findAppointment = await Appointment.findById(req.params.id);
 
         if (findAppointment.approved)
             return res.status(400).json({ success: false, message: "This appointment has been approved!" });
 
         findAppointment.approved = true;
-        findAppointment.approvedBy = req.body;
+        findAppointment.approved_By = value.name;
         await findAppointment.save();
 
         return res.status(205).json({ success: true, updateAppointment, message: "Appointement approved successfully" });
@@ -99,13 +114,18 @@ export const approveAppointment = async (req, res, next) => {
 
 export const disapproveAppointment = async (req, res, next) => {
     try {
+        const { error, value } = ApprovalValidator.validate(req.body);
+
+        if (error)
+            return res.status(400).json({ success: false, message: error.message });
+
         const findAppointment = await Appointment.findById(req.params.id);
 
         if (!findAppointment.approved)
             return res.status(400).json({ success: false, message: "This appointment isn't approved!" });
 
         findAppointment.approved = false;
-        findAppointment.disapprovedBy = req.body;
+        findAppointment.disapproved_By = value.name;
         await findAppointment.save();
 
         return res.status(205).json({ success: true, updateAppointment, message: "Appointement disapproved successfully" });

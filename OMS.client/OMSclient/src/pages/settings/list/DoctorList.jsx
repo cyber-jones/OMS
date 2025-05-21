@@ -1,69 +1,77 @@
+import { useMemo } from "react";
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from "material-react-table";
 import useDoctor from "../../../hooks/useDoctor";
 import { Link } from "react-router-dom";
 import { oms_url } from "../../../utils/SD";
+import Circle from "../../../components/loading/Circle";
 
 const DoctorList = () => {
   const { loading, doctors } = useDoctor();
+
+  //should be memoized or stable
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "first_Name", //access nested data with dot notation
+        header: "First Name",
+        size: 150,
+      },
+      {
+        accessorKey: "middle_Name",
+        header: "Middle Name",
+        size: 150,
+      },
+      {
+        accessorKey: "last_Name",
+        header: "Last Name",
+        size: 150,
+      },
+      {
+        accessorKey: "mln", //normal accessorKey
+        header: "MLN",
+        size: 200,
+      },
+      {
+        accessorKey: "sex",
+        header: "Gender",
+        size: 150,
+      },
+      {
+        accessorKey: "specialty.name",
+        header: "Specialty",
+        size: 150,
+      },
+      {
+        accessorKey: "sub_Specialty.name",
+        header: "Sub Specialty",
+        size: 150,
+      },
+    ],
+    []
+  );
+
+
+  console.log(loading, doctors);
+  const table = useMaterialReactTable({
+    columns,
+    doctors, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
+  });
+
   return (
-    <div className="w-[95%] h-11/12 text-center">
-      <table className="border-collapse border border-gray-400 w-full font-sans text-[10px] md:text-[14px]">
-        <thead>
-          <tr>
-            <th className="border border-gray-300 h-12">First Name</th>
-            <th className="border border-gray-300 h-12">Last Name</th>
-            <th className="border border-gray-300 h-12">MLN</th>
-            <th className="border border-gray-300 h-12 hidden lg:block">
-              Gender
-            </th>
-            <th className="border border-gray-300 h-12">Specialty</th>
-            <th className="border border-gray-300 h-12 hidden lg:block">
-              Sub-Specialty
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {!loading && doctors ? (
-            doctors.map((doctor, index) => (
-              <tr key={index}>
-                <td className="border border-gray-300 h-12">
-                  {doctor?.first_Name}
-                </td>
-                <td className="border border-gray-300 h-12">
-                  {doctor?.last_Name}
-                </td>
-                <td className="border border-gray-300 h-12">{doctor?.mln}</td>
-                <td className="border border-gray-300 h-12 hidden lg:block">
-                  {doctor?.sex}
-                </td>
-                <td className="border border-gray-300 h-12">
-                  {doctor?.specialty?.name}
-                </td>
-                <td className="border border-gray-300 h-12 hidden lg:block">
-                  {doctor?.sub_Specialty?.name}
-                </td>
-                <td className="border border-gray-300 h-12">
-                  <Link
-                    to={oms_url.updateDoctor + "/" + doctor?.doctor_Id}
-                    className="bg-blue-600 text-white px-2 py-1 text-sm hover:bg-blue-900 cursor-pointer rounded-lg"
-                  >
-                    <i className="bi bi-pencil-fill"></i>
-                  </Link>
-                </td>
-                <td className="border border-gray-300 h-12">
-                  <Link className="bg-red-600 text-white px-2 py-1 text-sm hover:bg-red-900 cursor-pointer rounded-lg">
-                    <i className="bi bi-unlock-fill"></i>
-                  </Link>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr className="border border-gray-300 ...">
-              <td>Loading...</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+    <>
+      { !loading ? (
+        <div className="w-[95%] h-11/12 text-center">
+          <MaterialReactTable table={table} />
+        </div>
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <Circle />
+        </div>
+      )}
+    </>
   );
 };
 

@@ -6,11 +6,6 @@ import { oms_server_dev_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import useSpecialty from "../../../hooks/useSpecialty";
 
-
-
-
-
-
 const RegisterDoctor = () => {
   const [formData, setFormData] = useState({});
   const [CertificateUrl, setCertificateUrl] = useState("");
@@ -28,7 +23,6 @@ const RegisterDoctor = () => {
     });
   };
 
-
   const handleCertificateImageUrl = (e) => {
     const file = e.target.files[0];
 
@@ -40,10 +34,10 @@ const RegisterDoctor = () => {
     const fileReader = new FileReader();
     fileReader.onload = () => {
       setCertificateUrl(fileReader.result);
-    }
+    };
     fileReader.readAsDataURL(file);
-  }
-  
+  };
+
   // useEffect(()=> {
   //   let val = Object.keys(formData);
   //   val.forEach(key => {
@@ -56,7 +50,10 @@ const RegisterDoctor = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosAuth.post("/doctor", {...formData, Certificate_Url: CertificateUrl});
+      const res = await axiosAuth.post("/doctor", {
+        ...formData,
+        Certificate_Url: CertificateUrl,
+      });
       console.log(res);
       if (res?.status !== 201)
         return enqueueSnackbar(res.statusText, { variant: "error" });
@@ -72,210 +69,207 @@ const RegisterDoctor = () => {
   };
   console.log(formData);
 
-
-
-
-
-
-
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-[95%] h-11/12 text-sm md:text-lg pl-3 grid grid-cols-2 md:grid-cols-3 font-sans place-content-start place-items-center gap-8 md:overflow-auto overflow-y-scroll"
-    >
-      <Input2
-        name={"First_Name"}
-        label={"First Name"}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"Middle_Name"}
-        label={"Middle Name"}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"Last_Name"}
-        label={"Last Name"}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"email"}
-        label={"Email"}
-        type={"email"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"Cell_Phone"}
-        label={"Phone"}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <label htmlFor="Relationship" className="w-full">
-        <p className="font-medium">Relationship:</p>
-        <select
-          id="Relationship"
-          onChange={(e) => handleChange(e)}
-          className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
-        >
-          <option>--select relationship</option>
-          <option value={"Married"}>Married</option>
-          <option value={"Single"}>Single</option>
-          <option value={"Devorced"}>Devorced</option>
-        </select>
-      </label>
-      <label htmlFor="State" className="w-full">
-        <p className="font-medium">Address State:</p>
-        <select
-          id="State"
-          onChange={(e) => handleChange(e)}
-          className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
-        >
-          <option>--select address state</option>
-          <option value={"Lagos"}>Lagos</option>
-          <option value={"Ikeja"}>Ikeja</option>
-          <option value={"Abuja"}>Abuja</option>
-        </select>
-      </label>
-      <Input2
-        name={"Address"}
-        label={"Home Address"}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"NIN"}
-        label={"National Identity No."}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"Work_ID"}
-        label={"Work ID"}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <label htmlFor="Sex" className="w-full">
-        <p className="font-medium">Sex:</p>
-        <select
-          id="Sex"
-          onChange={(e) => handleChange(e)}
-          className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
-        >
-          <option>--select sex</option>
-          <option value={"Male"}>Male</option>
-          <option value={"Female"}>Female</option>
-        </select>
-      </label>
-      <Input2
-        name={"DOB"}
-        label={"Date of birth"}
-        type={"date"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"MLN"}
-        label={"Medical Licence No."}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <label htmlFor="Specialty_Id" className="w-full">
-        <p className="font-medium">Specialty:</p>
-        <select
-          id="Specialty_Id"
-          onChange={(e) => handleChange(e)}
-          className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
-        >
-          <option>--select specialty</option>
-          {!loadingSpecialty ? (
-            specialties.map((specialty, index) => (
-              <option key={index} value={specialty?.specialty_Id}>
-                {specialty?.name}
-              </option>
-            ))
-          ) : (
-            <option>Loading...</option>
-          )}
-        </select>
-      </label>
-      <label htmlFor="Sub_Specialty_Id" className="w-full">
-        <p className="font-medium">Sub Specialty:</p>
-        <select
-          id="Sub_Specialty_Id"
-          onChange={(e) => handleChange(e)}
-          className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
-        >
-          <option>--select specialty</option>
-          {!loadingSpecialty ? (
-            specialties.map((specialty, index) => (
-              <option key={index} value={specialty?.specialty_Id}>
-                {specialty?.name}
-              </option>
-            ))
-          ) : (
-            <option>Loading...</option>
-          )}
-        </select>
-      </label>
-      <Input2
-        name={"Clinic_Phone"}
-        label={"Work Phone"}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"CT_Start"}
-        label={"CT- (start)"}
-        type={"time"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"CT_End"}
-        label={"CT- (end)"}
-        type={"time"}
-        handleChange={handleChange}
-      />
-      <Input2
-        name={"password"}
-        label={"Password"}
-        type={"text"}
-        handleChange={handleChange}
-      />
-      <label htmlFor="Certificate_Url" className="w-full">
-        <p className="font-medium">Upload Certificate:</p>
-        <input
-          id="Certificate_Url"
-          type="file"
-          accept="image/*"
-          hidden
-          ref={imageRef}
-          onChange={(e) => handleCertificateImageUrl(e)}
-          className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+    <div className="w-[95%] h-11/12 flex flex-col font-sans">
+      <p className="text-blue-700 text-3xl mb-6 pl-3 font-semibold">Register New Doctor</p>
+      <form
+        onSubmit={handleSubmit}
+        className="w-full h-11/12 text-sm md:text-lg pl-3 grid grid-cols-2 md:grid-cols-3 place-content-start place-items-center gap-8 md:overflow-auto overflow-y-scroll"
+      >
+        <Input2
+          name={"First_Name"}
+          label={"First Name"}
+          type={"text"}
+          handleChange={handleChange}
         />
-        <img
-          onClick={() => imageRef.current.click()}
-          src={CertificateUrl ? CertificateUrl : "/images/image-insert.png"}
-          className="cursor-pointer"
-          alt="certi-image"
+        <Input2
+          name={"Middle_Name"}
+          label={"Middle Name"}
+          type={"text"}
+          handleChange={handleChange}
         />
-      </label>
-      <div className="w-full">
-        {loading ? (
-          <button
-            disabled={loading}
-            className="w-10/12 py-4 uppercase bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer"
+        <Input2
+          name={"Last_Name"}
+          label={"Last Name"}
+          type={"text"}
+          handleChange={handleChange}
+        />
+        <Input2
+          name={"email"}
+          label={"Email"}
+          type={"email"}
+          handleChange={handleChange}
+        />
+        <Input2
+          name={"Cell_Phone"}
+          label={"Phone"}
+          type={"text"}
+          handleChange={handleChange}
+        />
+        <label htmlFor="Relationship" className="w-full">
+          <p className="font-medium">Relationship:</p>
+          <select
+            id="Relationship"
+            onChange={(e) => handleChange(e)}
+            className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
-            Loading...
-          </button>
-        ) : (
-          <button className="w-10/12 py-4 uppercase bg-green-900 hover:bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer">
-            Submit
-          </button>
-        )}
-      </div>
-    </form>
+            <option>--select relationship</option>
+            <option value={"Married"}>Married</option>
+            <option value={"Single"}>Single</option>
+            <option value={"Devorced"}>Devorced</option>
+          </select>
+        </label>
+        <label htmlFor="State" className="w-full">
+          <p className="font-medium">Address State:</p>
+          <select
+            id="State"
+            onChange={(e) => handleChange(e)}
+            className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+          >
+            <option>--select address state</option>
+            <option value={"Lagos"}>Lagos</option>
+            <option value={"Ikeja"}>Ikeja</option>
+            <option value={"Abuja"}>Abuja</option>
+          </select>
+        </label>
+        <Input2
+          name={"Address"}
+          label={"Home Address"}
+          type={"text"}
+          handleChange={handleChange}
+        />
+        <Input2
+          name={"NIN"}
+          label={"National Identity No."}
+          type={"text"}
+          handleChange={handleChange}
+        />
+        <Input2
+          name={"Work_ID"}
+          label={"Work ID"}
+          type={"text"}
+          handleChange={handleChange}
+        />
+        <label htmlFor="Sex" className="w-full">
+          <p className="font-medium">Sex:</p>
+          <select
+            id="Sex"
+            onChange={(e) => handleChange(e)}
+            className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+          >
+            <option>--select sex</option>
+            <option value={"Male"}>Male</option>
+            <option value={"Female"}>Female</option>
+          </select>
+        </label>
+        <Input2
+          name={"DOB"}
+          label={"Date of birth"}
+          type={"date"}
+          handleChange={handleChange}
+        />
+        <Input2
+          name={"MLN"}
+          label={"Medical Licence No."}
+          type={"text"}
+          handleChange={handleChange}
+        />
+        <label htmlFor="Specialty_Id" className="w-full">
+          <p className="font-medium">Specialty:</p>
+          <select
+            id="Specialty_Id"
+            onChange={(e) => handleChange(e)}
+            className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+          >
+            <option>--select specialty</option>
+            {!loadingSpecialty ? (
+              specialties.map((specialty, index) => (
+                <option key={index} value={specialty?.specialty_Id}>
+                  {specialty?.name}
+                </option>
+              ))
+            ) : (
+              <option>Loading...</option>
+            )}
+          </select>
+        </label>
+        <label htmlFor="Sub_Specialty_Id" className="w-full">
+          <p className="font-medium">Sub Specialty:</p>
+          <select
+            id="Sub_Specialty_Id"
+            onChange={(e) => handleChange(e)}
+            className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+          >
+            <option>--select specialty</option>
+            {!loadingSpecialty ? (
+              specialties.map((specialty, index) => (
+                <option key={index} value={specialty?.specialty_Id}>
+                  {specialty?.name}
+                </option>
+              ))
+            ) : (
+              <option>Loading...</option>
+            )}
+          </select>
+        </label>
+        <Input2
+          name={"Clinic_Phone"}
+          label={"Work Phone"}
+          type={"text"}
+          handleChange={handleChange}
+        />
+        <Input2
+          name={"CT_Start"}
+          label={"CT- (start)"}
+          type={"time"}
+          handleChange={handleChange}
+        />
+        <Input2
+          name={"CT_End"}
+          label={"CT- (end)"}
+          type={"time"}
+          handleChange={handleChange}
+        />
+        <Input2
+          name={"password"}
+          label={"Password"}
+          type={"text"}
+          handleChange={handleChange}
+        />
+        <label htmlFor="Certificate_Url" className="w-full">
+          <p className="font-medium">Upload Certificate:</p>
+          <input
+            id="Certificate_Url"
+            type="file"
+            accept="image/*"
+            hidden
+            ref={imageRef}
+            onChange={handleCertificateImageUrl}
+            className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+          />
+          <img
+            onClick={() => imageRef.current.click}
+            src={CertificateUrl ? CertificateUrl : "/images/image-insert.png"}
+            className="cursor-pointer"
+            alt="certi-image"
+          />
+        </label>
+        <div className="w-full">
+          {loading ? (
+            <button
+              disabled={loading}
+              className="w-10/12 py-4 uppercase bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer"
+            >
+              Loading...
+            </button>
+          ) : (
+            <button className="w-10/12 py-4 uppercase bg-green-900 hover:bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer">
+              Submit
+            </button>
+          )}
+        </div>
+      </form>
+    </div>
   );
 };
 

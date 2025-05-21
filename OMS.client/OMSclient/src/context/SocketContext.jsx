@@ -28,7 +28,7 @@ export const SocketProvider = ({ children }) => {
   // }, []);
 
 
-  console.log(socket);
+  // console.log(socket);
 
   return (
     <SocketContext.Provider value={{ socket, setSocket, connectSocket, disconnectSocket }}>

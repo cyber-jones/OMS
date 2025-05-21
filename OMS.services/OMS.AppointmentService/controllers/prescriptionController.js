@@ -1,5 +1,5 @@
-import Prescription from "../models/prescriptionModel";
-import { PrescriptionValidator } from "../validators/validateSchema";
+import Prescription from "../models/prescriptionModel.js";
+import { PrescriptionValidator } from "../validators/validateSchema.js";
 
 
 export const getPrescriptions = async (req, res, next) => {
@@ -47,13 +47,18 @@ export const updatePrescription = async (req, res, next) => {
 
 export const approvePrescription = async (req, res, next) => {
     try {
+        const { error, value } = ApprovalValidator.validate(req.body);
+
+            if (error)
+            return res.status(400).json({ success: false, message: error.message });
+
         const findPrescription = await Prescription.findById(req.params.id);
 
         if (findPrescription.approved)
             return res.status(400).json({ success: false, message: "This Prescription has been approved!" });
 
         findPrescription.approved = true;
-        findPrescription.approvedBy = req.body;
+        findPrescription.approved_By = value;
         await findPrescription.save();
 
         return res.status(205).json({ success: true, findPrescription, message: "Prescription approved successfully" });
@@ -65,13 +70,18 @@ export const approvePrescription = async (req, res, next) => {
 
 export const disapprovePrescription = async (req, res, next) => {
     try {
+        const { error, value } = ApprovalValidator.validate(req.body);
+
+        if (error)
+            return res.status(400).json({ success: false, message: error.message });
+
         const findPrescription = await Prescription.findById(req.params.id);
 
         if (!findPrescription.approved)
             return res.status(400).json({ success: false, message: "This Prescription isn't approved!" });
 
         findPrescription.approved = false;
-        findPrescription.disapprovedBy = req.body;
+        findPrescription.disapproved_By = value.name;
         await findPrescription.save();
 
         return res.status(205).json({ success: true, findPrescription, message: "Appointement disapproved successfully" });

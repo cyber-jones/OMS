@@ -2,7 +2,7 @@ import express from "express";
 import { Server } from "socket.io";
 import http from "http";
 import { ALLOWEDORIGINS } from "../utils/SD.js";
-import message from "../models/messageModel.js";
+
 
 const app = express();
 const server = new http.createServer(app);

@@ -34,7 +34,7 @@ app.use("/api/user", userRouter);
 app.use("/api", refreshRouter);
 
 
-app.all("*", (req, res)=>{
+app.all("*", (req, res) => {
     res.status(404);
 
     if(req.accepts("html"))

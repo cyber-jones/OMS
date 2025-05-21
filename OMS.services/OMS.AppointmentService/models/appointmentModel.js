@@ -4,28 +4,34 @@ import { Schema, model } from "mongoose";
 
 
 const appointmentSchema = new Schema({
+    specialty_Id: {
+        required: true,
+        type: String
+    },
     doctor_Id: {
         required: true,
-        unique: true,
         type: String
     },
     patient_Id: {
         required: true,
-        unique: true,
         type: String
     },
     date: {
         required: true,
         type: Date
     },
+    illness_Description: {
+        required: true,
+        type: String
+    }, 
     approved: {
         type: Boolean,
         default: false
     },
-    approvedBy: {
+    approved_By: {
         type: String,
     },
-    disapprovedBy: {
+    disapproved_By: {
         type: String,
     }  
 }, { timestamps: true });

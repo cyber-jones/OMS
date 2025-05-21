@@ -26,6 +26,8 @@ import UpdateDrug from "./pages/settings/update/UpdateDrug";
 import SpecialtyList from "./pages/settings/list/SpecialtyList";
 import UpdateSpecialty from "./pages/settings/update/UpdateSpecialty";
 import IsLoggedIn from "./components/authorize/IsLoggedIn";
+import NewAppointment from "./pages/appointment/NewAppointment";
+import Appointments from "./pages/appointment/Appointments";
 
 function App() {
   return (
@@ -60,6 +62,22 @@ function App() {
           element={
             <DashBoardComponents>
               <Consultation />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.appointment}
+          element={
+            <DashBoardComponents>
+              <Appointments />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.newAppointment}
+          element={
+            <DashBoardComponents>
+              <NewAppointment />
             </DashBoardComponents>
           }
         />

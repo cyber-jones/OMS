@@ -1,108 +1,91 @@
-import { useMemo } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useMemo, useState } from "react";
 import { MaterialReactTable, useMaterialReactTable } from "material-react-table";
+import useAppointments from "../../hooks/useAppointment ";
+import { Link, useNavigate } from "react-router-dom";
+import { oms_url } from "../../utils/SD";
+import { appointmentData } from "../../data/oms.data";
+import Circle from "../../components/loading/Circle";
 
-//example data type
-// type Person = {
-//   name: {
-//     firstName: string;
-//     lastName: string;
-//   };
-//   address: string;
-//   city: string;
-//   state: string;
-// };
-
-//nested data is ok, see accessorKeys in ColumnDef below
-const data = [
-  {
-    name: {
-      firstName: "John",
-      lastName: "Doe",
-    },
-    address: "261 Erdman Ford",
-    city: "East Daphne",
-    state: "Kentucky",
-  },
-  {
-    name: {
-      firstName: "Jane",
-      lastName: "Doe",
-    },
-    address: "769 Dominic Grove",
-    city: "Columbus",
-    state: "Ohio",
-  },
-  {
-    name: {
-      firstName: "Joe",
-      lastName: "Doe",
-    },
-    address: "566 Brakus Inlet",
-    city: "South Linda",
-    state: "West Virginia",
-  },
-  {
-    name: {
-      firstName: "Kevin",
-      lastName: "Vandy",
-    },
-    address: "722 Emie Stream",
-    city: "Lincoln",
-    state: "Nebraska",
-  },
-  {
-    name: {
-      firstName: "Joshua",
-      lastName: "Rolluffs",
-    },
-    address: "32188 Larkin Turnpike",
-    city: "Omaha",
-    state: "Nebraska",
-  },
-];
 
 const Appointments = () => {
+    const { loading, appointments } = useAppointments();
+      const navigate = useNavigate();
+      const [data, setData] = useState(appointmentData);
+    
+      useEffect(() => {
+        if (!loading) {
+          const mutateAppointments = appointments.map( appointment => ({
+            id: appointment._id,
+            specialty_Name: appointment.specialty_Id,
+            illness_Description: appointment.illness_Description,
+            date: new Date(appointment.date).toDateString()
+          }));
+
+          setData([...mutateAppointments]);
+        }
+      }, [appointments]);
+
+
   //should be memoized or stable
   const columns = useMemo(
     () => [
       {
-        accessorKey: "name.firstName", //access nested data with dot notation
-        header: "First Name",
-        size: 150,
+        accessorKey: "specialty_Name", //access nested data with dot notation
+        header: "Specialty Name",
+        size: 100,
       },
       {
-        accessorKey: "name.lastName",
-        header: "Last Name",
-        size: 150,
+        accessorKey: "illness_Description",
+        header: "Description of illness",
+        size: 250,
       },
       {
-        accessorKey: "address", //normal accessorKey
-        header: "Address",
-        size: 200,
-      },
-      {
-        accessorKey: "city",
-        header: "City",
-        size: 150,
-      },
-      {
-        accessorKey: "state",
-        header: "State",
-        size: 150,
-      },
+        accessorKey: "date", //normal accessorKey
+        header: "Date",
+        size: 100,
+      }
     ],
     []
   );
 
   const table = useMaterialReactTable({
     columns,
-    data, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
+    data,
+    muiTableBodyRowProps: ({ row }) => ({
+      onClick: () => {
+        navigate(oms_url.appointment + "/" + row.original.id);
+      },
+      sx: {
+        cursor: "pointer", //you might want to change the cursor too when adding an onClick
+      },
+    }),
   });
 
   return (
-    <div className="w-11/12 h-11/12">
-        <MaterialReactTable table={table} />
-    </div>
+        <>
+      {!loading ? (
+        <div className="w-[95%] h-11/12">
+          <Link to={oms_url.newAppointment} className="float-right"><i className="bi bi-plus text-green-600 text-lg md:text-3xl border border-green-600 px-1 mr-2"></i></Link>
+          <p className="text-lg text-center md:text-left md:text-3xl font-semibold text-blue-500 mb-5">
+            My Appointments
+          </p>
+          {data.length > 0 && appointments.length > 0 ? (
+            <div className="w-full h-11/12 overflow-auto">
+              <MaterialReactTable table={table} />
+            </div>
+          ) : (
+            <p className="text-center text-red-500 text-2xl mt-10">
+              No appointment made 
+            </p>
+          )}
+        </div>
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <Circle />
+        </div>
+      )}
+    </>
   );
 };
 

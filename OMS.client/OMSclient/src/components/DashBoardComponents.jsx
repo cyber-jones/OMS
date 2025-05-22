@@ -20,6 +20,11 @@ const DashBoardComponents = ({ children }) => {
     socket.on("new-disconnection", (userId) => {
       enqueueSnackbar("Disconnected: " + userId, { variant: "warning" });
     });
+
+    return () => {
+      socket.off("new-connection");
+      socket.off("new-disconnection");
+    }
   }, []);
 
   return (

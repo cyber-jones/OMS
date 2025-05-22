@@ -40,7 +40,7 @@ const Chat = () => {
 
     return () => socket.off("send-message");
 
-  }, [socket]);
+  }, []);
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];

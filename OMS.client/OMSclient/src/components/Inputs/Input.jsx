@@ -3,6 +3,7 @@ const Input = ({ type, name, label, handleChange, width = "w-1/2" }) => {
     <label htmlFor={name} className={width}>
       <p className="font-medium">{label}:</p>
       <input
+        required
         id={name}
         type={type}
         onChange={(e) => handleChange(e)}

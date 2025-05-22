@@ -1,85 +1,80 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { oms_server_dev_url, oms_url } from "../../../utils/SD";
-import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
-import { useSnackbar } from "notistack";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useMemo, useState } from "react";
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from "material-react-table";
+import { useNavigate } from "react-router-dom";
+import { oms_url } from "../../../utils/SD";
+import { specialtyData } from "../../../data/oms.data";
+import Circle from "../../../components/loading/Circle";
 import useSpecialty from "../../../hooks/useSpecialty";
-import confirmAction from "../../../utils/confirmAction";
 
 const SpecialtyList = () => {
   const { loading, specialties } = useSpecialty();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
-  const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [data, setData] = useState(specialtyData);
 
-    const handleDelete = async (id, name) => {
-      if (confirmAction(name)) {
-        try {
-          const res = await axiosAuth.delete("/specialty/" + id);
-          console.log(res);
-          if (res?.status !== 204 && !res?.data)
-            return enqueueSnackbar(res.statusText, { variant: "error" });
+  useEffect(() => {
+    if (!loading) setData([...specialties]);
+  }, [specialties]);
 
-          enqueueSnackbar(res.statusText + ": Deleted", { variant: "success" });
-          navigate(oms_url.drugList);
-        } catch (err) {
-          enqueueSnackbar(err?.response?.statusText, { variant: "error" });
-        }
-      }
+  //should be memoized or stable
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "name", //access nested data with dot notation
+        header: "Specialty Name",
+        size: 100,
+      },
+      {
+        accessorKey: "description",
+        header: "Description",
+        size: 250,
+      },
+      {
+        accessorKey: "createdAt",
+        header: "Created Date",
+        size: 100,
+      },
+    ],
+    []
+  );
 
-      return;
-    }
-
- 
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    muiTableBodyRowProps: ({ row }) => ({
+      onClick: () => {
+        navigate(oms_url.specialty + "/" + row.original.specialty_Id);
+      },
+      sx: {
+        cursor: "pointer", //you might want to change the cursor too when adding an onClick
+      },
+    }),
+  });
 
   return (
-    <div className="w-[95%] h-11/12 text-center overflow-auto">
-      <table className="border-collapse border border-gray-400 w-full font-sans text-[10px] md:text-[14px]">
-        <thead>
-          <tr>
-            <th className="border border-gray-300 h-12">Name</th>
-            <th className="border border-gray-300 h-12">Description</th>
-            <th className="border border-gray-300 h-12">Created Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {!loading && specialties ? (
-            specialties.map((specialty, index) => (
-              <tr key={index}>
-                <td className="border border-gray-300 h-12">
-                  {specialty?.name}
-                </td>
-                <td className="border border-gray-300 h-12">{specialty?.description.slice(0, 20)}...</td>
-                <td className="border border-gray-300 h-12">
-                  {new Date(specialty?.createdAt).toDateString()}
-                </td>
-                <td className="border border-gray-300 h-12 px-2">
-                  <Link
-                    to={oms_url.updateSpecialty + "/" + specialty?.specialty_Id}
-                    className="bg-blue-600 text-white px-2 py-1 text-sm hover:bg-blue-900 cursor-pointer rounded-lg"
-                  >
-                    <i className="bi bi-pencil-fill text-[12px]"></i>
-                  </Link>
-                </td>
-                <td className="border border-gray-300 h-12 px-2">
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(specialty?.specialty_Id, specialty?.name)}
-                    className="bg-red-600 text-white px-2 py-1 text-sm hover:bg-red-900 cursor-pointer rounded-lg"
-                  >
-                    <i className="bi bi-trash-fill text-[12px]"></i>
-                  </button>
-                </td>
-              </tr>
-            ))
+    <>
+      {!loading ? (
+        <div className="w-[95%] h-11/12">
+          <p className="text-lg text-center md:text-left md:text-3xl font-semibold text-blue-500 mb-5">All Specialties</p>
+          {data.length > 0 ? (
+            <div className="w-full h-11/12 overflow-auto">
+              <MaterialReactTable table={table} />
+            </div>
           ) : (
-            <tr className="border border-gray-300 ...">
-              <td>Loading...</td>
-            </tr>
+            <p className="text-center text-red-500 text-2xl mt-10">
+              No Data found
+            </p>
           )}
-        </tbody>
-      </table>
-    </div>
+        </div>
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <Circle />
+        </div>
+      )}
+    </>
   );
 };
 

@@ -15,7 +15,7 @@ export const verifyAccess = (req, res, next) => {
         if (err)
             return res.status(403).json({ success: false, message: "Forbidden!" });
 
-        const roles = [user.roles];
+        const roles = user.roles;
         req.user = user.id;
         req.email = user.email;
         req.roles = roles;

@@ -9,7 +9,7 @@ const server = new http.createServer(app);
 const io = new Server(server, { cors: { origin: ALLOWEDORIGINS } });
 
 
-let users = {};
+let users = new Object();
 
 io.on("connection", socket => {
     console.log("A user connected", socket.id);
@@ -23,11 +23,6 @@ io.on("connection", socket => {
 
     socket.emit("online-users", Object.keys(users));
 
-    socket.on("new-message", message => {
-        console.log(message);
-        socket.to(message.reciever_Id).emit("send-message", message);
-    });
-
     socket.on("disconnect", () => {
         console.log("A user disconnected", socket.id);
         socket.broadcast.emit("new-disconnection", userId);
@@ -37,4 +32,8 @@ io.on("connection", socket => {
     });
 });
 
-export { app, server, io };
+const getRecieverSocketId = (Id) => {
+    return users[Id];
+}
+
+export { app, server, io, getRecieverSocketId };

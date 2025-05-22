@@ -78,7 +78,7 @@ const DrugList = () => {
     <>
       {!loading ? (
         <div className="w-[95%] h-11/12">
-          <p className="text-3xl font-semibold text-blue-500 mb-5">All Drugs</p>
+          <p className="text-lg text-center md:text-left md:text-3xl font-semibold text-blue-500 mb-5">All Drugs</p>
           {data.length > 0 ? (
             <div className="w-full h-11/12 overflow-auto">
               <MaterialReactTable table={table} />

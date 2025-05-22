@@ -19,17 +19,18 @@ export const SocketProvider = ({ children }) => {
   const connectSocket = (Id) => {
     const newSocket = io(socket_connect_dev_url, { query: { userId: Id } });
     newSocket.connect();
-    
-    setSocket(connectSocket);
+
+    console.log("New-socket", newSocket);
+    setSocket(newSocket);
   }
 
-  // useEffect(() => {
-  //   connectSocket(authUser?.user_Profile_Id);
-  // }, []);
+  useEffect(() => {
+    if (socket) return;
+    
+    return connectSocket(authUser?.user_Profile_Id);
+  }, []);
 
-
-  // console.log(socket);
-
+  console.log("Socket", socket);
   return (
     <SocketContext.Provider value={{ socket, setSocket, connectSocket, disconnectSocket }}>
       {children}

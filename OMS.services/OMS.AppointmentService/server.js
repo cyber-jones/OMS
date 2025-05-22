@@ -15,6 +15,7 @@ import appointmentRouter from "./routes/appointmentRoute.js";
 import { verifyAccess } from "./middlewares/verifyAccess.js";
 import messageRouter from "./routes/messageRoute.js";
 import prescriptionRouter from "./routes/prescriptionRoute.js";
+import { credentials } from "./middlewares/corsCredentials.js";
 
 
 
@@ -25,6 +26,7 @@ connectDb(URI);
 
 
 app.use(reqLogger);
+app.use(credentials);
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());

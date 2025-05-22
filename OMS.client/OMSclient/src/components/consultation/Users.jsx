@@ -36,7 +36,9 @@ const Users = () => {
       console.log("Online-socket-users", users);
       dispatch(setOnlineUsers(users));
     });
-  }, [socket]);
+
+    return () => socket.off("online-users");
+  }, []);
 
 
   const handleSelectUser = (user) => {

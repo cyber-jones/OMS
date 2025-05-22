@@ -20,6 +20,10 @@ const appointmentSchema = new Schema({
         required: true,
         type: Date
     },
+    time: {
+        required: true,
+        type: Date
+    },
     illness_Description: {
         required: true,
         type: String

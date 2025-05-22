@@ -32,7 +32,7 @@ export const getAppointmentsBySpecialty_Id = async (req, res, next) => {
 }  
 
 
-export const getAppointmentsBydoctor_Id = async (req, res, next) => {
+export const getAppointmentsByDoctor_Id = async (req, res, next) => {
     try {
         const appointments = await Appointment.find({ doctor_Id: req.params.doctor_Id });
         return res.status(200).json({ success: true, appointments });
@@ -42,7 +42,7 @@ export const getAppointmentsBydoctor_Id = async (req, res, next) => {
 }  
 
 
-export const getAppointmentsByPatientId = async (req, res, next) => {
+export const getAppointmentsByPatient_Id = async (req, res, next) => {
     try {
         const appointments = await Appointment.find({ patient_Id: req.params.patient_Id });
         return res.status(200).json({ success: true, appointments });
@@ -59,9 +59,15 @@ export const postAppointment = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const Appointed = await Appointment.findOne({ date: value.date });
-        if (Appointed)
-            return res.status(400).json({ success: false, message: "Appointment already scheduled!" });
+        const requestedDate = new Date(value.date);
+        const todaysDate = new Date().now() - 1000 * 60 * 2;
+
+        if (todaysDate > requestedDate)
+            return res.status(400).json({ success: false, message: "An appointment has been scheduled with this doctor by this time!" });
+
+        const appointment = await Appointment.findOne({ doctor_Id: value.doctor_Id, date: value.date });
+        if (appointment)
+            return res.status(400).json({ success: false, message: "An appointment has been scheduled with this doctor by this time!" });
 
         const newAppointment = new Appointment({ ...value });
         await newAppointment.save();  

@@ -1,3 +1,4 @@
+import { getRecieverSocketId, io } from "../config/socket.io.config.js";
 import Message from "../models/messageModel.js";
 import { MessageValidator } from "../validators/validateSchema.js";
 
@@ -20,23 +21,19 @@ export const getAllMessages = async (req, res, next) => {
 
 export const getUserMessages = async (req, res, next) => {
     try {
-        const messages = await Message.find({ sender_Id: req.params.id });
-        return res.status(200).json({ success: true, messages });
-    } catch (err) {
-        next(err);
-    }
-}  
-
-
-export const getUserPrivateMessages = async (req, res, next) => {
-    try {
         const { sender_Id, reciever_Id } = req.params;
-        const messages = await Message.find({ sender_Id: sender_Id, reciever_Id: reciever_Id });
+
+        const messages = await Message.find({ $or: [
+            { sender_Id: sender_Id, reciever_Id: reciever_Id },
+            { sender_Id: reciever_Id, reciever_Id: sender_Id },
+        ] });
+
         return res.status(200).json({ success: true, messages });
     } catch (err) {
         next(err);
     }
 }  
+
 
 
 export const postMessage = async (req, res, next) => {
@@ -49,7 +46,11 @@ export const postMessage = async (req, res, next) => {
         const newMessage = new Message({ ...value });
         await newMessage.save();  
 
-        return res.status(201).json({ success: true, newMessage });
+        const recieverId = getRecieverSocketId(value.reciever_Id);
+        if (recieverId)
+            io.to(recieverId).emit("new-message", newMessage);
+
+        return res.status(201).json({ success: true, message: "New message sent", newMessage });
     } catch (err) {
         next(err);
     }

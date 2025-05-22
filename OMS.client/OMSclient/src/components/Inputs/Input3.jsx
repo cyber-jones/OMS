@@ -1,10 +1,9 @@
-import React from "react";
-
 const Input3 = ({ type, name, label, handleChange, value }) => {
   return (
     <label htmlFor={name} className="w-full">
       <p className="font-medium">{label}:</p>
       <input
+        required
         id={name}
         type={type}
         value={value}

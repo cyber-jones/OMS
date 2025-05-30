@@ -25,7 +25,7 @@ const SideBar = ({ sideNav }) => {
           <div>Consultation</div>
         </div>
       </Link>
-      <Link to={oms_url.appointment}>
+      <Link to={oms_url.appointments}>
         <div className="text-center w-full hover:cursor-pointer">
           <i className={`bi bi-building-check ${nav_icons}`}></i>
           <div>Appointments</div>

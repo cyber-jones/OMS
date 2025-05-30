@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useSpecialty from "../../hooks/useSpecialty";
 import useDoctor from "../../hooks/useDoctor";
 import Circle from "../../components/loading/Circle";
+import { useSelector } from "react-redux";
 
 const NewAppointment = () => {
   const [formData, setFormData] = useState({});
@@ -15,6 +16,7 @@ const NewAppointment = () => {
   const [time, setTime] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const { authUser } = useSelector((state) => state.authUser);
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const { doctors, loading: loadingDoctor } = useDoctor();
   const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
@@ -57,32 +59,35 @@ console.log(today)
       const docCTE = hrs1 + mins1;
 
       if (reqTime > docCTS && reqTime < docCTE) setTime(e.target.value);
-      else
+      else {
+        e.target.value = null;
         enqueueSnackbar(
           `Dr ${doctor.first_Name} consultation time starts from ${doctor.cT_Start}am and ends at ${doctor.cT_End}pm`
         );
+      }
     }
   };
 
-  console.log({ ...formData, specialty_Id: specialty, time: time });
+  console.log({ ...formData, specialty_Id: specialty, time: time, patient_Id: authUser?.user_Profile_Id });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosAuth.post("/", {
+      const res = await axiosAuth.post("/appointment", {
         ...formData,
         specialty_Id: specialty,
         time: time,
+        patient_Id: authUser?.user_Profile_Id
       });
       if (res?.status !== 201)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data.message || res.statusText, { variant: "error" });
 
       enqueueSnackbar(res.data.message, { variant: "success" });
       setFormData({});
       navigate(oms_url.appointment);
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+      enqueueSnackbar(err.response.data.message || err.response.statusText, { variant: "error" });
     } finally {
       setLoading(false);
     }
@@ -102,6 +107,7 @@ console.log(today)
             <p className="font-medium">Specialty:</p>
             <select
               id="Specialty_Id"
+              required
               onChange={handleSpecialtyChange}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
@@ -125,6 +131,7 @@ console.log(today)
             <p className="font-medium">Doctor:</p>
             <select
               id="doctor_Id"
+              required
               onChange={handleFormChange}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
@@ -149,6 +156,7 @@ console.log(today)
             <textarea
               id="illness_Description"
               type="text"
+              required
               onChange={handleFormChange}
               className="w-full max-h-36 min-h-26 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             ></textarea>
@@ -159,6 +167,7 @@ console.log(today)
               id="date"
               type="date"
               min={today}
+              required
               onChange={handleFormChange}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             />
@@ -172,6 +181,7 @@ console.log(today)
             <input
               id="time"
               type="time"
+              required
               onChange={handleTimeChange}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             />

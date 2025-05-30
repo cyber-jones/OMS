@@ -1,5 +1,7 @@
 import React from "react";
 import useUser from "../hooks/useUser";
+import { Link } from "react-router-dom";
+import { oms_url } from "../utils/SD";
 
 
 
@@ -33,15 +35,15 @@ const Header = ({ sideNav, setSideNav }) => {
             ? `${user?.first_Name} ${user?.last_Name}`
             : "Loading..."}
         </p>
-        <div className="w-[30px] md:w-[35px] h-[30px] md:h-[35px] rounded-full bg-black mr-3">
-          { user && user?.profile_Url !== null ? (
-            <img src={user?.profile_Url} alt="profile" />
+        <Link to={oms_url.profile} className="w-[30px] md:w-[35px] h-[30px] md:h-[35px] rounded-full bg-black mr-3">
+          {user?.profile_Url !== null ? (
+            <img src={user?.profile_Url} className="rounded-full" alt="profile" />
           ) : user?.sex == "Male" ? (
-            <img src="/images/profile-masculine.jpeg" alt="profile" />
-          ) : (
-            <img src="/images/profile-femine.jpeg" alt="profile" />
-          )}
-        </div>
+            <img src="/images/profile-masculine.jpeg" className="rounded-full" alt="profile" />
+          ) : user?.sex == "Female" ? (
+            <img src="/images/profile-femine.jpeg" className="rounded-full" alt="profile" />
+          ) : null}
+        </Link>
       </div>
     </header>
   );

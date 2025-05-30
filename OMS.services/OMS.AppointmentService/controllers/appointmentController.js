@@ -1,4 +1,5 @@
 import Appointment from "../models/appointmentModel.js";
+import { STATUS } from "../utils/SD.js";
 import { AppointmentValidator, ApprovalValidator } from "../validators/validateSchema.js";
 
 
@@ -15,7 +16,7 @@ export const getAllAppointments = async (req, res, next) => {
 export const getAppointmentById = async (req, res, next) => {
     try {
         const appointment = await Appointment.findById(req.params.id);
-        return res.status(200).json({ success: true, appointment });
+        return res.status(200).json({ success: true, appointments: appointment });
     } catch (err) {
         next(err);
     }
@@ -59,17 +60,16 @@ export const postAppointment = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const requestedDate = new Date(value.date);
-        const todaysDate = new Date().now() - 1000 * 60 * 2;
+        const pendingAppointment = await Appointment.find({ patient_Id: value.patient_Id, approved: STATUS.pending });
+        console.log(pendingAppointment);
+        if (pendingAppointment.length > 0) 
+            return res.status(400).json({ success: false, message: "You have pending appointments!" });
 
-        if (todaysDate > requestedDate)
-            return res.status(400).json({ success: false, message: "An appointment has been scheduled with this doctor by this time!" });
-
-        const appointment = await Appointment.findOne({ doctor_Id: value.doctor_Id, date: value.date });
+        const appointment = await Appointment.findOne({ doctor_Id: value.doctor_Id, date: value.date, time: value.time });
         if (appointment)
             return res.status(400).json({ success: false, message: "An appointment has been scheduled with this doctor by this time!" });
 
-        const newAppointment = new Appointment({ ...value });
+        const newAppointment = new Appointment({ ...value, status: STATUS.pending });
         await newAppointment.save();  
 
         return res.status(201).json({ success: true, newAppointment });
@@ -104,10 +104,10 @@ export const approveAppointment = async (req, res, next) => {
 
         const findAppointment = await Appointment.findById(req.params.id);
 
-        if (findAppointment.approved)
+        if (findAppointment.status.equals(STATUS.approved))
             return res.status(400).json({ success: false, message: "This appointment has been approved!" });
 
-        findAppointment.approved = true;
+        findAppointment.approved = STATUS.approved;
         findAppointment.approved_By = value.name;
         await findAppointment.save();
 
@@ -127,10 +127,10 @@ export const disapproveAppointment = async (req, res, next) => {
 
         const findAppointment = await Appointment.findById(req.params.id);
 
-        if (!findAppointment.approved)
-            return res.status(400).json({ success: false, message: "This appointment isn't approved!" });
+        if (findAppointment.status.equals(STATUS.disapproved))
+            return res.status(400).json({ success: false, message: "This appointment has been disapproved!" });
 
-        findAppointment.approved = false;
+        findAppointment.approved = STATUS.approved;
         findAppointment.disapproved_By = value.name;
         await findAppointment.save();
 

@@ -7,16 +7,21 @@ import useAxiosAuthorization from './useAxiosAuth';
 
 
 
-const useStaff = () => {
+const useStaff = (Id = null) => {
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-    const [staff, setStaff] = useState([]);
+    const [staff, setStaff] = useState(null);
     const axiosAuth = useAxiosAuthorization(oms_server_dev_url.staff);
 
     const getstaff = async () => {
         setLoading(true)
         try {
-            const res = await axiosAuth.get("/staff/all");
+            let res = null;
+            if (Id)
+                res = await axiosAuth.get("/staff/"+Id);
+            else
+                res = await axiosAuth.get("/staff/all");
+        
             console.log(res);
             if (res?.status !== 200 && res) {
                 enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });

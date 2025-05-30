@@ -20,8 +20,8 @@ const prescriptionSchema = new Schema({
         required: true,
         type: String
     },
-    approved: {
-        type: Boolean,
+    status: {
+        type: String,
         default: false
     },
     approved_By: {

@@ -28,11 +28,24 @@ import UpdateSpecialty from "./pages/settings/update/UpdateSpecialty";
 import IsLoggedIn from "./components/authorize/IsLoggedIn";
 import NewAppointment from "./pages/appointment/NewAppointment";
 import Appointments from "./pages/appointment/Appointments";
+import Appointment from "./pages/appointment/Appointment";
+import Profile from "./pages/Profile";
+import DoctorProfile from "./pages/settings/profile/DoctorProfile";
+import StaffProfile from "./pages/settings/profile/StaffProfile";
+import PatientProfile from "./pages/settings/profile/PatientProfile";
 
 function App() {
   return (
     <Routes>
       <Route element={<IsAuth role={Roles.PATIENT} />}>
+        <Route
+          path={oms_url.profile}
+          element={
+            <DashBoardComponents>
+              <Profile />
+            </DashBoardComponents>
+          }
+        />
         <Route
           path={oms_url.dashBoard}
           element={
@@ -66,10 +79,18 @@ function App() {
           }
         />
         <Route
-          path={oms_url.appointment}
+          path={oms_url.appointments}
           element={
             <DashBoardComponents>
               <Appointments />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={`${oms_url.appointment}/:id`}
+          element={
+            <DashBoardComponents>
+              <Appointment />
             </DashBoardComponents>
           }
         />
@@ -220,10 +241,42 @@ function App() {
           }
         />
         <Route
+          path={oms_url.appointmentList}
+          element={
+            <DashBoardComponents>
+              <Appointments />
+            </DashBoardComponents>
+          }
+        />
+        <Route
           path={oms_url.updateSpecialty + "/:id"}
           element={
             <DashBoardComponents>
               <UpdateSpecialty />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.profile + "/doctor/:id"}
+          element={
+            <DashBoardComponents>
+              <DoctorProfile />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.profile + "/staff/:id"}
+          element={
+            <DashBoardComponents>
+              <StaffProfile />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.profile + "/patient/:id"}
+          element={
+            <DashBoardComponents>
+              <PatientProfile />
             </DashBoardComponents>
           }
         />

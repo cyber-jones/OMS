@@ -16,7 +16,7 @@ const StaffList = () => {
     const [data, setData] = useState(patientData);
   
     useEffect(() => {
-      if (!loading) setData([...patients]);
+      if (!loading && patients) setData(patients);
     }, [patients]);
   
   //should be memoized or stable
@@ -66,7 +66,7 @@ const StaffList = () => {
       data,
       muiTableBodyRowProps: ({ row }) => ({
         onClick: () => {
-          navigate(oms_url.patient + "/" + row.original.patient_Id);
+          navigate(oms_url.profile + "/staff/" + row.original.patient_Id);
         },
         sx: {
           cursor: "pointer", //you might want to change the cursor too when adding an onClick

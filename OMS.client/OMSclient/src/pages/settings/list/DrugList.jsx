@@ -16,7 +16,7 @@ const DrugList = () => {
   const [data, setData] = useState(drugData);
 
   useEffect(() => {
-    if (!loading) setData([...drugs]);
+    if (!loading && drugs) setData(drugs);
   }, [drugs]);
 
   //should be memoized or stable

@@ -7,8 +7,8 @@ import useAxiosAuthorization from './useAxiosAuth';
 
 
 
-const useSpecialty = () => {
-    const [specialties, setSpecialties] = useState([]);
+const useSpecialty = (Id = null) => {
+    const [specialties, setSpecialties] = useState(null);
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
@@ -16,7 +16,12 @@ const useSpecialty = () => {
     const getSpecialties = async () => {
         setLoading(true)
         try {
-            const res = await axiosAuth.get("/specialty/all");
+            let res = null;
+            if (Id)
+                res = await axiosAuth.get("/specialty/"+Id);
+            else
+                res = await axiosAuth.get("/specialty/all");
+    
             if (res?.status !== 200 && res) {
                 enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });
                 return;

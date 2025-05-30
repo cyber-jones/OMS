@@ -16,7 +16,7 @@ const SpecialtyList = () => {
   const [data, setData] = useState(specialtyData);
 
   useEffect(() => {
-    if (!loading) setData([...specialties]);
+    if (!loading && specialties) setData(specialties);
   }, [specialties]);
 
   //should be memoized or stable

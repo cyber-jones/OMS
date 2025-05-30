@@ -7,16 +7,21 @@ import useAxiosAuthorization from './useAxiosAuth';
 
 
 
-const useDrug = () => {
+const useDrug = (Id = null) => {
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-    const [drugs, setDrugs] = useState([]);
+    const [drugs, setDrugs] = useState(null);
     const axiosAuth = useAxiosAuthorization(oms_server_dev_url.drug);
 
     const getDrugs = async () => {
         setLoading(true)
         try {
-            const res = await axiosAuth.get("/drug/all");
+            let res = null;
+            if (Id)
+                res = await axiosAuth.get("/drug/"+Id);
+            else
+                res = await axiosAuth.get("/drug/all");
+
             console.log(res)
             if (res?.status !== 200 && res) {
                 enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });

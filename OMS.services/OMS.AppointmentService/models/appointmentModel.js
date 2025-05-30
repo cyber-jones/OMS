@@ -18,18 +18,18 @@ const appointmentSchema = new Schema({
     },
     date: {
         required: true,
-        type: Date
+        type: String
     },
     time: {
         required: true,
-        type: Date
+        type: String
     },
     illness_Description: {
         required: true,
         type: String
     }, 
-    approved: {
-        type: Boolean,
+    status: {
+        type: String,
         default: false
     },
     approved_By: {

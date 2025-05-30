@@ -7,16 +7,21 @@ import useAxiosAuthorization from './useAxiosAuth';
 
 
 
-const usePatient = () => {
+const usePatient = (Id = null) => {
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-    const [patients, setPatients] = useState([]);
+    const [patients, setPatients] = useState(null);
     const axiosAuth = useAxiosAuthorization(oms_server_dev_url.patient);
 
     const getPatients = async () => {
         setLoading(true)
         try {
-            const res = await axiosAuth.get("/patient/all");
+            let res = null;
+            if (Id)
+                res = await axiosAuth.get("/patient/"+Id);
+            else
+                res = await axiosAuth.get("/patient/all");
+            
             console.log(res);
             if (res?.status !== 200 && res) {
                 enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });

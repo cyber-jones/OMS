@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useState } from "react";
-import { MaterialReactTable, useMaterialReactTable } from "material-react-table";
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from "material-react-table";
 import useAppointments from "../../hooks/useAppointment ";
 import { Link, useNavigate } from "react-router-dom";
 import { oms_url, Roles } from "../../utils/SD";
@@ -9,29 +12,31 @@ import Circle from "../../components/loading/Circle";
 import useSpecialty from "../../hooks/useSpecialty";
 import { useSelector } from "react-redux";
 
-
 const Appointments = () => {
-    const { authUser } = useSelector((state) => state.authUser);
-    const { loading, appointments } = useAppointments(authUser?.roles.includes(Roles.ADMIN) ? null : authUser?.user_Profile_Id);
-    const { loading: loadingSpecialty, specialties } = useSpecialty();
-    const navigate = useNavigate();
-    const [data, setData] = useState(appointmentData);
-    
-      useEffect(() => {
-        if (!loading && !loadingSpecialty && appointmentData && specialties) {
-          const mutateAppointments = appointments.map( appointment => ({
-            id: appointment._id,
-            specialty_Name: specialties.find(specialty => specialty.specialty_Id == appointment.specialty_Id).name,
-            illness_Description: appointment.illness_Description,
-            date: new Date(appointment.date).toDateString(),
-            status: appointment.status,
-            time: appointment.time
-          }));
+  const { authUser } = useSelector((state) => state.authUser);
+  const { loading, appointments } = useAppointments(
+    authUser?.roles.includes(Roles.ADMIN) ? null : authUser?.user_Profile_Id
+  );
+  const { loading: loadingSpecialty, specialties } = useSpecialty();
+  const navigate = useNavigate();
+  const [data, setData] = useState(appointmentData);
 
-          setData([...mutateAppointments]);
-        }
-      }, [appointments, loadingSpecialty, loading]);
+  useEffect(() => {
+    if (!loading && !loadingSpecialty && appointmentData && specialties) {
+      const mutateAppointments = appointments.map((appointment) => ({
+        id: appointment._id,
+        specialty_Name: specialties.find(
+          (specialty) => specialty.specialty_Id == appointment.specialty_Id
+        ).name,
+        illness_Description: appointment.illness_Description,
+        date: new Date(appointment.date).toDateString(),
+        status: appointment.status,
+        time: appointment.time,
+      }));
 
+      setData([...mutateAppointments]);
+    }
+  }, [appointments, loadingSpecialty, loading]);
 
   //should be memoized or stable
   const columns = useMemo(
@@ -60,7 +65,7 @@ const Appointments = () => {
         accessorKey: "time", //normal accessorKey
         header: "Time",
         size: 100,
-      }
+      },
     ],
     []
   );
@@ -79,20 +84,24 @@ const Appointments = () => {
   });
 
   return (
-        <>
+    <>
       {!loading && !loadingSpecialty ? (
         <div className="w-[95%] h-11/12">
-          <Link to={oms_url.newAppointment} className="float-right"><i className="bi bi-plus text-green-600 text-lg md:text-3xl border border-green-600 px-1 mr-2"></i></Link>
+          <Link to={oms_url.newAppointment} className="float-right">
+            <i className="bi bi-plus text-green-600 text-lg md:text-3xl border border-green-600 px-1 mr-2"></i>
+          </Link>
           <p className="text-lg text-center md:text-left md:text-3xl font-semibold text-blue-500 mb-5">
-            { authUser?.roles.includes(Roles.ADMIN) ? "All Appointments" : "My Appointments" }
+            {authUser?.roles.includes(Roles.ADMIN)
+              ? "All Appointments"
+              : "My Appointments"}
           </p>
-          {data.length > 0 && appointments.length > 0 ? (
+          {data.length > 0 && appointments ? (
             <div className="w-full h-11/12 overflow-auto">
               <MaterialReactTable table={table} />
             </div>
           ) : (
             <p className="text-center text-red-500 text-2xl mt-10">
-              No appointment made 
+              No appointment made
             </p>
           )}
         </div>

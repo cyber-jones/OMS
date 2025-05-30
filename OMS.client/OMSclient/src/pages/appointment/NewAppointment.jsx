@@ -112,7 +112,7 @@ console.log(today)
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
               <option>--select specialty</option>
-              {!loadingSpecialty ? (
+              {!loadingSpecialty && specialties ? (
                 specialties.map((specialty, index) => (
                   <option key={index} value={specialty?.specialty_Id}>
                     {specialty?.name}
@@ -135,12 +135,12 @@ console.log(today)
               onChange={handleFormChange}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
-              {data.length > 0 ? (
+              {data?.length > 0 ? (
                 <option>--choose doctor</option>
               ) : (
                 <option>No doctor with this specialty</option>
               )}
-              {!loadingDoctor ? (
+              {!loadingDoctor && data ? (
                 data.map((doctor, index) => (
                   <option key={index} value={doctor?.doctor_Id}>
                     {doctor?.first_Name} {doctor?.last_Name}

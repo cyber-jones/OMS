@@ -29,6 +29,7 @@ export const oms_url = {
     updateDrug: "/update/drug",
     updateSpecialty: "/update/specialty",
     updatePatient: "/update/patient",
+    updateAppointment: "/update/appointment"
 }
 
 

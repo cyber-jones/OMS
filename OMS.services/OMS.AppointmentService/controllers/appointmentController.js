@@ -60,10 +60,10 @@ export const postAppointment = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const pendingAppointment = await Appointment.find({ patient_Id: value.patient_Id, approved: STATUS.pending });
-        console.log(pendingAppointment);
-        if (pendingAppointment.length > 0) 
-            return res.status(400).json({ success: false, message: "You have pending appointments!" });
+        const pendingAppointment = await Appointment.findOne({ patient_Id: value.patient_Id, approved: STATUS.pending });
+
+        if (pendingAppointment) 
+            return res.status(400).json({ success: false, message: "You have pending appointment!" });
 
         const appointment = await Appointment.findOne({ doctor_Id: value.doctor_Id, date: value.date, time: value.time });
         if (appointment)
@@ -82,6 +82,10 @@ export const postAppointment = async (req, res, next) => {
 export const updateAppointment = async (req, res, next) => {
     try {
         const { error, value } = AppointmentValidator.validate(req.body);
+
+         const appointment = await Appointment.findOne({ doctor_Id: value.doctor_Id, date: value.date, time: value.time });
+        if (appointment)
+            return res.status(400).json({ success: false, message: "An appointment has been scheduled with this doctor by this time!" });
 
         if (error)
             return res.status(400).json({ success: false, message: error.message });
@@ -108,7 +112,7 @@ export const approveAppointment = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "This appointment has been approved!" });
 
         findAppointment.approved = STATUS.approved;
-        findAppointment.approved_By = value.name;
+        findAppointment.approved_By = value.email;
         await findAppointment.save();
 
         return res.status(205).json({ success: true, updateAppointment, message: "Appointement approved successfully" });
@@ -131,7 +135,7 @@ export const disapproveAppointment = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "This appointment has been disapproved!" });
 
         findAppointment.approved = STATUS.approved;
-        findAppointment.disapproved_By = value.name;
+        findAppointment.disapproved_By = value.email;
         await findAppointment.save();
 
         return res.status(205).json({ success: true, updateAppointment, message: "Appointement disapproved successfully" });

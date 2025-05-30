@@ -33,6 +33,7 @@ import Profile from "./pages/Profile";
 import DoctorProfile from "./pages/settings/profile/DoctorProfile";
 import StaffProfile from "./pages/settings/profile/StaffProfile";
 import PatientProfile from "./pages/settings/profile/PatientProfile";
+import UpdateAppointment from "./pages/appointment/UpdateAppointment";
 
 function App() {
   return (
@@ -83,6 +84,14 @@ function App() {
           element={
             <DashBoardComponents>
               <Appointments />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.updateAppointment+"/:id"}
+          element={
+            <DashBoardComponents>
+              <UpdateAppointment />
             </DashBoardComponents>
           }
         />

@@ -80,8 +80,8 @@ console.log(today)
         time: time,
         patient_Id: authUser?.user_Profile_Id
       });
-      if (res?.status !== 201)
-        return enqueueSnackbar(res.data.message || res.statusText, { variant: "error" });
+      if (res && res?.status !== 201)
+        return enqueueSnackbar(res.data.message || res.statusText, { variant: "warning" });
 
       enqueueSnackbar(res.data.message, { variant: "success" });
       setFormData({});
@@ -186,7 +186,7 @@ console.log(today)
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             />
           </label>
-          <div className="w-11/12">
+          <div className="w-full">
             <button
               disabled={loading}
               className="md:w-5/12 w-full py-4 uppercase bg-green-900 hover:bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer md:float-right"
@@ -199,7 +199,7 @@ console.log(today)
       <div className="w-full md:w-[40%] h-3/12 md:h-full flex justify-center items-center">
         <img
           src="/images/calender.webp"
-          className="md:pr-10 w-[50%]"
+          className="md:pr-10 w-40 md:w-70"
           alt="drug-img"
         />
       </div>

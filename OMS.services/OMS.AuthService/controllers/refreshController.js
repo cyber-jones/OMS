@@ -7,7 +7,7 @@ import User from "../models/userModel.js";
 export const getRefresh = async (req, res, next) => {
     try {
         const cookies = req.cookies;
-
+        console.log(cookies?.jwt);
         if (!cookies?.jwt) 
             return res.status(401).json({ success: false, message: "Unauthorized!" });
     
@@ -23,7 +23,7 @@ export const getRefresh = async (req, res, next) => {
             const accessToken = jwt.sign(
                 { id: userFromDb._id, email: userFromDb.email, roles: userFromDb.roles }, 
                 process.env.ACCESS_TOKEN_SECRETE, 
-                { expiresIn: "1h", issuer: process.env.ISSUER, audience: process.env.AUDIENCE }
+                { expiresIn: "60s", issuer: process.env.ISSUER, audience: process.env.AUDIENCE }
             );
 
             const { password: password, ...rest } = userFromDb._doc;

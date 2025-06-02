@@ -83,16 +83,16 @@ export const updateAppointment = async (req, res, next) => {
     try {
         const { error, value } = AppointmentValidator.validate(req.body);
 
-         const appointment = await Appointment.findOne({ doctor_Id: value.doctor_Id, date: value.date, time: value.time });
-        if (appointment)
-            return res.status(400).json({ success: false, message: "An appointment has been scheduled with this doctor by this time!" });
-
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
+         const appointment = await Appointment.findOne({ _id: req.params.id, doctor_Id: value.doctor_Id, date: value.date, time: value.time });
+        if (appointment)
+            return res.status(400).json({ success: false, message: "An appointment has been scheduled with this doctor by this time!" });
+
         const updateAppointment = await Appointment.findByIdAndUpdate(req.params.id, { $set: { ...value }}, { new: true });
 
-        return res.status(205).json({ success: true, updateAppointment, message: "Appointement updated successfully" });
+        return res.status(200).json({ success: true, updateAppointment, message: "Appointement updated successfully" });
     } catch (err) {
         next(err);
     }
@@ -115,7 +115,7 @@ export const approveAppointment = async (req, res, next) => {
         findAppointment.approved_By = value.email;
         await findAppointment.save();
 
-        return res.status(205).json({ success: true, updateAppointment, message: "Appointement approved successfully" });
+        return res.status(200).json({ success: true, updateAppointment, message: "Appointement approved successfully" });
     } catch (err) {
         next(err);
     }
@@ -138,7 +138,7 @@ export const disapproveAppointment = async (req, res, next) => {
         findAppointment.disapproved_By = value.email;
         await findAppointment.save();
 
-        return res.status(205).json({ success: true, updateAppointment, message: "Appointement disapproved successfully" });
+        return res.status(200).json({ success: true, updateAppointment, message: "Appointement disapproved successfully" });
     } catch (err) {
         next(err);
     }

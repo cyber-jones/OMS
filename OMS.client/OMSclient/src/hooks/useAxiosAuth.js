@@ -3,62 +3,72 @@ import axios from "axios";
 import { logOut, setAuthUser } from "../redux/auth/authUserSlice";
 import { useSnackbar } from "notistack";
 import useSocket from "./useSocket";
-
-
+import { oms_server_dev_url } from "../utils/SD";
 
 const useAxiosAuthorization = (url) => {
-    const { token } = useSelector(state => state.authUser);
-    const { disconnectSocket } = useSocket();
-    const dispatch = useDispatch();
-    const { enqueueSnackbar } = useSnackbar();
+  const { token } = useSelector((state) => state.authUser);
+  const { disconnectSocket } = useSocket();
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
-    const axiosAuth = axios.create({
-        baseURL: url,
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true
-    });
+  const axiosAuth = axios.create({
+    baseURL: url,
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true,
+  });
 
-    axiosAuth.interceptors.request.use((config) => {
-        console.log("Interceptors", config);
-        if (token && !config.headers.Authorization)
-            config.headers.Authorization = `Bearer ${token}`;
-        return config;
-    }, (error) => Promise.reject(error));
-    
-    axiosAuth.interceptors.response.use(res => res, async (error) => {
-        console.log("Interceptors-error", error);
-        const prevReq = error.config;
+  axiosAuth.interceptors.request.use(
+    (config) => {
+      console.log("Interceptors", config);
+      if (token && !config.headers.Authorization)
+        config.headers.Authorization = `Bearer ${token}`;
+      return config;
+    },
+    (error) => Promise.reject(error)
+  );
 
-        if (error.response?.status === 401 && !prevReq._retry) {
-            prevReq._retry = true;
+  axiosAuth.interceptors.response.use(
+    (res) => res,
+    async (error) => {
+      console.log("Interceptors-error", error);
+      const prevReq = error.config;
 
-            try {
-                const res = await axiosAuth.get("/refresh");
-    
-                if (res?.status === 401 || res?.status === 403 && res) {
-                    // enqueueSnackbar(res?.data?.message, { variant: "error" });
-                    disconnectSocket();
-                    return dispatch(logOut());
-                }
-    
-                console.log(res);
-                const { accessToken: token, ...rest } = res.data.user;
-                dispatch(setAuthUser({ authUser: rest, accessToken: token }));
-                prevReq.headers.Authorization = `Bearer ${token}`;
+      if (error.response?.status === 401 || error.response?.status === 403 && !prevReq._retry) {
+        prevReq._retry = true;
 
-                return axiosAuth(prevReq);
-            } catch (err) {
-                // enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
-                enqueueSnackbar("Session Expired!", { variant: "warning" });
-                disconnectSocket();
-                dispatch(logOut())
-                return Promise.reject(err);
-            }
+        try {
+          const res = await axios.get(oms_server_dev_url.auth + "/refresh", {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          });
+
+          if (res && res?.status === 401 || res?.status === 403) {
+            enqueueSnackbar(res.data?.message, { variant: "error" });
+            disconnectSocket();
+            return dispatch(logOut());
+          }
+
+          console.log("refresh => ", res);
+          const { accessToken, ...rest } = res.data.user;
+          dispatch(setAuthUser({ authUser: rest, accessToken }));
+          prevReq.headers.Authorization = `Bearer ${accessToken}`;
+
+          return axiosAuth(prevReq);
+        } catch (err) {
+          // enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
+          enqueueSnackbar("Session Expired!", { variant: "warning" });
+          disconnectSocket();
+          dispatch(logOut());
+          return Promise.reject(err);
         }
-        return Promise.reject(error);
-    });
+      }
+      return Promise.reject(error);
+    }
+  );
 
-    return axiosAuth;
-} 
+  return axiosAuth;
+};
 
-export default useAxiosAuthorization; 
+export default useAxiosAuthorization;

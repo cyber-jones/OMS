@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import DashBoardComponents from "./components/DashBoardComponents";
 import { oms_url, Roles } from "./utils/SD";
 import DashBoardContent from "./pages/DashBoard";
-import Specialty from "./pages/specialty/Specialty";
+import Specialties from "./pages/specialty/Specialties";
 import DetailedSpecialty from "./pages/specialty/DetailedSpecialty";
 import Consultation from "./pages/Consultation";
 import Auth from "./pages/Auth";
@@ -56,10 +56,10 @@ function App() {
           }
         />
         <Route
-          path={oms_url.specialty}
+          path={oms_url.specialties}
           element={
             <DashBoardComponents>
-              <Specialty />
+              <Specialties />
             </DashBoardComponents>
           }
         />
@@ -135,14 +135,6 @@ function App() {
             </DashBoardComponents>
           }
         />
-        <Route
-          path={oms_url.registerDoctor}
-          element={
-            <DashBoardComponents>
-              <RegisterDoctor />
-            </DashBoardComponents>
-          }
-        />
       </Route>
       <Route element={<IsAuth role={Roles.ADMIN} />}>
         <Route
@@ -178,18 +170,18 @@ function App() {
           }
         />
         <Route
-          path={oms_url.doctorList}
-          element={
-            <DashBoardComponents>
-              <DoctorList />
-            </DashBoardComponents>
-          }
-        />
-        <Route
           path={oms_url.updateDoctor + "/:id"}
           element={
             <DashBoardComponents>
               <UpdateDoctor />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.doctorList}
+          element={
+            <DashBoardComponents>
+              <DoctorList />
             </DashBoardComponents>
           }
         />

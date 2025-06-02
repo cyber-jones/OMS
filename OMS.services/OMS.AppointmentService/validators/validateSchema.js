@@ -21,8 +21,8 @@ export const PrescriptionValidator = Joi.object({
 
 
 export const MessageValidator = Joi.object({
-    sender_Id: Joi.string().required(),
-    reciever_Id: Joi.string().required(),
+    sender_Id: Joi.string().email().required(),
+    reciever_Id: Joi.string().email().required(),
 });
 
 

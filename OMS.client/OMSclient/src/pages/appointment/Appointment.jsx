@@ -12,7 +12,7 @@ const Appointment = () => {
   const { id } = useParams();
 const { authUser } = useSelector((state) => state.authUser);
 const { user } = useSelector((state) => state.user);
-const requiredRoles = [Roles.ADMIN, Roles.DOCTOR, Roles.STAFF];
+const requiredRoles = [Roles.DOCTOR, Roles.STAFF];
 const isAuthorized = authUser?.roles
     .map((role) => requiredRoles.includes(role))
     .find((value) => value == true);

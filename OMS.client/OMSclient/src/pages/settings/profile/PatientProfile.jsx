@@ -11,18 +11,18 @@ const PatientProfile = () => {
       {!loading ? (
         <>
           <div className="w-full md:w-6/12 flex items-center justify-center md:h-full">
-            <div className="w-10/12 md:w-6/12 rounded-full bg-black mr-3">
-              {patient && patient?.profile_Url !== null ? (
-                <img src={patient?.profile_Url} alt="profile" />
-              ) : patient?.sex == "Male" ? (
-                <img
-                  src="/images/profile-masculine.jpeg"
-                  className="rounded-full"
-                  alt="profile"
-                />
-              ) : patient?.sex == "Female" ? (
-                <img src="/images/profile-femine.jpeg" alt="profile" />
-              ) : null}
+            <div>
+              <img
+                src={
+                  patient?.profile_Url
+                    ? patient?.profile_Url
+                    : patient?.sex == "Male"
+                    ? "/images/profile-masculine.jpeg"
+                    : "/images/profile-femine.jpeg"
+                }
+                className="rounded-full shadow-2xl w-40 md:w-70"
+                alt="profile"
+              />
             </div>
           </div>
           <div className="w-full md:w-6/12 md:h-full">
@@ -75,8 +75,15 @@ const PatientProfile = () => {
               <b>Full Name</b>: {patient?.eC_FullName}
             </p>
             <div className="mt-3 flex flex-col-reverse gap-2">
-                <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">Lock <i className="bi bi-lock"></i></button>
-                <Link to={oms_url.updateDoctor+"/"+id} className="bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-blue-950 transition duration-500 ease-in">Update <i className="bi bi-cloud-check"></i></Link>
+              <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">
+                Lock <i className="bi bi-lock"></i>
+              </button>
+              <Link
+                to={oms_url.updateDoctor + "/" + id}
+                className="bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-blue-950 transition duration-500 ease-in"
+              >
+                Update <i className="bi bi-cloud-check"></i>
+              </Link>
             </div>
           </div>
         </>

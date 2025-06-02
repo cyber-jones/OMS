@@ -1,32 +1,34 @@
-import { useRef, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMessages, setSelectedUser } from "../../redux/chat/chatSlice";
 import { useSnackbar } from "notistack";
 import useSocket from "../../hooks/useSocket";
 import useAxiosAuthorization from "../../hooks/useAxiosAuth";
-import { oms_server_dev_url } from "../../utils/SD";
-import useMessage from "../../hooks/useMessages";
+import { oms_server_dev_url, oms_url } from "../../utils/SD";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
   const [loading, setLoading] = useState(false);
   const { selectedUser, messages } = useSelector((state) => state.chat);
   const { authUser } = useSelector((state) => state.authUser);
-  const { loading: loadingMessages, messages: chatMessages } = useMessage()
-  const [text, setText] = useState(null);
-  const [image, setImage] = useState(null);
+  const [text, setText] = useState("");
+  const [image, setImage] = useState("");
   const { socket } = useSocket();
   const { onlineUsers } = useSelector((state) => state.chat);
   const imageRef = useRef();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
+  const profileUrl = selectedUser?.doctor_Id
+    ? `/doctor/${selectedUser?.doctor_Id}`
+    : selectedUser?.staff_Id
+    ? `/staff/${selectedUser?.staff_Id}`
+    : `/patient/${selectedUser?.patient_Id}`;
 
   const handleSendMessage = async () => {
-    const senderId = authUser?.user_Profile_Id;
-    const recieverId =
-      selectedUser?.patient_Id ||
-      selectedUser?.doctor_Id ||
-      selectedUser?.staff_Id;
+    const senderId = authUser.email;
+    const recieverId = selectedUser.email;
 
     const newMessage = {
       sender_Id: senderId,
@@ -34,7 +36,6 @@ const Chat = () => {
       text: text,
       image: image,
     };
-    console.log(newMessage);
 
     setLoading(true);
     try {
@@ -48,7 +49,9 @@ const Chat = () => {
         return;
       }
 
-      setMessages([...messages, res.data.newMessage]);
+      dispatch(setMessages([...messages, res.data.newMessage]));
+      setText("");
+      setImage("");
     } catch (err) {
       enqueueSnackbar(err?.response?.data?.message || err.message, {
         variant: "error",
@@ -59,16 +62,15 @@ const Chat = () => {
     socket.emit("new-message", newMessage);
   };
 
-  useState(() => {
-    if (!loadingMessages && chatMessages) setMessages(chatMessages);
+  useEffect(() => {
     if (!socket) return;
 
-    socket.on("send-message", (message) => {
-      setMessages([...messages, message]);
+    socket.on("new-message", (message) => {
+      dispatch(setMessages([...messages, message]));
     });
 
-    return () => socket.off("send-message");
-  }, []);
+    return () => socket.off("new-message");
+  }, [messages, socket]);
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];
@@ -90,6 +92,11 @@ const Chat = () => {
     imageRef.current.value = null;
   };
 
+  const handleCloseChat = () => {
+    dispatch(setMessages([]));
+    dispatch(setSelectedUser(null));
+  };
+
   return (
     <>
       {selectedUser == null ? (
@@ -103,47 +110,58 @@ const Chat = () => {
           } h-full justify-start items-center flex-col bg-gray-200 rounded-br-2xl`}
         >
           <div className="w-full h-14 flex gap-5 px-2 items-center">
-            <div className="w-12 h-12 bg-gray-950 rounded-full">
-              {onlineUsers?.includes(
-                selectedUser?.patient_Id ||
-                  selectedUser?.doctor_Id ||
-                  selectedUser?.staff_Id
-              ) ? (
-                <div className="relative w-4 h-4 bg-green-500 rounded-full left-7 top-9"></div>
-              ) : (
-                <div className="relative w-4 h-4 bg-red-500 rounded-full left-7 top-9"></div>
-              )}
-            </div>
+            <Link className="bg-gray-950 rounded-full">
+              <img
+                src={
+                  selectedUser?.profile_Url
+                    ? selectedUser?.profile_Url
+                    : selectedUser?.sex == "Male"
+                    ? "/images/profile-masculine.jpeg"
+                    : "/images/profile-femine.jpeg"
+                }
+                className="rounded-full w-10"
+              />
+            </Link>
             <div>
-              <strong>
-                {selectedUser?.first_Name} {selectedUser?.last_Name}
-              </strong>
-              <p className="text-sm">
-                {onlineUsers?.includes(
-                  selectedUser?.patient_Id ||
-                    selectedUser?.doctor_Id ||
-                    selectedUser?.staff_Id
-                )
-                  ? "online"
-                  : "Offline"}
-              </p>
+              <Link to={oms_url.profile + profileUrl}>
+                <strong className="text-sm md:text-lg">
+                  {selectedUser?.first_Name} {selectedUser?.last_Name}
+                </strong>
+              </Link>
+              <div className="text-[9px] md:text-sm flex gap-2 justify-start items-center">
+                <div>
+                  {onlineUsers?.includes(selectedUser?.email)
+                    ? "online"
+                    : "Offline"}
+                </div>
+                {onlineUsers?.includes(selectedUser?.email) ? (
+                  <div className="w-4 h-4 bg-green-500 rounded-full "></div>
+                ) : (
+                  <div className="w-2 h-2 bg-red-500 rounded-full "></div>
+                )}
+              </div>
             </div>
             <div className="flex flex-1 justify-end items-center gap-5 px-4">
-              <p className="text-sm">
+              <p className="text-[9px] md:text-sm">
                 {selectedUser ? "" : "Specialty: "}
                 <i>{selectedUser?.specialty?.name}</i>
               </p>
               <i
-                onClick={() => dispatch(setSelectedUser(null))}
+                onClick={handleCloseChat}
                 className="bi bi-people-fill text-2xl cursor-pointer"
               ></i>
             </div>
           </div>
-          <div className="flex-1 w-full justify-center">
+          <div className="flex-1 w-full justify-center p-3">
             {messages && messages.length > 0 ? (
-              messages.map((message, index) => (
-                <p key={index}>{messages.text}</p>
-              ))
+              <>
+                {messages.map((message, index) => (
+                  <p key={index}>{message.text}</p>
+                ))}
+                {loading ? (
+                  <div className="w-10 h-10 animate-ping text-black"></div>
+                ) : null}
+              </>
             ) : (
               <div className="w-full flex flex-col justify-center items-center h-full">
                 <i className="bi bi-chat-left-dots text-[100px] text-pink-500 animate-bounce"></i>
@@ -171,6 +189,7 @@ const Chat = () => {
               type="text"
               placeholder="Send Message"
               id="message"
+              value={text}
               onChange={(e) => setText(e.target.value)}
               className="focus:outline-0 w-10/12 border p-3 border-gray-400 rounded-md"
             />
@@ -187,10 +206,12 @@ const Chat = () => {
               onClick={() => imageRef.current.click()}
               className="bi bi-image-fill text-2xl cursor-pointer"
             ></i>
-            <button disabled={loading}><i
-              onClick={handleSendMessage}
-              className="bi bi-send-fill text-2xl cursor-pointer"
-            ></i></button>
+            <button disabled={loading}>
+              <i
+                onClick={handleSendMessage}
+                className="bi bi-send-fill text-2xl cursor-pointer"
+              ></i>
+            </button>
           </div>
         </div>
       )}

@@ -31,7 +31,7 @@ const SideBar = ({ sideNav }) => {
           <div>Appointments</div>
         </div>
       </Link>
-      <Link to={oms_url.specialty}>
+      <Link to={oms_url.specialties}>
         <div className="text-center w-full hover:cursor-pointer">
           <i className={`bi bi-person-video3 ${nav_icons}`}></i>
           <div>Specialties</div>

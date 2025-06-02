@@ -15,14 +15,14 @@ import { useSelector } from "react-redux";
 const Appointments = () => {
   const { authUser } = useSelector((state) => state.authUser);
   const { loading, appointments } = useAppointments(
-    authUser?.roles.includes(Roles.ADMIN) ? null : authUser?.user_Profile_Id
+    authUser.roles.includes(Roles.ADMIN) || authUser.includes(Roles.STAFF) ? null : authUser.user_Profile_Id
   );
   const { loading: loadingSpecialty, specialties } = useSpecialty();
   const navigate = useNavigate();
   const [data, setData] = useState(appointmentData);
 
   useEffect(() => {
-    if (!loading && !loadingSpecialty && appointmentData && specialties) {
+    if (!loading && !loadingSpecialty && appointmentData && specialties && appointments) {
       const mutateAppointments = appointments.map((appointment) => ({
         id: appointment._id,
         specialty_Name: specialties.find(

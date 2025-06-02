@@ -4,13 +4,13 @@ import useSpecialty from "../../hooks/useSpecialty";
 import { oms_url } from "../../utils/SD";
 import { useEffect, useState } from "react";
 
-const Specialty = () => {
+const Specialties = () => {
   const { specialties, loading } = useSpecialty();
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(specialties);
-  }, [specialties]);
+    if (!loading && specialties) setData(specialties);
+  }, [specialties, loading]);
 
   const handleSearch = (e) => {
     const specialtySearched = specialties.filter((specialty) =>
@@ -55,4 +55,4 @@ const Specialty = () => {
   );
 };
 
-export default Specialty;
+export default Specialties;

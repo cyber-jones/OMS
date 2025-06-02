@@ -99,6 +99,13 @@ const Settings = () => {
           <i className="bi bi-building-check text-4xl text-purple-800"></i>
           <p className="text-md">Appointments</p>
         </Link>
+        <Link
+          to={oms_url.prescriptions}
+          className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-green-900 h-[100px] rounded-lg flex justify-center items-center gap-7"
+        >
+          <i className="bi bi-building-check text-4xl text-green-900"></i>
+          <p className="text-md">Prescriptions</p>
+        </Link>
         <div
           onClick={handleLogout}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-red-400 h-[100px] rounded-lg flex justify-center items-center gap-7"

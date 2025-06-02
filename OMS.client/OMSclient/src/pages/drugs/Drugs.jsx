@@ -9,8 +9,8 @@ const Drugs = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(drugs);
-  }, [drugs]);
+    if (!loading && drugs) setData(drugs);
+  }, [drugs, loading]);
 
   const handleSearch = (e) => {
     const drugSearched = drugs.filter((drug)=>

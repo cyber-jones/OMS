@@ -11,6 +11,7 @@ import { corsOptions } from "./config/corsOption.js";
 import userRouter from "./routes/userRouter.js";
 import refreshRouter from "./routes/refreshRouter.js";
 import { reqLogger } from "./config/logConfig.js";
+import { credentials } from "./middlewares/corsCredentials.js";
 
 
 const app = express();
@@ -21,6 +22,7 @@ connectDb(URI);
 
 
 app.use(reqLogger);
+app.use(credentials);
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());

@@ -13,11 +13,11 @@ const UpdateAppointment = () => {
   const { id } = useParams();
   const { appointments: appointment, loading: loadingAppointment } =
     useAppointments(null, null, id);
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [specialty, setSpecialty] = useState();
-  const [time, setTime] = useState();
+  const [time, setTime] = useState("");
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const { authUser } = useSelector((state) => state.authUser);
@@ -92,20 +92,20 @@ const UpdateAppointment = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosAuth.put("/appointment", {
+      const res = await axiosAuth.put("/appointment/"+id, {
         ...formData,
         specialty_Id: specialty,
         time: time,
         patient_Id: authUser?.user_Profile_Id,
       });
-      if (res?.status !== 204)
+      if (res && res?.status !== 200)
         return enqueueSnackbar(res.data.message || res.statusText, {
-          variant: "error",
+          variant: "warning",
         });
-
+        console.log(res);
       enqueueSnackbar(res.data.message, { variant: "success" });
       setFormData({});
-      navigate(oms_url.appointment);
+      navigate(oms_url.appointment+"/"+res.data.updateAppointment._id);
     } catch (err) {
       enqueueSnackbar(err.response.data.message || err.response.statusText, {
         variant: "error",

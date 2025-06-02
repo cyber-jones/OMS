@@ -25,7 +25,7 @@ const DashBoardComponents = ({ children }) => {
       socket.off("new-connection");
       socket.off("new-disconnection");
     }
-  }, []);
+  }, [socket]);
 
   return (
     <div className="bg-white w-full h-screen font-mono">

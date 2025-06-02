@@ -38,12 +38,13 @@ export const getUserMessages = async (req, res, next) => {
 
 export const postMessage = async (req, res, next) => {
     try {
-        const { error, value } = MessageValidator.validate(req.body);
+        const { text, image, ...data } = req.body;
+        const { error, value } = MessageValidator.validate(data);
 
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const newMessage = new Message({ ...value });
+        const newMessage = new Message({ ...value, text, image });
         await newMessage.save();  
 
         const recieverId = getRecieverSocketId(value.reciever_Id);

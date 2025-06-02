@@ -2,10 +2,18 @@
 import { useEffect, useState } from "react";
 import useDoctor from "../../hooks/useDoctor";
 import Circle from "../loading/Circle";
-import { setOnlineUsers, setSelectedUser } from "../../redux/chat/chatSlice";
+import {
+  setLoading,
+  setMessages,
+  setOnlineUsers,
+  setSelectedUser,
+} from "../../redux/chat/chatSlice";
 import { useDispatch, useSelector } from "react-redux";
 import usePatient from "../../hooks/usePatient";
 import useSocket from "../../hooks/useSocket";
+import useAxiosAuthorization from "../../hooks/useAxiosAuth";
+import { oms_server_dev_url } from "../../utils/SD";
+import { useSnackbar } from "notistack";
 
 const Users = () => {
   const { doctors, loading } = useDoctor();
@@ -13,9 +21,13 @@ const Users = () => {
   const { patients, loading: loadingPatient } = usePatient();
   const [userList, setUserList] = useState([]);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const { selectedUser, onlineUsers } = useSelector((state) => state.chat);
+  const { selectedUser, onlineUsers } = useSelector(
+    (state) => state.chat
+  );
   const dispatch = useDispatch();
   const { socket } = useSocket();
+  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (!socket) return;
@@ -26,10 +38,34 @@ const Users = () => {
     });
 
     return () => socket.off("online-users");
-  }, []);
+  }, [socket, onlineUsers, setOnlineUsers]);
 
-  const handleSelectUser = (user) => {
-    dispatch(setSelectedUser(user));
+  const handleSelectUser = async (user) => {
+    if (loading) return;
+
+    dispatch(setLoading(true));
+    try {
+      const res = await axiosAuth.get(
+        "/message/user/" + authUser.email + "/" + user.email
+      );
+
+      console.log("res", res);
+      if (res?.status !== 200 && res) {
+        enqueueSnackbar(res?.data?.message || res?.statusText, {
+          variant: "error",
+        });
+        return;
+      }
+
+      dispatch(setMessages(res.data.messages));
+      dispatch(setSelectedUser(user));
+    } catch (err) {
+      enqueueSnackbar(err?.response?.data?.message || err.message, {
+        variant: "error",
+      });
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   const handlePopulateUserList = () => {
@@ -39,17 +75,17 @@ const Users = () => {
         (user) => user?.email !== authUser?.email
       );
       setUserList(newUserArray);
+      console.log("user-list", userList);
     }
   };
 
   const handleOnlineUsers = () => {
     let getOnlineUsers = [];
     userList.forEach((user) => {
-      let Id = authUser?.user_Profile_Id;
+      let Id = user.email;
 
       if (onlineUsers.includes(Id)) getOnlineUsers.push(user);
     });
-
     setUserList(getOnlineUsers);
   };
 
@@ -58,6 +94,7 @@ const Users = () => {
   }, [doctors, patients, onlineUsers]);
 
   useEffect(() => {
+    dispatch(setSelectedUser(null));
     const handleCheckWidth = () => setScreenWidth(window.innerWidth);
 
     window.addEventListener("resize", handleCheckWidth);
@@ -96,7 +133,7 @@ const Users = () => {
           Online
         </button>
       </div>
-      {!loading && !loadingPatient && userList ? (
+      {!loading && !loadingPatient ? userList.length > 0 ? (
         userList.map((user, index) => (
           <div
             key={index}
@@ -104,9 +141,7 @@ const Users = () => {
             className="font-sans w-full gap-6 h-22 flex justify-start items-center cursor-pointer hover:bg-gray-300 transition-all ease-out duration-500"
           >
             <div className="w-12 h-12 rounded-full bg-stone-700 ml-8">
-              {onlineUsers?.includes(
-                user?.patient_Id || user?.doctor_Id || user?.staff_Id
-              ) ? (
+              {onlineUsers?.includes(user?.email) ? (
                 <div className="relative w-4 h-4 bg-green-500 rounded-full left-7 top-9"></div>
               ) : (
                 <div className="relative w-4 h-4 bg-red-500 rounded-full left-7 top-9"></div>
@@ -117,19 +152,19 @@ const Users = () => {
                 {user?.doctor_Id ? "Dr" : null} {user?.first_Name}{" "}
                 {user?.last_Name}
               </strong>
-              <p>
-                {onlineUsers?.includes(
-                  user?.patient_Id || user?.doctor_Id || user?.staff_Id
-                )
-                  ? "online"
-                  : "Offline"}
-              </p>
+              <p>{onlineUsers?.includes(user?.email) ? "online" : "Offline"}</p>
             </div>
           </div>
         ))
       ) : (
-        <Circle />
-      )}
+        <div
+            className="font-sans w-full gap-6 h-22 flex text-center justify-center items-center cursor-pointer hover:bg-gray-300 transition-all ease-out duration-500"
+          >
+            <strong className="text-sm border-b-[0.2px] text-red-800 text-center border-gray-400 py-2 w-[65%]">
+              No user found!
+            </strong>
+          </div>
+      ) : <Circle /> }
     </div>
   );
 };

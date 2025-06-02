@@ -9,18 +9,18 @@ const Profile = () => {
   return (
     <div className="text-sm md:text-[15px] w-[90%] flex flex-col md:flex-row-reverse h-full md:h-11/12 p-7 md:p-20 rounded-lg shadow-lg bg-gray-50 font-sans">
       <div className="w-full md:w-6/12 flex items-center justify-center md:h-full">
-        <div className="w-10/12 md:w-6/12 rounded-full bg-black mr-3">
-          {user && user?.profile_Url !== null ? (
-            <img src={user?.profile_Url} alt="profile" />
-          ) : user?.sex == "Male" ? (
-            <img
-              src="/images/profile-masculine.jpeg"
-              className="rounded-full"
-              alt="profile"
-            />
-          ) : user?.sex == "Female" ? (
-            <img src="/images/profile-femine.jpeg" alt="profile" />
-          ) : null}
+        <div>
+          <img
+            src={
+              user?.profile_Url
+                ? user?.profile_Url
+                : user?.sex == "Male"
+                ? "/images/profile-masculine.jpeg"
+                : "/images/profile-femine.jpeg"
+            }
+            className="rounded-full shadow-2xl w-40 md:w-70"
+            alt="profile"
+          />
         </div>
       </div>
       <div className="w-full md:w-6/12 md:h-full">
@@ -75,12 +75,19 @@ const Profile = () => {
               <b>Full Name</b>: {user?.eC_FullName}
             </p>
             <div className="mt-3 flex flex-col-reverse gap-2">
-                <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">Deactivate account <i className="bi bi-lock"></i></button>
-                <Link to={oms_url.updatePatient+"/"+user?.patient_Id} className="bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-blue-950 transition duration-500 ease-in">Update <i className="bi bi-cloud-check"></i></Link>
+              <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">
+                Deactivate account <i className="bi bi-lock"></i>
+              </button>
+              <Link
+                to={oms_url.updatePatient + "/" + user?.patient_Id}
+                className="bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-blue-950 transition duration-500 ease-in"
+              >
+                Update <i className="bi bi-cloud-check"></i>
+              </Link>
             </div>
           </>
-        ) : authUser?.accType == "doctor" ?
-            <>
+        ) : authUser?.accType == "doctor" ? (
+          <>
             <p className="text-red-500 mt-3">
               <b>Medical Info</b>
             </p>
@@ -97,11 +104,18 @@ const Profile = () => {
               <b>OMS ID</b>: {user?.work_Id}
             </p>
             <div className="mt-3 flex flex-col-reverse gap-2">
-                <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">Deactivate account <i className="bi bi-lock"></i></button>
-                <Link to={oms_url.updateDoctor+"/"+user?.doctor_Id} className="bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-blue-950 transition duration-500 ease-in">Update <i className="bi bi-cloud-check"></i></Link>
+              <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">
+                Deactivate account <i className="bi bi-lock"></i>
+              </button>
+              <Link
+                to={oms_url.updateDoctor + "/" + user?.doctor_Id}
+                className="bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-blue-950 transition duration-500 ease-in"
+              >
+                Update <i className="bi bi-cloud-check"></i>
+              </Link>
             </div>
-          </> : null
-        }
+          </>
+        ) : null}
       </div>
     </div>
   );

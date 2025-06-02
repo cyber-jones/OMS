@@ -3,13 +3,8 @@ import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
 import { oms_url } from "../utils/SD";
 
-
-
-
 const Header = ({ sideNav, setSideNav }) => {
   const { loading, user } = useUser();
-
-  
 
   return (
     <header className="static w-full h-1/12 bg-gray-100 flex justify-between items-center">
@@ -35,14 +30,20 @@ const Header = ({ sideNav, setSideNav }) => {
             ? `${user?.first_Name} ${user?.last_Name}`
             : "Loading..."}
         </p>
-        <Link to={oms_url.profile} className="w-[30px] md:w-[35px] h-[30px] md:h-[35px] rounded-full bg-black mr-3">
-          {user?.profile_Url !== null ? (
-            <img src={user?.profile_Url} className="rounded-full" alt="profile" />
-          ) : user?.sex == "Male" ? (
-            <img src="/images/profile-masculine.jpeg" className="rounded-full" alt="profile" />
-          ) : user?.sex == "Female" ? (
-            <img src="/images/profile-femine.jpeg" className="rounded-full" alt="profile" />
-          ) : null}
+        <Link
+          to={oms_url.profile}
+          className="w-[30px] md:w-[35px] h-[30px] md:h-[35px] rounded-full bg-black mr-3"
+        >
+          <img
+            src={
+              user?.profile_Url
+                ? user?.profile_Url
+                : user?.sex == "Male"
+                ? "/images/profile-masculine.jpeg"
+                : "/images/profile-femine.jpeg"
+            }
+            className="rounded-full"
+          />
         </Link>
       </div>
     </header>

@@ -13,8 +13,8 @@ appointmentRouter.get("/doctor/all/:specialty_Id", verifyRoles([ROLES[0], ROLES[
 appointmentRouter.get("/doctor/all/:doctor_Id", verifyRoles([ROLES[0], ROLES[1], ROLES[2]]), getAppointmentsByDoctor_Id);
 appointmentRouter.get("/patient/all/:patient_Id", verifyRoles(ROLES), getAppointmentsByPatient_Id);
 appointmentRouter.post("/", verifyRoles([ROLES[0], ROLES[3]]), postAppointment);
-appointmentRouter.put("/", verifyRoles(ROLES), updateAppointment);
-appointmentRouter.delete("/", verifyRoles([ROLES[0], ROLES[3]]), deleteAppointment);
+appointmentRouter.put("/:id", verifyRoles(ROLES), updateAppointment);
+appointmentRouter.delete("/:id", verifyRoles([ROLES[0], ROLES[3]]), deleteAppointment);
 appointmentRouter.post("/approve/:id", verifyRoles([ROLES[1], ROLES[2]]), approveAppointment);
 appointmentRouter.post("/disapprove/:id", verifyRoles([ROLES[1], ROLES[2]]), disapproveAppointment);
 

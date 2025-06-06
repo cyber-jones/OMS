@@ -23,9 +23,9 @@ const isAuthorized = authUser?.roles
   );
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const { doctors, loading: loadingDoctor } = useDoctor();
-    const specialty = specialties?.find(
+    const specialty = specialties ? specialties?.find(
     (specialty) => specialty.specialty_Id == appointment.specialty_Id
-  );
+  ) : null;
   const doctor = doctors?.find(
     (doctor) => doctor.doctor_Id == appointment.doctor_Id
   );
@@ -56,8 +56,8 @@ const isAuthorized = authUser?.roles
 
   const handleApprove = async () => {
     try {
-      const res = await axiosAuth.post("/appointment/approve/" + id, { email: user.email });
-      if (res?.status !== 205 && res) {
+      const res = await axiosAuth.post("/appointment/approve/" + id, { name: user.email });
+      if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",
         });
@@ -77,8 +77,8 @@ const isAuthorized = authUser?.roles
 
   const handleDisapprove = async () => {
     try {
-      const res = await axiosAuth.post("/appointment/disapprove/" + id, { email: user.email });
-      if (res?.status !== 205 && res) {
+      const res = await axiosAuth.post("/appointment/disapprove/" + id, { name: user.email });
+      if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",
         });

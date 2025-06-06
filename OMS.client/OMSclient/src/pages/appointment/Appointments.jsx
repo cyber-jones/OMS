@@ -14,9 +14,8 @@ import { useSelector } from "react-redux";
 
 const Appointments = () => {
   const { authUser } = useSelector((state) => state.authUser);
-  const { loading, appointments } = useAppointments(
-    authUser.roles.includes(Roles.ADMIN) || authUser.includes(Roles.STAFF) ? null : authUser.user_Profile_Id
-  );
+  const { user } = useSelector((state) => state.user);
+  const { loading, appointments } = useAppointments(user?.patient_Id, user?.doctor_Id);
   const { loading: loadingSpecialty, specialties } = useSpecialty();
   const navigate = useNavigate();
   const [data, setData] = useState(appointmentData);

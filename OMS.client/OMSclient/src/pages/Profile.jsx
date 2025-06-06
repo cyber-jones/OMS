@@ -7,7 +7,7 @@ const Profile = () => {
   const { authUser } = useSelector((state) => state.authUser);
 
   return (
-    <div className="text-sm md:text-[15px] w-[90%] flex flex-col md:flex-row-reverse h-full md:h-11/12 p-7 md:p-20 rounded-lg shadow-lg bg-gray-50 font-sans">
+    <div className="text-sm md:text-[15px] w-[90%] flex flex-col bg-purple-300 justify-center p-4 items-center md:flex-row-reverse h-11/12 rounded-lg shadow-lg font-sans">
       <div className="w-full md:w-6/12 flex items-center justify-center md:h-full">
         <div>
           <img

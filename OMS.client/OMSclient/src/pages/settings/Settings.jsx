@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { oms_url } from "../../utils/SD";
-import { useDispatch } from "react-redux";
+import { oms_url, Roles } from "../../utils/SD";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../redux/auth/authUserSlice";
 import { chatLogOut } from "../../redux/chat/chatSlice";
 import useSocket from "../../hooks/useSocket";
@@ -8,8 +8,11 @@ import { userLogout } from "../../redux/user/userSlice";
 
 const Settings = () => {
   const { disconnectSocket } = useSocket();
+  const { authUser } = useSelector(state => state.authUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const roles = [Roles.ADMIN, Roles.DOCTOR, Roles.STAFF];
+  const isAuth = authUser.roles.map(role => roles.includes(role)).find(value => value === true);
 
   const handleLogout = () => {
     disconnectSocket();
@@ -21,7 +24,7 @@ const Settings = () => {
 
   return (
     <div className="w-[95%] h-11/12 flex justify-center items-center">
-      <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 font-sans md:overflow-auto overflow-y-scroll place-content-start md:place-content-center  place-items-center gap-8 md:gap-12">
+      <div className="w-full h-full grid grid-cols-1 md:grid-cols-3 font-sans overflow-y-scroll place-content-start md:place-content-center  place-items-center gap-8 md:gap-12">
         <Link
           to={oms_url.profile}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-red-700 h-[100px] rounded-lg flex justify-center items-center gap-7"
@@ -30,6 +33,7 @@ const Settings = () => {
           <p className="text-md">View Profile</p>
         </Link>
         <Link
+          hidden={!isAuth}
           to={oms_url.registerDoctor}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-pink-400 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
@@ -37,6 +41,7 @@ const Settings = () => {
           <p className="text-md">New Doctor</p>
         </Link>
         <Link
+          hidden={!isAuth}
           to={oms_url.registerStaff}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-purple-400 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
@@ -44,6 +49,7 @@ const Settings = () => {
           <p className="text-md">New Staff</p>
         </Link>
         <Link
+          hidden={!isAuth}
           to={oms_url.registerDrug}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-blue-400 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
@@ -51,6 +57,7 @@ const Settings = () => {
           <p className="text-md">New Drug</p>
         </Link>
         <Link
+          hidden={!isAuth}
           to={oms_url.registerSpecialty}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-green-400 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
@@ -58,6 +65,7 @@ const Settings = () => {
           <p className="text-md">New Specialty</p>
         </Link>
         <Link
+          hidden={!isAuth}
           to={oms_url.doctorList}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-orange-400 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
@@ -65,6 +73,7 @@ const Settings = () => {
           <p className="text-md">Doctors</p>
         </Link>
         <Link
+          hidden={!isAuth}
           to={oms_url.staffList}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-yellow-400 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
@@ -72,6 +81,7 @@ const Settings = () => {
           <p className="text-md">Staffs</p>
         </Link>
         <Link
+          hidden={!isAuth}
           to={oms_url.patientList}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-stone-400 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
@@ -79,6 +89,7 @@ const Settings = () => {
           <p className="text-md">Patients</p>
         </Link>
         <Link
+          hidden={!isAuth}
           to={oms_url.drugList}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-cyan-400 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
@@ -86,6 +97,7 @@ const Settings = () => {
           <p className="text-md">Drugs</p>
         </Link>
         <Link
+          hidden={!isAuth}
           to={oms_url.specialtyList}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-stone-800 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
@@ -105,6 +117,14 @@ const Settings = () => {
         >
           <i className="bi bi-building-check text-4xl text-green-900"></i>
           <p className="text-md">Prescriptions</p>
+        </Link>
+        <Link
+          hidden={!isAuth}
+          to={oms_url.logs}
+          className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-blue-900 h-[100px] rounded-lg flex justify-center items-center gap-7"
+        >
+          <i className="bi bi-building-check text-4xl text-blue-900"></i>
+          <p className="text-md">Logs</p>
         </Link>
         <div
           onClick={handleLogout}

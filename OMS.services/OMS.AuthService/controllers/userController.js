@@ -76,15 +76,15 @@ export const loginUser = async (req, res, next) => {
         const accessToken = jwt.sign(
             { id: user._id, email: user.email, roles: user.roles }, 
             process.env.ACCESS_TOKEN_SECRETE, 
-            { expiresIn: "60s", issuer: process.env.ISSUER, audience: process.env.AUDIENCE }
+            { expiresIn: "1h", issuer: process.env.ISSUER, audience: process.env.AUDIENCE }
         );
 
         const { password: pass, refreshToken: refresh, ...rest } = user._doc;
 
         const cookieOpt = { httpOnly: true, sameSite: "None", maxAge: 1000 * 60 * 60 * 24 * 7 }
-
-        res.cookie("jwt", refreshToken, cookieOpt);
-        return res.status(200).json({ success: true, body: { ...rest, accessToken } });
+  
+        return res.cookie("jwt", refreshToken, cookieOpt)
+                    .status(200).json({ success: true, body: { ...rest, accessToken } });
 
     } catch (err) {
         next(err);

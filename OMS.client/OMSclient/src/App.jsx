@@ -135,6 +135,30 @@ function App() {
             </DashBoardComponents>
           }
         />
+        <Route
+          path={oms_url.updateDoctor + "/:id"}
+          element={
+            <DashBoardComponents>
+              <UpdateDoctor />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.updatePatient + "/:id"}
+          element={
+            <DashBoardComponents>
+              <UpdatePatient />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.updateStaff + "/:id"}
+          element={
+            <DashBoardComponents>
+              <UpdateStaff />
+            </DashBoardComponents>
+          }
+        />
       </Route>
       <Route element={<IsAuth role={Roles.ADMIN} />}>
         <Route
@@ -170,14 +194,6 @@ function App() {
           }
         />
         <Route
-          path={oms_url.updateDoctor + "/:id"}
-          element={
-            <DashBoardComponents>
-              <UpdateDoctor />
-            </DashBoardComponents>
-          }
-        />
-        <Route
           path={oms_url.doctorList}
           element={
             <DashBoardComponents>
@@ -194,26 +210,10 @@ function App() {
           }
         />
         <Route
-          path={oms_url.updatePatient + "/:id"}
-          element={
-            <DashBoardComponents>
-              <UpdatePatient />
-            </DashBoardComponents>
-          }
-        />
-        <Route
           path={oms_url.staffList}
           element={
             <DashBoardComponents>
               <StaffList />
-            </DashBoardComponents>
-          }
-        />
-        <Route
-          path={oms_url.updateStaff + "/:id"}
-          element={
-            <DashBoardComponents>
-              <UpdateStaff />
             </DashBoardComponents>
           }
         />

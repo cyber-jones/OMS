@@ -106,14 +106,14 @@ export const approveAppointment = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const findAppointment = await Appointment.findById(req.params.id);
+        const appointment = await Appointment.findById(req.params.id);
 
-        if (findAppointment.status.equals(STATUS.approved))
+        if (appointment.status == STATUS.approved)
             return res.status(400).json({ success: false, message: "This appointment has been approved!" });
 
-        findAppointment.approved = STATUS.approved;
-        findAppointment.approved_By = value.email;
-        await findAppointment.save();
+        appointment.status = STATUS.approved;
+        appointment.approved_By = value.email;
+        await appointment.save();
 
         return res.status(200).json({ success: true, updateAppointment, message: "Appointement approved successfully" });
     } catch (err) {
@@ -129,16 +129,16 @@ export const disapproveAppointment = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const findAppointment = await Appointment.findById(req.params.id);
+        const appointment = await Appointment.findById(req.params.id);
 
-        if (findAppointment.status.equals(STATUS.disapproved))
+        if (appointment.status == STATUS.disapproved)
             return res.status(400).json({ success: false, message: "This appointment has been disapproved!" });
 
-        findAppointment.approved = STATUS.approved;
-        findAppointment.disapproved_By = value.email;
-        await findAppointment.save();
+        appointment.status = STATUS.approved;
+        appointment.disapproved_By = value.email;
+        await appointment.save();
 
-        return res.status(200).json({ success: true, updateAppointment, message: "Appointement disapproved successfully" });
+        return res.status(200).json({ success: true, appointment, message: "Appointement disapproved successfully" });
     } catch (err) {
         next(err);
     }

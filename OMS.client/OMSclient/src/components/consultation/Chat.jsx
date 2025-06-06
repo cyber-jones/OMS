@@ -135,9 +135,9 @@ const Chat = () => {
                     : "Offline"}
                 </div>
                 {onlineUsers?.includes(selectedUser?.email) ? (
-                  <div className="w-4 h-4 bg-green-500 rounded-full "></div>
+                  <div className="w-2 h-2 md:w-4 md:h-4 bg-green-500 rounded-full "></div>
                 ) : (
-                  <div className="w-2 h-2 bg-red-500 rounded-full "></div>
+                  <div className="w-2 h-2 md:w-4 md:h-4 bg-red-500 rounded-full "></div>
                 )}
               </div>
             </div>

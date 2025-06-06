@@ -10,6 +10,7 @@ export const oms_url = {
     login: "/login",
     auth: "/auth",
     drugs: "/drugs",
+    logs: "/logs",
     settings: "/settings",
     registerDoctor: "/register/doctor",
     registerStaff: "/register/staff",

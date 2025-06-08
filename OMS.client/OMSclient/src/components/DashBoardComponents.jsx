@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import Header from "./header";
+import Header from "./Header";
 import SideBar from "./SideBar";
 import useSocket from "../hooks/useSocket";
 import { useSnackbar } from "notistack";

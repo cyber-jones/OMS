@@ -85,7 +85,7 @@ const Signup = () => {
           <select
             id="Relationship"
             onChange={(e) => handleChange(e)}
-            className="w-full opacity-75 pt-2 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
+            className="w-full border-t-0 border-r-0 opacity-75 pt-2 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
           >
             <option></option>
             <option value={"Married"}>Married</option>
@@ -120,7 +120,7 @@ const Signup = () => {
           <select
             id="Sex"
             onChange={(e) => handleChange(e)}
-            className="w-full opacity-75 pt-2 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
+            className="w-full opacity-75 pt-2 border-t-0 border-r-0 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
           >
             <option></option>
             <option value={"Male"}>Male</option>

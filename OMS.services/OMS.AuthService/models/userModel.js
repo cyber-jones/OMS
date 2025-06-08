@@ -17,7 +17,7 @@ const userSchema = new Schema({
     roles: {
         type: [String],
         enum: ["admin", "doctor", "staff", "patient"],
-        default: ["patient"],
+        default: ["user"],
     },
     accType: {
         required: true,

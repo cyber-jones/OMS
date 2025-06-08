@@ -28,10 +28,7 @@ export const registerUser = async (req, res, next) => {
     
         const passHashed = bcryptjs.hashSync(value.Password, bcryptjs.genSaltSync(10));
         const newUser = new User({ password: passHashed, email: value.Email, accType: value.AccType, user_Profile_Id: value.User_Profile_Id });
-
-        if (role !== "patient") {
-            newUser.roles.push(role);
-        }
+        newUser.roles.push(role);
 
         await newUser.save();
         const { password: pass, refreshToken: refresh, ...rest } = newUser._doc;

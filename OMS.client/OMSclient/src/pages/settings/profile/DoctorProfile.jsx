@@ -1,16 +1,17 @@
 import Circle from "../../../components/loading/Circle";
 import useDoctor from "../../../hooks/useDoctor";
 import { Link, useParams } from "react-router-dom";
-import { oms_url } from "../../../utils/SD";
+import { oms_url, Roles } from "../../../utils/SD";
+import { useAuth } from "../../../utils/isAuthorized";
 
 const DoctorProfile = () => {
   const { id } = useParams();
   const { loading, doctors: doctor } = useDoctor(id);
-
+  const isAdmin = useAuth([Roles.ADMIN]);
   if (loading) return <Circle />;
 
   return (
-    <div className="text-sm md:text-[15px] w-[90%] flex flex-col bg-purple-300 justify-center p-4 items-center md:flex-row-reverse h-11/12 rounded-lg shadow-lg font-sans">
+    <div className="text-sm md:text-[15px] w-[90%] flex flex-col bg-purple-200 justify-center p-4 items-center md:flex-row-reverse h-11/12 rounded-lg shadow-lg font-sans">
       <div className="w-full md:w-6/12 flex items-center justify-center md:h-full">
         <div>
           <img
@@ -26,7 +27,7 @@ const DoctorProfile = () => {
           />
         </div>
       </div>
-      <div className="w-full h-10/12 md:w-6/12 md:h-full ">
+      <div className="w-full h-10/12 flex flex-col justify-center  md:w-6/12 md:h-full ">
         <p className="text-purple-600 text-2xl my-4 text-center md:text-left font-semibold">
           Doctor
         </p>
@@ -81,7 +82,7 @@ const DoctorProfile = () => {
         <p>
           <b>OMS ID</b>: {doctor?.work_ID}
         </p>
-        <div className="mt-3 flex flex-col-reverse gap-2">
+        <div hidden={!isAdmin} className="mt-3 flex flex-col-reverse gap-2">
           <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">
             Lock <i className="bi bi-lock"></i>
           </button>

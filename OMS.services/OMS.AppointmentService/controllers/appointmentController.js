@@ -122,6 +122,23 @@ export const approveAppointment = async (req, res, next) => {
 }  
 
 
+export const cancleAppointment = async (req, res, next) => {
+    try {
+        const appointment = await Appointment.findById(req.params.id);
+
+        if (appointment.status == STATUS.approved)
+            return res.status(400).json({ success: false, message: "This appointment has been approved!" });
+
+        appointment.status = STATUS.cancle;
+        await appointment.save();
+
+        return res.status(200).json({ success: true, updateAppointment, message: "Appointement cancled successfully" });
+    } catch (err) {
+        next(err);
+    }
+}  
+
+
 export const disapproveAppointment = async (req, res, next) => {
     try {
         const { error, value } = ApprovalValidator.validate(req.body);
@@ -134,7 +151,7 @@ export const disapproveAppointment = async (req, res, next) => {
         if (appointment.status == STATUS.disapproved)
             return res.status(400).json({ success: false, message: "This appointment has been disapproved!" });
 
-        appointment.status = STATUS.approved;
+        appointment.status = STATUS.disapproved;
         appointment.disapproved_By = value.email;
         await appointment.save();
 

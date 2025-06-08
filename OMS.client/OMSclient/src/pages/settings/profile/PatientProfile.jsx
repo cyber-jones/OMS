@@ -1,13 +1,15 @@
 import { Link, useParams } from "react-router-dom";
 import usePatient from "../../../hooks/usePatient";
 import Circle from "../../../components/loading/Circle";
-import { oms_url } from "../../../utils/SD";
+import { oms_url, Roles } from "../../../utils/SD";
+import { useAuth } from "../../../utils/isAuthorized";
 
 const PatientProfile = () => {
   const { id } = useParams();
   const { loading, patients: patient } = usePatient(id);
+  const isAdmin = useAuth([Roles.ADMIN]);
   return (
-    <div className="text-sm md:text-[15px] w-[90%] flex flex-col bg-purple-300 justify-center p-4 items-center md:flex-row-reverse h-11/12 rounded-lg shadow-lg font-sans">
+    <div className="text-sm md:text-[15px] w-[90%] flex flex-col bg-yellow-200 justify-center p-4 items-center md:flex-row-reverse h-11/12 rounded-lg shadow-lg font-sans">
       {!loading ? (
         <>
           <div className="w-full md:w-6/12 flex items-center justify-center md:h-full">
@@ -25,8 +27,8 @@ const PatientProfile = () => {
               />
             </div>
           </div>
-          <div className="w-full md:w-6/12 md:h-full">
-            <p className="text-purple-500 text-2xl my-4 text-center md:text-left">
+          <div className="w-full flex flex-col justify-center md:w-6/12 md:h-full">
+            <p className="text-yellow-500 text-2xl my-4 text-center md:text-left">
               patient
             </p>
             <p>
@@ -74,7 +76,7 @@ const PatientProfile = () => {
             <p>
               <b>Full Name</b>: {patient?.eC_FullName}
             </p>
-            <div className="mt-3 flex flex-col-reverse gap-2">
+            <div hidden={!isAdmin} className="mt-3 flex flex-col-reverse gap-2">
               <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">
                 Lock <i className="bi bi-lock"></i>
               </button>

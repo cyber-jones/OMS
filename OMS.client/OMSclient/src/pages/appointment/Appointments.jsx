@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -11,11 +12,20 @@ import { appointmentData } from "../../data/oms.data";
 import Circle from "../../components/loading/Circle";
 import useSpecialty from "../../hooks/useSpecialty";
 import { useSelector } from "react-redux";
+import { useAuth } from "../../utils/isAuthorized";
 
 const Appointments = () => {
   const { authUser } = useSelector((state) => state.authUser);
-  const { user } = useSelector((state) => state.user);
-  const { loading, appointments } = useAppointments(user?.patient_Id, user?.doctor_Id);
+  const isPatient = useAuth([Roles.PATIENT]);
+  let appointment = null;
+  if (authUser.roles.includes(Roles.PATIENT))
+    appointment = useAppointments(authUser.user_Profile_Id);
+  else if(authUser.roles.includes(Roles.DOCTOR))
+    appointment = useAppointments(null, authUser.user_Profile_Id);
+  else
+    appointment = useAppointments();
+  
+  const { loading, appointments } = appointment;
   const { loading: loadingSpecialty, specialties } = useSpecialty();
   const navigate = useNavigate();
   const [data, setData] = useState(appointmentData);
@@ -86,7 +96,7 @@ const Appointments = () => {
     <>
       {!loading && !loadingSpecialty ? (
         <div className="w-[95%] h-11/12">
-          <Link to={oms_url.newAppointment} className="float-right">
+          <Link hidden={!isPatient} to={oms_url.newAppointment} className="float-right">
             <i className="bi bi-plus text-green-600 text-lg md:text-3xl border border-green-600 px-1 mr-2"></i>
           </Link>
           <p className="text-lg text-center md:text-left md:text-3xl font-semibold text-blue-500 mb-5">

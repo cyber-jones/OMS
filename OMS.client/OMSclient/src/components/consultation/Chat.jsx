@@ -124,9 +124,9 @@ const Chat = () => {
             </Link>
             <div>
               <Link to={oms_url.profile + profileUrl}>
-                <strong className="text-sm md:text-lg">
-                  {selectedUser?.first_Name} {selectedUser?.last_Name}
-                </strong>
+                <p className="text-sm md:text-lg ">
+                  <strong>{selectedUser?.first_Name}</strong> <strong>{selectedUser?.last_Name}</strong>
+                </p>
               </Link>
               <div className="text-[9px] md:text-sm flex gap-2 justify-start items-center">
                 <div>
@@ -135,9 +135,9 @@ const Chat = () => {
                     : "Offline"}
                 </div>
                 {onlineUsers?.includes(selectedUser?.email) ? (
-                  <div className="w-2 h-2 md:w-4 md:h-4 bg-green-500 rounded-full "></div>
+                  <div className="w-2 h-2 bg-green-500 rounded-full "></div>
                 ) : (
-                  <div className="w-2 h-2 md:w-4 md:h-4 bg-red-500 rounded-full "></div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full "></div>
                 )}
               </div>
             </div>
@@ -152,11 +152,32 @@ const Chat = () => {
               ></i>
             </div>
           </div>
-          <div className="flex-1 w-full justify-center p-3">
+          <div className="flex-1 w-full justify-center p-3 overflow-auto">
             {messages && messages.length > 0 ? (
               <>
                 {messages.map((message, index) => (
-                  <p key={index}>{message.text}</p>
+                  // <p key={index}>{message.text}</p>
+                  <div
+                    key={index}
+                    className={`chat ${
+                      message.sender_Id == authUser.email
+                        ? "chat-start"
+                        : "chat-end"
+                    }`}
+                  >
+                    <div className="chat-header">
+                      <time className="text-xs opacity-50">
+                        {new Date(message.createdAt).getTime()}
+                      </time>
+                    </div>
+                    {message?.text ? (
+                      <div className="chat-bubble">{message.text}</div>
+                    ) : null}
+                    {message?.image ? (
+                      <div className="chat-bubble"><img src={message.image} /></div>
+                    ) : null}
+                    <div className="chat-footer opacity-50">Delivered</div>
+                  </div>
                 ))}
                 {loading ? (
                   <div className="w-10 h-10 animate-ping text-black"></div>

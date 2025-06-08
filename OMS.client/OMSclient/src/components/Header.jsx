@@ -1,4 +1,3 @@
-import React from "react";
 import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
 import { oms_url } from "../utils/SD";
@@ -17,12 +16,8 @@ const Header = ({ sideNav, setSideNav }) => {
         ></i>
         <p className="font-bold text-lg md:text-3xl">OMS</p>
       </div>
-      <div className="flex-1 hidden sm:block">
-        <input
-          className="px-8 py-3 focus:outline-0 ml-3 w-[300px] text-sm"
-          type="text"
-          placeholder="Search Patient"
-        />
+      <div className="flex-1">
+        <p className="uppercase text-sm md:text-lg hidden md:block">welcome! <b className="text-blue-700">{user?.doctor_Id ? "Dr" : null } {user?.first_Name}</b></p>
       </div>
       <div className="min-w-[40%] md:min-w-[20%] h-full flex justify-end items-center gap-2">
         <p className="text-[10px] md:text-[15px] font-light">

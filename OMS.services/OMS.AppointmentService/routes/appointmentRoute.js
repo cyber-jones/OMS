@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { approveAppointment, deleteAppointment, disapproveAppointment, getAllAppointments, getAppointmentById, getAppointmentsByDoctor_Id, getAppointmentsByPatient_Id, getAppointmentsBySpecialty_Id, postAppointment, updateAppointment } from '../controllers/appointmentController.js';
+import { approveAppointment, cancleAppointment, deleteAppointment, disapproveAppointment, getAllAppointments, getAppointmentById, getAppointmentsByDoctor_Id, getAppointmentsByPatient_Id, getAppointmentsBySpecialty_Id, postAppointment, updateAppointment } from '../controllers/appointmentController.js';
 import { verifyRoles } from '../middlewares/verifyRoles.js';
 import { ROLES } from '../utils/SD.js';
 const appointmentRouter = Router();
@@ -17,6 +17,7 @@ appointmentRouter.put("/:id", verifyRoles(ROLES), updateAppointment);
 appointmentRouter.delete("/:id", verifyRoles([ROLES[0], ROLES[3]]), deleteAppointment);
 appointmentRouter.post("/approve/:id", verifyRoles([ROLES[1], ROLES[2]]), approveAppointment);
 appointmentRouter.post("/disapprove/:id", verifyRoles([ROLES[1], ROLES[2]]), disapproveAppointment);
+appointmentRouter.post("/cancle/:id", verifyRoles([ROLES[3]]), cancleAppointment);
 
 
 

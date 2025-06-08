@@ -3,9 +3,12 @@ export const oms_url = {
     specialty: "/specialty",
     specialties: "/specialties",
     consultation: "/consultation",
+    patients: "/patients",
+    prescription: "/prescription",
     prescriptions: "/prescriptions",
     appointments: "/appointments",
     newAppointment: "/appointment/new",
+    newPrescription: "/prescription/new",
     profile: "/profile",
     login: "/login",
     auth: "/auth",
@@ -51,6 +54,14 @@ export const Roles = {
     PATIENT: "patient",
     DOCTOR: "doctor",
     STAFF: "staff"
+}
+
+
+export const Status = {
+    APPROVED: "approved",
+    DISAPPROVED: "disapproved",
+    PENDING: "pending",
+    CANCLE: "cancle"
 }
 
 

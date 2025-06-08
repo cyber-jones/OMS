@@ -3,19 +3,16 @@ import useAppointments from "../../hooks/useAppointment ";
 import Circle from "../../components/loading/Circle";
 import useSpecialty from "../../hooks/useSpecialty";
 import useDoctor from "../../hooks/useDoctor";
-import { oms_server_dev_url, oms_url, Roles } from "../../utils/SD";
+import { oms_server_dev_url, oms_url, Roles, Status } from "../../utils/SD";
 import { useSnackbar } from "notistack";
 import useAxiosAuthorization from "../../hooks/useAxiosAuth";
 import { useSelector } from "react-redux";
+import { useAuth } from "../../utils/isAuthorized";
 
 const Appointment = () => {
   const { id } = useParams();
-const { authUser } = useSelector((state) => state.authUser);
-const { user } = useSelector((state) => state.user);
-const requiredRoles = [Roles.DOCTOR, Roles.STAFF];
-const isAuthorized = authUser?.roles
-    .map((role) => requiredRoles.includes(role))
-    .find((value) => value == true);
+  const { user } = useSelector((state) => state.user);
+  const isAuthorized = useAuth([Roles.DOCTOR, Roles.STAFF]);
   const { loading, appointments: appointment } = useAppointments(
     null,
     null,
@@ -23,15 +20,18 @@ const isAuthorized = authUser?.roles
   );
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const { doctors, loading: loadingDoctor } = useDoctor();
-    const specialty = specialties ? specialties?.find(
-    (specialty) => specialty.specialty_Id == appointment.specialty_Id
-  ) : null;
+  const specialty = specialties !== null
+    ? specialties.find(
+        (specialtyValue) => specialtyValue.specialty_Id == appointment.specialty_Id
+      )
+    : null;
   const doctor = doctors?.find(
     (doctor) => doctor.doctor_Id == appointment.doctor_Id
   );
   const { enqueueSnackbar } = useSnackbar();
   const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
   const navigate = useNavigate();
+  const isAuth = useAuth([Roles.ADMIN]);
 
   const handleDelete = async () => {
     try {
@@ -54,9 +54,32 @@ const isAuthorized = authUser?.roles
     }
   };
 
+  const handleCancle = async () => {
+    try {
+      const res = await axiosAuth.get("/appointment/cancle" + id);
+      if (res?.status !== 200 && res) {
+        enqueueSnackbar(res?.data?.message || res?.statusText, {
+          variant: "error",
+        });
+        return;
+      }
+
+      enqueueSnackbar(res?.data?.message || res?.statusText, {
+        variant: "success",
+      });
+      navigate(oms_url.appointments);
+    } catch (err) {
+      enqueueSnackbar(err?.response?.data?.message || err.message, {
+        variant: "error",
+      });
+    }
+  };
+
   const handleApprove = async () => {
     try {
-      const res = await axiosAuth.post("/appointment/approve/" + id, { name: user.email });
+      const res = await axiosAuth.post("/appointment/approve/" + id, {
+        name: user.email,
+      });
       if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",
@@ -77,7 +100,9 @@ const isAuthorized = authUser?.roles
 
   const handleDisapprove = async () => {
     try {
-      const res = await axiosAuth.post("/appointment/disapprove/" + id, { name: user.email });
+      const res = await axiosAuth.post("/appointment/disapprove/" + id, {
+        name: user.email,
+      });
       if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",
@@ -127,31 +152,44 @@ const isAuthorized = authUser?.roles
             </p>
           </div>
           <div className="w-full flex flex-col mt-10 gap-2">
-            <Link
-              to={oms_url.updateAppointment + "/" + id}
-              className="bg-purple-700 w-full text-white py-2 px-4 text-center rounded-lg font-semibold cursor-pointer hover:bg-purple-950 transition duration-500 ease-in"
-            >
-              Reschedule <i className="bi bi-arrow-clockwise"></i>
-            </Link>
+            {appointment?.status == Status.APPROVED ? (
+              <button
+                hidden={!isAuthorized}
+                onClick={handleDisapprove}
+                className="bg-yellow-700 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-yellow-950 transition duration-500 ease-in"
+              >
+                Disapprove <i className="bi bi-exclamation-octagon"></i>
+              </button>
+            ) : (
+              <>
+                <Link
+                  to={oms_url.updateAppointment + "/" + id}
+                  className="bg-purple-700 w-full text-white py-2 px-4 text-center rounded-lg font-semibold cursor-pointer hover:bg-purple-950 transition duration-500 ease-in"
+                >
+                  Reschedule <i className="bi bi-arrow-clockwise"></i>
+                </Link>
+                <button
+                  hidden={!isAuthorized}
+                  onClick={handleApprove}
+                  className="bg-green-700 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-green-950 transition duration-500 ease-in"
+                >
+                  Approve <i className="bi bi-check2-circle"></i>
+                </button>
+                <button
+                  hidden={isAuth && isAuthorized}
+                  onClick={handleCancle}
+                  className="bg-red-400 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-600 transition duration-500 ease-in"
+                >
+                  Cancle <i className="bi bi-x-circle"></i>
+                </button>
+              </>
+            )}
             <button
-              hidden={isAuthorized ? false : true}
-              onClick={handleApprove}
-              className="bg-green-700 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-green-950 transition duration-500 ease-in"
-            >
-              Approve <i className="bi bi-check2-circle"></i>
-            </button>
-            <button
-              hidden={isAuthorized ? false : true}
-              onClick={handleDisapprove}
-              className="bg-yellow-700 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-yellow-950 transition duration-500 ease-in"
-            >
-              Disapprove <i className="bi bi-exclamation-octagon"></i>
-            </button>
-            <button
+              hidden={!isAuth}
               onClick={handleDelete}
               className="bg-red-700 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in"
             >
-              Cancle <i className="bi bi-x-circle"></i>
+              Delete <i className="bi bi-x-circle"></i>
             </button>
           </div>
         </div>

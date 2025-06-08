@@ -23,7 +23,7 @@ const Specialties = () => {
   return (
     <div className="w-[95%] h-11/12 flex flex-col justify-center items-center">
       <input
-        className="px-8 focus:outline-0 ml-3 w-[80%] md:w-[60%] text-md my-3"
+        className="px-8 focus:outline-0 ml-3 border-0 w-[80%] md:w-[60%] text-md my-3"
         type="text"
         onChange={handleSearch}
         placeholder="Search Specialty"

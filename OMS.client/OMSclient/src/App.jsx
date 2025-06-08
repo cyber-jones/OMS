@@ -34,11 +34,13 @@ import DoctorProfile from "./pages/settings/profile/DoctorProfile";
 import StaffProfile from "./pages/settings/profile/StaffProfile";
 import PatientProfile from "./pages/settings/profile/PatientProfile";
 import UpdateAppointment from "./pages/appointment/UpdateAppointment";
+import Patients from "./pages/patients/Patients";
+import PatientAction from "./pages/patients/PatientAction";
 
 function App() {
   return (
     <Routes>
-      <Route element={<IsAuth role={Roles.PATIENT} />}>
+      <Route element={<IsAuth roles={[]} />}>
         <Route
           path={oms_url.profile}
           element={
@@ -55,6 +57,24 @@ function App() {
             </DashBoardComponents>
           }
         />
+        <Route element={<IsAuth roles={[Roles.DOCTOR, Roles.STAFF]} />}>
+          <Route
+            path={oms_url.patients}
+            element={
+              <DashBoardComponents>
+                <Patients />
+              </DashBoardComponents>
+            }
+          />
+          <Route
+            path={oms_url.patient+"/action/:id"}
+            element={
+              <DashBoardComponents>
+                <PatientAction />
+              </DashBoardComponents>
+            }
+          />
+        </Route>
         <Route
           path={oms_url.specialties}
           element={
@@ -88,7 +108,7 @@ function App() {
           }
         />
         <Route
-          path={oms_url.updateAppointment+"/:id"}
+          path={oms_url.updateAppointment + "/:id"}
           element={
             <DashBoardComponents>
               <UpdateAppointment />
@@ -160,7 +180,27 @@ function App() {
           }
         />
       </Route>
-      <Route element={<IsAuth role={Roles.ADMIN} />}>
+      <Route
+        element={<IsAuth roles={[Roles.ADMIN, Roles.DOCTOR, Roles.STAFF]} />}
+      >
+        <Route
+          path={oms_url.patientList}
+          element={
+            <DashBoardComponents>
+              <PatientList />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.profile + "/patient/:id"}
+          element={
+            <DashBoardComponents>
+              <PatientProfile />
+            </DashBoardComponents>
+          }
+        />
+      </Route>
+      <Route element={<IsAuth roles={[Roles.ADMIN]} />}>
         <Route
           path={oms_url.registerDoctor}
           element={
@@ -198,14 +238,6 @@ function App() {
           element={
             <DashBoardComponents>
               <DoctorList />
-            </DashBoardComponents>
-          }
-        />
-        <Route
-          path={oms_url.patientList}
-          element={
-            <DashBoardComponents>
-              <PatientList />
             </DashBoardComponents>
           }
         />
@@ -270,14 +302,6 @@ function App() {
           element={
             <DashBoardComponents>
               <StaffProfile />
-            </DashBoardComponents>
-          }
-        />
-        <Route
-          path={oms_url.profile + "/patient/:id"}
-          element={
-            <DashBoardComponents>
-              <PatientProfile />
             </DashBoardComponents>
           }
         />

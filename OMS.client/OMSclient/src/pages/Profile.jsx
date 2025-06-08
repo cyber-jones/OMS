@@ -7,7 +7,7 @@ const Profile = () => {
   const { authUser } = useSelector((state) => state.authUser);
 
   return (
-    <div className="text-sm md:text-[15px] w-[90%] flex flex-col bg-purple-300 justify-center p-4 items-center md:flex-row-reverse h-11/12 rounded-lg shadow-lg font-sans">
+    <div className="text-sm md:text-[15px] w-[90%] flex flex-col bg-gray-300 justify-center p-4 items-center md:flex-row-reverse h-11/12 rounded-lg shadow-lg font-sans">
       <div className="w-full md:w-6/12 flex items-center justify-center md:h-full">
         <div>
           <img
@@ -24,7 +24,7 @@ const Profile = () => {
         </div>
       </div>
       <div className="w-full md:w-6/12 md:h-full">
-        <p className="text-purple-500 text-2xl my-4 text-center md:text-left">
+        <p className="text-gray-600 text-2xl my-4 text-center md:text-left">
           {authUser?.accType}
         </p>
         <p>
@@ -92,10 +92,10 @@ const Profile = () => {
               <b>Medical Info</b>
             </p>
             <p>
-              <b>Specialty</b>: {user?.specialty}
+              <b>Specialty</b>: {user?.specialty.name}
             </p>
             <p>
-              <b>Sub specialty</b>: {user?.sub_Specialty}
+              <b>Sub specialty</b>: {user?.sub_Specialty.name}
             </p>
             <p>
               <b>Medical Licence Number</b>: {user?.mln}

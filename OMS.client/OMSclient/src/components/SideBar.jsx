@@ -1,9 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { oms_url } from "../utils/SD";
+import { oms_url, Roles } from "../utils/SD";
+import { useAuth } from "../utils/isAuthorized";
 
 const SideBar = ({ sideNav }) => {
   const nav_icons = "text-lg md:text-2xl hover:text-4xl transition-all ease-in";
+  const isAuth = useAuth([Roles.DOCTOR, Roles.STAFF])
 
   return (
     <div
@@ -21,14 +22,21 @@ const SideBar = ({ sideNav }) => {
       </Link>
       <Link to={oms_url.consultation}>
         <div className="text-center w-full hover:cursor-pointer">
-          <i className={`bi bi-people-fill ${nav_icons}`}></i>
+          <i className={`bi bi-wechat ${nav_icons}`}></i>
           <div>Consultation</div>
         </div>
       </Link>
+      
       <Link to={oms_url.appointments}>
         <div className="text-center w-full hover:cursor-pointer">
           <i className={`bi bi-building-check ${nav_icons}`}></i>
           <div>Appointments</div>
+        </div>
+      </Link>
+      <Link hidden={!isAuth} to={oms_url.patients}>
+        <div className="text-center w-full hover:cursor-pointer">
+          <i className={`bi bi-people-fill ${nav_icons}`}></i>
+          <div>Patients</div>
         </div>
       </Link>
       <Link to={oms_url.specialties}>

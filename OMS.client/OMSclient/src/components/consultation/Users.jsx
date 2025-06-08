@@ -141,10 +141,20 @@ const Users = () => {
             className="font-sans w-full gap-6 h-22 flex justify-start items-center cursor-pointer hover:bg-gray-300 transition-all ease-out duration-500"
           >
             <div className="w-12 h-12 rounded-full bg-stone-700 ml-8">
+              <img
+                src={
+                  user?.profile_Url
+                    ? user?.profile_Url
+                    : user?.sex == "Male"
+                    ? "/images/profile-masculine.jpeg"
+                    : "/images/profile-femine.jpeg"
+                }
+                className="rounded-full"
+              />
               {onlineUsers?.includes(user?.email) ? (
                 <div className="relative w-4 h-4 bg-green-500 rounded-full left-7 top-9"></div>
               ) : (
-                <div className="relative w-4 h-4 bg-red-500 rounded-full left-7 top-9"></div>
+                <div className="relative w-4 h-4 bg-red-500 rounded-full -top-4 left-7"></div>
               )}
             </div>
             <div className="text-sm border-b-[0.2px] border-gray-400 py-2 w-[65%]">

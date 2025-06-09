@@ -49,6 +49,16 @@ export const oms_server_dev_url = {
 }
 
 
+export const oms_server_production_url = {
+    doctor: "http://localhost:7002/api",
+    staff: "http://localhost:7004/api",
+    patient: "http://localhost:7001/api",
+    auth: "https://oms-auth-api.onrender.com/api",
+    drug: "http://localhost:7003/api",
+    appointment: "https://oms-appointment-api.onrender.com/api",
+}
+
+
 export const Roles = {
     ADMIN: "admin",
     PATIENT: "patient",

@@ -78,7 +78,7 @@ export const loginUser = async (req, res, next) => {
 
         const { password: pass, refreshToken: refresh, ...rest } = user._doc;
 
-        const cookieOpt = { httpOnly: true, sameSite: "None", maxAge: 1000 * 60 * 60 * 24 * 7 }
+        const cookieOpt = { httpOnly: true, secure: true, sameSite: "None", maxAge: 1000 * 60 * 60 * 24 * 7 }
   
         return res.cookie("jwt", refreshToken, cookieOpt)
                     .status(200).json({ success: true, body: { ...rest, accessToken } });

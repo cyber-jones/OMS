@@ -1,55 +1,53 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { oms_server_dev_url } from "../../utils/SD";
+import {  Roles } from "../../utils/SD";
 import Circle from "../../components/loading/Circle";
 import { useSnackbar } from "notistack";
-import useAxiosAuthorization from "../../hooks/useAxiosAuth";
+import { useAuth } from "../../utils/isAuthorized";
+import useDrug from "../../hooks/useDrug";
+import { setPrescribedDrugs } from "../../redux/prescription/prescriptionSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const DetailedDrug = () => {
-  const [drug, setDrug] = useState(null);
-  const [amount, setAmount] = useState(1);
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
+  const { prescribedDrugs } = useSelector(state => state.prescription);
+  const { loading, drugs: drug } = useDrug(id);
+  const [amount, setAmount] = useState(1);
   const { enqueueSnackbar } = useSnackbar();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.drug);
+  const dispatch = useDispatch();
+  const isNotDoctor = useAuth([Roles.DOCTOR]);
+  
 
-  const getDrug = async () => {
-    setLoading(true);
-    try {
-      const res = await axiosAuth.get("/drug/" + id);
-      if (res?.status !== 200)
-        enqueueSnackbar(res.statusText, { variant: "error" });
 
-      setDrug(res.data);
-    } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
-    } finally {
-      setLoading(false);
+  const handleAddToPrescription = () => {
+    if (!loading && drug) {
+      console.log(prescribedDrugs);
+      const foundDrug = prescribedDrugs.find(value => value.drug_Id == drug.drug_Id);
+      if (foundDrug) enqueueSnackbar("Drug already in prescription!", { variant: "warning" }); 
+      else {
+        dispatch(setPrescribedDrugs([...prescribedDrugs, drug]));
+        enqueueSnackbar("Drug added to prescription", { variant: "success" });
+      }
     }
-  };
+
+    return;
+  }
 
   const handleIncrement = () => {
-    if (amount < 100 && amount > 0) {
+    if (amount < 30 && amount > 0) 
       return setAmount(amount + 1);
-    }
 
     enqueueSnackbar("Limit reached", { variant: "error" });
   };
 
   const handleDecrement = () => {
-    if (amount <= 100 && amount > 1) {
+    if (amount <= 30 && amount > 1)
       return setAmount(amount - 1);
-    }
 
     enqueueSnackbar("Limit reached", { variant: "error" });
   };
 
   const handleAddToCart = () => {};
-
-  useEffect(() => {
-    getDrug();
-  }, []);
 
   return (
     <>
@@ -97,10 +95,18 @@ const DetailedDrug = () => {
               +
             </button>
             <button
+              hidden={isNotDoctor}
               className="float-right px-3 py-1 rounded-lg text-white bg-green-950 cursor-pointer font-serif hover:bg-green-900 duration-500 ease-in"
               onClick={handleAddToCart}
             >
               Add to cart
+            </button>
+            <button
+              hidden={!isNotDoctor}
+              className="float-right px-3 py-1 rounded-lg text-white bg-blue-950 cursor-pointer font-serif hover:bg-blue-900 duration-500 ease-in"
+              onClick={handleAddToPrescription}
+            >
+              Add to prescription
             </button>
           </div>
         </div>

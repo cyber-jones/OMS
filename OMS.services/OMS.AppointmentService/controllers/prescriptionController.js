@@ -1,4 +1,5 @@
 import Prescription from "../models/prescriptionModel.js";
+import { STATUS } from "../utils/SD.js";
 import { PrescriptionValidator } from "../validators/validateSchema.js";
 
 
@@ -54,10 +55,10 @@ export const approvePrescription = async (req, res, next) => {
 
         const findPrescription = await Prescription.findById(req.params.id);
 
-        if (findPrescription.approved)
+        if (findPrescription.status == STATUS.approved)
             return res.status(400).json({ success: false, message: "This Prescription has been approved!" });
 
-        findPrescription.approved = true;
+        findPrescription.status = STATUS.approved;
         findPrescription.approved_By = value;
         await findPrescription.save();
 
@@ -77,10 +78,10 @@ export const disapprovePrescription = async (req, res, next) => {
 
         const findPrescription = await Prescription.findById(req.params.id);
 
-        if (!findPrescription.approved)
+        if (!findPrescription.status !== STATUS.approved)
             return res.status(400).json({ success: false, message: "This Prescription isn't approved!" });
 
-        findPrescription.approved = false;
+        findPrescription.status = STATUS.disapproved;
         findPrescription.disapproved_By = value.name;
         await findPrescription.save();
 

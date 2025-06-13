@@ -125,7 +125,8 @@ const Chat = () => {
             <div>
               <Link to={oms_url.profile + profileUrl}>
                 <p className="text-sm md:text-lg ">
-                  <strong>{selectedUser?.first_Name}</strong> <strong>{selectedUser?.last_Name}</strong>
+                  <strong>{selectedUser?.first_Name}</strong>{" "}
+                  <strong>{selectedUser?.last_Name}</strong>
                 </p>
               </Link>
               <div className="text-[9px] md:text-sm flex gap-2 justify-start items-center">
@@ -161,20 +162,36 @@ const Chat = () => {
                     key={index}
                     className={`chat ${
                       message.sender_Id == authUser.email
-                        ? "chat-start"
-                        : "chat-end"
+                        ? "chat-end"
+                        : "chat-start"
                     }`}
                   >
                     <div className="chat-header">
                       <time className="text-xs opacity-50">
-                        {new Date(message.createdAt).getTime()}
+                        {new Date(message.createdAt).toLocaleDateString()}
                       </time>
                     </div>
                     {message?.text ? (
-                      <div className="chat-bubble">{message.text}</div>
+                      <div
+                        className={`chat-bubble ${
+                          message.sender_Id == authUser.email
+                            ? "bg-blue-300"
+                            : null
+                        }`}
+                      >
+                        {message.text}
+                      </div>
                     ) : null}
                     {message?.image ? (
-                      <div className="chat-bubble"><img src={message.image} /></div>
+                      <div
+                        className={`chat-bubble ${
+                          message.sender_Id == authUser.email
+                            ? "bg-blue-300"
+                            : null
+                        }`}
+                      >
+                        <img src={message.image} />
+                      </div>
                     ) : null}
                     <div className="chat-footer opacity-50">Delivered</div>
                   </div>

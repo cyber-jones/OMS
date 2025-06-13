@@ -152,7 +152,7 @@ const Users = () => {
                 className="rounded-full"
               />
               {onlineUsers?.includes(user?.email) ? (
-                <div className="relative w-4 h-4 bg-green-500 rounded-full left-7 top-9"></div>
+                <div className="relative w-4 h-4 bg-green-500 rounded-full -top-4 left-7"></div>
               ) : (
                 <div className="relative w-4 h-4 bg-red-500 rounded-full -top-4 left-7"></div>
               )}

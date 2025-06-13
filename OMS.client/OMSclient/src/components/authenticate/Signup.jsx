@@ -6,7 +6,6 @@ import { axioAnonymous } from "../../data/axios";
 import { oms_server_dev_url, oms_url } from "../../utils/SD";
 import { useNavigate } from "react-router-dom";
 
-
 const Signup = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -25,7 +24,8 @@ const Signup = () => {
     setLoading(true);
     try {
       const res = await axioAnonymous(oms_server_dev_url.patient).post(
-        "/patient", formData
+        "/patient",
+        formData
       );
 
       if (res?.status !== 201)
@@ -41,10 +41,12 @@ const Signup = () => {
     }
   };
 
-
   return (
-    <form className="flex flex-col justify-center items-center w-full gap-3" onSubmit={(e) => handleSignup(e)}>
-      {/* <p className='text-2xl font-bold '>SignUp Here!</p> */}
+    <form
+      className="flex flex-col justify-center items-center w-full h-10/12 overflow-y-scroll gap-3 md:gap-2"
+      onSubmit={(e) => handleSignup(e)}
+    >
+      <p className="text-2xl font-bold my-2">SignUp Here!</p>
       <div className="flex gap-2 w-full">
         <Input
           type={"text"}

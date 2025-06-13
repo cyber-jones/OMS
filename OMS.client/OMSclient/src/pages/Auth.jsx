@@ -32,7 +32,7 @@ const Auth = () => {
         />
       </div>
       <div className="w-full h-screen flex justify-center items-center">
-        <div className="flex flex-col w-[90%] md:w-[60%] min-h-6/12  gap-4 ">
+        <div className="flex flex-col w-[90%] md:w-[60%] h-full gap-4 justify-center">
           <div className="flex text-center bg-gray-200 rounded-3xl text-md cursor-pointer transition-all duration-1000">
             <div
               id="login"

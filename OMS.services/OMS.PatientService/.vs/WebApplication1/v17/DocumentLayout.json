@@ -1,50 +1,47 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\",
+  "WorkspaceRootPath": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.patientservice\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\config\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\config\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.patientservice\\webapplication1\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|solutionrelative:webapplication1\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.patientservice\\webapplication1\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|solutionrelative:webapplication1\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Migrations\\20250313084323_Mag01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\models\\patientmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\models\\patientmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\DTOs\\PatientUpdateDto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\data\\patientdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\data\\patientdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.patientservice\\webapplication1\\dtos\\patientregisterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|solutionrelative:webapplication1\\dtos\\patientregisterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\migrations\\20250313084323_mag01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|solutionrelative:webapplication1\\migrations\\20250313084323_mag01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.patientservice\\webapplication1\\dtos\\patientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|solutionrelative:webapplication1\\dtos\\patientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\dtos\\patientregisterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dtos\\patientregisterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.patientservice\\webapplication1\\config\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|solutionrelative:webapplication1\\config\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\dtos\\patientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dtos\\patientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Data\\PatientDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\dtos\\patientupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\dtos\\patientupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.patientservice\\webapplication1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|solutionrelative:webapplication1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.patientservice\\webapplication1\\webapplication1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.patientservice\\webapplication1\\models\\patientmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{19FCBC86-1D84-4A42-BD3B-833ED87686C3}|WebApplication1\\OMS.PatientService.csproj|solutionrelative:webapplication1\\models\\patientmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,150 +51,141 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Properties\\launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "WebApplication1\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Properties\\launchSettings.json",
               "RelativeToolTip": "WebApplication1\\Properties\\launchSettings.json",
               "ViewState": "AgIAABIAAAAAAAAAAAAiwB0AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-13T09:01:37.488Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T09:01:37.488Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "20250313084323_Mag01.cs",
               "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Migrations\\20250313084323_Mag01.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Migrations\\20250313084323_Mag01.cs",
+              "RelativeDocumentMoniker": "..\\..\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Migrations\\20250313084323_Mag01.cs",
               "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Migrations\\20250313084323_Mag01.cs",
-              "RelativeToolTip": "WebApplication1\\Migrations\\20250313084323_Mag01.cs",
+              "RelativeToolTip": "..\\..\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Migrations\\20250313084323_Mag01.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T08:43:24.922Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T08:43:24.922Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "PatientUpdateDto.cs",
               "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\DTOs\\PatientUpdateDto.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\DTOs\\PatientUpdateDto.cs",
+              "RelativeDocumentMoniker": "..\\..\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\DTOs\\PatientUpdateDto.cs",
               "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\DTOs\\PatientUpdateDto.cs",
-              "RelativeToolTip": "WebApplication1\\DTOs\\PatientUpdateDto.cs",
+              "RelativeToolTip": "..\\..\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\DTOs\\PatientUpdateDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T07:30:01.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T07:30:01.792Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "PatientRegisterDto.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\DTOs\\PatientRegisterDto.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\DTOs\\PatientRegisterDto.cs",
               "RelativeDocumentMoniker": "WebApplication1\\DTOs\\PatientRegisterDto.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\DTOs\\PatientRegisterDto.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\DTOs\\PatientRegisterDto.cs",
               "RelativeToolTip": "WebApplication1\\DTOs\\PatientRegisterDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T07:17:12.769Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T07:17:12.769Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PatientController.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Controllers\\PatientController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Controllers\\PatientController.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Controllers\\PatientController.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Controllers\\PatientController.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Controllers\\PatientController.cs",
               "RelativeToolTip": "WebApplication1\\Controllers\\PatientController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAUwJ0AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-13T06:32:00.107Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "PatientDto.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\DTOs\\PatientDto.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\DTOs\\PatientDto.cs",
               "RelativeDocumentMoniker": "WebApplication1\\DTOs\\PatientDto.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\DTOs\\PatientDto.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\DTOs\\PatientDto.cs",
               "RelativeToolTip": "WebApplication1\\DTOs\\PatientDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T06:24:38.697Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T06:24:38.697Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "AutoMapperConfig.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Config\\AutoMapperConfig.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Config\\AutoMapperConfig.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Config\\AutoMapperConfig.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Config\\AutoMapperConfig.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Config\\AutoMapperConfig.cs",
               "RelativeToolTip": "WebApplication1\\Config\\AutoMapperConfig.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T06:18:32.473Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T06:18:32.473Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Program.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Program.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Program.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Program.cs",
               "RelativeToolTip": "WebApplication1\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-13T05:57:07.569Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "PatientDbContext.cs",
               "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Data\\PatientDbContext.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Data\\PatientDbContext.cs",
+              "RelativeDocumentMoniker": "..\\..\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Data\\PatientDbContext.cs",
               "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Data\\PatientDbContext.cs",
-              "RelativeToolTip": "WebApplication1\\Data\\PatientDbContext.cs",
+              "RelativeToolTip": "..\\..\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Data\\PatientDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T06:09:38.632Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T06:09:38.632Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\appsettings.json",
+              "RelativeDocumentMoniker": "WebApplication1\\appsettings.json",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\appsettings.json",
+              "RelativeToolTip": "WebApplication1\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-13T05:55:32.458Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\appsettings.json",
-              "RelativeDocumentMoniker": "WebApplication1\\appsettings.json",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\appsettings.json",
-              "RelativeToolTip": "WebApplication1\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-13T05:55:32.458Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "PatientModel.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Models\\PatientModel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Models\\PatientModel.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Models\\PatientModel.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.PatientService\\WebApplication1\\WebApplication1\\Models\\PatientModel.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.PatientService\\WebApplication1\\Models\\PatientModel.cs",
               "RelativeToolTip": "WebApplication1\\Models\\PatientModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T03:22:27.723Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T03:22:27.723Z"
             }
           ]
         }

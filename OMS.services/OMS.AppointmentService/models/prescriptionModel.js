@@ -12,17 +12,13 @@ const prescriptionSchema = new Schema({
         required: true,
         type: String
     },
-    drug_Ids: {
-        required: true,
-        type: [String]
-    },
     prescription: {
         required: true,
-        type: String
+        type: [Object]
     },
     status: {
         type: String,
-        default: false
+        default: "pending"
     },
     approved_By: {
         type: String,

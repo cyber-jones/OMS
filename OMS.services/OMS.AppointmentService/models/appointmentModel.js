@@ -30,7 +30,7 @@ const appointmentSchema = new Schema({
     }, 
     status: {
         type: String,
-        default: false
+        default: "pending"
     },
     approved_By: {
         type: String,

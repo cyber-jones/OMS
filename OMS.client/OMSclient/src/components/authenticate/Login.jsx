@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Input from "../Inputs/Input";
 import { useSnackbar } from "notistack";
 import { axioAnonymous } from "../../data/axios";
-import { oms_server_production_url, oms_url } from "../../utils/SD";
+import { oms_server_dev_url, oms_url } from "../../utils/SD";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../../redux/auth/authUserSlice";
@@ -35,7 +35,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axioAnonymous(oms_server_production_url.auth).post(
+      const res = await axioAnonymous(oms_server_dev_url.auth).post(
         "/user/login",
         formData
       );

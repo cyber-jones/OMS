@@ -36,6 +36,7 @@ import PatientProfile from "./pages/settings/profile/PatientProfile";
 import UpdateAppointment from "./pages/appointment/UpdateAppointment";
 import Patients from "./pages/patients/Patients";
 import PatientAction from "./pages/patients/PatientAction";
+import NewPrescription from "./pages/prescription/NewPrescription";
 
 function App() {
   return (
@@ -57,6 +58,16 @@ function App() {
             </DashBoardComponents>
           }
         />
+        <Route element={<IsAuth roles={[Roles.DOCTOR]} />}>
+          <Route
+            path={oms_url.newPrescription+"/:id"}
+            element={
+              <DashBoardComponents>
+                <NewPrescription />
+              </DashBoardComponents>
+            }
+          />
+        </Route>
         <Route element={<IsAuth roles={[Roles.DOCTOR, Roles.STAFF]} />}>
           <Route
             path={oms_url.patients}

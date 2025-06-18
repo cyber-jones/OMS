@@ -17,6 +17,7 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 SD.Client_Dev_Url = builder.Configuration["OMS.Client_devUrl"]!;
+SD.Client_Production_Url = builder.Configuration["OMS.Client_productionUrl"]!;
 
 // Add services to the container.
 Log.Logger = new LoggerConfiguration()

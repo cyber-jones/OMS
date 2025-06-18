@@ -61,9 +61,9 @@ const NewPrescription = () => {
       <h1 className="w-11/12 md:w-6/12 text-2xl text-blue-600 mb-8 font-semibold">
         New Prescription For {patient?.first_Name}
       </h1>
-      <p className="font-semibold">
+      <p className="font-semibold w-11/12 md:w-6/12 font-serif">
         Patient: {patient?.first_Name} {patient?.last_Name}{" "}
-        {patient?.middle_Name}
+        {patient?.middle_Name} <b className="float-right text-red-400 cursor-pointer">Clear</b>
       </p>
       <div className="w-11/12 md:w-6/12 overflow-y-scroll">
         {prescribedDrugs.length > 0 ? (

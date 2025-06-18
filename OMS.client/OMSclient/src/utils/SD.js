@@ -54,7 +54,7 @@ export const oms_server_production_url = {
     staff: "http://localhost:7004/api",
     patient: "http://localhost:7001/api",
     auth: "https://oms-auth-api.onrender.com/api",
-    drug: "http://localhost:7003/api",
+    drug: "http://oms-drug-api.runasp.net/api",
     appointment: "https://oms-appointment-api.onrender.com/api",
 }
 

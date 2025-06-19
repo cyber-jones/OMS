@@ -12,6 +12,7 @@ import userRouter from "./routes/userRouter.js";
 import refreshRouter from "./routes/refreshRouter.js";
 import { reqLogger } from "./config/logConfig.js";
 import { credentials } from "./middlewares/corsCredentials.js";
+import mailRouter from "./routes/mailRouter.js";
 
 
 const app = express();
@@ -33,6 +34,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 app.use("/api/user", userRouter);
 app.use("/api", refreshRouter);
+app.use("/api", mailRouter);
 
 
 app.all("*", (req, res) => {

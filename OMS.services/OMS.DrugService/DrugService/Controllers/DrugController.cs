@@ -34,11 +34,11 @@ namespace DrugService.Controllers
         {
             try
             {
-                IEnumerable<DrugModel> patients = await _dbContext.Drugs
+                IEnumerable<DrugModel> drugs = await _dbContext.Drugs
                     .OrderBy(d => d.Drug_Name)
                         .ToListAsync();
 
-                var drugsDto = _mapper.Map<IEnumerable<DrugDto>>(patients);
+                var drugsDto = _mapper.Map<IEnumerable<DrugDto>>(drugs);
 
                 return Ok(drugsDto);
             }

@@ -5,7 +5,7 @@ using DrugService.Models;
 
 namespace OMS.DrugService.Models;
 
-public class OrderDetails
+public class OrderDetailsModel
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,12 +14,12 @@ public class OrderDetails
     [Required]
     public Guid OrderHeader_Id { get; set; }
     [ForeignKey(nameof(OrderHeader_Id))]
-    public OrderHeader? OrderHeader { get; set;}
+    public OrderHeaderModel? OrderHeader { get; set;}
 
     public Guid Product_Id { get; set;}
     [ForeignKey(nameof(Product_Id))]
     public DrugModel? Product { get; set;}
-
+    [Range(1, 30, ErrorMessage = "You can only purchase 30 at a time")]
     public int Count { get; set; }
     public double Price { get; set; }
 

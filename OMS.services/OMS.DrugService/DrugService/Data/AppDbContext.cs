@@ -13,6 +13,8 @@ namespace DrugService.Data
 
         public DbSet<DrugModel> Drugs { get; set; }
         public DbSet<LogModel> Logs { get; set; }
+        public DbSet<CartModel> Carts { get; set; }
+        public DbSet<OrderHeaderModel> OrderHeaders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

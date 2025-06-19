@@ -5,7 +5,7 @@ using OMS.DrugService.Utils;
 
 namespace OMS.DrugService.Models;
 
-public class OrderHeader
+public class OrderHeaderModel
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,8 +13,9 @@ public class OrderHeader
 
     [Required]
     public string User_Id { get; set; }
+    public string? Session_Id { get; set; }
     public string? Payment_Intent_Id { get; set; }
     public int Total_Amount { get; set; }
-    public decimal Total_Price { get; set; }
+    public double Total_Price { get; set; }
     public string Status { get; set; } = SD.Pending;
 }

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { oms_server_dev_url } from '../utils/SD';
+import { oms_server_production_url } from '../utils/SD';
 import { useState, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import useAxiosAuthorization from './useAxiosAuth';
@@ -11,7 +11,7 @@ const useSpecialty = (Id = null) => {
     const [specialties, setSpecialties] = useState(null);
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-    const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
+    const axiosAuth = useAxiosAuthorization(oms_server_production_url.doctor);
 
     const getSpecialties = async () => {
         setLoading(true)

@@ -1,5 +1,5 @@
-import mail from "../config/emailConfig";
-import { EmailValidator } from "../validator/validateSchema";
+import mail from "../config/emailConfig.js";
+import { EmailValidator } from "../validator/validateSchema.js";
 
 export const sendMail = async (req, res, next) => {
     try {

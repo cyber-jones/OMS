@@ -10,7 +10,7 @@ const useAxiosAuthorization = (url) => {
   const { disconnectSocket } = useSocket();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-
+console.log("Token", "Bearer "+token);
   const axiosAuth = axios.create({
     baseURL: url,
     headers: { "Content-Type": "application/json" },

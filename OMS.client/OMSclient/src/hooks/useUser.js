@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { oms_server_dev_url } from '../utils/SD';
+import { oms_server_production_url } from '../utils/SD';
 import { useState, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import useAxiosAuthorization from './useAxiosAuth';
@@ -19,15 +19,15 @@ const useUser = () => {
     let url = null;
 
     if (authUser?.accType == "patient") {
-        axiosAuthUrl = oms_server_dev_url.patient
+        axiosAuthUrl = oms_server_production_url.patient
         url =  "/patient";
     }
     else if (authUser?.accType == "doctor") {
-        axiosAuthUrl = oms_server_dev_url.doctor
+        axiosAuthUrl = oms_server_production_url.doctor
         url =  "/doctor";
     }
     else if (authUser?.accType == "staff") {
-        axiosAuthUrl = oms_server_dev_url.staff
+        axiosAuthUrl = oms_server_production_url.staff
         url =  "/staff";
     }
     else

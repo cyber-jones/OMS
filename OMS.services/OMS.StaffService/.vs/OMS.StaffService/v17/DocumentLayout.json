@@ -1,38 +1,53 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\",
+  "WorkspaceRootPath": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.staffservice\\oms.staffservice\\oms.staffservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.staffservice\\oms.staffservice\\oms.staffservice\\models\\staffmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\models\\staffmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\httprepo\\implementation\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\httprepo\\implementation\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.staffservice\\oms.staffservice\\oms.staffservice\\dtos\\staffdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\dtos\\staffdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\config\\corsconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\config\\corsconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.staffservice\\oms.staffservice\\oms.staffservice\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.staffservice\\oms.staffservice\\oms.staffservice\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.staffservice\\oms.staffservice\\oms.staffservice\\config\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\config\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.staffservice\\oms.staffservice\\oms.staffservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms services\\oms.staffservice\\oms.staffservice\\oms.staffservice\\migrations\\20250316221629_mag01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\migrations\\20250316221629_mag01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\utils\\sd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\utils\\sd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\migrations\\20250620055644_mag03.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\migrations\\20250620055644_mag03.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\models\\staffmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\models\\staffmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\dtos\\staffdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\dtos\\staffdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|c:\\users\\user\\documents\\oms\\oms.services\\oms.staffservice\\oms.staffservice\\config\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ED1C1D30-824A-4A37-B607-2FF283997FBC}|OMS.StaffService\\OMS.StaffService.csproj|solutionrelative:oms.staffservice\\config\\automapperconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Migrations\\20250316221629_Mag01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,80 +57,131 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "20250316221629_Mag01.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Migrations\\20250316221629_Mag01.cs",
-              "RelativeDocumentMoniker": "OMS.StaffService\\Migrations\\20250316221629_Mag01.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Migrations\\20250316221629_Mag01.cs",
-              "RelativeToolTip": "OMS.StaffService\\Migrations\\20250316221629_Mag01.cs",
+              "DocumentIndex": 1,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\HttpRepo\\Implementation\\AuthService.cs",
+              "RelativeDocumentMoniker": "OMS.StaffService\\HttpRepo\\Implementation\\AuthService.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\HttpRepo\\Implementation\\AuthService.cs",
+              "RelativeToolTip": "OMS.StaffService\\HttpRepo\\Implementation\\AuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T06:03:15.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CorsConfig.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Config\\CorsConfig.cs",
+              "RelativeDocumentMoniker": "OMS.StaffService\\Config\\CorsConfig.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Config\\CorsConfig.cs",
+              "RelativeToolTip": "OMS.StaffService\\Config\\CorsConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T05:59:53.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SD.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Utils\\SD.cs",
+              "RelativeDocumentMoniker": "OMS.StaffService\\Utils\\SD.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Utils\\SD.cs",
+              "RelativeToolTip": "OMS.StaffService\\Utils\\SD.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T05:58:32.169Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20250620055644_Mag03.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Migrations\\20250620055644_Mag03.cs",
+              "RelativeDocumentMoniker": "OMS.StaffService\\Migrations\\20250620055644_Mag03.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Migrations\\20250620055644_Mag03.cs",
+              "RelativeToolTip": "OMS.StaffService\\Migrations\\20250620055644_Mag03.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T22:16:30.454Z",
+              "WhenOpened": "2025-06-20T05:56:44.857Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "20250316221629_Mag01.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Migrations\\20250316221629_Mag01.cs",
+              "RelativeDocumentMoniker": "..\\..\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Migrations\\20250316221629_Mag01.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Migrations\\20250316221629_Mag01.cs",
+              "RelativeToolTip": "..\\..\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Migrations\\20250316221629_Mag01.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-16T22:16:30.454Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Program.cs",
               "RelativeDocumentMoniker": "OMS.StaffService\\Program.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Program.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Program.cs",
               "RelativeToolTip": "OMS.StaffService\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-16T22:11:53.842Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\appsettings.json",
               "RelativeDocumentMoniker": "OMS.StaffService\\appsettings.json",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\appsettings.json",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\appsettings.json",
               "RelativeToolTip": "OMS.StaffService\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-03-16T22:11:10.303Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "StaffController.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Controllers\\StaffController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Controllers\\StaffController.cs",
               "RelativeDocumentMoniker": "OMS.StaffService\\Controllers\\StaffController.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Controllers\\StaffController.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Controllers\\StaffController.cs",
               "RelativeToolTip": "OMS.StaffService\\Controllers\\StaffController.cs",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAYwH8AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAkBAAAAAAAAAAAgwDsAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-16T21:51:59.671Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Data\\AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "OMS.StaffService\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Data\\AppDbContext.cs",
               "RelativeToolTip": "OMS.StaffService\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAswA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-16T21:49:59.439Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "StaffDto.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\DTOs\\StaffDto.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\DTOs\\StaffDto.cs",
               "RelativeDocumentMoniker": "OMS.StaffService\\DTOs\\StaffDto.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\DTOs\\StaffDto.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\DTOs\\StaffDto.cs",
               "RelativeToolTip": "OMS.StaffService\\DTOs\\StaffDto.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAIwAwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -124,29 +190,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "StaffModel.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Models\\StaffModel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Models\\StaffModel.cs",
               "RelativeDocumentMoniker": "OMS.StaffService\\Models\\StaffModel.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Models\\StaffModel.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Models\\StaffModel.cs",
               "RelativeToolTip": "OMS.StaffService\\Models\\StaffModel.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAuwBMAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-16T21:42:40.374Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "AutoMapperConfig.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Config\\AutoMapperConfig.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Config\\AutoMapperConfig.cs",
               "RelativeDocumentMoniker": "OMS.StaffService\\Config\\AutoMapperConfig.cs",
-              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS Services\\OMS.StaffService\\OMS.StaffService\\OMS.StaffService\\Config\\AutoMapperConfig.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\OMS\\OMS.services\\OMS.StaffService\\OMS.StaffService\\Config\\AutoMapperConfig.cs",
               "RelativeToolTip": "OMS.StaffService\\Config\\AutoMapperConfig.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T21:41:18.184Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T21:41:18.184Z"
             }
           ]
         }

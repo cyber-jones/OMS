@@ -17,6 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 SD.AuthService_Dev_Url = builder.Configuration["OMS.AuthService_devUrl"]!;
 SD.Client_Dev_Url = builder.Configuration["OMS.Client_devUrl"]!;
+SD.AuthService_Production_Url = builder.Configuration["OMS.AuthService_productionUrl"]!;
+SD.Client_Production_Url = builder.Configuration["OMS.Client_productionUrl"]!;
 
 // Add services to the container.
 Log.Logger = new LoggerConfiguration()
@@ -76,3 +78,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// "doctor": "Data Source=CYBER-DECK\\SQLEXPRESS01;Initial Catalog=OMS.DoctorService;Integrated Security=True;Trust Server Certificate=True"
+// "doctor": "Server=db21956.public.databaseasp.net; Database=db21956; User Id=db21956; Password=8n%Gb#M2B9=d; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;"

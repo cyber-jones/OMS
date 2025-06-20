@@ -9,9 +9,10 @@ internal static class CorsConfig
     {
         services.AddCors(option => 
             option.AddPolicy(Policies.LOCAL, policy =>
-                policy.WithOrigins([SD.AuthService_Url])
+                policy.WithOrigins([SD.AuthService_DevUrl, SD.AuthService_ProdductionUrl])
                     .WithMethods(["GET, POST, PATCH, DELETE"])
                     .WithHeaders(["accept", "content-type", "origin", "X-InclineCount"])
+                    .AllowCredentials()
             )
         );
 

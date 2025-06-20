@@ -13,7 +13,6 @@ using OMS.DoctorService.Utils;
 namespace OMS.DoctorService.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     public class SpecialtyController : ControllerBase
     {
@@ -51,6 +50,7 @@ namespace OMS.DoctorService.Controllers
 
 
         // GET api/<SpecialtyController>/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<SpecialtyDto>> GetSpecialty(string id)
         {

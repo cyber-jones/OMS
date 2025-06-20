@@ -15,7 +15,8 @@ using Serilog;
 
 
 var builder = WebApplication.CreateBuilder(args);
-SD.AuthService_Url = builder.Configuration["OMS.AuthService_devUrl"]!;
+SD.AuthService_DevUrl = builder.Configuration["OMS.AuthService_devUrl"]!;
+SD.AuthService_ProdductionUrl = builder.Configuration["OMS.AuthService_productionUrl"]!;
 
 // Add services to the container.
 Log.Logger = new LoggerConfiguration()
@@ -26,7 +27,7 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("patient")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("staff")));
 
 
 builder.Services.AddHttpContextAccessor();
@@ -75,3 +76,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+// "staff": "Data Source=CYBER-DECK\\SQLEXPRESS01;Initial Catalog=OMS.StaffService;Integrated Security=True;Trust Server Certificate=True"
+// "staff" : "Server=db21968.public.databaseasp.net; Database=db21968; User Id=db21968; Password=9z!YgM7+6@Qe; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;"

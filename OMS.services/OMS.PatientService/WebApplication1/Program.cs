@@ -79,3 +79,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+//  "patient": "Data Source=CYBER-DECK\\SQLEXPRESS01;Initial Catalog=OMS.PatientService;Integrated Security=True;Trust Server Certificate=True"
+// "patient": "Server=db21967.public.databaseasp.net; Database=db21967; User Id=db21967; Password=5Zw+i@A92p_E; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;"

@@ -14,7 +14,6 @@ using OMS.DrugService.Utils;
 namespace DrugService.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     public class DrugController : ControllerBase
     {
@@ -51,6 +50,7 @@ namespace DrugService.Controllers
 
 
         // GET api/<DrugController>/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<DrugDto>> GetDrug(string id)
         {

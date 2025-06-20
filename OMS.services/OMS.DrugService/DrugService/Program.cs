@@ -77,3 +77,4 @@ app.MapControllers();
 app.Run();
 
 // "drug": "Server=db21791.public.databaseasp.net; Database=db21791; User Id=db21791; Password=Zc9-%Qy8w@5H; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;"
+// "drug": "Data Source=CYBER-DECK\\SQLEXPRESS01;Initial Catalog=OMS.DrugService;Integrated Security=True;Trust Server Certificate=True"

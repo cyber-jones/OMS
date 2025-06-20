@@ -19,7 +19,7 @@ public class AuthService : IAuthService
     {
         return await _httpService.SendAsync(new RequestDto(){
             ApiType = ApiType.POST,
-            Uri = $"{SD.AuthService_Url}/api/user/register",
+            Uri = $"{SD.AuthService_DevUrl}/api/user/register",
             Body = userDto
         }); 
     }

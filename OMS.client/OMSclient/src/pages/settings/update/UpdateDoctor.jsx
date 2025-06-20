@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input3 from "../../../components/Inputs/Input3";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
-import { oms_server_dev_url, oms_url } from "../../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import useSpecialty from "../../../hooks/useSpecialty";
 import Circle from "../../../components/loading/Circle";
@@ -61,7 +61,7 @@ const UpdateDoctor = () => {
   const imageRef = useRef();
   const { id } = useParams();
   const { specialties, loading: loadingSpecialty } = useSpecialty();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.doctor);
 
 
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input2 from "../../../components/Inputs/Input2";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import { oms_server_dev_url, oms_url } from "../../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 
 const RegisterStaff = () => {
@@ -10,7 +10,7 @@ const RegisterStaff = () => {
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.staff);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.staff);
 
   const handleChange = (e) => {
     setFormData({

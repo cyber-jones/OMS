@@ -3,7 +3,7 @@ import axios from "axios";
 import { logOut, setAuthUser } from "../redux/auth/authUserSlice";
 import { useSnackbar } from "notistack";
 import useSocket from "./useSocket";
-import { oms_server_dev_url } from "../utils/SD";
+import { oms_server_production_url } from "../utils/SD";
 
 const useAxiosAuthorization = (url) => {
   const { token } = useSelector((state) => state.authUser);
@@ -37,7 +37,7 @@ console.log("Token", "Bearer "+token);
         prevReq._retry = true;
 
         try {
-          const res = await axios.get(oms_server_dev_url.auth + "/refresh", {
+          const res = await axios.get(oms_server_production_url.auth + "/refresh", {
             headers: {
               "Content-Type": "application/json",
             },

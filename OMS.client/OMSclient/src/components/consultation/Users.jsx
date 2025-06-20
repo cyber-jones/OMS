@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import usePatient from "../../hooks/usePatient";
 import useSocket from "../../hooks/useSocket";
 import useAxiosAuthorization from "../../hooks/useAxiosAuth";
-import { oms_server_dev_url } from "../../utils/SD";
+import { oms_server_production_url } from "../../utils/SD";
 import { useSnackbar } from "notistack";
 
 const Users = () => {
@@ -26,7 +26,7 @@ const Users = () => {
   );
   const dispatch = useDispatch();
   const { socket } = useSocket();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {

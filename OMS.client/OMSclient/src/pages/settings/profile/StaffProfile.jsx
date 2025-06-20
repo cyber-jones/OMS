@@ -6,7 +6,7 @@ import { useAuth } from "../../../utils/isAuthorized";
 
 const StaffProfile = () => {
   const { id } = useParams();
-  const { loading, staff } = useStaff(id);
+  const { loading, staffs: staff } = useStaff(id);
   const isAdmin = useAuth([Roles.ADMIN]);
 
   return (

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import { oms_server_dev_url, oms_url } from "../../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import { useSelector } from "react-redux";
 
@@ -13,7 +13,7 @@ const RegisterDrug = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.drug);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.drug);
 
   const handleChange = (e) => {
     setFormData({

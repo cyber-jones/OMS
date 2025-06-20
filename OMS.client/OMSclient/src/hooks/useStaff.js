@@ -10,7 +10,7 @@ import useAxiosAuthorization from './useAxiosAuth';
 const useStaff = (Id = null) => {
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
-    const [staff, setStaff] = useState(null);
+    const [staffs, setStaff] = useState(null);
     const axiosAuth = useAxiosAuthorization(oms_server_production_url.staff);
 
     const getstaff = async () => {
@@ -40,7 +40,7 @@ const useStaff = (Id = null) => {
         getstaff();
     }, []);
 
-    return { staff, loading };
+    return { staffs, loading };
 }
 
 

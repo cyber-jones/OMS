@@ -21,6 +21,7 @@ internal static class JwtConfig
                 ValidateIssuer = true,
                 ValidateAudience = true,
                 ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
                 ValidIssuer = configuration.GetValue<string>("JWT:issuer"),
                 ValidAudience = configuration.GetValue<string>("JWT:audience"),
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("JWT:accessTokenSecret")!))

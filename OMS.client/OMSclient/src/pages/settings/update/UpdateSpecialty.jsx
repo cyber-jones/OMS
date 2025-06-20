@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
-import { oms_server_dev_url, oms_url } from "../../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 
 
@@ -24,7 +24,7 @@ const UpdateSpecialty = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
   const navigete = useNavigate();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.doctor);
 
 
 

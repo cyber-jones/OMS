@@ -5,8 +5,9 @@ import { setMessages, setSelectedUser } from "../../redux/chat/chatSlice";
 import { useSnackbar } from "notistack";
 import useSocket from "../../hooks/useSocket";
 import useAxiosAuthorization from "../../hooks/useAxiosAuth";
-import { oms_server_dev_url, oms_url } from "../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../utils/SD";
 import { Link } from "react-router-dom";
+import { formatTime } from "../../utils/formatTime";
 
 const Chat = () => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,8 @@ const Chat = () => {
   const imageRef = useRef();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
+  const messageEndRef = useRef();
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
   const profileUrl = selectedUser?.doctor_Id
     ? `/doctor/${selectedUser?.doctor_Id}`
     : selectedUser?.staff_Id
@@ -97,6 +99,11 @@ const Chat = () => {
     dispatch(setSelectedUser(null));
   };
 
+  useEffect(() => {
+    if (messageEndRef.current && messages)
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" })
+  }, [messages]);
+
   return (
     <>
       {selectedUser == null ? (
@@ -159,6 +166,7 @@ const Chat = () => {
                 {messages.map((message, index) => (
                   // <p key={index}>{message.text}</p>
                   <div
+                    ref={messageEndRef}
                     key={index}
                     className={`chat ${
                       message.sender_Id == authUser.email
@@ -168,7 +176,7 @@ const Chat = () => {
                   >
                     <div className="chat-header">
                       <time className="text-xs opacity-50">
-                        {new Date(message.createdAt).toLocaleDateString()}
+                        {formatTime(message.createdAt)}
                       </time>
                     </div>
                     {message?.text ? (

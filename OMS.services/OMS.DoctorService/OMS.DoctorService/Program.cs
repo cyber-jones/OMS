@@ -69,7 +69,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(Policies.LOCAL);
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 

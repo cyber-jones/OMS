@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Input3 from "../../../components/Inputs/Input3";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
-import { oms_server_dev_url, oms_url } from "../../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import Circle from "../../../components/loading/Circle";
 
@@ -55,7 +55,7 @@ const UpdatePatient = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
   const { id } = useParams();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.patient);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.patient);
 
 
 

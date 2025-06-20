@@ -8,16 +8,16 @@ import { useNavigate } from "react-router-dom";
 import { oms_url } from "../../../utils/SD";
 import { patientData } from "../../../data/oms.data";
 import Circle from "../../../components/loading/Circle";
-import usePatient from "../../../hooks/usePatient";
+import useStaff from "../../../hooks/useStaff";
 
 const StaffList = () => {
-  const { loading, patients } = usePatient();
+  const { loading, staffs } = useStaff();
     const navigate = useNavigate();
     const [data, setData] = useState(patientData);
   
     useEffect(() => {
-      if (!loading && patients) setData(patients);
-    }, [patients]);
+      if (!loading && staffs) setData(staffs);
+    }, [staffs]);
   
   //should be memoized or stable
   const columns = useMemo(

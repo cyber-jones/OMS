@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Input2 from "../../../components/Inputs/Input2";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import { oms_server_dev_url, oms_url } from "../../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import useSpecialty from "../../../hooks/useSpecialty";
 
@@ -14,7 +14,7 @@ const RegisterDoctor = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
   const { specialties, loading: loadingSpecialty } = useSpecialty();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.doctor);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.doctor);
 
   const handleChange = (e) => {
     setFormData({

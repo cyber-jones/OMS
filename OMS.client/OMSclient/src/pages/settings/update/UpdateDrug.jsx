@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef, useState } from "react";
-import Input3 from "../../../components/Inputs/Input3";
+import { useEffect, useRef, useState } from "react";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
-import { oms_server_dev_url, oms_url } from "../../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import Circle from "../../../components/loading/Circle";
 import { useSelector } from "react-redux";
@@ -45,7 +44,7 @@ const UpdateDrug = () => {
   const navigete = useNavigate();
   const { id } = useParams();
   const { user } = useSelector((state) => state.user);
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.drug);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.drug);
 
   const getDoctorById = async () => {
     setLoading(true);

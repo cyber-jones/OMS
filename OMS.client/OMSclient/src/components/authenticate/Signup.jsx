@@ -3,7 +3,7 @@ import Input from "../Inputs/Input";
 import TextArea from "../Inputs/TextArea";
 import { useSnackbar } from "notistack";
 import { axioAnonymous } from "../../data/axios";
-import { oms_server_dev_url, oms_url } from "../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../utils/SD";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -23,7 +23,7 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axioAnonymous(oms_server_dev_url.patient).post(
+      const res = await axioAnonymous(oms_server_production_url.patient).post(
         "/patient",
         formData
       );

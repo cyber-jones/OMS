@@ -25,7 +25,7 @@ import { verifyRoles } from "./middlewares/verifyRoles.js";
 const URI = process.env.MONGOOSE_PRODUCTION_URI;
 const PORT = process.env.PORT || 7003;
 connectDb(URI);
-Migration()
+// Migration();
 
 
 app.use(reqLogger);

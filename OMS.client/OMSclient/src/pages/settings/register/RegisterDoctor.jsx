@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import useSpecialty from "../../../hooks/useSpecialty";
+import { axioAnonymous } from "../../../data/axios";
 
 const RegisterDoctor = () => {
   const [formData, setFormData] = useState({});
@@ -34,6 +35,10 @@ const RegisterDoctor = () => {
     const fileReader = new FileReader();
     fileReader.onload = () => {
       setCertificateUrl(fileReader.result);
+      setFormData({
+        ...formData,
+        [e.target.id]: fileReader.result,
+      });
     };
     fileReader.readAsDataURL(file);
   };
@@ -49,20 +54,41 @@ const RegisterDoctor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const { password, ...data } = formData;
     try {
-      const res = await axiosAuth.post("/doctor", {
-        ...formData,
-        Certificate_Url: CertificateUrl,
-      });
-      console.log(res);
-      if (res?.status !== 201)
-        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+      const res = await axiosAuth.post("/doctor", data);
 
-      enqueueSnackbar(res.statusText, { variant: "success" });
-      setFormData({});
-      navigete(oms_url.doctorList);
+      if (res.status !== 201)
+        return enqueueSnackbar(res.data?.message || res.statusText, {
+          variant: "error",
+        });
+      else {
+        const body = {
+          Email: formData.email,
+          Password: password,
+          AccType: "doctor",
+          Role: "doctor",
+          User_Profile_Id: res.data?.patient._id,
+        };
+
+        const res2 = await axioAnonymous(oms_server_production_url.auth).post(
+          "/user/register",
+          body
+        );
+
+        if (res2.status !== 201)
+          return enqueueSnackbar(res.data?.message || res.statusText, {
+            variant: "error",
+          });
+
+        enqueueSnackbar(res.statusText, { variant: "success" });
+        setFormData({});
+        navigete(oms_url.doctorList);
+      }
     } catch (err) {
-      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, {
+        variant: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -71,25 +97,27 @@ const RegisterDoctor = () => {
 
   return (
     <div className="w-[95%] h-11/12 flex flex-col font-sans">
-      <p className="text-blue-700 text-3xl mb-6 pl-3 font-semibold">Register New Doctor</p>
+      <p className="text-blue-700 text-3xl mb-6 pl-3 font-semibold">
+        Register New Doctor
+      </p>
       <form
         onSubmit={handleSubmit}
         className="w-full h-11/12 text-sm md:text-lg pl-3 grid grid-cols-2 md:grid-cols-3 place-content-start place-items-center gap-8 md:overflow-auto overflow-y-scroll"
       >
         <Input2
-          name={"First_Name"}
+          name={"first_Name"}
           label={"First Name"}
           type={"text"}
           handleChange={handleChange}
         />
         <Input2
-          name={"Middle_Name"}
+          name={"middle_Name"}
           label={"Middle Name"}
           type={"text"}
           handleChange={handleChange}
         />
         <Input2
-          name={"Last_Name"}
+          name={"last_Name"}
           label={"Last Name"}
           type={"text"}
           handleChange={handleChange}
@@ -101,7 +129,7 @@ const RegisterDoctor = () => {
           handleChange={handleChange}
         />
         <Input2
-          name={"Cell_Phone"}
+          name={"cell_Phone"}
           label={"Phone"}
           type={"text"}
           handleChange={handleChange}
@@ -109,7 +137,7 @@ const RegisterDoctor = () => {
         <label htmlFor="Relationship" className="w-full">
           <p className="font-medium">Relationship:</p>
           <select
-            id="Relationship"
+            id="relationship"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
@@ -119,10 +147,10 @@ const RegisterDoctor = () => {
             <option value={"Devorced"}>Devorced</option>
           </select>
         </label>
-        <label htmlFor="State" className="w-full">
+        <label htmlFor="state" className="w-full">
           <p className="font-medium">Address State:</p>
           <select
-            id="State"
+            id="state"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
@@ -133,27 +161,27 @@ const RegisterDoctor = () => {
           </select>
         </label>
         <Input2
-          name={"Address"}
+          name={"address"}
           label={"Home Address"}
           type={"text"}
           handleChange={handleChange}
         />
         <Input2
-          name={"NIN"}
+          name={"nin"}
           label={"National Identity No."}
           type={"text"}
           handleChange={handleChange}
         />
         <Input2
-          name={"Work_ID"}
+          name={"work_ID"}
           label={"Work ID"}
           type={"text"}
           handleChange={handleChange}
         />
-        <label htmlFor="Sex" className="w-full">
+        <label htmlFor="sex" className="w-full">
           <p className="font-medium">Sex:</p>
           <select
-            id="Sex"
+            id="sex"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
@@ -163,28 +191,28 @@ const RegisterDoctor = () => {
           </select>
         </label>
         <Input2
-          name={"DOB"}
+          name={"dob"}
           label={"Date of birth"}
           type={"date"}
           handleChange={handleChange}
         />
         <Input2
-          name={"MLN"}
+          name={"mln"}
           label={"Medical Licence No."}
           type={"text"}
           handleChange={handleChange}
         />
-        <label htmlFor="Specialty_Id" className="w-full">
+        <label htmlFor="specialty" className="w-full">
           <p className="font-medium">Specialty:</p>
           <select
-            id="Specialty_Id"
+            id="specialty"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
             <option>--select specialty</option>
             {!loadingSpecialty && specialties ? (
               specialties.map((specialty, index) => (
-                <option key={index} value={specialty?.specialty_Id}>
+                <option key={index} value={specialty?._id}>
                   {specialty?.name}
                 </option>
               ))
@@ -193,17 +221,17 @@ const RegisterDoctor = () => {
             )}
           </select>
         </label>
-        <label htmlFor="Sub_Specialty_Id" className="w-full">
+        <label htmlFor="sub_Specialty" className="w-full">
           <p className="font-medium">Sub Specialty:</p>
           <select
-            id="Sub_Specialty_Id"
+            id="sub_Specialty"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
             <option>--select specialty</option>
             {!loadingSpecialty && specialties ? (
               specialties.map((specialty, index) => (
-                <option key={index} value={specialty?.specialty_Id}>
+                <option key={index} value={specialty?._id}>
                   {specialty?.name}
                 </option>
               ))
@@ -213,19 +241,19 @@ const RegisterDoctor = () => {
           </select>
         </label>
         <Input2
-          name={"Clinic_Phone"}
+          name={"clinic_Phone"}
           label={"Work Phone"}
           type={"text"}
           handleChange={handleChange}
         />
         <Input2
-          name={"CT_Start"}
+          name={"cT_Start"}
           label={"CT- (start)"}
           type={"time"}
           handleChange={handleChange}
         />
         <Input2
-          name={"CT_End"}
+          name={"cT_End"}
           label={"CT- (end)"}
           type={"time"}
           handleChange={handleChange}
@@ -236,10 +264,10 @@ const RegisterDoctor = () => {
           type={"text"}
           handleChange={handleChange}
         />
-        <label htmlFor="Certificate_Url" className="w-full">
+        <label htmlFor="certificate_Url" className="w-full">
           <p className="font-medium">Upload Certificate:</p>
           <input
-            id="Certificate_Url"
+            id="certificate_Url"
             type="file"
             accept="image/*"
             hidden

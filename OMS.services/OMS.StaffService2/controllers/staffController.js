@@ -26,28 +26,28 @@ export const getStaff = async (req, res, next) => {
 export const postStaff = async (req, res, next) => {
   try {
     const { error, value } = StaffValidator.validate(req.body);
-    const { Password, ...data } = value;
+    const { password, ...data } = value;
 
     if (error)
       return res.status(400).json({ success: false, message: error.message });
 
-    const newStaff = new Staff({ ...data });
+    const newStaff = new Staff({ created_By: req.email, ...data });
 
-    await Logger(value.Email, "New Staff", value.Email);
+    await Logger(value.email, "New Staff", value.email);
 
-    const body = {
-      Email: value.Email,
-      Password: Password,
-      AccType: ROLES[2],
-      Role: ROLES[2],
-      User_Profile_Id: newStaff._id,
-    };
+    // const body = {
+    //   Email: value.Email,
+    //   Password: Password,
+    //   AccType: ROLES[2],
+    //   Role: ROLES[2],
+    //   User_Profile_Id: newStaff._id,
+    // };
 
-    await axios.post("http://localhost:7005/api/user/register", body, {
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
+    // await axios.post("http://localhost:7005/api/user/register", body, {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   }
+    // });
 
     await newStaff.save();
     return res
@@ -71,11 +71,11 @@ export const updateStaff = async (req, res, next) => {
 
     const updatedStaff = await Staff.findByIdAndUpdate(
       req.params.id,
-      { $set: { ...value } },
+      { $set: { updated_By: req.email, ...value } },
       { new: true }
     );
 
-    await Logger(req.email, "Updated Staff", value.Email);
+    await Logger(req.email, "Updated Staff", value.email);
 
     return res
       .status(205)
@@ -91,11 +91,11 @@ export const updateStaff = async (req, res, next) => {
 
 export const deleteStaff = async (req, res, next) => {
   try {
-    const Staff = await Staff.findByIdAndDelete(req.params.id);
+    const staff = await Staff.findByIdAndDelete(req.params.id);
     await Logger(
       req.email,
       "Deleted Staff",
-      `${Staff.First_Name} ${Staff.Last_Name} ${Staff.Middle_Name}`
+      `${staff.first_Name} ${staff.last_Name} ${staff.middle_Name}`
     );
     return res
       .status(200)

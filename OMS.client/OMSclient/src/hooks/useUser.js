@@ -42,16 +42,16 @@ const useUser = () => {
             const res = await axiosAuth.get(url+"/"+authUser?.user_Profile_Id);
             console.log(res);
             if (res?.status !== 200 && res) {
-                enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });
+                enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
                 return;
             }
-            
+
             const data = res.data?.patient || res.data?.doctor || res.data?.staff;
             dispatch(setUser(data));
             setThisUser(data);
         } catch (err) {
             console.log(err);
-            enqueueSnackbar(err?.response?.statusText || err.message, { variant: "error" });
+            enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
         } finally {
             setLoading(false);
         }

@@ -4,97 +4,97 @@ import mongoose, { Schema, model } from "mongoose";
 
 
 const doctorSchema = new Schema({
-    Email: {
+    email: {
         unique: true,
         required: true,
         type: String
     },
-    First_Name: {
+    first_Name: {
         required: true,
         type: String
     },
-    Last_Name: {
+    last_Name: {
         required: true,
         type: String
     },
-    Middle_Name: {
+    middle_Name: {
         required: true,
         type: String
     },
-    Address: {
+    address: {
         required: true,
         type: String
     },
-    Clinic_Phone: {
+    clinic_Phone: {
         unique: true,
         required: true,
         type: String
     }, 
-    Cell_Phone: {
+    cell_Phone: {
         unique: true,
         required: true,
         type: String
     }, 
-    DOB: {
+    dob: {
         required: true,
         type: String
     }, 
-    MLN: {
+    mln: {
         unique: true,
         required: true,
         type: String
     }, 
-    NIN: {
+    nin: {
         unique: true,
         required: true,
         type: String
     }, 
-    Profile_Url: {
+    profile_Url: {
         required: true,
         type: String
     }, 
-    Relationship: {
+    relationship: {
         required: true,
         type: String
     }, 
-    Sex: {
+    sex: {
         required: true,
         type: String
     }, 
-    Specialty: {
+    specialty: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Specialty"
     }, 
-    Sub_Specialty: {
+    sub_Specialty: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Specialty"
     }, 
-    State: {
+    state: {
         unique: true,
         required: true,
         type: String
     }, 
-    Work_ID: {
+    work_ID: {
         required: true,
         type: String
     },
-    Certificate_Url: {
+    certificate_Url: {
         type: String,
         required: true
     },
-    CT_Start: {
+    cT_Start: {
         type: String,
         required: true
     },
-    CT_End: {
+    cT_End: {
         type: String,
         required: true
     },
-    Created_By: {
+    created_By: {
         type: String,
         required: true
     },
-    Updated_By: {
+    updated_By: {
         type: String,
     }  
 }, { timestamps: true });

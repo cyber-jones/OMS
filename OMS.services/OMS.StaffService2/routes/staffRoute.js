@@ -8,8 +8,8 @@ const staffRouter = Router();
 
 
 
-staffRouter.get("/all", verifyRoles([ROLES]), getStaffs);
-staffRouter.get("/:id", verifyRoles([ROLES]), getStaff);
+staffRouter.get("/all", verifyRoles(ROLES), getStaffs);
+staffRouter.get("/:id", verifyRoles(ROLES), getStaff);
 staffRouter.post("/", verifyRoles([ROLES[0]]), postStaff);
 staffRouter.put("/:id", verifyRoles([ROLES[0], ROLES[2]]), updateStaff);
 staffRouter.delete("/:id", verifyRoles([ROLES[0]]), deleteStaff);

@@ -66,7 +66,7 @@ const DrugList = () => {
     data,
     muiTableBodyRowProps: ({ row }) => ({
       onClick: () => {
-        navigate(oms_url.drug + "/" + row.original.drug_Id);
+        navigate(oms_url.drug + "/" + row.original._id);
       },
       sx: {
         cursor: "pointer", //you might want to change the cursor too when adding an onClick

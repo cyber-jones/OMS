@@ -59,19 +59,19 @@ const RegisterSpecialty = () => {
       <h1 className="w-11/12 md:w-6/12 text-2xl text-blue-600 mb-8 font-semibold">
         New Specialty
       </h1>
-      <label htmlFor="Name" className="w-11/12 md:w-6/12">
+      <label htmlFor="name" className="w-11/12 md:w-6/12">
         <p className="font-semibold">Specialty Name:</p>
         <input
-          id="Name"
+          id="name"
           type="text"
           onChange={(e) => handleChange(e)}
           className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
         />
       </label>
-      <label htmlFor="Description" className="w-11/12 md:w-6/12">
+      <label htmlFor="description" className="w-11/12 md:w-6/12">
         <p className="font-semibold">Specialty Description:</p>
         <textarea
-          id="Description"
+          id="description"
           type="text"
           onChange={(e) => handleChange(e)}
           className="w-full max-h-46 min-h-36 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"

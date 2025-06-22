@@ -35,7 +35,7 @@ const Appointments = () => {
       const mutateAppointments = appointments.map((appointment) => ({
         id: appointment._id,
         specialty_Name: specialties.find(
-          (specialty) => specialty.specialty_Id == appointment.specialty_Id
+          (specialty) => specialty._id == appointment._id
         ).name,
         illness_Description: appointment.illness_Description,
         date: new Date(appointment.date).toDateString(),

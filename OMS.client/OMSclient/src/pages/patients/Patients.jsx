@@ -54,7 +54,7 @@ const Patients = () => {
             data.map((patient, index) => (
               <Link
                 onClick={() => handleSetPatientForPrescribe(patient)}
-                to={`${oms_url.patient}/action/${patient?.patient_Id}`}
+                to={`${oms_url.patient}/action/${patient?._id}`}
                 key={index}
                 className="bg-gray-200 h-20 w-[80%] rounded-lg shadow-lg flex justify-center items-center hover:bg-gray-400 transition-all ease-in-out duration-700"
               >

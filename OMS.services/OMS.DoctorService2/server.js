@@ -22,7 +22,7 @@ import specialtyRouter from "./routes/specialtyRoute.js";
 
 
 
-const URI = process.env.MONGOOSE_DEV_URI;
+const URI = process.env.MONGOOSE_PRODUCTION_URI;
 const PORT = process.env.PORT || 7002;
 connectDb(URI);
 // Migration();
@@ -40,8 +40,8 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 
 app.use(verifyAccess);
-app.use("/api/drug", doctorRouter);
-app.use("/api/cart", specialtyRouter);
+app.use("/api/doctor", doctorRouter);
+app.use("/api/specialty", specialtyRouter);
 app.use("/api/logs", verifyRoles([ROLES[0]]), getLogs);
 
 

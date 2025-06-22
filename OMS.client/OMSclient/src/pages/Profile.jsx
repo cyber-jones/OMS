@@ -58,7 +58,7 @@ const Profile = () => {
           <b>Address</b>: {user?.address}
         </p>
         <p>
-          <b>Registered</b>: {new Date(user?.created).toDateString()}
+          <b>Registered</b>: {new Date(user?.createdAt).toDateString()}
         </p>
         {authUser?.accType == "patient" ? (
           <>
@@ -79,7 +79,7 @@ const Profile = () => {
                 Deactivate account <i className="bi bi-lock"></i>
               </button>
               <Link
-                to={oms_url.updatePatient + "/" + user?.patient_Id}
+                to={oms_url.updatePatient + "/" + user?._id}
                 className="bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-blue-950 transition duration-500 ease-in"
               >
                 Update <i className="bi bi-cloud-check"></i>
@@ -108,14 +108,31 @@ const Profile = () => {
                 Deactivate account <i className="bi bi-lock"></i>
               </button>
               <Link
-                to={oms_url.updateDoctor + "/" + user?.doctor_Id}
+                to={oms_url.updateDoctor + "/" + user?._id}
                 className="bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-blue-950 transition duration-500 ease-in"
               >
                 Update <i className="bi bi-cloud-check"></i>
               </Link>
             </div>
           </>
-        ) : null}
+        ) : (
+          <>
+            <p>
+              <b>OMS ID</b>: {user?.work_Id}
+            </p>
+            <div className="mt-3 flex flex-col-reverse gap-2">
+              <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">
+                Deactivate account <i className="bi bi-lock"></i>
+              </button>
+              <Link
+                to={oms_url.updateStaff + "/" + user?._id}
+                className="bg-blue-600 text-white text-center py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-blue-950 transition duration-500 ease-in"
+              >
+                Update <i className="bi bi-cloud-check"></i>
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -12,108 +12,129 @@ export const connectDb = async (uri) => {
 
 const specialities = [
   {
-    Name: "Allergist",
-    Description:
+    created_By: "admin",
+    name: "Allergist",
+    description:
       "Focuses on diagnosing and treating allergies, asthma, and conditions related to the immune system",
   },
   {
-    Name: "Anesthesiologist",
-    Description:
+    created_By: "admin",
+    name: "Anesthesiologist",
+    description:
       "Manages pain and monitors vital signs during surgery and medical procedures",
   },
   {
-    Name: "Cardiologist",
-    Description:
+    created_By: "admin",
+    name: "Cardiologist",
+    description:
       "Specializes in the heart and blood vessels, diagnosing and treating conditions like heart disease",
   },
   {
-    Name: "Dermatologist",
-    Description:
+    created_By: "admin",
+    name: "Dermatologist",
+    description:
       "Focuses on the skin, hair, and nails, diagnosing and treating conditions like acne, eczema, and skin cancer",
   },
   {
-    Name: "Endocrinologist",
-    Description:
+    created_By: "admin",
+    name: "Endocrinologist",
+    description:
       "Specializes in the endocrine system (hormones), diagnosing and treating conditions like diabetes and thyroid disorders",
   },
   {
-    Name: "Gastroenterologist",
-    Description:
+    created_By: "admin",
+    name: "Gastroenterologist",
+    description:
       "Focuses on the digestive system, diagnosing and treating conditions like ulcers, colitis, and irritable bowel syndrome",
   },
   {
-    Name: "General Surgeon",
-    Description:
+    created_By: "admin",
+    name: "General Surgeon",
+    description:
       "Performs a wide range of surgical procedures, often specializing in a specific area like abdominal, thoracic, or vascular surgery",
   },
   {
-    Name: "Internal Medicine (Internist)",
-    Description:
+    created_By: "admin",
+    name: "Internal Medicine (Internist)",
+    description:
       "Focuses on diagnosing and treating allergies, asthma, and conditions related to the immune system",
   },
   {
-    Name: "Neurologist",
-    Description:
+    created_By: "admin",
+    name: "Neurologist",
+    description:
       "Specializes in the nervous system (brain and spinal cord), diagnosing and treating conditions like stroke, epilepsy, and multiple sclerosis",
   },
   {
-    Name: "Obstetrician",
-    Description:
+    created_By: "admin",
+    name: "Obstetrician",
+    description:
       "Specializes in the care of women during pregnancy, childbirth, and the postpartum period",
   },
   {
-    Name: "Oncologist",
-    Description:
+    created_By: "admin",
+    name: "Oncologist",
+    description:
       "Focuses on the diagnosis, treatment, and prevention of cancer",
   },
   {
-    Name: "Ophthalmologist",
-    Description:
+    created_By: "admin",
+    name: "Ophthalmologist",
+    description:
       "Specializes in the eyes and vision, diagnosing and treating conditions like cataracts, glaucoma, and vision problems",
   },
   {
-    Name: "Orthopedic Surgeon",
-    Description:
+    created_By: "admin",
+    name: "Orthopedic Surgeon",
+    description:
       "Specializes in the musculoskeletal system (bones, joints, muscles), diagnosing and treating conditions like fractures, arthritis, and sports injuries",
   },
   {
-    Name: "Otolaryngologist (ENT)",
-    Description:
+    created_By: "admin",
+    name: "Otolaryngologist (ENT)",
+    description:
       "Specializes in the ears, nose, and throat, diagnosing and treating conditions like ear infections, sinus problems, and voice disorders",
   },
   {
-    Name: "Pathologist",
-    Description:
+    created_By: "admin",
+    name: "Pathologist",
+    description:
       "Analyzes tissues, cells, and fluids to diagnose diseases, often working in a laboratory setting",
   },
   {
-    Name: "Pediatrician",
-    Description:
+    created_By: "admin",
+    name: "Pediatrician",
+    description:
       "Specializes in the care of infants, children, and adolescents",
   },
   {
-    Name: "Psychiatrist",
-    Description:
+    created_By: "admin",
+    name: "Psychiatrist",
+    description:
       "Specializes in mental health, diagnosing and treating conditions like depression, anxiety, and schizophrenia",
   },
   {
-    Name: "Pulmonologist",
-    Description:
+    created_By: "admin",
+    name: "Pulmonologist",
+    description:
       "Focuses on the lungs and respiratory system, diagnosing and treating conditions like asthma, pneumonia, and COPD",
   },
   {
-    Name: "Radiologist",
-    Description:
+    created_By: "admin",
+    name: "Radiologist",
+    description:
       "Uses imaging techniques (X-rays, MRI, CT scans) to diagnose and treat medical conditions",
   },
   {
-    Name: "Rheumatologist",
-    Description:
+    created_By: "admin",
+    name: "Rheumatologist",
+    description:
       "Specializes in autoimmune and inflammatory diseases that affect joints, muscles, and other tissues",
   },
   {
-    Name: "Urologist",
-    Description:
+    created_By: "admin",
+    name: "Urologist",
+    description:
       "Specializes in the urinary tract and male reproductive organs, diagnosing and treating conditions like kidney stones, bladder cancer, and prostate problems",
   },
 ];

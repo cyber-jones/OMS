@@ -1,10 +1,10 @@
 import Log from "../models/logModel.js"
 
-export const Logger = async (values) => {
+export const Logger = async (blame, description, victim) => {
     try {
-        const log = new Log({ ...values });
+        const log = new Log({ blame, description, victim });
         await log.save();
     } catch (err) {
-        new Promise.reject(err);
+        throw err
     }
 }

@@ -9,8 +9,8 @@ const patientRouter = Router();
 
 
 
-patientRouter.get("/all", verifyAccess, verifyRoles([ROLES]), getPatients);
-patientRouter.get("/:id", verifyAccess, verifyRoles([ROLES]), getPatient);
+patientRouter.get("/all", verifyAccess, verifyRoles(ROLES), getPatients);
+patientRouter.get("/:id", verifyAccess, verifyRoles(ROLES), getPatient);
 patientRouter.post("/", postPatient);
 patientRouter.put("/:id", verifyAccess, verifyRoles([ROLES[0], ROLES[3]]), updatePatient);
 patientRouter.delete("/:id", verifyAccess, verifyRoles([ROLES[0]]), deletePatient);

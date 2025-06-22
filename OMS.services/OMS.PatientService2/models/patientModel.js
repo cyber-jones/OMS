@@ -4,68 +4,68 @@ import  { Schema, model } from "mongoose";
 
 
 const patientSchema = new Schema({
-    Email: {
+    email: {
         unique: true,
         required: true,
         type: String
     },
-    First_Name: {
+    first_Name: {
         required: true,
         type: String
     },
-    Last_Name: {
+    last_Name: {
         required: true,
         type: String
     },
-    Middle_Name: {
+    middle_Name: {
         required: true,
         type: String
     },
-    Address: {
+    address: {
         required: true,
         type: String
     },
-    Cell_Phone: {
+    cell_Phone: {
         unique: true,
         required: true,
         type: String
     }, 
-    DOB: {
+    dob: {
         required: true,
         type: String
     }, 
-    NIN: {
+    nin: {
         unique: true,
         required: true,
         type: String
     }, 
-    Profile_Url: {
+    profile_Url: {
         type: String
     }, 
-    Relationship: {
+    relationship: {
         required: true,
         type: String
     }, 
-    Sex: {
+    sex: {
         required: true,
         type: String
     }, 
-    State: {
-        unique: true,
-        required: true,
-        type: String
-    },
-    EC_FullName: {
+    state: {
         unique: true,
         required: true,
         type: String
     },
-    EC_Cell_Phone: {
+    eC_FullName: {
         unique: true,
         required: true,
         type: String
     },
-    EC_Address: {
+    eC_Cell_Phone: {
+        unique: true,
+        required: true,
+        type: String
+    },
+    eC_Address: {
         unique: true,
         required: true,
         type: String

@@ -7,8 +7,8 @@ const specialtyRouter = Router();
 
 
 
-specialtyRouter.get("/all", verifyRoles([ROLES]), getSpecialties);
-specialtyRouter.get("/:id", verifyRoles([ROLES]), getSpecialty);
+specialtyRouter.get("/all", verifyRoles(ROLES), getSpecialties);
+specialtyRouter.get("/:id", verifyRoles(ROLES), getSpecialty);
 specialtyRouter.post("/", verifyRoles([ROLES[0]]), postSpecialty);
 specialtyRouter.put("/:id", verifyRoles([ROLES[0]]), updateSpecialty);
 specialtyRouter.delete("/:id", verifyRoles([ROLES[0]]), deleteSpecialty);

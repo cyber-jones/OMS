@@ -4,60 +4,67 @@ import  { Schema, model } from "mongoose";
 
 
 const staffSchema = new Schema({
-    Email: {
+    email: {
         unique: true,
         required: true,
         type: String
     },
-    First_Name: {
+    first_Name: {
         required: true,
         type: String
     },
-    Last_Name: {
+    last_Name: {
         required: true,
         type: String
     },
-    Middle_Name: {
+    middle_Name: {
         required: true,
         type: String
     },
-    Address: {
+    address: {
         required: true,
         type: String
     },
-    Cell_Phone: {
+    cell_Phone: {
         unique: true,
         required: true,
         type: String
     }, 
-    DOB: {
+    dob: {
         required: true,
         type: String
     }, 
-    NIN: {
+    nin: {
         unique: true,
         required: true,
         type: String
     }, 
-    Profile_Url: {
+    profile_Url: {
         type: String
     }, 
-    Relationship: {
+    relationship: {
         required: true,
         type: String
     }, 
-    Sex: {
+    sex: {
         required: true,
         type: String
     }, 
-    State: {
+    state: {
         unique: true,
         required: true,
         type: String
     },
-    Work_ID: {
+    work_ID: {
         unique: true,
         required: true,
+        type: String
+    }, 
+    created_By: {
+        required: true,
+        type: String
+    }, 
+    updated_By: {
         type: String
     }
 }, { timestamps: true });

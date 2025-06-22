@@ -6,7 +6,7 @@ import { SpecialtyValidator } from "../validators/validateSchema.js";
 export const getSpecialties = async (req, res, next) => {
     try {
         const specialties = await Specialty.find();
-        return res.status(200).json({ success: true, data: specialties });
+        return res.status(200).json({ success: true, specialty: specialties });
     } catch (err) {
         next(err);
     }
@@ -30,12 +30,12 @@ export const postSpecialty = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const newSpecialty = new Specialty({ ...value });
+        const newSpecialty = new Specialty({ created_By: req.email, ...value });
         await newSpecialty.save();  
 
-        await Logger(req.email, "New Specialty", newSpecialty.Name);
+        await Logger(req.email, "New Specialty", newSpecialty.name);
 
-        return res.status(201).json({ success: true, data: newSpecialty, message: "Specialty created successfully" });
+        return res.status(201).json({ success: true, specialty: newSpecialty, message: "Specialty created successfully" });
     } catch (err) {
         next(err);
     }
@@ -49,11 +49,11 @@ export const updateSpecialty = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const updatedSpecialty = await Specialty.findByIdAndUpdate(req.params.id, { $set: { ...value }}, { new: true });
+        const updatedSpecialty = await Specialty.findByIdAndUpdate(req.params.id, { $set: { updated_By: req.email, ...value }}, { new: true });
 
-        await Logger(req.email, "Updated Specialty", updatedSpecialty.Name);
+        await Logger(req.email, "Updated Specialty", updatedSpecialty.name);
 
-        return res.status(205).json({ success: true, data: updatedSpecialty, message: "Specialty updated successfully" });
+        return res.status(205).json({ success: true, specialty: updatedSpecialty, message: "Specialty updated successfully" });
     } catch (err) {
         next(err);
     }

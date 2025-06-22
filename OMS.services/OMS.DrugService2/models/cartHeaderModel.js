@@ -4,23 +4,23 @@ import mongoose, { Schema, model } from "mongoose";
 
 
 const cartHeaderSchema = new Schema({
-    User_Id: {
+    user_Id: {
         required: true,
         unique: true,
         type: String
     },
-    Sesssion_Id: {
+    sesssion_Id: {
         unique: true,
         type: String
     },
-    Payment_Intentent_Id: {
+    payment_Intentent_Id: {
         unique: true,
         type: String
     },
-    Total_Count: {
+    total_Count: {
         type: Number,
     },
-    Total_Price: {
+    total_Price: {
         type: Number
     }  
 }, { timestamps: true });

@@ -45,7 +45,7 @@ const UpdateAppointment = () => {
         date: appointment.date,
       });
       const filterDoctors = doctors.filter(
-        (doctor) => doctor.specialty_Id == appointment.specialty_Id
+        (doctor) => doctor.specialty._id == appointment.specialty_Id
       );
       setData(filterDoctors);
     }
@@ -61,7 +61,7 @@ const UpdateAppointment = () => {
   const handleSpecialtyChange = (e) => {
     setSpecialty(e.target.value);
     const filterDoctors = doctors.filter(
-      (doctor) => doctor.specialty_Id == e.target.value
+      (doctor) => doctor.specialty._id == e.target.value
     );
     setData(filterDoctors);
   };
@@ -72,7 +72,7 @@ const UpdateAppointment = () => {
     const reqTime = hours + minutes;
 
     if (formData?.doctor_Id) {
-      const doctor = doctors.find((doc) => doc.doctor_Id == formData.doctor_Id);
+      const doctor = doctors.find((doc) => doc._id == formData.doctor_Id);
       const [hrs, mins] = doctor.cT_Start.split(":");
       const [hrs1, mins1] = doctor.cT_End.split(":");
       const docCTS = hrs + mins;
@@ -134,7 +134,7 @@ const UpdateAppointment = () => {
                   </p>
                   <select
                     disabled={isAuthorized ? false : true}
-                    id="Specialty_Id"
+                    id="specialty_Id"
                     value={specialty}
                     required
                     onChange={handleSpecialtyChange}
@@ -143,7 +143,7 @@ const UpdateAppointment = () => {
                     <option>--select specialty</option>
                     {!loadingSpecialty ? (
                       specialties.map((specialty, index) => (
-                        <option key={index} value={specialty?.specialty_Id}>
+                        <option key={index} value={specialty?._id}>
                           {specialty?.name}
                         </option>
                       ))
@@ -175,7 +175,7 @@ const UpdateAppointment = () => {
                     )}
                     {!loadingDoctor ? (
                       data.map((doctor, index) => (
-                        <option key={index} value={doctor?.doctor_Id}>
+                        <option key={index} value={doctor?._id}>
                           {doctor?.first_Name} {doctor?.last_Name}
                         </option>
                       ))

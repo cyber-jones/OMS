@@ -6,7 +6,7 @@ import Stripe from "stripe";
 
 export const getCarts = async (req, res, next) => {
     try {
-        const carts = await Cart.find({ Cart_Header_Id: req.params.id, User_Id: req.user });
+        const carts = await Cart.find({ cart_Header_Id: req.params.id, user_Id: req.user });
         return res.status(200).json({ success: true, carts });
     } catch (err) {
         next(err);
@@ -21,15 +21,15 @@ export const addToCart = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const cartHeader = await CartHeader.findOne({ User_Id: req.user, Payment_Intentent_Id: null });
+        const cartHeader = await CartHeader.findOne({ user_Id: req.user, payment_Intentent_Id: null });
 
         if (cartHeader) {
-            const cart = new Cart({ User_Id: req.user, Cart_Header_Id: cartHeader._id, ...value });
+            const cart = new Cart({ user_Id: req.user, cart_Header_Id: cartHeader._id, ...value });
             await cart.save();
         }
         else {
-            const newCartHeader = new CartHeader({ User_Id: req.user });
-            const newCart = new Cart({ User_Id: req.user, Cart_Header_Id: newCartHeader._id, ...value });
+            const newCartHeader = new CartHeader({ user_Id: req.user });
+            const newCart = new Cart({ user_Id: req.user, cart_Header_Id: newCartHeader._id, ...value });
 
             await newCartHeader.save();
             await newCart.save();
@@ -49,7 +49,7 @@ export const removeFromCart = async (req, res, next) => {
         const cart = await Cart.findByIdAndDelete(req.params.id);
 
         if (!cart) {
-            const cartHeader = await CartHeader.findOneAndDelete({ User_Id: req.user, Payment_Intentent_Id: null });
+            const cartHeader = await CartHeader.findOneAndDelete({ user_Id: req.user, payment_Intentent_Id: null });
             await Logger(req.email, "Dropped Cart", cartHeader._id);
         }
 
@@ -66,7 +66,7 @@ export const createSubscription = async (req, res, next) => {
         if (!cartHeader)
             return res.status(400).json({ success: false, message: "No cart available" });
 
-        const carts = await Cart.find({ Cart_Header_Id: cartHeader._id }).populate("Products");
+        const carts = await Cart.find({ cart_Header_Id: cartHeader._id }).populate("Products");
         if (carts.length < 1)
             return res.status(400).json({ success: false, message: "No cart available" });
 

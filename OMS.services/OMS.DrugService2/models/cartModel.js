@@ -4,24 +4,24 @@ import mongoose, { Schema, model } from "mongoose";
 
 
 const cartSchema = new Schema({
-    User_Id: {
+    user_Id: {
         required: true,
         unique: true,
         type: String
     },
-    Price: {
+    price: {
         type: Number,
         required: true
     },
-    Count: {
+    count: {
         type: Number,
         required: true
     },
-    Product: {
+    product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Drug"
     },
-    Cart_Header_Id : {
+    cart_Header_Id : {
         type: mongoose.Schema.Types.ObjectId,
         ref: "CartHeader"
     }

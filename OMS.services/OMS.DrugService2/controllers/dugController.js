@@ -31,7 +31,7 @@ export const postDrug = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const newDrug = new Drug({ Created_By: req.email ,...value });
+        const newDrug = new Drug({ created_By: req.email ,...value });
         await newDrug.save();  
 
         await Logger(req.email, "New Drug", newDrug.Name);
@@ -50,7 +50,7 @@ export const updateDrug = async (req, res, next) => {
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const updateDrug = await Drug.findByIdAndUpdate(req.params.id, { $set: { Updated_By: req.email, ...value }}, { new: true });
+        const updateDrug = await Drug.findByIdAndUpdate(req.params.id, { $set: { updated_By: req.email, ...value }}, { new: true });
 
         await Logger(req.email, "Updated Drug", updateDrug.Name);
 

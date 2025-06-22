@@ -3,27 +3,25 @@ import Joi from "joi";
 
 
 export const DoctorValidator = Joi.object({
-    Email: Joi.string().required(),
-    First_Name: Joi.string().required(),
-    Last_Name: Joi.string().required(),
-    Middle_Name: Joi.string().required(),
-    Clinic_Phone: Joi.string().required(),
-    Cell_Phone: Joi.string().required(),
-    Address: Joi.string().required(),
-    DOB: Joi.string().required(),
-    MLN: Joi.string().required(),
-    NIN: Joi.string().required(),
-    Profile_Url: Joi.string().required(),
-    Relationship: Joi.string().required(),
-    Sex: Joi.string().required(),
-    Specialty: Joi.string().required(),
-    Sub_Specialty: Joi.string().required(),
-    Work_ID: Joi.string().required(),
-    Certificate_Url: Joi.string().required(),
-    CT_Start: Joi.string().required(),
-    CT_End: Joi.string().required(),
-    Created_By: Joi.string().required(),
-    Updated_By: Joi.string()
+    email: Joi.string().required(),
+    first_Name: Joi.string().required(),
+    last_Name: Joi.string().required(),
+    middle_Name: Joi.string().required(),
+    clinic_Phone: Joi.string().required(),
+    cell_Phone: Joi.string().required(),
+    address: Joi.string().required(),
+    dob: Joi.string().required(),
+    mln: Joi.string().required(),
+    nin: Joi.string().required(),
+    profile_Url: Joi.string().required(),
+    relationship: Joi.string().required(),
+    sex: Joi.string().required(),
+    specialty: Joi.string().required(),
+    sub_Specialty: Joi.string().required(),
+    work_ID: Joi.string().required(),
+    certificate_Url: Joi.string().required(),
+    cT_Start: Joi.string().required(),
+    cT_End: Joi.string().required()
 });
 
 export const SpecialtyValidator = Joi.object({

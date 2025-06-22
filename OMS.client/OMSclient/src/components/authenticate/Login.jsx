@@ -41,13 +41,13 @@ const Login = () => {
       );
 
       if (res?.status !== 200)
-        return enqueueSnackbar(res?.data?.message, { variant: "error" });
+        return enqueueSnackbar(res?.data?.message || res.statusText, { variant: "error" });
 
       const { accessToken: access, ...data } = res.data.body;
       dispatch(setAuthUser({ authUser: data, accessToken: access }));
       connectSocket(res.data.body.email);
 
-      enqueueSnackbar(res.statusText, { variant: "success" });
+      enqueueSnackbar(res.data?.message || res.statusText, { variant: "success" });
       navigete(prevLoc, { replace: true });
 
     } catch (err) {

@@ -17,7 +17,7 @@ const Header = ({ sideNav, setSideNav }) => {
         <p className="font-bold text-lg md:text-3xl">OMS</p>
       </div>
       <div className="flex-1">
-        <p className="uppercase text-sm md:text-lg hidden md:block">welcome! <b className="text-blue-700">{user?.doctor_Id ? "Dr" : null } {user?.first_Name}</b></p>
+        <p className="uppercase text-sm md:text-lg hidden md:block">welcome! <b className="text-blue-700">{user?.mln ? "Dr" : null } {user?.first_Name}</b></p>
       </div>
       <div className="min-w-[40%] md:min-w-[20%] h-full flex justify-end items-center gap-2">
         <p className="text-[10px] md:text-[15px] font-light">

@@ -22,7 +22,7 @@ const DetailedDrug = () => {
   const handleAddToPrescription = () => {
     if (!loading && drug) {
       console.log(prescribedDrugs);
-      const foundDrug = prescribedDrugs.find(value => value.drug_Id == drug.drug_Id);
+      const foundDrug = prescribedDrugs.find(value => value.drug_Id == drug._id);
       if (foundDrug) enqueueSnackbar("Drug already in prescription!", { variant: "warning" }); 
       else {
         dispatch(setPrescribedDrugs([...prescribedDrugs, drug]));

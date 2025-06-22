@@ -42,8 +42,8 @@ const RegisterDrug = () => {
     try {
       const res = await axiosAuth.post("/drug", {
         ...formData,
-        Created_By: `${user?.first_Name} ${user?.middle_Name} ${user?.last_Name}`,
-        Image: ImageUrl,
+        created_By: `${user?.first_Name} ${user?.middle_Name} ${user?.last_Name}`,
+        image: ImageUrl,
       });
       console.log(res);
       if (res?.status !== 201)
@@ -69,60 +69,60 @@ const RegisterDrug = () => {
           onSubmit={handleSubmit}
           className="w-full h-full md:h-11/12 flex pl-3 flex-col justify-start items-satrt gap-8 font-sans overflow-y-scroll"
         >
-          <label htmlFor="Drug_Name" className="w-11/12">
+          <label htmlFor="drug_Name" className="w-11/12">
             <p className="font-semibold">Drug Name:</p>
             <input
               required
-              id="Drug_Name"
+              id="drug_Name"
               type="text"
               onChange={(e) => handleChange(e)}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             />
           </label>
-          <label htmlFor="Side_Effects" className="w-11/12">
+          <label htmlFor="side_Effects" className="w-11/12">
             <p className="font-semibold">Side Effects:</p>
             <textarea
               required
-              id="Side_Effects"
+              id="side_Effects"
               type="text"
               onChange={(e) => handleChange(e)}
               className="w-full max-h-36 min-h-26 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             ></textarea>
           </label>
-          <label htmlFor="Description" className="w-11/12">
+          <label htmlFor="description" className="w-11/12">
             <p className="font-semibold">Drug Description:</p>
             <textarea
-              id="Description"
+              id="description"
               type="text"
               onChange={(e) => handleChange(e)}
               className="w-full max-h-36 min-h-26 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             ></textarea>
           </label>
-          <label htmlFor="Disclaimer" className="w-11/12">
-            <p className="font-semibold">Disclaimer:</p>
+          <label htmlFor="disclaimer" className="w-11/12">
+            <p className="font-semibold">disclaimer:</p>
             <input
               required
-              id="Disclaimer"
+              id="disclaimer"
               type="text"
               onChange={(e) => handleChange(e)}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             />
           </label>
-          <label htmlFor="Manufacturer" className="w-11/12">
+          <label htmlFor="manufacturer" className="w-11/12">
             <p className="font-semibold">Manufacturer:</p>
             <input
               required
-              id="Manufacturer"
+              id="manufacturer"
               type="text"
               onChange={(e) => handleChange(e)}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             />
           </label>
-          <label htmlFor="Category" className="w-11/12">
+          <label htmlFor="category" className="w-11/12">
             <p className="font-medium">Category:</p>
             <select
               required
-              id="Category"
+              id="category"
               onChange={(e) => handleChange(e)}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
@@ -148,50 +148,50 @@ const RegisterDrug = () => {
               <option value={"Insomnia"}>Insomnia</option>
             </select>
           </label>
-          <label htmlFor="Consume_Type" className="w-11/12">
+          <label htmlFor="consume_Type" className="w-11/12">
             <p className="font-medium">Consume Type:</p>
             <textarea
-              id="Consume_Type"
+              id="consume_Type"
               type="text"
               onChange={(e) => handleChange(e)}
               className="w-full max-h-36 min-h-26 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             ></textarea>
           </label>
-          <label htmlFor="Price" className="w-11/12">
+          <label htmlFor="price" className="w-11/12">
             <p className="font-semibold">Price:</p>
             <input
               required
-              id="Price"
+              id="price"
               type="number"
               onChange={(e) => handleChange(e)}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             />
           </label>
-          <label htmlFor="Expiry_Date" className="w-11/12">
+          <label htmlFor="expiry_Date" className="w-11/12">
             <p className="font-semibold">Expiry Date:</p>
             <input
               required
-              id="Expiry_Date"
+              id="expiry_Date"
               type="date"
               onChange={(e) => handleChange(e)}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             />
           </label>
-          <label htmlFor="Count_In_Stock" className="w-11/12">
+          <label htmlFor="count_In_Stock" className="w-11/12">
             <p className="font-semibold">Count In Stock:</p>
             <input
               required
-              id="Count_In_Stock"
+              id="count_In_Stock"
               type="number"
               onChange={(e) => handleChange(e)}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             />
           </label>
-          <label htmlFor="Image" className="w-11/12">
+          <label htmlFor="image" className="w-11/12">
             <p className="font-semibold">Drug Image:</p>
             <input
               required
-              id="Image"
+              id="image"
               type="file"
               hidden
               accept="image/*"

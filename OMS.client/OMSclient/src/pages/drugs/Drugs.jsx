@@ -33,7 +33,7 @@ const Drugs = () => {
           {data.length > 0 ? (
             data.map((drug, index) => (
               <Link
-                to={`${oms_url.drug}/${drug?.drug_Id}`}
+                to={`${oms_url.drug}/${drug?._id}`}
                 key={index}
                 className="bg-gray-200 h-20 w-[80%] rounded-lg shadow-lg flex justify-center items-center hover:bg-gray-400 transition-all ease-in-out duration-700"
               >

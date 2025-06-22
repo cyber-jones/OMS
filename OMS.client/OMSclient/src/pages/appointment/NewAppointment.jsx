@@ -41,7 +41,7 @@ console.log(today)
   const handleSpecialtyChange = (e) => {
     setSpecialty(e.target.value);
     const filterDoctors = doctors.filter(
-      (doctor) => doctor.specialty_Id == e.target.value
+      (doctor) => doctor.specialty._id == e.target.value
     );
     setData(filterDoctors);
   };
@@ -103,10 +103,10 @@ console.log(today)
           onSubmit={handleSubmit}
           className="w-full h-11/12 flex pl-3 flex-col justify-start items-satrt gap-5 font-sans overflow-auto"
         >
-          <label htmlFor="Specialty_Id" className="w-full">
+          <label htmlFor="specialty_Id" className="w-full">
             <p className="font-medium">Specialty:</p>
             <select
-              id="Specialty_Id"
+              id="specialty_Id"
               required
               onChange={handleSpecialtyChange}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
@@ -114,7 +114,7 @@ console.log(today)
               <option>--select specialty</option>
               {!loadingSpecialty && specialties ? (
                 specialties.map((specialty, index) => (
-                  <option key={index} value={specialty?.specialty_Id}>
+                  <option key={index} value={specialty?._id}>
                     {specialty?.name}
                   </option>
                 ))
@@ -142,7 +142,7 @@ console.log(today)
               )}
               {!loadingDoctor && data ? (
                 data.map((doctor, index) => (
-                  <option key={index} value={doctor?.doctor_Id}>
+                  <option key={index} value={doctor?._id}>
                     {doctor?.first_Name} {doctor?.last_Name}
                   </option>
                 ))

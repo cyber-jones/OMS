@@ -7,7 +7,7 @@ const drugRouter = Router();
 
 
 
-drugRouter.get("/all", verifyRoles([ROLES]), getDrugs);
+drugRouter.get("/all", verifyRoles(ROLES), getDrugs);
 drugRouter.post("/", verifyRoles([ROLES[0]]), postDrug);
 drugRouter.put("/:id", verifyRoles([ROLES[0]]), updateDrug);
 drugRouter.delete("/:id", verifyRoles([ROLES[0]]), deleteDrug);

@@ -4,15 +4,15 @@ import { Schema, model } from "mongoose";
 
 
 const logSchema = new Schema({
-    Blame: {
+    blame: {
         required: true,
         type: String
     },
-    Description: {
+    description: {
         required: true,
         type: String
     },
-    Victim: {
+    victim: {
         required: true,
         type: String
     }

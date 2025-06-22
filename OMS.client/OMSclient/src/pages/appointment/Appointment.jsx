@@ -22,11 +22,11 @@ const Appointment = () => {
   const { doctors, loading: loadingDoctor } = useDoctor();
   const specialty = specialties !== null
     ? specialties.find(
-        (specialtyValue) => specialtyValue.specialty_Id == appointment.specialty_Id
+        (specialtyValue) => specialtyValue._id == appointment._id
       )
     : null;
   const doctor = doctors?.find(
-    (doctor) => doctor.doctor_Id == appointment.doctor_Id
+    (doctor) => doctor._id == appointment._id
   );
   const { enqueueSnackbar } = useSnackbar();
   const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
@@ -78,7 +78,7 @@ const Appointment = () => {
   const handleApprove = async () => {
     try {
       const res = await axiosAuth.post("/appointment/approve/" + id, {
-        name: user.email,
+        name: user.Email,
       });
       if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
@@ -101,7 +101,7 @@ const Appointment = () => {
   const handleDisapprove = async () => {
     try {
       const res = await axiosAuth.post("/appointment/disapprove/" + id, {
-        name: user.email,
+        name: user.Email,
       });
       if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {

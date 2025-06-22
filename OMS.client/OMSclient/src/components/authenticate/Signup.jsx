@@ -22,20 +22,37 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const { password, ...data } = formData;
     try {
       const res = await axioAnonymous(oms_server_production_url.patient).post(
         "/patient",
-        formData
+        data
       );
 
-      console.log(res);
+      if (res.status !== 201)
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+      else {
+        const body = {
+          Email: formData.email,
+          Password: password,
+          AccType: "patient",
+          Role: "patient",
+          User_Profile_Id: res.data?.patient._id,
+        };
 
-      if (res?.status !== 201)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+        console.log(body);
+          const res2 = await axioAnonymous(oms_server_production_url.auth).post(
+            "/user/register",
+            body
+          );
 
-      enqueueSnackbar(res.statusText, { variant: "success" });
-      setFormData({});
-      navigete(oms_url.dashBoard);
+          if (res2.status !== 201)
+            return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+
+          enqueueSnackbar(res2.statusText, { variant: "success" });
+          setFormData({});
+          navigete(oms_url.dashBoard);
+      }
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err.response?.data?.message || err.response?.statusText, { variant: "error" });
@@ -46,20 +63,20 @@ const Signup = () => {
 
   return (
     <form
-      className="flex flex-col justify-center items-center w-full h-10/12 overflow-y-scroll gap-3 md:gap-2"
+      className="flex flex-col justify-center items-center w-full h-10/12 gap-3 md:gap-2"
       onSubmit={(e) => handleSignup(e)}
     >
       <p className="text-2xl font-bold my-2">SignUp Here!</p>
       <div className="flex gap-2 w-full">
         <Input
           type={"text"}
-          name={"First_Name"}
+          name={"first_Name"}
           label={"First Name"}
           handleChange={handleChange}
         />
         <Input
           type={"text"}
-          name={"Last_Name"}
+          name={"last_Name"}
           label={"Last Name"}
           handleChange={handleChange}
         />
@@ -67,13 +84,13 @@ const Signup = () => {
       <div className="flex gap-2 w-full">
         <Input
           type={"text"}
-          name={"Middle_Name"}
+          name={"middle_Name"}
           label={"Middle Name"}
           handleChange={handleChange}
         />
         <Input
           type={"email"}
-          name={"Email"}
+          name={"email"}
           label={"Email"}
           handleChange={handleChange}
         />
@@ -81,14 +98,14 @@ const Signup = () => {
       <div className="flex gap-2 w-full">
         <Input
           type={"text"}
-          name={"Cell_Phone"}
+          name={"cell_Phone"}
           label={"Cell Phone"}
           handleChange={handleChange}
         />
         <label htmlFor="Relationship" className="w-1/2">
           <p className="font-medium">Relationship:</p>
           <select
-            id="Relationship"
+            id="relationship"
             onChange={(e) => handleChange(e)}
             className="w-full border-t-0 border-r-0 opacity-75 pt-2 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
           >
@@ -102,13 +119,13 @@ const Signup = () => {
       <div className="flex gap-2 w-full">
         <Input
           type={"text"}
-          name={"NIN"}
+          name={"nin"}
           label={"National Identity No"}
           handleChange={handleChange}
         />
         <Input
           type={"text"}
-          name={"State"}
+          name={"state"}
           label={"State"}
           handleChange={handleChange}
         />
@@ -116,14 +133,14 @@ const Signup = () => {
       <div className="flex gap-2 w-full">
         <Input
           type={"date"}
-          name={"DOB"}
+          name={"dob"}
           label={"Date of birth"}
           handleChange={handleChange}
         />
         <label htmlFor="Sex" className="w-1/2">
           <p className="font-medium">Sex:</p>
           <select
-            id="Sex"
+            id="sex"
             onChange={(e) => handleChange(e)}
             className="w-full opacity-75 pt-2 border-t-0 border-r-0 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
           >
@@ -135,13 +152,13 @@ const Signup = () => {
       </div>
       <div className="flex gap-2 w-full">
         <TextArea
-          name={"Address"}
+          name={"address"}
           label={"Home Address"}
           handleChange={handleChange}
         />
         <Input
           type={"password"}
-          name={"Password"}
+          name={"password"}
           label={"Password (4 digits only)"}
           handleChange={handleChange}
         />
@@ -156,20 +173,20 @@ const Signup = () => {
       <div className="flex gap-2 w-full">
         <Input
           type={"text"}
-          name={"EC_FullName"}
+          name={"eC_FullName"}
           label={"Full Name"}
           handleChange={handleChange}
         />
         <Input
           type={"text"}
-          name={"EC_Cell_Phone"}
+          name={"eC_Cell_Phone"}
           label={"Cell phone"}
           handleChange={handleChange}
         />
       </div>
       <div className="flex gap-2 w-full">
         <TextArea
-          name={"EC_Address"}
+          name={"eC_Address"}
           label={"Address"}
           handleChange={handleChange}
         />

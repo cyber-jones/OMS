@@ -22,11 +22,9 @@ const Chat = () => {
   const { enqueueSnackbar } = useSnackbar();
   const messageEndRef = useRef();
   const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
-  const profileUrl = selectedUser?.doctor_Id
-    ? `/doctor/${selectedUser?.doctor_Id}`
-    : selectedUser?.staff_Id
-    ? `/staff/${selectedUser?.staff_Id}`
-    : `/patient/${selectedUser?.patient_Id}`;
+  const profileUrl = selectedUser?.MLN
+    ? `/doctor/${selectedUser?._id}`
+    : `/patient/${selectedUser?._id}`;
 
   const handleSendMessage = async () => {
     const senderId = authUser.email;
@@ -212,7 +210,7 @@ const Chat = () => {
               <div className="w-full flex flex-col justify-center items-center h-full">
                 <i className="bi bi-chat-left-dots text-[100px] text-pink-500 animate-bounce"></i>
                 <p className="text-4xl mt-5">
-                  <strong>HI</strong> {selectedUser?.doctor_Id ? "Dr" : null}{" "}
+                  <strong>HI</strong> {selectedUser?.MLN ? "Dr" : null}{" "}
                   {selectedUser?.last_Name}
                 </p>
               </div>

@@ -151,7 +151,7 @@ const Users = () => {
                 }
                 className="rounded-full"
               />
-              {onlineUsers?.includes(user?.email) ? (
+              {onlineUsers?.includes(user?.Email) ? (
                 <div className="relative w-4 h-4 bg-green-500 rounded-full -top-4 left-7"></div>
               ) : (
                 <div className="relative w-4 h-4 bg-red-500 rounded-full -top-4 left-7"></div>
@@ -159,8 +159,8 @@ const Users = () => {
             </div>
             <div className="text-sm border-b-[0.2px] border-gray-400 py-2 w-[65%]">
               <strong>
-                {user?.doctor_Id ? "Dr" : null} {user?.first_Name}{" "}
-                {user?.last_Name}
+                {user?.MLN ? "Dr" : null} {user?.first_Name}{" "}
+                {user?.Last_Name}
               </strong>
               <p>{onlineUsers?.includes(user?.email) ? "online" : "Offline"}</p>
             </div>

@@ -23,7 +23,7 @@ const useMessage = () => {
         return;
       }
 
-      setMessage(res?.data.messages);
+      setMessage(res.data?.messages);
     } catch (err) {
       enqueueSnackbar(err?.response?.data?.message || err.message, {
         variant: "error",

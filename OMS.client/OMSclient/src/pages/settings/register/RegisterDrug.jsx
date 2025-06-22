@@ -47,13 +47,13 @@ const RegisterDrug = () => {
       });
       console.log(res);
       if (res?.status !== 201)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       setFormData({});
       navigate(oms_url.doctorList);
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
     } finally {
       setLoading(false);
     }
@@ -72,6 +72,7 @@ const RegisterDrug = () => {
           <label htmlFor="Drug_Name" className="w-11/12">
             <p className="font-semibold">Drug Name:</p>
             <input
+              required
               id="Drug_Name"
               type="text"
               onChange={(e) => handleChange(e)}
@@ -81,6 +82,7 @@ const RegisterDrug = () => {
           <label htmlFor="Side_Effects" className="w-11/12">
             <p className="font-semibold">Side Effects:</p>
             <textarea
+              required
               id="Side_Effects"
               type="text"
               onChange={(e) => handleChange(e)}
@@ -99,6 +101,7 @@ const RegisterDrug = () => {
           <label htmlFor="Disclaimer" className="w-11/12">
             <p className="font-semibold">Disclaimer:</p>
             <input
+              required
               id="Disclaimer"
               type="text"
               onChange={(e) => handleChange(e)}
@@ -108,6 +111,7 @@ const RegisterDrug = () => {
           <label htmlFor="Manufacturer" className="w-11/12">
             <p className="font-semibold">Manufacturer:</p>
             <input
+              required
               id="Manufacturer"
               type="text"
               onChange={(e) => handleChange(e)}
@@ -117,6 +121,7 @@ const RegisterDrug = () => {
           <label htmlFor="Category" className="w-11/12">
             <p className="font-medium">Category:</p>
             <select
+              required
               id="Category"
               onChange={(e) => handleChange(e)}
               className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
@@ -155,6 +160,7 @@ const RegisterDrug = () => {
           <label htmlFor="Price" className="w-11/12">
             <p className="font-semibold">Price:</p>
             <input
+              required
               id="Price"
               type="number"
               onChange={(e) => handleChange(e)}
@@ -164,6 +170,7 @@ const RegisterDrug = () => {
           <label htmlFor="Expiry_Date" className="w-11/12">
             <p className="font-semibold">Expiry Date:</p>
             <input
+              required
               id="Expiry_Date"
               type="date"
               onChange={(e) => handleChange(e)}
@@ -173,6 +180,7 @@ const RegisterDrug = () => {
           <label htmlFor="Count_In_Stock" className="w-11/12">
             <p className="font-semibold">Count In Stock:</p>
             <input
+              required
               id="Count_In_Stock"
               type="number"
               onChange={(e) => handleChange(e)}
@@ -182,6 +190,7 @@ const RegisterDrug = () => {
           <label htmlFor="Image" className="w-11/12">
             <p className="font-semibold">Drug Image:</p>
             <input
+              required
               id="Image"
               type="file"
               hidden

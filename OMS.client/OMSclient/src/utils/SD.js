@@ -52,9 +52,11 @@ export const oms_server_dev_url = {
 export const oms_server_production_url = {
     doctor: "http://oms-doctor-api.runasp.net/api",
     staff: "http://oms-staff-api.runasp.net/api",
-    patient: "http://oms-patient-api.runasp.net/api",
+    // patient: "http://oms-patient-api.runasp.net/api",
+        patient: "http://localhost:7001/api",
     auth: "https://oms-auth-api.onrender.com/api",
-    drug: "http://oms-drug-api.runasp.net/api",
+    // drug: "http://oms-drug-api.runasp.net/api",
+        drug: "http://localhost:7003/api",
     appointment: "https://oms-appointment-api.onrender.com/api",
 }
 

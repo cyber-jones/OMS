@@ -32,13 +32,13 @@ const RegisterSpecialty = () => {
       const res = await axiosAuth.post("/specialty", formData);
       console.log(res);
       if (res?.status !== 201)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       setFormData({});
       navigete(oms_url.specialtyList);
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
     } finally {
       setLoading(false);
     }

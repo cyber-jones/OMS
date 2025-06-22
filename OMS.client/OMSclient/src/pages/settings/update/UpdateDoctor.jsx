@@ -14,7 +14,6 @@ import Circle from "../../../components/loading/Circle";
 
 const UpdateDoctor = () => {
   const [formData, setFormData] = useState({
-    Doctor_Id: "",
     First_Name: "",
     Middle_Name: "",
     Last_Name: "",
@@ -35,7 +34,6 @@ const UpdateDoctor = () => {
     Certificate_Url: "",
     Clinic_Phone: ""
   });
-  const [Doctor_Id, setDoctor_Id] = useState(null);
   const [FirstName, setFirstName] = useState(null);
   const [LastName, setLastName] = useState(null);
   const [MidddleName, setMidddleName] = useState(null);
@@ -72,9 +70,8 @@ const UpdateDoctor = () => {
       const res = await axiosAuth.get("/doctor/" + id);
       console.log(res);
       if (res?.status !== 200 && !res?.data)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
-      setDoctor_Id(res.data.doctor_Id)
       setFirstName(res.data.first_Name);
       setLastName(res.data.last_Name);
       setMidddleName(res.data.middle_Name);
@@ -99,7 +96,7 @@ const UpdateDoctor = () => {
 
       enqueueSnackbar(res.statusText, { variant: "success" });
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
     } finally {
       setLoading(false);
     }
@@ -113,7 +110,6 @@ const UpdateDoctor = () => {
 
   useEffect(() => {
     setFormData({
-      Doctor_Id: Doctor_Id,
       Address: Address,
       CT_End: CT_End,
       CT_Start: CT_Start,
@@ -180,12 +176,12 @@ const UpdateDoctor = () => {
       const res = await axiosAuth.put("/doctor/"+id, formData);
       console.log(res);
       if (res?.status !== 205)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       navigete(oms_url.doctorList);
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText || err.message, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
     } finally {
       setLoading(false);
     }

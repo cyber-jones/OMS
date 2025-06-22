@@ -45,9 +45,10 @@ const useUser = () => {
                 enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });
                 return;
             }
-
-            dispatch(setUser(res?.data));
-            setThisUser(res?.data);
+            
+            const data = res.data?.patient || res.data?.doctor || res.data?.staff;
+            dispatch(setUser(data));
+            setThisUser(data);
         } catch (err) {
             console.log(err);
             enqueueSnackbar(err?.response?.statusText || err.message, { variant: "error" });

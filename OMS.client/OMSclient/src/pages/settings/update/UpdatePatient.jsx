@@ -18,7 +18,6 @@ import Circle from "../../../components/loading/Circle";
 
 const UpdatePatient = () => {
   const [formData, setFormData] = useState({
-    Patient_Id: "",
     First_Name: "",
     Middle_Name: "",
     Last_Name: "",
@@ -35,7 +34,6 @@ const UpdatePatient = () => {
     EC_Cell_Phone: "",
     EC_Address: "",
   });
-  const [Patient_Id, setPatient_Id] = useState(null);
   const [FirstName, setFirstName] = useState(null);
   const [LastName, setLastName] = useState(null);
   const [MidddleName, setMidddleName] = useState(null);
@@ -67,29 +65,28 @@ const UpdatePatient = () => {
     try {
       const res = await axiosAuth.get("/patient/" + id);
       console.log(res);
-      if (res?.status !== 200 && !res?.data)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+      if (res?.status !== 200 && !res.data?.patient)
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
-      setPatient_Id(res.data.patient_Id);
-      setFirstName(res.data.first_Name);
-      setLastName(res.data.last_Name);
-      setMidddleName(res.data.middle_Name);
-      setNIN(res.data.nin);
-      setEmail(res.data.email);
-      setCellPhone(res.data.cell_Phone);
-      setState(res.data.state);
-      setRelationship(res.data.relationship);
-      setSex(res.data.sex);
-      setDOB(res.data.dob);
-      setAddress(res.data.address);
-      setProfileUrl(res.data.profile_Url);
-      setEC_FullName(res.data.eC_FullName);
-      setEC_Cell_Phone(res.data.eC_Cell_Phone);
-      setEC_Address(res.data.eC_Address);
+      setFirstName(res.data.patient.first_Name);
+      setLastName(res.data.patient.last_Name);
+      setMidddleName(res.data.patient.middle_Name);
+      setNIN(res.data.patient.nin);
+      setEmail(res.data.patient.email);
+      setCellPhone(res.data.patient.cell_Phone);
+      setState(res.data.patient.state);
+      setRelationship(res.data.patient.relationship);
+      setSex(res.data.patient.sex);
+      setDOB(res.data.patient.dob);
+      setAddress(res.data.patient.address);
+      setProfileUrl(res.data.patient.profile_Url);
+      setEC_FullName(res.data.patient.eC_FullName);
+      setEC_Cell_Phone(res.data.patient.eC_Cell_Phone);
+      setEC_Address(res.data.patient.eC_Address);
 
       enqueueSnackbar(res.statusText, { variant: "success" });
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
     } finally {
       setLoading(false);
     }
@@ -101,7 +98,6 @@ const UpdatePatient = () => {
 
   useEffect(() => {
     setFormData({
-      Patient_Id: Patient_Id,
       Address: Address,
       Cell_Phone: CellPhone,
       DOB: DOB,
@@ -158,12 +154,12 @@ const UpdatePatient = () => {
       const res = await axiosAuth.put("/patient/" + id, formData);
       console.log(res);
       if (res?.status !== 205)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       navigete(oms_url.patientList);
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText || err.message, {
+      enqueueSnackbar(err?.response?.data?.message || err?.message, {
         variant: "error",
       });
     } finally {

@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 
 
@@ -28,7 +28,7 @@ const userSchema = new Schema({
     },
     user_Profile_Id: {
         unique: true,
-        type: String
+        type: mongoose.Schema.Types.ObjectId
     }
 }, { timestamps: true });
 

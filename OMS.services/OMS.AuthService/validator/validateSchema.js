@@ -6,7 +6,7 @@ export const RegistrationValidator = Joi.object({
     Email: Joi.string().email().required(),
     Password: Joi.string().length(4).required(),
     AccType: Joi.string().required(),
-    User_Profile_Id: Joi.string().guid(),
+    User_Profile_Id: Joi.string().required(),
 });
 
 

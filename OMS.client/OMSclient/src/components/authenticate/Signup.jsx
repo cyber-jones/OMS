@@ -28,6 +28,8 @@ const Signup = () => {
         formData
       );
 
+      console.log(res);
+
       if (res?.status !== 201)
         return enqueueSnackbar(res.statusText, { variant: "error" });
 
@@ -35,7 +37,8 @@ const Signup = () => {
       setFormData({});
       navigete(oms_url.dashBoard);
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+      console.log(err);
+      enqueueSnackbar(err.response?.data?.message || err.response?.statusText, { variant: "error" });
     } finally {
       setLoading(false);
     }

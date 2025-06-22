@@ -1,0 +1,71 @@
+import Specialty from "../models/specialtyModel.js";
+import { Logger } from "../utils/log.js";
+import { SpecialtyValidator } from "../validators/validateSchema.js";
+
+
+export const getSpecialties = async (req, res, next) => {
+    try {
+        const specialties = await Specialty.find();
+        return res.status(200).json({ success: true, data: specialties });
+    } catch (err) {
+        next(err);
+    }
+}  
+
+
+export const getSpecialty = async (req, res, next) => {
+    try {
+        const specialty = await Specialty.findById(req.params.id);
+        return res.status(200).json({ success: true, specialty });
+    } catch (err) {
+        next(err);
+    }
+} 
+
+
+export const postSpecialty = async (req, res, next) => {
+    try {
+        const { error, value } = SpecialtyValidator.validate(req.body);
+
+        if (error)
+            return res.status(400).json({ success: false, message: error.message });
+
+        const newSpecialty = new Specialty({ ...value });
+        await newSpecialty.save();  
+
+        await Logger(req.email, "New Specialty", newSpecialty.Name);
+
+        return res.status(201).json({ success: true, data: newSpecialty, message: "Specialty created successfully" });
+    } catch (err) {
+        next(err);
+    }
+}  
+
+
+export const updateSpecialty = async (req, res, next) => {
+    try {
+        const { error, value } = SpecialtyValidator.validate(req.body);
+
+        if (error)
+            return res.status(400).json({ success: false, message: error.message });
+
+        const updatedSpecialty = await Specialty.findByIdAndUpdate(req.params.id, { $set: { ...value }}, { new: true });
+
+        await Logger(req.email, "Updated Specialty", updatedSpecialty.Name);
+
+        return res.status(205).json({ success: true, data: updatedSpecialty, message: "Specialty updated successfully" });
+    } catch (err) {
+        next(err);
+    }
+}
+
+
+export const deleteSpecialty = async (req, res, next) => {
+    try {
+        const specialty = await Specialty.findByIdAndDelete(req.params.id);
+        await Logger(req.email, "Deleted Specialty", specialty.Name);
+        return res.status(200).json({ success: true, message: "Specialty deleted successfully" });
+    } catch (err) {
+        next(err);
+    }
+}  

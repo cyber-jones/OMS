@@ -23,14 +23,14 @@ const useSpecialty = (Id = null) => {
                 res = await axiosAuth.get("/specialty/all");
     
             if (res?.status !== 200 && res) {
-                enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });
+                enqueueSnackbar(res?.data?.message || res?.statusText, { variant: "error" });
                 return;
             }
 
-            setSpecialties(res?.data)
+            setSpecialties(res.data?.specialty)
         } catch (err) {
             console.log(err);
-            enqueueSnackbar(err?.response?.statusText || err.message, { variant: "error" });
+            enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
         } finally {
             setLoading(false);
         }

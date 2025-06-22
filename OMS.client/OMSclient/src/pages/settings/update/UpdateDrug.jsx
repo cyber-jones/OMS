@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 
 const UpdateDrug = () => {
   const [formData, setFormData] = useState({
-    Drug_Id: "",
     Drug_Name: "",
     Side_Effects: "",
     Description: "",
@@ -24,7 +23,6 @@ const UpdateDrug = () => {
     Created_By: "",
     Image: "",
   });
-  const [Drug_Id, setDrug_Id] = useState(null);
   const [DrugName, setDrugName] = useState(null);
   const [SideEffects, setSideEffects] = useState(null);
   const [Description, setDescription] = useState(null);
@@ -51,27 +49,26 @@ const UpdateDrug = () => {
     try {
       const res = await axiosAuth.get("/drug/" + id);
       console.log(res);
-      if (res?.status !== 200 && !res?.data)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+      if (res?.status !== 200 && !res.data.drug)
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
-      setDrug_Id(res.data.drug_Id);
-      setDrugName(res.data.drug_Name);
-      setSideEffects(res.data.side_Effects);
-      setDescription(res.data.description);
-      setDisclaimer(res.data.Disclaimer);
-      setManufacturer(res.data.manufacturer);
-      setCategory(res.data.category);
-      setConsumeType(res.data.consume_Type);
-      setPrice(res.data.Price);
-      setExpiryDate(res.data.expiry_Date);
-      setCountInStock(res.data.count_In_Stock);
-      setCreatedAt(res.data.created_At);
-      setCreatedBy(res.data.created_By);
-      setImageUrl(res.data.image);
+      setDrugName(res.data.drug.drug_Name);
+      setSideEffects(res.data.drug.side_Effects);
+      setDescription(res.data.drug.description);
+      setDisclaimer(res.data.drug.Disclaimer);
+      setManufacturer(res.data.drug.manufacturer);
+      setCategory(res.data.drug.category);
+      setConsumeType(res.data.drug.consume_Type);
+      setPrice(res.data.drug.Price);
+      setExpiryDate(res.data.drug.expiry_Date);
+      setCountInStock(res.data.drug.count_In_Stock);
+      setCreatedAt(res.data.drug.created_At);
+      setCreatedBy(res.data.drug.created_By);
+      setImageUrl(res.data.drug.image);
 
       enqueueSnackbar(res.statusText, { variant: "success" });
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
     } finally {
       setLoading(false);
     }
@@ -83,7 +80,6 @@ const UpdateDrug = () => {
 
   useEffect(() => {
     setFormData({
-      Drug_Id: Drug_Id,
       Drug_Name: DrugName,
       Side_Effects: SideEffects,
       Description: Description,
@@ -138,12 +134,12 @@ const UpdateDrug = () => {
       });
       console.log(res);
       if (res?.status !== 205)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       navigete(oms_url.drugList);
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText || err.message, {
+      enqueueSnackbar(err?.response?.data?.message || err?.message, {
         variant: "error",
       });
     } finally {

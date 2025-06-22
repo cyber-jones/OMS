@@ -14,7 +14,6 @@ import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 
 const UpdateSpecialty = () => {
   const [formData, setFormData] = useState({
-    Specialty_Id: "",
     Name: "",
     Description: ""
   });
@@ -33,14 +32,14 @@ const UpdateSpecialty = () => {
       try {
         const res = await axiosAuth.get("/specialty/" + id);
         console.log(res);
-        if (res?.status !== 200 && !res?.data)
-          return enqueueSnackbar(res.statusText, { variant: "error" });
+        if (res?.status !== 200 && !res.data?.specialty)
+          return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
         
-        setName(res.data.name);
-        setDescription(res.data.description);
+        setName(res.data.specialty.name);
+        setDescription(res.data.specialty.description);
         enqueueSnackbar(res.statusText, { variant: "success" });
       } catch (err) {
-        enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+        enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
       } finally {
         setLoading(false);
       }
@@ -53,7 +52,6 @@ const UpdateSpecialty = () => {
 
     useEffect(() => {
       setFormData({
-        Specialty_Id: id,
         Name: Name,
         Description: Description
       });
@@ -64,7 +62,7 @@ const UpdateSpecialty = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosAuth.put("/doctor", formData);
+      const res = await axiosAuth.put("/doctor/"+id, formData);
       console.log(res);
       if (res?.status !== 201)
         return enqueueSnackbar(res.statusText, { variant: "error" });
@@ -73,7 +71,7 @@ const UpdateSpecialty = () => {
       setFormData({});
       navigete(oms_url.doctorList);
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
     } finally {
       setLoading(false);
     }

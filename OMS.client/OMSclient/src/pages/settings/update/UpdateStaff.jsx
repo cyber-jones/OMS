@@ -16,7 +16,6 @@ import Circle from "../../../components/loading/Circle";
 
 const UpdateStaff = () => {
   const [formData, setFormData] = useState({
-    Staff_Id: "",
     First_Name: "",
     Middle_Name: "",
     Last_Name: "",
@@ -31,7 +30,6 @@ const UpdateStaff = () => {
     DOB: "",
     Profile_Url: "",
   });
-  const [Staff_Id, setStaff_Id] = useState(null);
   const [FirstName, setFirstName] = useState(null);
   const [LastName, setLastName] = useState(null);
   const [MidddleName, setMidddleName] = useState(null);
@@ -61,27 +59,26 @@ const UpdateStaff = () => {
     try {
       const res = await axiosAuth.get("/staff/" + id);
       console.log(res);
-      if (res?.status !== 200 && !res?.data)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+      if (res?.status !== 200 && !res.data?.staff)
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
-      setStaff_Id(res.data.Staff_Id);
-      setFirstName(res.data.first_Name);
-      setLastName(res.data.last_Name);
-      setMidddleName(res.data.middle_Name);
-      setNIN(res.data.nin);
-      setEmail(res.data.email);
-      setCellPhone(res.data.cell_Phone);
-      setState(res.data.state);
-      setWorkID(res.data.work_ID);
-      setRelationship(res.data.relationship);
-      setSex(res.data.sex);
-      setDOB(res.data.dob);
-      setAddress(res.data.address);
-      setProfileUrl(res.data.profile_Url);
+      setFirstName(res.data.staff.first_Name);
+      setLastName(res.data.staff.last_Name);
+      setMidddleName(res.data.staff.middle_Name);
+      setNIN(res.data.staff.nin);
+      setEmail(res.data.staff.email);
+      setCellPhone(res.data.staff.cell_Phone);
+      setState(res.data.staff.state);
+      setWorkID(res.data.staff.work_ID);
+      setRelationship(res.data.staff.relationship);
+      setSex(res.data.staff.sex);
+      setDOB(res.data.staff.dob);
+      setAddress(res.data.staff.address);
+      setProfileUrl(res.data.staff.profile_Url);
 
       enqueueSnackbar(res.statusText, { variant: "success" });
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
     } finally {
       setLoading(false);
     }
@@ -93,7 +90,6 @@ const UpdateStaff = () => {
 
   useEffect(() => {
     setFormData({
-      Staff_Id: Staff_Id,
       Address: Address,
       Cell_Phone: CellPhone,
       DOB: DOB,
@@ -146,12 +142,12 @@ const UpdateStaff = () => {
       const res = await axiosAuth.put("/staff/" + id, formData);
       console.log(res);
       if (res?.status !== 205)
-        return enqueueSnackbar(res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       navigete(oms_url.staffList);
     } catch (err) {
-      enqueueSnackbar(err?.response?.statusText || err.message, {
+      enqueueSnackbar(err?.response?.data?.message || err?.message, {
         variant: "error",
       });
     } finally {

@@ -24,13 +24,13 @@ const useDoctor = (Id = null) => {
 
             console.log(res);
             if (res?.status !== 200 && res) {
-                enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });
+                enqueueSnackbar(res.data?.message || res?.statusText, { variant: "error" });
                 return;
             }
             
-            setDoctors(res?.data);
+            setDoctors(res.data?.doctor);
         } catch (err) {
-            enqueueSnackbar(err?.response?.statusText || err.message, { variant: "error" });
+            enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
         } finally {
             setLoading(false)
         }

@@ -24,13 +24,13 @@ const useStaff = (Id = null) => {
         
             console.log(res);
             if (res?.status !== 200 && res) {
-                enqueueSnackbar(res?.statusText || res?.message, { variant: "error" });
+                enqueueSnackbar(res?.data?.message || res?.statusText, { variant: "error" });
                 return;
             }
             
-            setStaff(res?.data);
+            setStaff(res.data?.staff);
         } catch (err) {
-            enqueueSnackbar(err?.response?.statusText || err.message, { variant: "error" });
+            enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
         } finally {
             setLoading(false);
         }

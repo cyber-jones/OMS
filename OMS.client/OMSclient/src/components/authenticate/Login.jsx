@@ -64,7 +64,7 @@ const Login = () => {
     >
       <p className="text-2xl font-bold my-4">Login Here!</p>
 
-      <label htmlFor={"email"} className="w-full">
+      <label htmlFor={"email"} className="w-full ">
         <p className="font-medium">Email:</p>
         <input
           required
@@ -73,7 +73,7 @@ const Login = () => {
           onChange={(e) => handleChange(e)}
           className="w-full opacity-75 pt-2 border-t-0 border-r-0 focus:outline-0 px-2 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
         />
-        <i className="bi bi-envelope absolute text-lg"></i>
+        <i className="bi bi-envelope relative float-right right-10 bottom-10 text-lg "></i>
       </label>
       <label htmlFor={"password"} className="w-full">
         <p className="font-medium">Password:</p>
@@ -86,12 +86,12 @@ const Login = () => {
         />
         {passwordType == "text" ? (
           <i
-            className="bi bi-eye absolute text-lg"
+            className="bi bi-eye relative float-right right-10 bottom-10 text-lg"
             onClick={() => setPasswordType("password")}
           ></i>
         ) : (
           <i
-            className="bi bi-eye-slash absolute"
+            className="bi bi-eye-slash relative float-right right-10 bottom-10"
             onClick={() => setPasswordType("text")}
           ></i>
         )}

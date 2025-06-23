@@ -13,16 +13,16 @@ import { corsOptions } from "./config/corsOption.js";
 import { reqLogger } from "./config/logConfig.js";
 import { verifyAccess } from "./middlewares/verifyAccess.js";
 import { credentials } from "./middlewares/corsCredentials.js";
-import { getLogs } from "./controllers/patientController.js";
 import { verifyRoles } from "./middlewares/verifyRoles.js";
 import { ROLES } from "./utils/SD.js";
 import staffRouter from "./routes/staffRoute.js";
+import { getLogs } from "./controllers/staffController.js";
 
 
 
 
 
-const URI = process.env.MONGOOSE_DEV_URI;
+const URI = process.env.MONGOOSE_PRODUCTION_URI;
 const PORT = process.env.PORT || 7001;
 connectDb(URI);
 
@@ -40,7 +40,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 
 app.use(verifyAccess);
-app.use("/api/patient", staffRouter);
+app.use("/api/staff", staffRouter);
 app.use("/api/logs", verifyRoles([ROLES[0]]), getLogs);
 
 

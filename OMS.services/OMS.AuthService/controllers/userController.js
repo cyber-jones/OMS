@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { RegistrationValidator, LoginValidator } from "../validator/validateSchema.js";
 import User from "../models/userModel.js";
 import bcryptjs from 'bcryptjs';
+import { ROLES } from "../utils/SD.js";
 // import { axiosStaff } from "../config/axiosStaffConfig.js";
 
 
@@ -97,6 +98,24 @@ export const getUsers = async (req, res, next) => {
         const users = await User.find({}).lean();
         return res.status(200).json({ success: true, users });
 
+    } catch (err) {
+        next(err);
+    }
+}
+
+
+
+
+export const isAdmin = async (req, res, next) => {
+    try {
+        const users = await User.findById(req.params.id);
+
+        if (users.roles.includes(ROLES[0]))
+            return res.status(400).json({ success: false, message: "User is already an admin!"});
+        else
+            users.roles.push(ROLES[0]);
+
+        return res.status(200).json({ success: true, message: "Admin assigned successfully!" });
     } catch (err) {
         next(err);
     }

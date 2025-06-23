@@ -43,18 +43,17 @@ const Signup = () => {
           User_Profile_Id: res.data?.patient._id,
         };
 
-        console.log(body);
         const res2 = await axioAnonymous(oms_server_production_url.auth).post(
           "/user/register",
           body
         );
 
         if (res2.status !== 201)
-          return enqueueSnackbar(res.data?.message || res.statusText, {
+          return enqueueSnackbar(res2.data?.message || res.statusText, {
             variant: "error",
           });
 
-        enqueueSnackbar(res2.statusText, { variant: "success" });
+        enqueueSnackbar(res2.data?.message || res2.statusText, { variant: "success" });
         setFormData({});
         navigete(oms_url.dashBoard);
       }

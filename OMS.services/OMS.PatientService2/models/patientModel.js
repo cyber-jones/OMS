@@ -26,7 +26,6 @@ const patientSchema = new Schema({
         type: String
     },
     cell_Phone: {
-        unique: true,
         required: true,
         type: String
     }, 
@@ -51,22 +50,18 @@ const patientSchema = new Schema({
         type: String
     }, 
     state: {
-        unique: true,
         required: true,
         type: String
     },
     eC_FullName: {
-        unique: true,
         required: true,
         type: String
     },
     eC_Cell_Phone: {
-        unique: true,
         required: true,
         type: String
     },
     eC_Address: {
-        unique: true,
         required: true,
         type: String
     }

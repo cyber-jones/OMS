@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useEffect, useState } from "react";
-import { socket_connect_dev_url } from "../utils/SD";
+import { socket_connect_production_url } from "../utils/SD";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 
@@ -17,7 +17,7 @@ export const SocketProvider = ({ children }) => {
   };
 
   const connectSocket = (Id) => {
-    const newSocket = io(socket_connect_dev_url, { query: { userId: Id } });
+    const newSocket = io(socket_connect_production_url, { query: { userId: Id } });
     newSocket.connect();
 
     console.log("New-socket", newSocket);

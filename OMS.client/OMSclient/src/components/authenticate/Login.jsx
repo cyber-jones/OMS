@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Input from "../Inputs/Input";
 import { useSnackbar } from "notistack";
 import { axioAnonymous } from "../../data/axios";
 import { oms_server_production_url, oms_url } from "../../utils/SD";
@@ -34,7 +33,7 @@ const Login = () => {
         "/user/login",
         formData
       );
-
+      console.log("------", res)
       if (res?.status !== 200)
         return enqueueSnackbar(res?.data?.message || res.statusText, {
           variant: "error",
@@ -44,7 +43,7 @@ const Login = () => {
       dispatch(setAuthUser({ authUser: data, accessToken: access }));
       connectSocket(res.data.body.email);
 
-      enqueueSnackbar(res.data?.message || res.statusText, {
+      enqueueSnackbar(res.statusText, {
         variant: "success",
       });
       navigete(prevLoc, { replace: true });
@@ -64,22 +63,22 @@ const Login = () => {
     >
       <p className="text-2xl font-bold my-4">Login Here!</p>
 
-      <label htmlFor={"email"} className="w-full ">
+      <label htmlFor={"Email"} className="w-full">
         <p className="font-medium">Email:</p>
         <input
           required
-          id={"email"}
+          id={"Email"}
           type={"email"}
           onChange={(e) => handleChange(e)}
           className="w-full opacity-75 pt-2 border-t-0 border-r-0 focus:outline-0 px-2 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
         />
         <i className="bi bi-envelope relative float-right right-10 bottom-10 text-lg "></i>
       </label>
-      <label htmlFor={"password"} className="w-full">
+      <label htmlFor={"Password"} className="w-full">
         <p className="font-medium">Password:</p>
         <input
           required
-          id={"password"}
+          id={"Password"}
           type={passwordType}
           onChange={(e) => handleChange(e)}
           className="w-full opacity-75 pt-2 border-t-0 border-r-0 focus:outline-0 px-2 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"

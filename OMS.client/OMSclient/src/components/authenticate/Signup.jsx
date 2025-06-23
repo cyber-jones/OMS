@@ -109,7 +109,7 @@ const Signup = () => {
           label={"Cell Phone"}
           handleChange={handleChange}
         />
-        <label htmlFor="Relationship" className="w-1/2">
+        <label htmlFor="relationship" className="w-1/2">
           <p className="font-medium">Relationship:</p>
           <select
             id="relationship"
@@ -130,12 +130,19 @@ const Signup = () => {
           label={"National Identity No"}
           handleChange={handleChange}
         />
-        <Input
-          type={"text"}
-          name={"state"}
-          label={"State"}
-          handleChange={handleChange}
-        />
+        <label htmlFor="state" className="w-1/2">
+          <p className="font-medium">Address State:</p>
+          <select
+            id="state"
+            onChange={handleChange}
+            className="w-full border-t-0 border-r-0 opacity-75 pt-2 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
+          >
+            <option>--select address state</option>
+            <option value={"Lagos"}>Lagos</option>
+            <option value={"Ikeja"}>Ikeja</option>
+            <option value={"Abuja"}>Abuja</option>
+          </select>
+        </label>
       </div>
       <div className="flex gap-2 w-full">
         <Input

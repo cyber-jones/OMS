@@ -35,7 +35,7 @@ const Appointments = () => {
       const mutateAppointments = appointments.map((appointment) => ({
         id: appointment._id,
         specialty_Name: specialties.find(
-          (specialty) => specialty._id == appointment._id
+          (specialty) => specialty._id == appointment.specialty_Id
         ).name,
         illness_Description: appointment.illness_Description,
         date: new Date(appointment.date).toDateString(),
@@ -100,8 +100,8 @@ const Appointments = () => {
             <i className="bi bi-plus text-green-600 text-lg md:text-3xl border border-green-600 px-1 mr-2"></i>
           </Link>
           <p className="text-lg text-center md:text-left md:text-3xl font-semibold text-blue-500 mb-5">
-            {authUser?.roles.includes(Roles.ADMIN)
-              ? "All Appointments"
+            {authUser?.roles.includes(Roles.DOCTOR)
+              ? "Appointments"
               : "My Appointments"}
           </p>
           {data.length > 0 && appointments ? (

@@ -11,9 +11,10 @@ export const ALLOWEDORIGINS = [
   "http://localhost:7004",
   "http://localhost:5173",
   "https://oms-ochre.vercel.app",
-  // "http://oms-doctor-api.runasp.net/api",
-  // "http://oms-staff-api.runasp.net/api",
-  // "http://oms-patient-api.runasp.net/api"
+  "http://oms-doctor-api.onrender.com/api",
+  "http://oms-staff-api.onrender.com/api",
+  "http://oms-patient-api.onrender.com/api",
+  "http://oms-drug-api.onrender.com/api",
 ];
 
 export const ALLOWEDMETHODS = ["GET", "POST", "PUT", "DELETE"];

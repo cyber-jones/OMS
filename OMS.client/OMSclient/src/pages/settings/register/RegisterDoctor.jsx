@@ -68,7 +68,7 @@ const RegisterDoctor = () => {
           Password: password,
           AccType: "doctor",
           Role: "doctor",
-          User_Profile_Id: res.data?.patient._id,
+          User_Profile_Id: res.data?.doctor._id,
         };
 
         const res2 = await axioAnonymous(oms_server_production_url.auth).post(

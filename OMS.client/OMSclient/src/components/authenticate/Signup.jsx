@@ -10,6 +10,7 @@ const Signup = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const [passwordType, setPasswordType] = useState("password");
   const navigete = useNavigate();
 
   const handleChange = (e) => {
@@ -30,7 +31,9 @@ const Signup = () => {
       );
 
       if (res.status !== 201)
-        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, {
+          variant: "error",
+        });
       else {
         const body = {
           Email: formData.email,
@@ -41,21 +44,25 @@ const Signup = () => {
         };
 
         console.log(body);
-          const res2 = await axioAnonymous(oms_server_production_url.auth).post(
-            "/user/register",
-            body
-          );
+        const res2 = await axioAnonymous(oms_server_production_url.auth).post(
+          "/user/register",
+          body
+        );
 
-          if (res2.status !== 201)
-            return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+        if (res2.status !== 201)
+          return enqueueSnackbar(res.data?.message || res.statusText, {
+            variant: "error",
+          });
 
-          enqueueSnackbar(res2.statusText, { variant: "success" });
-          setFormData({});
-          navigete(oms_url.dashBoard);
+        enqueueSnackbar(res2.statusText, { variant: "success" });
+        setFormData({});
+        navigete(oms_url.dashBoard);
       }
     } catch (err) {
       console.log(err);
-      enqueueSnackbar(err.response?.data?.message || err.response?.statusText, { variant: "error" });
+      enqueueSnackbar(err.response?.data?.message || err.response?.statusText, {
+        variant: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -156,12 +163,27 @@ const Signup = () => {
           label={"Home Address"}
           handleChange={handleChange}
         />
-        <Input
-          type={"password"}
-          name={"password"}
-          label={"Password (4 digits only)"}
-          handleChange={handleChange}
-        />
+        <label htmlFor={"password"}>
+          <p className="font-medium">Password (4 digits only):</p>
+          <input
+            required
+            id={"password"}
+            type={passwordType}
+            onChange={(e) => handleChange(e)}
+            className="w-full opacity-75 pt-2 border-t-0 border-r-0 focus:outline-0 px-2 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
+          />
+          {passwordType == "text" ? (
+            <i
+              className="bi bi-eye absolute text-lg"
+              onClick={() => setPasswordType("password")}
+            ></i>
+          ) : (
+            <i
+              className="bi bi-eye-slash absolute"
+              onClick={() => setPasswordType("text")}
+            ></i>
+          )}
+        </label>
       </div>
 
       <div className="w-full">

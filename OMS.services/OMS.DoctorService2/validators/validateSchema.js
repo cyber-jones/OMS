@@ -11,9 +11,9 @@ export const DoctorValidator = Joi.object({
     cell_Phone: Joi.string().required(),
     address: Joi.string().required(),
     dob: Joi.string().required(),
-    mln: Joi.string().required(),
     nin: Joi.string().required(),
-    profile_Url: Joi.string().required(),
+    mln: Joi.string().required(),
+    state: Joi.string().required(),
     relationship: Joi.string().required(),
     sex: Joi.string().required(),
     specialty: Joi.string().required(),
@@ -25,7 +25,7 @@ export const DoctorValidator = Joi.object({
 });
 
 export const SpecialtyValidator = Joi.object({
-    Name: Joi.string().required(),
-    Description: Joi.string().required()
+    name: Joi.string().required(),
+    description: Joi.string().required()
 });
 

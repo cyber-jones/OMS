@@ -45,7 +45,8 @@ export const postDrug = async (req, res, next) => {
 
 export const updateDrug = async (req, res, next) => {
     try {
-        const { error, value } = DrugValidator.validate(req.body);
+        const { _id, updatedAt, createdAt, __v, created_By, updated_By, ...data } = req.body
+        const { error, value } = DrugValidator.validate(data);
 
         if (error)
             return res.status(400).json({ success: false, message: error.message });

@@ -14,6 +14,7 @@ import useSocket from "../../hooks/useSocket";
 import useAxiosAuthorization from "../../hooks/useAxiosAuth";
 import { oms_server_production_url } from "../../utils/SD";
 import { useSnackbar } from "notistack";
+import DemoUsers from "./DemoUsers";
 
 const Users = () => {
   const { doctors, loading } = useDoctor();
@@ -21,13 +22,14 @@ const Users = () => {
   const { patients, loading: loadingPatient } = usePatient();
   const [userList, setUserList] = useState([]);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const { selectedUser, onlineUsers } = useSelector(
-    (state) => state.chat
-  );
+  const { selectedUser, onlineUsers } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
   const { socket } = useSocket();
-  const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
+  const axiosAuth = useAxiosAuthorization(
+    oms_server_production_url.appointment
+  );
   const { enqueueSnackbar } = useSnackbar();
+
 
   useEffect(() => {
     if (!socket) return;
@@ -102,14 +104,6 @@ const Users = () => {
     return () => window.removeEventListener("resize", handleCheckWidth);
   }, []);
 
-  // const btnAll = document.getElementById("allUsers");
-  // const btnOnline = document.getElementById("onlineUsers");
-
-  // btnAll.addEventListener("click", () => {
-  //   btnAll.classList.add("bg-blue-900 text-white");
-  //   btnAll.classList.remove("border-blue-900");
-  // });
-
   return (
     <div
       className={`${
@@ -133,48 +127,51 @@ const Users = () => {
           Online
         </button>
       </div>
-      {!loading && !loadingPatient ? userList.length > 0 ? (
-        userList.map((user, index) => (
-          <div
-            key={index}
-            onClick={() => handleSelectUser(user)}
-            className="font-sans w-full gap-6 h-22 flex justify-start items-center cursor-pointer hover:bg-gray-300 transition-all ease-out duration-500"
-          >
-            <div className="w-12 h-12 rounded-full bg-stone-700 ml-8">
-              <img
-                src={
-                  user?.profile_Url
-                    ? user?.profile_Url
-                    : user?.sex == "Male"
-                    ? "/images/profile-masculine.jpeg"
-                    : "/images/profile-femine.jpeg"
-                }
-                className="rounded-full"
-              />
-              {onlineUsers?.includes(user?.Email) ? (
-                <div className="relative w-4 h-4 bg-green-500 rounded-full -top-4 left-7"></div>
-              ) : (
-                <div className="relative w-4 h-4 bg-red-500 rounded-full -top-4 left-7"></div>
-              )}
+      {!loading && !loadingPatient ? (
+        userList.length > 0 ? (
+          userList.map((user, index) => (
+            <div
+              key={index}
+              onClick={() => handleSelectUser(user)}
+              className="font-sans w-full gap-6 h-22 flex justify-start items-center cursor-pointer hover:bg-gray-300 transition-all ease-out duration-500"
+            >
+              <div className="w-12 h-12 rounded-full bg-stone-700 ml-8">
+                <img
+                  src={
+                    user?.profile_Url
+                      ? user?.profile_Url
+                      : user?.sex == "Male"
+                      ? "/images/profile-masculine.jpeg"
+                      : "/images/profile-femine.jpeg"
+                  }
+                  className="rounded-full"
+                />
+                {onlineUsers?.includes(user?.Email) ? (
+                  <div className="relative w-4 h-4 bg-green-500 rounded-full -top-4 left-7"></div>
+                ) : (
+                  <div className="relative w-4 h-4 bg-red-500 rounded-full -top-4 left-7"></div>
+                )}
+              </div>
+              <div className="text-sm border-b-[0.2px] border-gray-400 py-2 w-[65%]">
+                <strong>
+                  {user?.mln ? "Dr" : null} {user?.first_Name} {user?.last_Name}
+                </strong>
+                <p>
+                  {onlineUsers?.includes(user?.email) ? "online" : "Offline"}
+                </p>
+              </div>
             </div>
-            <div className="text-sm border-b-[0.2px] border-gray-400 py-2 w-[65%]">
-              <strong>
-                {user?.MLN ? "Dr" : null} {user?.first_Name}{" "}
-                {user?.Last_Name}
-              </strong>
-              <p>{onlineUsers?.includes(user?.email) ? "online" : "Offline"}</p>
-            </div>
-          </div>
-        ))
-      ) : (
-        <div
-            className="font-sans w-full gap-6 h-22 flex text-center justify-center items-center cursor-pointer hover:bg-gray-300 transition-all ease-out duration-500"
-          >
+          ))
+        ) : (
+          <div className="font-sans w-full gap-6 h-22 flex text-center justify-center items-center cursor-pointer hover:bg-gray-300 transition-all ease-out duration-500">
             <strong className="text-sm border-b-[0.2px] text-red-800 text-center border-gray-400 py-2 w-[65%]">
               No user found!
             </strong>
           </div>
-      ) : <Circle /> }
+        )
+      ) : (
+        <DemoUsers />
+      )}
     </div>
   );
 };

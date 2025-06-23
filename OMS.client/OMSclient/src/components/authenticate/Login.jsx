@@ -8,11 +8,8 @@ import { useDispatch } from "react-redux";
 import { setAuthUser } from "../../redux/auth/authUserSlice";
 import useSocket from "../../hooks/useSocket";
 
-
-
-
-
 const Login = () => {
+  const [passwordType, setPasswordType] = useState("password");
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -22,8 +19,6 @@ const Login = () => {
   const prevLoc = location.state?.from?.pathname || oms_url.dashBoard;
   const { connectSocket } = useSocket();
 
- 
-  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -41,17 +36,22 @@ const Login = () => {
       );
 
       if (res?.status !== 200)
-        return enqueueSnackbar(res?.data?.message || res.statusText, { variant: "error" });
+        return enqueueSnackbar(res?.data?.message || res.statusText, {
+          variant: "error",
+        });
 
       const { accessToken: access, ...data } = res.data.body;
       dispatch(setAuthUser({ authUser: data, accessToken: access }));
       connectSocket(res.data.body.email);
 
-      enqueueSnackbar(res.data?.message || res.statusText, { variant: "success" });
+      enqueueSnackbar(res.data?.message || res.statusText, {
+        variant: "success",
+      });
       navigete(prevLoc, { replace: true });
-
     } catch (err) {
-      enqueueSnackbar(err?.response?.data?.message || err.message, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err.message, {
+        variant: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -63,20 +63,39 @@ const Login = () => {
       onSubmit={(e) => handleLogin(e)}
     >
       <p className="text-2xl font-bold my-4">Login Here!</p>
-      <Input
-        type={"email"}
-        name={"Email"}
-        label={"Email"}
-        handleChange={handleChange}
-        width="w-full"
-      />
-      <Input
-        type={"password"}
-        name={"Password"}
-        label={"Password"}
-        handleChange={handleChange}
-        width="w-full"
-      />
+
+      <label htmlFor={"email"} className="w-full">
+        <p className="font-medium">Email:</p>
+        <input
+          required
+          id={"email"}
+          type={"email"}
+          onChange={(e) => handleChange(e)}
+          className="w-full opacity-75 pt-2 border-t-0 border-r-0 focus:outline-0 px-2 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
+        />
+        <i className="bi bi-envelope absolute text-lg"></i>
+      </label>
+      <label htmlFor={"password"} className="w-full">
+        <p className="font-medium">Password:</p>
+        <input
+          required
+          id={"password"}
+          type={passwordType}
+          onChange={(e) => handleChange(e)}
+          className="w-full opacity-75 pt-2 border-t-0 border-r-0 focus:outline-0 px-2 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
+        />
+        {passwordType == "text" ? (
+          <i
+            className="bi bi-eye absolute text-lg"
+            onClick={() => setPasswordType("password")}
+          ></i>
+        ) : (
+          <i
+            className="bi bi-eye-slash absolute"
+            onClick={() => setPasswordType("text")}
+          ></i>
+        )}
+      </label>
       {loading ? (
         <button
           disabled={loading}

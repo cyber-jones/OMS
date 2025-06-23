@@ -50,19 +50,17 @@ export const oms_server_dev_url = {
 
 
 export const oms_server_production_url = {
-    // doctor: "http://oms-doctor-api.runasp.net/api",
-     doctor: "http://localhost:7002/api",
-    // doctor: "http://oms-doctor-api.onrender.com/api",
-    // staff: "http://oms-staff-api.runasp.net/api",
-    staff: "http://oms-staff-api.onrender.com/api",
-    // patient: "http://oms-patient-api.runasp.net/api",
-    // patient: "http://oms-patient-api.onrender.com/api",
-    patient: "http://localhost:7001/api",
-    // auth: "https://oms-auth-api.onrender.com/api",
-     auth: "http://localhost:7005/api",
-    // drug: "http://oms-drug-api.runasp.net/api",
-    // drug: "http://oms-drug-api.onrender.com/api",
-        drug: "http://localhost:7003/api",
+    //  doctor: "http://localhost:7002/api",
+    doctor: "https://oms-doctor-api.onrender.com/api",
+    // patient: "http://localhost:7001/api",
+    patient: "https://oms-patient-api.onrender.com/api",
+    // staff: "http://localhost:7004/api",
+    staff: "https://oms-staff-api.onrender.com/api",
+    // auth: "http://localhost:7005/api",
+    auth: "https://oms-auth-api.onrender.com/api",
+    // drug: "http://localhost:7003/api",
+    drug: "https://oms-drug-api.onrender.com/api",
+    // appointment: "http://localhost:7006/api",
     appointment: "https://oms-appointment-api.onrender.com/api",
 }
 

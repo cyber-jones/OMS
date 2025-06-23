@@ -78,7 +78,7 @@ const DoctorList = () => {
 
   return (
     <>
-      {!loading ? (
+      {!loading && doctors ? (
         <div className="w-[95%] h-11/12">
           <p className="text-lg text-center md:text-left md:text-3xl font-semibold text-blue-500 mb-5">
             All Doctors

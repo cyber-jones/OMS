@@ -52,7 +52,7 @@ console.log(today)
     const reqTime = hours + minutes;
 
     if (formData?.doctor_Id) {
-      const doctor = doctors.find((doc) => doc.doctor_Id == formData.doctor_Id);
+      const doctor = doctors.find((doc) => doc._id == formData.doctor_Id);
       const [hrs, mins] = doctor.cT_Start.split(":");
       const [hrs1, mins1] = doctor.cT_End.split(":");
       const docCTS = hrs + mins;
@@ -87,7 +87,7 @@ console.log(today)
       setFormData({});
       navigate(oms_url.appointment);
     } catch (err) {
-      enqueueSnackbar(err.response.data.message || err.response.statusText, { variant: "error" });
+      enqueueSnackbar(err.response?.data.message || err.response.statusText, { variant: "error" });
     } finally {
       setLoading(false);
     }

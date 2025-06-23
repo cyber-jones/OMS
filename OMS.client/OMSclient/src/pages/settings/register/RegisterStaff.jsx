@@ -45,7 +45,7 @@ const RegisterStaff = () => {
           Password: password,
           AccType: "staff",
           Role: "staff",
-          User_Profile_Id: res.data?.patient._id,
+          User_Profile_Id: res.data?.staff._id,
         };
 
         console.log(body);

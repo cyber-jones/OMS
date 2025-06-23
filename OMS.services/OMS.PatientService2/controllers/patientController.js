@@ -61,7 +61,7 @@ export const postPatient = async (req, res, next) => {
 
 export const updatePatient = async (req, res, next) => {
   try {
-    const { _id, updatedAt, createdAt, __v, ...data } = req.body
+    const { _id, updatedAt, createdAt, __v, profile_Url, ...data } = req.body
     const { error, value } = PatientValidator.validate(data);
 
     if (error)
@@ -69,7 +69,7 @@ export const updatePatient = async (req, res, next) => {
 
     const updatedPatient = await Patient.findByIdAndUpdate(
       req.params.id,
-      { $set: { ...value } },
+      { $set: { profile_Url: profile_Url, ...value } },
       { new: true }
     );
 

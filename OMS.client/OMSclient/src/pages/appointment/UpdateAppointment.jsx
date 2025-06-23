@@ -120,13 +120,13 @@ const UpdateAppointment = () => {
       {!loadingAppointment && appointment ? (
         <>
           <div className="w-[95%] flex flex-col-reverse md:flex-row-reverse h-11/12 font-sans">
-            <div className="flex h-9/12 md:h-11/12 flex-col w-full md:w-[55%] justify-center items-center">
+            <div className="flex h-7/12 md:h-11/12 flex-col w-full md:w-[55%] justify-center items-center">
               <p className="text-blue-700 text-3xl mb-6 md:pl-0 pl-3 font-semibold mt-6 md:mt-0">
                 Reschedule Appointment
               </p>
               <form
                 onSubmit={handleSubmit}
-                className="w-full h-full flex pl-3 flex-col justify-start items-satrt gap-5 font-sans overflow-auto"
+                className="w-full h-11/12 flex pl-3 flex-col justify-start items-satrt gap-5 font-sans overflow-auto"
               >
                 <label htmlFor="Specialty_Id" className="w-full">
                   <p className="font-medium">
@@ -235,13 +235,13 @@ const UpdateAppointment = () => {
                 </div>
               </form>
             </div>
-            <div className="w-full md:w-[40%] h-3/12 md:h-full flex justify-center items-center">
-              <img
-                src="/images/calender.webp"
-                className="md:pr-10 w-[50%]"
-                alt="drug-img"
-              />
-            </div>
+           <div className="w-full md:w-[40%] h-5/12 md:h-full flex justify-center items-center">
+            <calendar-date class="cally bg-base-100 border border-base-300 shadow-lg rounded-box">
+              <svg aria-label="Previous" className="fill-current size-4" slot="previous" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M15.75 19.5 8.25 12l7.5-7.5"></path></svg>
+              <svg aria-label="Next" className="fill-current size-4" slot="next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path></svg>
+              <calendar-month></calendar-month>
+            </calendar-date>
+          </div>
           </div>
         </>
       ) : (

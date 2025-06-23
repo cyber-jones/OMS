@@ -44,12 +44,13 @@ export const postSpecialty = async (req, res, next) => {
 
 export const updateSpecialty = async (req, res, next) => {
     try {
-        const { error, value } = SpecialtyValidator.validate(req.body);
+        const { _id, updatedAt, createdAt, __v, created_By, updated_By, ...data } = req.body;
+        const { error, value } = SpecialtyValidator.validate(data);
 
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const updatedSpecialty = await Specialty.findByIdAndUpdate(req.params.id, { $set: { updated_By: req.email, ...value }}, { new: true });
+        const updatedSpecialty = await Specialty.findByIdAndUpdate(req.params.id, { $set: { created_By: created_By, updated_By: req.email, ...value }}, { new: true });
 
         await Logger(req.email, "Updated Specialty", updatedSpecialty.name);
 
@@ -57,7 +58,7 @@ export const updateSpecialty = async (req, res, next) => {
     } catch (err) {
         next(err);
     }
-}
+}   
 
 
 export const deleteSpecialty = async (req, res, next) => {

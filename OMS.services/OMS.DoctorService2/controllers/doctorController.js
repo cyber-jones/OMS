@@ -9,7 +9,7 @@ import { DoctorValidator } from "../validators/validateSchema.js";
 export const getDoctors = async (req, res, next) => {
     try {
         const doctors = await Doctor.find().populate("specialty").populate("sub_Specialty").exec();
-        return res.status(200).json({ success: true, data: doctors });
+        return res.status(200).json({ success: true, doctor: doctors });
     } catch (err) {
         next(err);
     }
@@ -39,7 +39,7 @@ export const postDoctor = async (req, res, next) => {
         // await RegisterAuthUser({ Email: value.Email, Password: Password, AccType: ROLES[1], Role: ROLES[1], User_Profile_Id: newDoctor._id });
 
         await newDoctor.save();
-        return res.status(201).json({ success: true, data: newDoctor, message: "Doctor created successfully" });
+        return res.status(201).json({ success: true, doctor: newDoctor, message: "Doctor created successfully" });
     } catch (err) {
         next(err);
     }
@@ -48,16 +48,17 @@ export const postDoctor = async (req, res, next) => {
 
 export const updateDoctor = async (req, res, next) => {
     try {
-        const { error, value } = DoctorValidator.validate(req.body);
+        const { _id, updatedAt, createdAt, __v, created_By, updated_By, profile_Url, ...data } = req.body;
+        const { error, value } = DoctorValidator.validate(data);
 
         if (error)
             return res.status(400).json({ success: false, message: error.message });
 
-        const updatedDoctor = await Doctor.findByIdAndUpdate(req.params.id, { $set: { updated_By: req.email, ...value }}, { new: true });
+        const updatedDoctor = await Doctor.findByIdAndUpdate(req.params.id, { $set: { updated_By: req.email, profile_Url: profile_Url, ...value }}, { new: true });
 
         await Logger(req.email, "Updated Doctor", value.email);
 
-        return res.status(205).json({ success: true, data: updatedDoctor, message: "Doctor updated successfully" });
+        return res.status(205).json({ success: true, doctor: updatedDoctor, message: "Doctor updated successfully" });
     } catch (err) {
         next(err);
     }

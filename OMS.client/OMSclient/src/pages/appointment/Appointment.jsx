@@ -22,11 +22,11 @@ const Appointment = () => {
   const { doctors, loading: loadingDoctor } = useDoctor();
   const specialty = specialties !== null
     ? specialties.find(
-        (specialtyValue) => specialtyValue._id == appointment._id
+        (specialtyValue) => specialtyValue._id == appointment.specialty_Id
       )
     : null;
   const doctor = doctors?.find(
-    (doctor) => doctor._id == appointment._id
+    (doctor) => doctor._id == appointment.doctor_Id
   );
   const { enqueueSnackbar } = useSnackbar();
   const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);

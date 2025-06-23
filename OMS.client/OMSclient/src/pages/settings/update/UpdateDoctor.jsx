@@ -8,52 +8,8 @@ import useSpecialty from "../../../hooks/useSpecialty";
 import Circle from "../../../components/loading/Circle";
 import useDoctor from "../../../hooks/useDoctor";
 
-
-
-
-
 const UpdateDoctor = () => {
-  // const [formData, setFormData] = useState({
-  //   First_Name: "",
-  //   Middle_Name: "",
-  //   Last_Name: "",
-  //   Email: "",
-  //   Relationship: "",
-  //   Cell_Phone: "",
-  //   State: "",
-  //   Address: "",
-  //   NIN: "",
-  //   Work_ID: "",
-  //   Sex: "",
-  //   DOB: "",
-  //   MLN: "",
-  //   Specialty_Id: "",
-  //   Sub_Specialty_Id: "",
-  //   CT_Start: "",
-  //   CT_End: "",
-  //   Certificate_Url: "",
-  //   Clinic_Phone: ""
-  // });
-  // const [FirstName, setFirstName] = useState(null);
-  // const [LastName, setLastName] = useState(null);
-  // const [MidddleName, setMidddleName] = useState(null);
-  // const [NIN, setNIN] = useState(null);
-  // const [Email, setEmail] = useState(null);
-  // const [CellPhone, setCellPhone] = useState(null);
-  // const [Relationship, setRelationship] = useState(null);
-  // const [State, setState] = useState(null);
-  // const [Address, setAddress] = useState(null);
-  // const [WorkID, setWorkID] = useState(null);
-  // const [SpecialtyId, setSpecialtyId] = useState(null);
-  // const [SubSpecialtyId, setSubSpecialtyId] = useState(null);
-  // const [Sex, setSex] = useState(null);
-  // const [DOB, setDOB] = useState(null);
-  // const [MLN, setMLN] = useState(null);
-  // const [CT_Start, setCT_Start] = useState(null);
-  // const [CT_End, setCT_End] = useState(null);
-  // const [ClinicPhone, setClinicPhone] = useState(null);
-  const [CertificateUrl, setCertificateUrl] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
@@ -63,101 +19,9 @@ const UpdateDoctor = () => {
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const axiosAuth = useAxiosAuthorization(oms_server_production_url.doctor);
 
-
-
-
-  // const getDoctorById = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const res = await axiosAuth.get("/doctor/" + id);
-  //     console.log(res);
-  //     if (res?.status !== 200 && !res?.data)
-  //       return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
-
-  //     setFirstName(res.data.first_Name);
-  //     setLastName(res.data.last_Name);
-  //     setMidddleName(res.data.middle_Name);
-  //     setNIN(res.data.nin);
-  //     setEmail(res.data.email);
-  //     setCellPhone(res.data.cell_Phone);
-  //     setState(res.data.state);
-  //     setWorkID(res.data.work_ID);
-  //     setRelationship(res.data.relationship);
-  //     setSpecialtyId(res.data.specialty_Id);
-  //     setSubSpecialtyId(res.data.sub_Specialty_Id);
-  //     setSex(res.data.sex);
-  //     setDOB(res.data.dob);
-  //     setMLN(res.data.mln);
-  //     setCT_Start(res.data.cT_Start);
-  //     setCT_End(res.data.cT_End);
-  //     setClinicPhone(res.data.clinic_Phone);
-  //     setCT_Start(res.data.cT_Start);
-  //     setCT_End(res.data.cT_End);
-  //     setAddress(res.data.address);
-  //     setCertificateUrl(res.data.certificate_Url);
-
-  //     enqueueSnackbar(res.statusText, { variant: "success" });
-  //   } catch (err) {
-  //     enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-
-  // useEffect(() => {
-  //   getDoctorById();
-  // }, []);
-
-
-  // useEffect(() => {
-  //   setFormData({
-  //     Address: Address,
-  //     CT_End: CT_End,
-  //     CT_Start: CT_Start,
-  //     Cell_Phone: CellPhone,
-  //     DOB: DOB,
-  //     Email: Email,
-  //     First_Name: FirstName,
-  //     Middle_Name: MidddleName,
-  //     Last_Name: LastName,
-  //     MLN: MLN,
-  //     Relationship: Relationship,
-  //     Work_ID: WorkID,
-  //     Sex: Sex,
-  //     Sub_Specialty_Id: SubSpecialtyId,
-  //     Specialty_Id: SpecialtyId,
-  //     NIN: NIN,
-  //     State: State,
-  //     Certificate_Url: CertificateUrl,
-  //     Clinic_Phone: ClinicPhone
-  //   });
-  //   }, [
-  //     FirstName,
-  //     Address,
-  //     CT_End,
-  //     CellPhone,
-  //     DOB,
-  //     CT_Start,
-  //     MidddleName,
-  //     LastName,
-  //     MLN,
-  //     Relationship,
-  //     SpecialtyId,
-  //     SubSpecialtyId,
-  //     NIN,
-  //     CertificateUrl,
-  //     State,
-  //     ClinicPhone,
-  //     Sex,
-  //     WorkID,
-  //     Email
-  //   ]);
-
   useEffect(() => {
     if (!loadingDoctor && doctor) setFormData(doctor);
   }, [doctor, loadingDoctor]);
-
 
   const handleChange = (e) => {
     setFormData({
@@ -176,35 +40,37 @@ const UpdateDoctor = () => {
 
     const fileReader = new FileReader();
     fileReader.onload = () => {
-      setCertificateUrl(fileReader.result);
       setFormData({
-      ...formData,
-      [e.target.id]: fileReader.result,
-    });
-    }
+        ...formData,
+        [e.target.id]: fileReader.result,
+      });
+    };
     fileReader.readAsDataURL(file);
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    formData.specialty = formData.specialty._id;
+    formData.sub_Specialty = formData.sub_Specialty._id;
     try {
-      const res = await axiosAuth.put("/doctor/"+id, formData);
+      const res = await axiosAuth.put("/doctor/" + id, formData);
       console.log(res);
       if (res?.status !== 205)
-        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, {
+          variant: "error",
+        });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       navigete(oms_url.doctorList);
     } catch (err) {
-      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, {
+        variant: "error",
+      });
     } finally {
       setLoading(false);
     }
   };
-
-
 
   console.log(formData);
 
@@ -226,7 +92,7 @@ const UpdateDoctor = () => {
             name={"middle_Name"}
             label={"Middle Name"}
             type={"text"}
-            value={formData?.midddle_Name}
+            value={formData?.middle_Name}
             handleChange={handleChange}
           />
           <Input3
@@ -247,14 +113,14 @@ const UpdateDoctor = () => {
             name={"cell_Phone"}
             label={"Phone"}
             type={"text"}
-            value={formData?.CellPhone}
+            value={formData?.cell_Phone}
             handleChange={handleChange}
           />
           <label htmlFor="relationship" className="w-full">
             <p className="font-medium">Relationship:</p>
             <select
               id="relationship"
-              value={formData?.Relationship}
+              value={formData?.relationship}
               onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
@@ -268,7 +134,7 @@ const UpdateDoctor = () => {
             <p className="font-medium">Address State:</p>
             <select
               id="state"
-              value={formData?.State}
+              value={formData?.state}
               onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
@@ -282,28 +148,28 @@ const UpdateDoctor = () => {
             name={"address"}
             label={"Home Address"}
             type={"text"}
-            value={formData?.Address}
+            value={formData?.address}
             handleChange={handleChange}
           />
           <Input3
             name={"nin"}
             label={"National Identity No."}
             type={"text"}
-            value={formData?.NIN}
+            value={formData?.nin}
             handleChange={handleChange}
           />
           <Input3
             name={"work_ID"}
             label={"Work ID"}
             type={"text"}
-            value={formData?.WorkID}
+            value={formData?.work_ID}
             handleChange={handleChange}
           />
           <label htmlFor="sex" className="w-full">
             <p className="font-medium">Sex:</p>
             <select
               id="sex"
-              value={formData?.Sex}
+              value={formData?.sex}
               onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
@@ -323,22 +189,22 @@ const UpdateDoctor = () => {
             name={"MLN"}
             label={"Medical Licence No."}
             type={"text"}
-            value={formData?.MLN}
+            value={formData?.mln}
             handleChange={handleChange}
           />
           <label htmlFor="specialty" className="w-full">
             <p className="font-medium">Specialty:</p>
             <select
               id="specialty"
-              value={formData?.specialty}
+              value={formData?.specialty._id}
               onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
               <option>--select specialty</option>
-              {!loadingSpecialty ? (
+              {!loadingSpecialty && specialties ? (
                 specialties.map((specialty, index) => (
-                  <option key={index} value={formData?.specialty?.name}>
-                    {specialty?.name}
+                  <option key={index} value={specialty._id}>
+                    {specialty.name}
                   </option>
                 ))
               ) : (
@@ -350,15 +216,15 @@ const UpdateDoctor = () => {
             <p className="font-medium">Sub Specialty:</p>
             <select
               id="sub_Specialty"
-              value={formData?.sub_Specialty}
+              value={formData?.sub_Specialty._id}
               onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
               <option>--select specialty</option>
-              {!loadingSpecialty ? (
+              {!loadingSpecialty && specialties ? (
                 specialties.map((specialty, index) => (
-                  <option key={index} value={formData?.specialty?.name}>
-                    {specialty?.name}
+                  <option key={index} value={specialty?._id}>
+                    {specialty.name}
                   </option>
                 ))
               ) : (
@@ -370,7 +236,7 @@ const UpdateDoctor = () => {
             name={"clinic_Phone"}
             label={"Work Phone"}
             type={"text"}
-            value={formData?.ClinicPhone}
+            value={formData?.clinic_Phone}
             handleChange={handleChange}
           />
           <Input3
@@ -388,7 +254,7 @@ const UpdateDoctor = () => {
             handleChange={handleChange}
           />
           <label htmlFor="certificate_Url" className="w-full">
-          <p className="font-medium">Upload Certificate:</p>
+            <p className="font-medium">Upload Certificate:</p>
             <input
               id="certificate_Url"
               type="file"
@@ -400,7 +266,11 @@ const UpdateDoctor = () => {
             />
             <img
               onClick={() => imageRef.current.click()}
-              src={CertificateUrl ? CertificateUrl : "/images/image-insert.png"}
+              src={
+                formData?.certificate_Url
+                  ? formData.certificate_Url
+                  : "/images/image-insert.png"
+              }
               className="cursor-pointer"
               alt="certi-image"
             />

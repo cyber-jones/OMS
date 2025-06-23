@@ -1,124 +1,32 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input3 from "../../../components/Inputs/Input3";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
 import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import Circle from "../../../components/loading/Circle";
-
-
-
-
-
-
-
+import useStaff from "../../../hooks/useStaff";
 
 const UpdateStaff = () => {
-  const [formData, setFormData] = useState({
-    First_Name: "",
-    Middle_Name: "",
-    Last_Name: "",
-    Email: "",
-    Relationship: "",
-    Cell_Phone: "",
-    State: "",
-    Address: "",
-    NIN: "",
-    Work_ID: "",
-    Sex: "",
-    DOB: "",
-    Profile_Url: "",
-  });
-  const [FirstName, setFirstName] = useState(null);
-  const [LastName, setLastName] = useState(null);
-  const [MidddleName, setMidddleName] = useState(null);
-  const [NIN, setNIN] = useState(null);
-  const [Email, setEmail] = useState(null);
-  const [CellPhone, setCellPhone] = useState(null);
-  const [Relationship, setRelationship] = useState(null);
-  const [State, setState] = useState(null);
-  const [Address, setAddress] = useState(null);
-  const [WorkID, setWorkID] = useState(null);
-  const [Sex, setSex] = useState(null);
-  const [DOB, setDOB] = useState(null);
-  const [ProfileUrl, setProfileUrl] = useState(null);
+  const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
+    const imageRef = useRef();
   const { id } = useParams();
+  const { loading: loadingStaff, staffs: staff } = useStaff(id);
   const axiosAuth = useAxiosAuthorization(oms_server_production_url.staff);
 
-
-
-
-
-
-  const getDoctorById = async () => {
-    setLoading(true);
-    try {
-      const res = await axiosAuth.get("/staff/" + id);
-      console.log(res);
-      if (res?.status !== 200 && !res.data?.staff)
-        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
-
-      setFirstName(res.data.staff.first_Name);
-      setLastName(res.data.staff.last_Name);
-      setMidddleName(res.data.staff.middle_Name);
-      setNIN(res.data.staff.nin);
-      setEmail(res.data.staff.email);
-      setCellPhone(res.data.staff.cell_Phone);
-      setState(res.data.staff.state);
-      setWorkID(res.data.staff.work_ID);
-      setRelationship(res.data.staff.relationship);
-      setSex(res.data.staff.sex);
-      setDOB(res.data.staff.dob);
-      setAddress(res.data.staff.address);
-      setProfileUrl(res.data.staff.profile_Url);
-
-      enqueueSnackbar(res.statusText, { variant: "success" });
-    } catch (err) {
-      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getDoctorById();
-  }, []);
+    if (!loadingStaff && staff) setFormData(staff);
+  }, [loadingStaff, staff]);
 
-  useEffect(() => {
+  const handleChange = (e) => {
     setFormData({
-      Address: Address,
-      Cell_Phone: CellPhone,
-      DOB: DOB,
-      Email: Email,
-      First_Name: FirstName,
-      Middle_Name: MidddleName,
-      Last_Name: LastName,
-      Relationship: Relationship,
-      Work_ID: WorkID,
-      Sex: Sex,
-      NIN: NIN,
-      State: State,
-      Profile_Url: ProfileUrl,
+      ...formData,
+      [e.target.id]: e.target.value,
     });
-  }, [
-    Address,
-    CellPhone,
-    DOB,
-    Email,
-    FirstName,
-    MidddleName,
-    LastName,
-    Relationship,
-    WorkID,
-    Sex,
-    NIN,
-    State,
-    ProfileUrl,
-  ]);
+  };
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];
@@ -129,7 +37,10 @@ const UpdateStaff = () => {
 
     const fileReader = new FileReader();
     fileReader.onload = () => {
-      setProfileUrl(fileReader.result);
+      setFormData({
+        ...formData,
+        [e.target.id]: fileReader.result,
+      });
     };
     fileReader.readAsDataURL(file);
   };
@@ -140,9 +51,10 @@ const UpdateStaff = () => {
 
     try {
       const res = await axiosAuth.put("/staff/" + id, formData);
-      console.log(res);
       if (res?.status !== 205)
-        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, {
+          variant: "error",
+        });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       navigete(oms_url.staffList);
@@ -157,61 +69,54 @@ const UpdateStaff = () => {
 
   console.log(formData);
 
-
-
-
-
-
-
-
   return (
     <>
-      {!loading && FirstName ? (
+      {!loadingStaff && staff ? (
         <form
           onSubmit={handleSubmit}
           className="w-[95%] h-11/12 text-sm md:text-lg pl-3 grid grid-cols-2 md:grid-cols-3 font-sans place-content-start place-items-center gap-8 md:overflow-auto overflow-y-scroll"
         >
           <Input3
-            name={"First_Name"}
+            name={"first_Name"}
             label={"First Name"}
             type={"text"}
-            value={FirstName}
-            handleChange={(e) => setFirstName(e.target.value)}
+            value={formData?.firstName}
+            handleChange={handleChange}
           />
           <Input3
-            name={"Middle_Name"}
+            name={"middle_Name"}
             label={"Middle Name"}
             type={"text"}
-            value={MidddleName}
-            handleChange={(e) => setMidddleName(e.target.value)}
+            value={formData?.midddleName}
+            handleChange={handleChange}
           />
           <Input3
-            name={"Last_Name"}
+            name={"last_Name"}
             label={"Last Name"}
             type={"text"}
-            value={LastName}
-            handleChange={(e) => setLastName(e.target.value)}
+            value={formData?.lastName}
+            handleChange={handleChange}
           />
           <Input3
-            name={"Email"}
+            name={"email"}
             label={"Email"}
             type={"email"}
-            value={Email}
-            handleChange={(e) => setEmail(e.target.value)}
+            value={formData?.email}
+            handleChange={handleChange}
           />
           <Input3
-            name={"Cell_Phone"}
+            name={"cell_Phone"}
             label={"Phone"}
             type={"text"}
-            value={CellPhone}
-            handleChange={(e) => setCellPhone(e.target.value)}
+            value={formData?.cellPhone}
+            handleChange={handleChange}
           />
-          <label htmlFor="Relationship" className="w-full">
+          <label htmlFor="relationship" className="w-full">
             <p className="font-medium">Relationship:</p>
             <select
-              id="Relationship"
-              value={Relationship}
-              onChange={(e) => setRelationship(e.target.value)}
+              id="relationship"
+              value={formData?.relationship}
+              onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
               <option>--select relationship</option>
@@ -220,12 +125,12 @@ const UpdateStaff = () => {
               <option value={"Devorced"}>Devorced</option>
             </select>
           </label>
-          <label htmlFor="State" className="w-full">
+          <label htmlFor="state" className="w-full">
             <p className="font-medium">Address State:</p>
             <select
-              id="State"
-              value={State}
-              onChange={(e) => setState(e.target.value)}
+              id="state"
+              value={formData?.state}
+              onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
               <option>--select address state</option>
@@ -235,32 +140,32 @@ const UpdateStaff = () => {
             </select>
           </label>
           <Input3
-            name={"Address"}
+            name={"address"}
             label={"Home Address"}
             type={"text"}
-            value={Address}
-            handleChange={(e) => setAddress(e.target.value)}
+            value={formData?.address}
+            handleChange={handleChange}
           />
           <Input3
-            name={"NIN"}
+            name={"nin"}
             label={"National Identity No."}
             type={"text"}
-            value={NIN}
-            handleChange={(e) => setNIN(e.target.value)}
+            value={formData?.nin}
+            handleChange={handleChange}
           />
           <Input3
-            name={"Work_ID"}
+            name={"work_ID"}
             label={"Work ID"}
             type={"text"}
-            value={WorkID}
-            handleChange={(e) => setWorkID(e.target.value)}
+            value={formData?.workID}
+            handleChange={handleChange}
           />
-          <label htmlFor="Sex" className="w-full">
+          <label htmlFor="sex" className="w-full">
             <p className="font-medium">Sex:</p>
             <select
-              id="Sex"
-              value={Sex}
-              onChange={(e) => setSex(e.target.value)}
+              id="sex"
+              value={formData?.sex}
+              onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
               <option>--select sex</option>
@@ -269,20 +174,32 @@ const UpdateStaff = () => {
             </select>
           </label>
           <Input3
-            name={"DOB"}
+            name={"dob"}
             label={"Date of birth"}
             type={"date"}
-            value={DOB}
-            handleChange={(e) => setDOB(e.target.value)}
+            value={formData?.dob}
+            handleChange={handleChange}
           />
-          <label htmlFor="Profile_Url" className="w-full">
+          <label htmlFor="profile_Url" className="w-full">
             <p className="font-medium">Uplaod Profile:</p>
             <input
-              id="Profile_Url"
+              id="profile_Url"
               type="file"
               accept="image/*"
-              onChange={(e) => handleImageUrl(e)}
+              hidden
+              ref={imageRef}
+              onChange={handleImageUrl}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
+            />
+            <img
+              onClick={() => imageRef.current.click()}
+              src={
+                formData?.profile_Url
+                  ? formData.profile_Url
+                  : "/images/image-insert.png"
+              }
+              className="cursor-pointer"
+              alt="profile-image"
             />
           </label>
           <div className="w-full">

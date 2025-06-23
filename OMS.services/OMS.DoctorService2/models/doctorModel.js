@@ -50,7 +50,6 @@ const doctorSchema = new Schema({
         type: String
     }, 
     profile_Url: {
-        required: true,
         type: String
     }, 
     relationship: {

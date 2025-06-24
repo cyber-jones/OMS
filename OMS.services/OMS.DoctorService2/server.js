@@ -18,6 +18,7 @@ import { verifyRoles } from "./middlewares/verifyRoles.js";
 import { ROLES } from "./utils/SD.js";
 import doctorRouter from "./routes/doctorRoute.js";
 import specialtyRouter from "./routes/specialtyRoute.js";
+import { ConnectCloudinary } from "./config/cloudinaryConfig.js";
 
 
 
@@ -25,6 +26,7 @@ import specialtyRouter from "./routes/specialtyRoute.js";
 const URI = process.env.MONGOOSE_PRODUCTION_URI;
 const PORT = process.env.PORT || 7002;
 connectDb(URI);
+ConnectCloudinary();
 // Migration();
 
 

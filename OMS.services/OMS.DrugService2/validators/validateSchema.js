@@ -12,7 +12,6 @@ export const DrugValidator = Joi.object({
     price: Joi.string().required(),
     expiry_Date: Joi.string().required(),
     count_In_Stock: Joi.number().required(),
-    image: Joi.string().required()
 });
 
 

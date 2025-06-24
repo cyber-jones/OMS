@@ -1,6 +1,7 @@
 import Patient from "../models/patientModel.js";
 import Log from "../models/logModel.js";
 import { Logger } from "../utils/log.js";
+import { v2 as cloudinary } from "cloudinary";
 import axios from "axios"
 import { PatientValidator } from "../validators/validateSchema.js";
 import { ROLES } from "../utils/SD.js";
@@ -61,7 +62,7 @@ export const postPatient = async (req, res, next) => {
 
 export const updatePatient = async (req, res, next) => {
   try {
-    const { _id, updatedAt, createdAt, __v, profile_Url, ...data } = req.body
+    const { _id, updatedAt, createdAt, __v, profile_Url, ...data } = req.body;
     const { error, value } = PatientValidator.validate(data);
 
     if (error)
@@ -69,7 +70,7 @@ export const updatePatient = async (req, res, next) => {
 
     const updatedPatient = await Patient.findByIdAndUpdate(
       req.params.id,
-      { $set: { profile_Url: profile_Url, ...value } },
+      { $set: { ...value }},
       { new: true }
     );
 
@@ -81,6 +82,31 @@ export const updatePatient = async (req, res, next) => {
         success: true,
         patient: updatedPatient,
         message: "Patient updated successfully",
+      });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const imageUpload = async (req, res, next) => {
+  try {
+    const imageFile = req.file;
+    const cloudImage = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
+
+    const updatedPatient = await Patient.findByIdAndUpdate(
+      req.params.id,
+      { $set: { profile_Url: cloudImage?.secure_url }},
+      { new: true }
+    );
+
+    await Logger(req.email, "Updated Patient Image", req.email);
+
+    return res
+      .status(205)
+      .json({
+        success: true,
+        patient: updatedPatient,
+        message: "Updated successfully with profile image",
       });
   } catch (err) {
     next(err);

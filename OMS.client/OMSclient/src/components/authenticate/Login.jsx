@@ -33,7 +33,7 @@ const Login = () => {
         "/user/login",
         formData
       );
-      console.log("------", res)
+
       if (res?.status !== 200)
         return enqueueSnackbar(res?.data?.message || res.statusText, {
           variant: "error",

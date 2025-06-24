@@ -9,6 +9,7 @@ import useDrug from "../../../hooks/useDrug";
 const UpdateDrug = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
   const imageRef = useRef();
   const navigete = useNavigate();
@@ -16,12 +17,11 @@ const UpdateDrug = () => {
   const axiosAuth = useAxiosAuthorization(oms_server_production_url.drug);
   const { loading: laodingDrug, drugs: drug } = useDrug(id);
 
-
   useEffect(() => {
     if (!laodingDrug && drug) setFormData(drug);
   }, [laodingDrug, drug]);
 
-    const handleChange = (e) => {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
@@ -30,17 +30,26 @@ const UpdateDrug = () => {
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];
+    const fileSize = 2048000;
     if (!file.type.startsWith("image/")) {
       enqueueSnackbar("Please select an image file", { variant: "error" });
       return;
     }
 
+    if (file.size > fileSize) {
+      enqueueSnackbar("Image size too large { maximum - 2mb}", {
+        variant: "error",
+      });
+      return;
+    }
+
     const fileReader = new FileReader();
     fileReader.onload = () => {
-            setFormData({
-      ...formData,
-      [e.target.id]: fileReader.result,
-    });
+      setImage(fileReader.result);
+      setFormData({
+        ...formData,
+        [e.target.id]: file,
+      });
     };
     fileReader.readAsDataURL(file);
   };
@@ -51,12 +60,32 @@ const UpdateDrug = () => {
 
     try {
       const res = await axiosAuth.put("/drug/" + id, formData);
-      console.log(res);
       if (res?.status !== 205)
-        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, {
+          variant: "error",
+        });
+      else {
+        if (image) {
+          const form = new FormData();
+          form.append("image_file", formData?.image);
+          const res2 = await axiosAuth.put("/drug/image-upload/" + id, form, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
 
-      enqueueSnackbar(res.statusText, { variant: "success" });
-      navigete(oms_url.drugList);
+          if (res2?.status !== 205)
+            return enqueueSnackbar(res.data?.message || res.statusText, {
+              variant: "error",
+            });
+
+          enqueueSnackbar(res.statusText, { variant: "success" });
+          return navigete(oms_url.patientList);
+        } else {
+          enqueueSnackbar(res.statusText, { variant: "success" });
+          navigete(oms_url.patientList);
+        }
+      }
     } catch (err) {
       enqueueSnackbar(err?.response?.data?.message || err?.message, {
         variant: "error",
@@ -65,8 +94,6 @@ const UpdateDrug = () => {
       setLoading(false);
     }
   };
-
-
 
   return (
     <>
@@ -201,7 +228,7 @@ const UpdateDrug = () => {
           <label htmlFor="image" className="w-11/12 md:w-6/12">
             <p className="font-semibold">Drug Image:</p>
             <input
-              id="Image"
+              id="image"
               type="file"
               accept="image/*"
               hidden
@@ -211,7 +238,13 @@ const UpdateDrug = () => {
             />
             <img
               onClick={() => imageRef.current.click()}
-              src={formData?.imageUrl ? formData.imageUrl : "/images/image-insert.png"}
+              src={
+                image
+                  ? image
+                  : formData?.image
+                  ? formData.image
+                  : "/images/image-insert.png"
+              }
               className="cursor-pointer"
               alt="drug-image"
             />

@@ -1,6 +1,7 @@
 import Staff from "../models/staffModel.js";
 import Log from "../models/logModel.js";
 import { Logger } from "../utils/log.js";
+import { v2 as cloudinary } from "cloudinary";
 import axios from "axios"
 import { StaffValidator } from "../validators/validateSchema.js";
 import { ROLES } from "../utils/SD.js";
@@ -64,7 +65,8 @@ export const postStaff = async (req, res, next) => {
 
 export const updateStaff = async (req, res, next) => {
   try {
-    const { error, value } = StaffValidator.validate(req.body);
+    const { _id, updatedAt, createdAt, __v, profile_Url, ...data } = req.body;
+    const { error, value } = StaffValidator.validate(data);
 
     if (error)
       return res.status(400).json({ success: false, message: error.message });
@@ -83,6 +85,32 @@ export const updateStaff = async (req, res, next) => {
         success: true,
         staff: updatedStaff,
         message: "Staff updated successfully",
+      });
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+export const imageUpload = async (req, res, next) => {
+  try {
+    const imageFile = req.file;
+    const cloudImage = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
+
+    const updatedPatient = await Staff.findByIdAndUpdate(
+      req.params.id,
+      { $set: { profile_Url: cloudImage?.secure_url }},
+      { new: true }
+    );
+
+    await Logger(req.email, "Updated Staff Image", req.email);
+
+    return res
+      .status(205)
+      .json({
+        success: true,
+        patient: updatedPatient,
+        message: "Updated successfully with profile image",
       });
   } catch (err) {
     next(err);

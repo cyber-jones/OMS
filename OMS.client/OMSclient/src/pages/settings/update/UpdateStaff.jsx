@@ -9,6 +9,7 @@ import useStaff from "../../../hooks/useStaff";
 
 const UpdateStaff = () => {
   const [formData, setFormData] = useState({});
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigete = useNavigate();
@@ -30,16 +31,25 @@ const UpdateStaff = () => {
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];
+    const fileSize = 2048000;
     if (!file.type.startsWith("image/")) {
       enqueueSnackbar("Please select an image file", { variant: "error" });
       return;
     }
 
+    if (file.size > fileSize) {
+      enqueueSnackbar("Image size too large { maximum - 2mb}", {
+        variant: "error",
+      });
+      return;
+    }
+
     const fileReader = new FileReader();
     fileReader.onload = () => {
+      setImage(fileReader.result);
       setFormData({
         ...formData,
-        [e.target.id]: fileReader.result,
+        [e.target.id]: file,
       });
     };
     fileReader.readAsDataURL(file);
@@ -51,13 +61,37 @@ const UpdateStaff = () => {
 
     try {
       const res = await axiosAuth.put("/staff/" + id, formData);
+
       if (res?.status !== 205)
         return enqueueSnackbar(res.data?.message || res.statusText, {
           variant: "error",
         });
+      else {
+        if (image) {
+          const form = new FormData();
+          form.append("image_file", formData?.profile_Url);
+          const res2 = await axiosAuth.put(
+            "/staff/image-upload/" + id,
+            form,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
 
-      enqueueSnackbar(res.statusText, { variant: "success" });
-      navigete(oms_url.staffList);
+          if (res2?.status !== 205)
+            return enqueueSnackbar(res.data?.message || res.statusText, {
+              variant: "error",
+            });
+
+          enqueueSnackbar(res.statusText, { variant: "success" });
+          return navigete(oms_url.patientList);
+        } else {
+          enqueueSnackbar(res.statusText, { variant: "success" });
+          navigete(oms_url.patientList);
+        }
+      }
     } catch (err) {
       enqueueSnackbar(err?.response?.data?.message || err?.message, {
         variant: "error",
@@ -66,6 +100,8 @@ const UpdateStaff = () => {
       setLoading(false);
     }
   };
+
+  
 
   console.log(formData);
 
@@ -194,7 +230,9 @@ const UpdateStaff = () => {
             <img
               onClick={() => imageRef.current.click()}
               src={
-                formData?.profile_Url
+                image
+                  ? image
+                  : formData?.profile_Url
                   ? formData.profile_Url
                   : "/images/image-insert.png"
               }

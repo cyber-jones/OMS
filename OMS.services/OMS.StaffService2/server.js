@@ -17,6 +17,7 @@ import { verifyRoles } from "./middlewares/verifyRoles.js";
 import { ROLES } from "./utils/SD.js";
 import staffRouter from "./routes/staffRoute.js";
 import { getLogs } from "./controllers/staffController.js";
+import { ConnectCloudinary } from "./config/cloudinaryConfig.js";
 
 
 
@@ -25,7 +26,7 @@ import { getLogs } from "./controllers/staffController.js";
 const URI = process.env.MONGOOSE_PRODUCTION_URI;
 const PORT = process.env.PORT || 7001;
 connectDb(URI);
-
+ConnectCloudinary();
 
 
 app.use(reqLogger);

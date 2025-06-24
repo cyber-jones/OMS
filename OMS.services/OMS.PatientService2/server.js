@@ -17,6 +17,7 @@ import { getLogs } from "./controllers/patientController.js";
 import { verifyRoles } from "./middlewares/verifyRoles.js";
 import { ROLES } from "./utils/SD.js";
 import patientRouter from "./routes/patientRoute.js";
+import { ConnectCloudinary } from "./config/cloudinaryConfig.js";
 
 
 
@@ -25,7 +26,7 @@ import patientRouter from "./routes/patientRoute.js";
 const URI = process.env.MONGOOSE_PRODUCTION_URI;
 const PORT = process.env.PORT || 7001;
 connectDb(URI);
-
+ConnectCloudinary();
 
 
 app.use(reqLogger);

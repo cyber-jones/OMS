@@ -18,6 +18,7 @@ import drugRouter from "./routes/drugRoute.js";
 import cartRouter from "./routes/cartRoute.js";
 import { ROLES } from "./utils/SD.js";
 import { verifyRoles } from "./middlewares/verifyRoles.js";
+import { ConnectCloudinary } from "./config/cloudinaryConfig.js";
 
 
 
@@ -25,6 +26,7 @@ import { verifyRoles } from "./middlewares/verifyRoles.js";
 const URI = process.env.MONGOOSE_PRODUCTION_URI;
 const PORT = process.env.PORT || 7003;
 connectDb(URI);
+ConnectCloudinary();
 // Migration();
 
 

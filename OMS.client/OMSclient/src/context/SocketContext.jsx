@@ -25,8 +25,8 @@ export const SocketProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    if (!socket) return;
-    
+    if (socket) return;
+
     return connectSocket(authUser?.email);
   }, []);
 

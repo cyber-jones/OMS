@@ -6,7 +6,7 @@ import { DrugValidator } from "../validators/validateSchema.js";
 
 export const getDrugs = async (req, res, next) => {
   try {
-    const drugs = await Drug.find();
+    const drugs = await Drug.find({});
     return res.status(200).json({ success: true, drug: drugs });
   } catch (err) {
     next(err);

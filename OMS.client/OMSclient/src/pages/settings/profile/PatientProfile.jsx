@@ -41,6 +41,9 @@ const PatientProfile = () => {
               <b>Other Name</b>: {patient?.middle_Name}
             </p>
             <p>
+              <b>Email</b>: {patient?.email}
+            </p>
+            <p>
               <b>Gender</b>: {patient?.sex}
             </p>
             <p>
@@ -62,7 +65,7 @@ const PatientProfile = () => {
               <b>Address</b>: {patient?.address}
             </p>
             <p>
-              <b>Registered</b>: {new Date(patient?.created).toDateString()}
+              <b>Registered</b>: {new Date(patient?.createdAt).toDateString()}
             </p>
             <p className="text-red-500 mt-3">
               <b>Emergency Contact</b>

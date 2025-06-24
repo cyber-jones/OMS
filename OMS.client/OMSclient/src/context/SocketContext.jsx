@@ -20,7 +20,6 @@ export const SocketProvider = ({ children }) => {
     const newSocket = io(socket_connect_production_url, { query: { userId: Id } });
     newSocket.connect();
 
-    console.log("New-socket", newSocket);
     setSocket(newSocket);
   }
 
@@ -30,7 +29,7 @@ export const SocketProvider = ({ children }) => {
     return connectSocket(authUser?.email);
   }, []);
 
-  console.log("Socket", socket);
+
   return (
     <SocketContext.Provider value={{ socket, setSocket, connectSocket, disconnectSocket }}>
       {children}

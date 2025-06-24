@@ -112,6 +112,7 @@ const Signup = () => {
           <p className="font-medium">Relationship:</p>
           <select
             id="relationship"
+            required
             onChange={(e) => handleChange(e)}
             className="w-full border-t-0 border-r-0 opacity-75 pt-2 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
           >
@@ -133,10 +134,10 @@ const Signup = () => {
           <p className="font-medium">Address State:</p>
           <select
             id="state"
+            required
             onChange={handleChange}
             className="w-full border-t-0 border-r-0 opacity-75 pt-2 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
           >
-            <option>--select address state</option>
             <option value={"Lagos"}>Lagos</option>
             <option value={"Ikeja"}>Ikeja</option>
             <option value={"Abuja"}>Abuja</option>
@@ -154,6 +155,7 @@ const Signup = () => {
           <p className="font-medium">Sex:</p>
           <select
             id="sex"
+            required
             onChange={(e) => handleChange(e)}
             className="w-full opacity-75 pt-2 border-t-0 border-r-0 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
           >
@@ -222,7 +224,7 @@ const Signup = () => {
           {loading ? (
             <button
               disabled={loading}
-              className="w-full py-4 bg-yellow-950 uppercase rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer"
+              className="w-full py-4 bg-yellow-950 uppercase rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-not-allowedr"
             >
               Loading...
             </button>

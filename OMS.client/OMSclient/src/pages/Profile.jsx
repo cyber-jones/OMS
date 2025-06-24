@@ -37,6 +37,9 @@ const Profile = () => {
           <b>Other Name</b>: {user?.middle_Name}
         </p>
         <p>
+          <b>Email</b>: {user?.email}
+        </p>
+        <p>
           <b>Gender</b>: {user?.sex}
         </p>
         <p>

@@ -65,7 +65,7 @@ const DoctorProfile = () => {
           <b>Address</b>: {doctor?.address}
         </p>
         <p>
-          <b>Registered</b>: {new Date(doctor?.created).toDateString()}
+          <b>Registered</b>: {new Date(doctor?.createdAt).toDateString()}
         </p>
         <p className="text-red-500 mt-3">
           <b>Medical Info</b>

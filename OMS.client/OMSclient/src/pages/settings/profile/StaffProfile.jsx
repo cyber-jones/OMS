@@ -42,6 +42,9 @@ const StaffProfile = () => {
               <b>Other Name</b>: {staff?.middle_Name}
             </p>
             <p>
+              <b>Email</b>: {staff?.email}
+            </p>
+            <p>
               <b>Gender</b>: {staff?.sex}
             </p>
             <p>
@@ -66,7 +69,7 @@ const StaffProfile = () => {
               <b>OMS ID</b>: {staff?.work_ID}
             </p>
             <p>
-              <b>Registered</b>: {new Date(staff?.created).toDateString()}
+              <b>Registered</b>: {new Date(staff?.createdAt).toDateString()}
             </p>
             <p className="text-red-500 mt-3">
               <b>Emergency Contact</b>

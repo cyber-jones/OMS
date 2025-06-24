@@ -14,11 +14,11 @@ const DashBoardComponents = ({ children }) => {
     if (!socket) return;
 
     socket.on("new-connection", (userId) => {
-      enqueueSnackbar("Connected: " + userId, { variant: "success" });
+      enqueueSnackbar("Online: " + userId, { variant: "success" });
     });
 
     socket.on("new-disconnection", (userId) => {
-      enqueueSnackbar("Disconnected: " + userId, { variant: "warning" });
+      enqueueSnackbar("Offline: " + userId);
     });
 
     return () => {

@@ -98,7 +98,7 @@ const Login = () => {
       {loading ? (
         <button
           disabled={loading}
-          className="w-[80%] py-4 uppercase bg-green-950 rounded-3xl mt-7 text-lg text-white transition-all ease-in duration-500 cursor-pointer"
+          className="w-[80%] py-4 uppercase bg-green-950 rounded-3xl mt-7 text-lg text-white transition-all ease-in duration-500 cursor-not-allowed"
         >
           Logging in...
         </button>

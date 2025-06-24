@@ -318,8 +318,8 @@ function App() {
           }
         />
       </Route>
+      <Route path={oms_url.home} element={<Home />} />
       <Route element={<IsLoggedIn />}>
-        <Route path={oms_url.home} element={<Home />} />
         <Route path={oms_url.auth} element={<Auth />} />
       </Route>
       <Route path="*" element={<NotFound />} />

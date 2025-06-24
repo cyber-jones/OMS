@@ -72,7 +72,7 @@ const Users = () => {
     if (!loading && doctors && !loadingPatient && patients) {
       let newUserArray = [...doctors, ...patients];
       newUserArray = newUserArray.filter(
-        (user) => user?.email !== authUser?.email
+        (user) => user?._id !== authUser?.user_Profile_Id
       );
       setUserList(newUserArray);
       console.log("user-list", userList);

@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import useDoctor from "../../hooks/useDoctor";
-import Circle from "../loading/Circle";
 import {
   setLoading,
   setMessages,
@@ -51,7 +50,6 @@ const Users = () => {
         "/message/user/" + authUser.email + "/" + user.email
       );
 
-      console.log("res", res);
       if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",

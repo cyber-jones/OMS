@@ -22,11 +22,13 @@ const Chat = () => {
   const { enqueueSnackbar } = useSnackbar();
   const messageEndRef = useRef();
   const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
-  const profileUrl = selectedUser?.MLN
+  const profileUrl = selectedUser?.mln
     ? `/doctor/${selectedUser?._id}`
     : `/patient/${selectedUser?._id}`;
 
   const handleSendMessage = async () => {
+    if (text == "" && image == "") return;
+
     const senderId = authUser.email;
     const recieverId = selectedUser.email;
 
@@ -41,7 +43,6 @@ const Chat = () => {
     try {
       const res = await axiosAuth.post("/message", newMessage);
 
-      console.log(res);
       if (res?.status !== 201 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",
@@ -74,9 +75,17 @@ const Chat = () => {
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];
-
+    const fileSize = 1048000;
+    
     if (!file.type.startsWith("image/")) {
       enqueueSnackbar("Please select an image file", { variant: "error" });
+      return;
+    }
+
+    if (file.size > fileSize) {
+      enqueueSnackbar("Image size too large { maximum - 1mb}", {
+        variant: "error",
+      });
       return;
     }
 

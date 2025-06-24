@@ -1,4 +1,5 @@
 export const oms_url = {
+    home: "/",
     dashBoard: "/dashboard",
     specialty: "/specialty",
     specialties: "/specialties",

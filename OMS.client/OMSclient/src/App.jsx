@@ -37,6 +37,7 @@ import UpdateAppointment from "./pages/appointment/UpdateAppointment";
 import Patients from "./pages/patients/Patients";
 import PatientAction from "./pages/patients/PatientAction";
 import NewPrescription from "./pages/prescription/NewPrescription";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -318,6 +319,7 @@ function App() {
         />
       </Route>
       <Route element={<IsLoggedIn />}>
+        <Route path={oms_url.home} element={<Home />} />
         <Route path={oms_url.auth} element={<Auth />} />
       </Route>
       <Route path="*" element={<NotFound />} />

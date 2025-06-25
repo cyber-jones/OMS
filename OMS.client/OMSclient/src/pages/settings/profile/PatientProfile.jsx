@@ -13,7 +13,7 @@ const PatientProfile = () => {
       {!loading ? (
         <>
           <div className="w-full md:w-6/12 flex items-center justify-center md:h-full">
-            <div>
+            <Link to={patient?.profile_Url}>
               <img
                 src={
                   patient?.profile_Url
@@ -25,7 +25,7 @@ const PatientProfile = () => {
                 className="rounded-full shadow-2xl w-40 md:w-70"
                 alt="profile"
               />
-            </div>
+            </Link>
           </div>
           <div className="w-full flex flex-col justify-center md:w-6/12 md:h-full">
             <p className="text-yellow-500 text-2xl my-4 text-center md:text-left">

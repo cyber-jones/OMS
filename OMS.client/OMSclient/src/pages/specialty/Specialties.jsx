@@ -16,7 +16,7 @@ const Specialties = () => {
     const specialtySearched = specialties.filter((specialty) =>
       specialty.name.toLowerCase().startsWith(e.target.value.toLowerCase())
     );
-
+    
     setData(specialtySearched);
   };
 

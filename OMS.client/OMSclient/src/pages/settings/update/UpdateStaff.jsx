@@ -12,7 +12,7 @@ const UpdateStaff = () => {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-  const navigete = useNavigate();
+  const navigate = useNavigate();
     const imageRef = useRef();
   const { id } = useParams();
   const { loading: loadingStaff, staffs: staff } = useStaff(id);
@@ -86,10 +86,10 @@ const UpdateStaff = () => {
             });
 
           enqueueSnackbar(res.statusText, { variant: "success" });
-          return navigete(oms_url.patientList);
+          return navigate(oms_url.staffList);
         } else {
           enqueueSnackbar(res.statusText, { variant: "success" });
-          navigete(oms_url.patientList);
+          navigate(oms_url.staffList);
         }
       }
     } catch (err) {

@@ -32,6 +32,12 @@ const RegisterStaff = () => {
     e.preventDefault();
     setLoading(true);
     const { password, ...data } = formData;
+
+    if (password.length !== 4)
+      return enqueueSnackbar("Password should be four digits only", {
+        variant: "error",
+      });
+
     try {
       const res = await axiosAuth.post("/staff", data);
 
@@ -48,7 +54,6 @@ const RegisterStaff = () => {
           User_Profile_Id: res.data?.staff._id,
         };
 
-        console.log(body);
         const res2 = await axioAnonymous(oms_server_production_url.auth).post(
           "/user/register",
           body

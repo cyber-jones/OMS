@@ -38,6 +38,7 @@ import Patients from "./pages/patients/Patients";
 import PatientAction from "./pages/patients/PatientAction";
 import NewPrescription from "./pages/prescription/NewPrescription";
 import Home from "./pages/Home";
+import Log from "./pages/settings/Log";
 
 function App() {
   return (
@@ -314,6 +315,14 @@ function App() {
           element={
             <DashBoardComponents>
               <StaffProfile />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.logs}
+          element={
+            <DashBoardComponents>
+              <Log />
             </DashBoardComponents>
           }
         />

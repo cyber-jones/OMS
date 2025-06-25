@@ -55,6 +55,12 @@ const RegisterDoctor = () => {
     e.preventDefault();
     setLoading(true);
     const { password, ...data } = formData;
+
+    if (password.length !== 4)
+      return enqueueSnackbar("Password should be four digits only", {
+        variant: "error",
+      });
+
     try {
       const res = await axiosAuth.post("/doctor", data);
 

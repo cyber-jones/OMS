@@ -23,6 +23,9 @@ const drugSchema = new Schema({
     consume_Type: {
         type: String
     }, 
+    category: {
+        type: String
+    }, 
     price: {
         type: Number,
     },

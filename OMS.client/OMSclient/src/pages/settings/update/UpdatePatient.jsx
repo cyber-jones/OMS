@@ -13,7 +13,7 @@ const UpdatePatient = () => {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-  const navigete = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { loading: loadingPatient, patients: patient } = usePatient(id);
   const axiosAuth = useAxiosAuthorization(oms_server_production_url.patient);
@@ -85,10 +85,10 @@ const UpdatePatient = () => {
             });
 
           enqueueSnackbar(res.statusText, { variant: "success" });
-          return navigete(oms_url.patientList);
+          return navigate(oms_url.patientList);
         } else {
           enqueueSnackbar(res.statusText, { variant: "success" });
-          navigete(oms_url.patientList);
+          navigate(oms_url.patientList);
         }
       }
     } catch (err) {

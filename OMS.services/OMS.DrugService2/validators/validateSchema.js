@@ -9,9 +9,10 @@ export const DrugValidator = Joi.object({
     disclaimer: Joi.string().required(),
     manufacturer: Joi.string().required(),
     consume_Type: Joi.string().required(),
+    category: Joi.string().required(),
     price: Joi.string().required(),
     expiry_Date: Joi.string().required(),
-    count_In_Stock: Joi.number().required(),
+    count_In_Stock: Joi.number().required()
 });
 
 

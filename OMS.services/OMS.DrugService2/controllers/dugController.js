@@ -32,7 +32,7 @@ export const postDrug = async (req, res, next) => {
     const newDrug = new Drug({ created_By: req.email, ...value });
     await newDrug.save();
 
-    await Logger(req.email, "New Drug", newDrug.Name);
+    await Logger(req.email, "New Drug", newDrug.drug_Name);
 
     return res
       .status(201)
@@ -111,7 +111,7 @@ export const imageUpload = async (req, res, next) => {
 export const deleteDrug = async (req, res, next) => {
   try {
     const drug = await Drug.findByIdAndDelete(req.params.id);
-    await Logger(req.email, "Deleted Drug", drug.Name);
+    await Logger(req.email, "Deleted Drug", drug.drug_Name);
     return res
       .status(200)
       .json({ success: true, message: "Drug deleted successfully" });

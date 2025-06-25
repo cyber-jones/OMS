@@ -22,6 +22,21 @@ const Settings = () => {
     navigate(oms_url.auth);
   };
 
+  const toggleMode = () => {
+    console.log(localStorage.getItem("theme"))
+    if (localStorage.getItem("theme") == "light")
+      localStorage.setItem("theme", "dark");
+    else
+      localStorage.setItem("theme", "light");
+
+    // Whenever the user explicitly chooses light mode
+    localStorage.theme = "light";
+    // Whenever the user explicitly chooses dark mode
+    localStorage.theme = "dark";
+    // Whenever the user explicitly chooses to respect the OS preference
+    // localStorage.removeItem("theme");
+  }
+
   return (
     <div className="w-[95%] h-11/12">
       <div className="w-full max-h-full grid grid-cols-1 md:grid-cols-3 font-sans overflow-y-scroll place-content-start md:place-content-center  place-items-center gap-8 md:gap-12">
@@ -126,6 +141,14 @@ const Settings = () => {
           <i className="bi bi-journal-plus text-4xl text-blue-900"></i>
           <p className="text-md">Logs</p>
         </Link>
+        <div
+          onClick={toggleMode}
+          to={oms_url.logs}
+          className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-stone-900 h-[100px] rounded-lg flex justify-center items-center gap-7"
+        >
+          { localStorage.theme == "light" ? <i className="bi bi-moon text-4xl text-stone-900"></i> : <i className="bi bi-moon-fill text-4xl text-stone-900"></i>}
+          <p className="text-md">Mode</p>
+        </div>
         <div
           onClick={handleLogout}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-3 border-red-400 h-[100px] rounded-lg flex justify-center items-center gap-7"

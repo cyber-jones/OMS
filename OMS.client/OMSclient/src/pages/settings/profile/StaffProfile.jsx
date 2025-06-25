@@ -14,7 +14,7 @@ const StaffProfile = () => {
       {!loading ? (
         <>
           <div className="w-full md:w-6/12 flex items-center justify-center md:h-full">
-            <div>
+            <Link to={staff?.profile_Url}>
               <img
                 src={
                   staff?.profile_Url
@@ -26,7 +26,7 @@ const StaffProfile = () => {
                 className="rounded-full shadow-2xl w-40 md:w-70"
                 alt="profile"
               />
-            </div>
+            </Link>
           </div>
           <div className="w-full flex flex-col justify-center md:w-6/12 md:h-full">
             <p className="text-green-500 text-2xl my-4 text-center md:text-left">

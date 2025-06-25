@@ -13,7 +13,7 @@ const DoctorProfile = () => {
   return (
     <div className="text-sm md:text-[15px] w-[90%] flex flex-col bg-purple-200 justify-center p-4 items-center md:flex-row-reverse h-11/12 rounded-lg shadow-lg font-sans">
       <div className="w-full md:w-6/12 flex items-center justify-center md:h-full">
-        <div>
+        <Link to={doctor?.profile_Url}>
           <img
             src={
               doctor?.profile_Url
@@ -25,7 +25,7 @@ const DoctorProfile = () => {
             className="rounded-full shadow-2xl w-40 md:w-70"
             alt="profile"
           />
-        </div>
+        </Link>
       </div>
       <div className="w-full h-10/12 flex flex-col justify-center  md:w-6/12 md:h-full ">
         <p className="text-purple-600 text-2xl my-4 text-center md:text-left font-semibold">

@@ -11,14 +11,14 @@ const Auth = () => {
     loginRef.current.className =
       "bg-black text-white w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
     signupnRef.current.className =
-      "w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
+      "text-black w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
     setIsLogin(true);
   };
   const handleSignupRef = () => {
     signupnRef.current.className =
       "bg-black text-white w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
     loginRef.current.className =
-      "w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
+      "text-black w-[50%] rounded-3xl py-1 transition-all duration-700 ease-in-out";
     setIsLogin(false);
   };
 
@@ -38,7 +38,7 @@ const Auth = () => {
               id="login"
               onClick={handleLoginRef}
               ref={loginRef}
-              className="bg-black text-white w-[50%] rounded-3xl py-1 transition-all duration-1000 ease-in-out"
+              className="bg-black dark:bg-whte text-white w-[50%] rounded-3xl py-1 transition-all duration-1000 ease-in-out"
             >
               Login
             </div>
@@ -46,7 +46,7 @@ const Auth = () => {
               id="signup"
               onClick={handleSignupRef}
               ref={signupnRef}
-              className="w-[50%] py-1"
+              className="w-[50%] py-1 dark:text-black"
             >
               SignUp
             </div>

@@ -12,7 +12,7 @@ const UpdateDrug = () => {
   const [image, setImage] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
   const imageRef = useRef();
-  const navigete = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
   const axiosAuth = useAxiosAuthorization(oms_server_production_url.drug);
   const { loading: laodingDrug, drugs: drug } = useDrug(id);
@@ -80,10 +80,10 @@ const UpdateDrug = () => {
             });
 
           enqueueSnackbar(res.statusText, { variant: "success" });
-          return navigete(oms_url.patientList);
+          return navigate(oms_url.drugList);
         } else {
           enqueueSnackbar(res.statusText, { variant: "success" });
-          navigete(oms_url.patientList);
+          navigate(oms_url.drugList);
         }
       }
     } catch (err) {

@@ -13,7 +13,7 @@ const UpdateDoctor = () => {
     const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({});
   const { enqueueSnackbar } = useSnackbar();
-  const navigete = useNavigate();
+  const navigate = useNavigate();
   const imageRef = useRef();
   const { id } = useParams();
   const { loading: loadingDoctor, doctors: doctor } = useDoctor(id);
@@ -89,10 +89,10 @@ const UpdateDoctor = () => {
             });
 
           enqueueSnackbar(res.statusText, { variant: "success" });
-          return navigete(oms_url.patientList);
+          return navigate(oms_url.doctorList);
         } else {
           enqueueSnackbar(res.statusText, { variant: "success" });
-          navigete(oms_url.patientList);
+          navigate(oms_url.doctorList);
         }
       }
     } catch (err) {

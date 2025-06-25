@@ -3,7 +3,7 @@ import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
-import { useSelector } from "react-redux";
+
 
 const RegisterDrug = () => {
   const [formData, setFormData] = useState({});
@@ -12,7 +12,6 @@ const RegisterDrug = () => {
   const imageRef = useRef();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.user);
   const axiosAuth = useAxiosAuthorization(oms_server_production_url.drug);
 
   const handleChange = (e) => {
@@ -37,28 +36,47 @@ const RegisterDrug = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+       e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosAuth.post("/drug", {
-        ...formData,
-        created_By: `${user?.first_Name} ${user?.middle_Name} ${user?.last_Name}`,
-        image: ImageUrl,
-      });
-      console.log(res);
+      const res = await axiosAuth.post("/drug", formData);
+
       if (res?.status !== 201)
-        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, {
+          variant: "error",
+        });
+        else {
+          if (ImageUrl) {
+            const form = new FormData();
+            form.append("image_file", ImageUrl);
+            const res2 = await axiosAuth.put("/drug/image-upload/" + res.data?.drug._id, form, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            });
+  
+            if (res2?.status !== 205)
+              return enqueueSnackbar(res.data?.message || res.statusText, {
+                variant: "error",
+              });
+  
+            enqueueSnackbar(res.statusText, { variant: "success" });
+            return navigate(oms_url.drugList);
+          } else {
+            enqueueSnackbar(res.statusText, { variant: "success" });
+            navigate(oms_url.drugList);
+          }
+        }
+      } catch (err) {
+        enqueueSnackbar(err?.response?.data?.message || err?.message, {
+          variant: "error",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      enqueueSnackbar(res.statusText, { variant: "success" });
-      setFormData({});
-      navigate(oms_url.doctorList);
-    } catch (err) {
-      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
-    } finally {
-      setLoading(false);
-    }
-  };
-
+console.log(formData)
   return (
     <div className="w-[95%] flex flex-col-reverse md:flex-row-reverse h-11/12 font-sans">
       <div className="flex h-9/12 md:h-11/12 flex-col w-full md:w-[55%] justify-center items-center">

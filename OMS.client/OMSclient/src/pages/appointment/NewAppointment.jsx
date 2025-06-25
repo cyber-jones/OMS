@@ -81,13 +81,13 @@ console.log(today)
         patient_Id: authUser?.user_Profile_Id
       });
       if (res && res?.status !== 201)
-        return enqueueSnackbar(res.data.message || res.statusText, { variant: "warning" });
+        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "warning" });
 
       enqueueSnackbar(res.data.message, { variant: "success" });
       setFormData({});
       navigate(oms_url.appointment);
     } catch (err) {
-      enqueueSnackbar(err.response?.data.message || err.response.statusText, { variant: "error" });
+      enqueueSnackbar(err.response?.data.message || err?.statusText || err.message, { variant: "error" });
     } finally {
       setLoading(false);
     }
@@ -191,7 +191,7 @@ console.log(today)
               disabled={loading}
               className="md:w-5/12 w-full py-4 uppercase bg-green-900 hover:bg-green-950 rounded-3xl text-sm text-white transition-all ease-in duration-500 cursor-pointer md:float-right"
             >
-              {loading ? <Circle /> : null} Create Appiontment
+              {loading ? "Creating..." : "Create Appiontment"}
             </button>
           </div>
         </form>

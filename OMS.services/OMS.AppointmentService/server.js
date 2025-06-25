@@ -16,6 +16,9 @@ import { verifyAccess } from "./middlewares/verifyAccess.js";
 import messageRouter from "./routes/messageRoute.js";
 import prescriptionRouter from "./routes/prescriptionRoute.js";
 import { credentials } from "./middlewares/corsCredentials.js";
+import { getLogs } from "./controllers/appointmentController.js";
+import { verifyRoles } from "./middlewares/verifyRoles.js";
+import { ROLES } from "./utils/SD.js";
 
 
 
@@ -40,6 +43,7 @@ app.use(verifyAccess);
 app.use("/api/appointment", appointmentRouter);
 app.use("/api/message", messageRouter);
 app.use("/api/prescription", prescriptionRouter);
+app.use("/api/logs", verifyRoles([ROLES[0]]), getLogs);
 
 
 // app.all("*", (req, res) => {

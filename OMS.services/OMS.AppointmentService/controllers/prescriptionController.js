@@ -1,4 +1,5 @@
 import Prescription from "../models/prescriptionModel.js";
+import { Logger } from "../utils/log.js";
 import { STATUS } from "../utils/SD.js";
 import { PrescriptionValidator } from "../validators/validateSchema.js";
 
@@ -23,7 +24,9 @@ export const postPrescription = async (req, res, next) => {
         const newPrescription = new Prescription({ ...value });
         await newPrescription.save();  
 
-        return res.status(201).json({ success: true, newAppointment, message: "Drug prescribed successfully" });
+        await Logger(req.email, "New Prescription", newPrescription.patient_Id);
+
+        return res.status(201).json({ success: true, newPrescription, message: "Drug prescribed successfully" });
     } catch (err) {
         next(err);
     }
@@ -38,6 +41,7 @@ export const updatePrescription = async (req, res, next) => {
             return res.status(400).json({ success: false, message: error.message });
 
         const updatePrescription = await Prescription.findByIdAndUpdate(req.params.id, { $set: { ...value }}, { new: true });
+        await Logger(req.email, "Update Prescription", updatePrescription.patient_Id);
 
         return res.status(205).json({ success: true, updatePrescription, message: "Prescription updated successfully" });
     } catch (err) {
@@ -62,6 +66,8 @@ export const approvePrescription = async (req, res, next) => {
         findPrescription.approved_By = value;
         await findPrescription.save();
 
+        await Logger(req.email, "Approve Prescription", findPrescription.patient_Id);
+
         return res.status(205).json({ success: true, findPrescription, message: "Prescription approved successfully" });
     } catch (err) {
         next(err);
@@ -85,6 +91,8 @@ export const disapprovePrescription = async (req, res, next) => {
         findPrescription.disapproved_By = value.name;
         await findPrescription.save();
 
+        await Logger(req.email, "Disapprove Prescription", findPrescription.patient_Id);
+
         return res.status(205).json({ success: true, findPrescription, message: "Appointement disapproved successfully" });
     } catch (err) {
         next(err);
@@ -94,7 +102,9 @@ export const disapprovePrescription = async (req, res, next) => {
 
 export const deletePrescription = async (req, res, next) => {
     try {
-        await Prescription.findByIdAndDelete(req.params.id);
+        const prescription = await Prescription.findByIdAndDelete(req.params.id);
+        await Logger(req.email, "Delete Prescription", prescription.patient_Id);
+        
         return res.status(204).json({ success: true, message: "Prescription deleted successfully" });
     } catch (err) {
         next(err);

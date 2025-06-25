@@ -24,6 +24,12 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     const { password, ...data } = formData;
+
+    if (password.length !== 4)
+      return enqueueSnackbar("Password should be four digits only", {
+        variant: "error",
+      });
+
     try {
       const res = await axioAnonymous(oms_server_production_url.patient).post(
         "/patient",
@@ -53,7 +59,9 @@ const Signup = () => {
             variant: "error",
           });
 
-        enqueueSnackbar(res2.data?.message || res2.statusText, { variant: "success" });
+        enqueueSnackbar(res2.data?.message || res2.statusText, {
+          variant: "success",
+        });
         setFormData({});
         navigete(oms_url.dashBoard);
       }

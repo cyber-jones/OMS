@@ -8,6 +8,7 @@ import { useSnackbar } from "notistack";
 import useAxiosAuthorization from "../../hooks/useAxiosAuth";
 import { useSelector } from "react-redux";
 import { useAuth } from "../../utils/isAuthorized";
+import { useEffect, useState } from "react";
 
 const Appointment = () => {
   const { id } = useParams();
@@ -20,18 +21,25 @@ const Appointment = () => {
   );
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const { doctors, loading: loadingDoctor } = useDoctor();
-  const specialty = specialties !== null
+  const specialty = specialties !== null && appointment !== null
     ? specialties.find(
         (specialtyValue) => specialtyValue._id == appointment.specialty_Id
       )
     : null;
-  const doctor = doctors?.find(
-    (doctor) => doctor._id == appointment.doctor_Id
-  );
+  const [doctor, setDoctor] = useState({});    
   const { enqueueSnackbar } = useSnackbar();
   const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
   const navigate = useNavigate();
   const isAuth = useAuth([Roles.ADMIN]);
+
+  useEffect(() => {
+    if (!loadingDoctor && doctors && !loading && appointment) {
+      const doctor = doctors.find(
+      (doctor) => doctor._id == appointment.doctor_Id
+  );
+    setDoctor(doctor);
+    }
+  }, [loadingDoctor, doctors, appointment, loading]);
 
   const handleDelete = async () => {
     try {

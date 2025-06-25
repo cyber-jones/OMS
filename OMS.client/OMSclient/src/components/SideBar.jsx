@@ -10,7 +10,7 @@ const SideBar = ({ sideNav }) => {
     <div
       className={`${
         sideNav
-          ? "md:w-[10%] flex flex-col h-full justify-around items-center bg-gray-100 text-[11px] w-[150px] transition-all duration-700"
+          ? "md:w-[10%] flex flex-col h-full justify-around items-center bg-gray-100 text-[9px] w-[150px] transition-all duration-700"
           : "w-[0px] h- scale-x-0 h-11/12 flex flex-col justify-around items-center bg-gray-100 text-[11px] transition-all duration-700"
       }`}
     >

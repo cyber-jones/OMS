@@ -8,7 +8,7 @@ import useAxiosAuthorization from './useAxiosAuth';
 
 
 const useLog = () => {
-    const [logs, setLogs] = useState([]);
+    const [logs, setLogs] = useState(null);
     const [doctorLogs, setDoctorLogs] = useState([]);
     const [staffLogs, setstaffLogs] = useState([]);
     const [drugLogs, setDrugLogs] = useState([]);

@@ -3,11 +3,10 @@ import useLog from "../../hooks/useLog";
 
 const Log = () => {
   const { loading, logs } = useLog();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    if (loading) return;
-
+    if (!loading && logs) {
     const newArrLogs = logs.map((log) => ({
       blame: log.blame,
       description: log.description,
@@ -22,10 +21,11 @@ const Log = () => {
         ? "text-red-600"
         : "text-pint-600",
     }));
-    
-    console.log("arr", newArrLogs)
+    // console.log("arr", newArrLogs);
     setData(newArrLogs);
-  }, [loading, logs]);
+  }
+    return;
+  }, [loading, logs, setData]);
 
   return (
     <div className="w-[95%] md:w-[90%] h-full pt-1">
@@ -40,7 +40,7 @@ const Log = () => {
           <div className="w-3/12">Date</div>
         </div>
         {!loading ? (
-          data.length > 0 ? (
+          data ? (
             data.map((log, index) => (
               <div
                 key={index}

@@ -121,7 +121,7 @@ const DetaildeDashBoard = () => {
     }
     
   return (
-    <div className='w-full h-full flex justify-center items-center flex-col px-1 bg-amber-400'>
+    <div className='w-full h-full flex justify-center items-center flex-col px-1'>
         <div className='w-full h-1/12 md:pl-8 pl-2'>
             <h1 className='text-3xl font-semibold'>DashBoard</h1>
             <h3 className='text-sm font-thin text-red-400'>Health Data Tracker</h3>

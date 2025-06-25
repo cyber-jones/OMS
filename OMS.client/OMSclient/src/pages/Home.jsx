@@ -20,7 +20,7 @@ const Home = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-[70px] text-green-900 font-mono"
+            className="text-[50px] md:text-[70px] text-green-900 font-mono"
           >
             Health<span className="text-white">Tech</span>
           </motion.h1>

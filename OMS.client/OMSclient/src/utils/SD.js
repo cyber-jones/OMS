@@ -61,8 +61,8 @@ export const oms_server_production_url = {
     auth: "https://oms-auth-api.onrender.com/api",
     // drug: "http://localhost:7003/api",
     drug: "https://oms-drug-api.onrender.com/api",
-    appointment: "http://localhost:7006/api",
-    // appointment: "https://oms-appointment-api.onrender.com/api",
+    // appointment: "http://localhost:7006/api",
+    appointment: "https://oms-appointment-api.onrender.com/api",
 }
 
 

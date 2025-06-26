@@ -17,10 +17,12 @@ export const SocketProvider = ({ children }) => {
   };
 
   const connectSocket = (Id) => {
-    const newSocket = io(socket_connect_production_url, { query: { userId: Id } });
-    newSocket.connect();
+    if (authUser && Id) {
+      const newSocket = io(socket_connect_production_url, { query: { userId: Id } });
+      newSocket.connect();
 
-    setSocket(newSocket);
+      setSocket(newSocket);
+    }
   }
 
   useEffect(() => {
@@ -28,7 +30,6 @@ export const SocketProvider = ({ children }) => {
 
     return connectSocket(authUser?.email);
   }, []);
-
 
   return (
     <SocketContext.Provider value={{ socket, setSocket, connectSocket, disconnectSocket }}>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { axioAnonymous } from "../../data/axios";
 import { oms_server_production_url, oms_url } from "../../utils/SD";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../../redux/auth/authUserSlice";
 import useSocket from "../../hooks/useSocket";
@@ -107,9 +107,9 @@ const Login = () => {
           Login
         </button>
       )}
-      <p className="text-red-600 cursor-pointer hover:text-red-800 transition-all ease-in duration-500">
+      <Link to={oms_url.forgetPassword} className="text-red-600 cursor-pointer hover:text-red-800 transition-all ease-in duration-500">
         Forgot password?
-      </p>
+      </Link>
     </form>
   );
 };

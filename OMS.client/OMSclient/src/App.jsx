@@ -39,6 +39,9 @@ import PatientAction from "./pages/patients/PatientAction";
 import NewPrescription from "./pages/prescription/NewPrescription";
 import Home from "./pages/Home";
 import Log from "./pages/settings/Log";
+import ForgetPassword from "./pages/reset-password/ForgetPassword";
+import VerifyOtp from "./pages/reset-password/VerifyOtp";
+import ResetPassword from "./pages/reset-password/ResetPassword";
 
 function App() {
   return (
@@ -330,6 +333,9 @@ function App() {
       <Route path={oms_url.home} element={<Home />} />
       <Route element={<IsLoggedIn />}>
         <Route path={oms_url.auth} element={<Auth />} />
+        <Route path={oms_url.forgetPassword} element={<ForgetPassword />} />
+        <Route path={oms_url.verifyOtp} element={<VerifyOtp />} />
+        <Route path={oms_url.resetPassword} element={<ResetPassword />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

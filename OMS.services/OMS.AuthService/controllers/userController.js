@@ -176,7 +176,7 @@ export const forgetPassword = async (req, res, next) => {
         .status(400)
         .json({ success: false, message: "Email is has not been registered" });
 
-    await Logger(req.email, "Forget authUser password", user.email);
+    await Logger(user.email, "Forget authUser password", user.email);
 
     const otp = generateId();
     user.otp = otp;

@@ -4,13 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 
-
-
-
-
-
-
-
 const RegisterSpecialty = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -32,25 +25,22 @@ const RegisterSpecialty = () => {
       const res = await axiosAuth.post("/specialty", formData);
       console.log(res);
       if (res?.status !== 201)
-        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "error" });
+        return enqueueSnackbar(res.data?.message || res.statusText, {
+          variant: "error",
+        });
 
       enqueueSnackbar(res.statusText, { variant: "success" });
       setFormData({});
       navigete(oms_url.specialtyList);
     } catch (err) {
-      enqueueSnackbar(err?.response?.data?.message || err?.message, { variant: "error" });
+      enqueueSnackbar(err?.response?.data?.message || err?.message, {
+        variant: "error",
+      });
     } finally {
       setLoading(false);
     }
   };
-  console.log(formData);
 
-
-
-
-
-
-  
   return (
     <form
       onSubmit={handleSubmit}

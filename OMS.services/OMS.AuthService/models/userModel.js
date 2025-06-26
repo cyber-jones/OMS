@@ -28,6 +28,13 @@ const userSchema = new Schema({
     user_Profile_Id: {
         unique: true,
         type: mongoose.Schema.Types.ObjectId
+    },
+    loggedIn: {
+        type: Boolean,
+        default: false
+    },
+    otp: {
+        type: String
     }
 }, { timestamps: true });
 

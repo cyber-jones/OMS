@@ -1,11 +1,10 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Input2 from "../../../components/Inputs/Input2";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
 import useSpecialty from "../../../hooks/useSpecialty";
-import { axioAnonymous } from "../../../data/axios";
 
 const RegisterDoctor = () => {
   const [formData, setFormData] = useState({});
@@ -43,54 +42,26 @@ const RegisterDoctor = () => {
     fileReader.readAsDataURL(file);
   };
 
-  // useEffect(()=> {
-  //   let val = Object.keys(formData);
-  //   val.forEach(key => {
-  //     localStorage.setItem(key, "");
-  //   });
-
-  // }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const { password, ...data } = formData;
 
-    if (password.length !== 4)
+    if (formData.password.length !== 4)
       return enqueueSnackbar("Password should be four digits only", {
         variant: "error",
       });
 
     try {
-      const res = await axiosAuth.post("/doctor", data);
+      const res = await axiosAuth.post("/doctor", formData);
 
       if (res.status !== 201)
         return enqueueSnackbar(res.data?.message || res.statusText, {
           variant: "error",
         });
-      else {
-        const body = {
-          Email: formData.email,
-          Password: password,
-          AccType: "doctor",
-          Role: "doctor",
-          User_Profile_Id: res.data?.doctor._id,
-        };
 
-        const res2 = await axioAnonymous(oms_server_production_url.auth).post(
-          "/user/register",
-          body
-        );
-
-        if (res2.status !== 201)
-          return enqueueSnackbar(res.data?.message || res.statusText, {
-            variant: "error",
-          });
-
-        enqueueSnackbar(res.statusText, { variant: "success" });
+        enqueueSnackbar(res.data?.message || res.statusText, { variant: "success" });
         setFormData({});
         navigete(oms_url.doctorList);
-      }
     } catch (err) {
       enqueueSnackbar(err?.response?.data?.message || err?.message, {
         variant: "error",
@@ -99,7 +70,7 @@ const RegisterDoctor = () => {
       setLoading(false);
     }
   };
-  console.log(formData);
+
 
   return (
     <div className="w-[95%] h-11/12 flex flex-col font-sans">

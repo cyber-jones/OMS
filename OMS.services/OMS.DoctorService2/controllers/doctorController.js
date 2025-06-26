@@ -2,9 +2,10 @@ import Doctor from "../models/doctorModel.js";
 import Log from "../models/logModel.js";
 import { Logger } from "../utils/log.js";
 import { v2 as cloudinary } from "cloudinary";
-import { RegisterAuthUser } from "../utils/registerAuth.js";
 import { ROLES } from "../utils/SD.js";
 import { DoctorValidator } from "../validators/validateSchema.js";
+import { axiosPrivate } from "../config/axiosConfig.js";
+import mail from "../config/emailConfig.js";
 
 export const getDoctors = async (req, res, next) => {
   try {
@@ -41,16 +42,35 @@ export const postDoctor = async (req, res, next) => {
     const newDoctor = new Doctor({ created_By: req.email, ...data });
 
     await Logger(req.email, "New Doctor", value.email);
-    // await RegisterAuthUser({ Email: value.Email, Password: Password, AccType: ROLES[1], Role: ROLES[1], User_Profile_Id: newDoctor._id });
+
+    const body = {
+      Email: value.Email,
+      Password: Password,
+      AccType: ROLES[1],
+      Role: ROLES[1],
+      User_Profile_Id: newDoctor._id,
+    };
+
+    const authRes = await axiosPrivate(req.token).post("/register", body);
+    if (authRes && authRes.status !== 201)
+      return res.status(400).json({
+        success: false,
+        message: authRes.data?.message || authRes.statusText,
+      });
 
     await newDoctor.save();
-    return res
-      .status(201)
-      .json({
-        success: true,
-        doctor: newDoctor,
-        message: "Doctor created successfully",
-      });
+    await mail(
+      newDoctor.email,
+      `${newDoctor.first_Name} ${newDoctor.last_Name}`,
+      "Doctor Registration",
+      "Thank you for trusting us"
+    );
+
+    return res.status(201).json({
+      success: true,
+      doctor: newDoctor,
+      message: "Doctor created successfully",
+    });
   } catch (err) {
     next(err);
   }
@@ -73,6 +93,16 @@ export const updateDoctor = async (req, res, next) => {
     if (error)
       return res.status(400).json({ success: false, message: error.message });
 
+    const authRes = await axiosPrivate(req.token).put(
+      "/update/email",
+      value.email
+    );
+    if (authRes && authRes.status !== 205)
+      return res.status(400).json({
+        success: false,
+        message: authRes.data?.message || authRes.statusText,
+      });
+
     const updatedDoctor = await Doctor.findByIdAndUpdate(
       req.params.id,
       { $set: { updated_By: req.email, ...value } },
@@ -81,13 +111,11 @@ export const updateDoctor = async (req, res, next) => {
 
     await Logger(req.email, "Updated Doctor", value.email);
 
-    return res
-      .status(205)
-      .json({
-        success: true,
-        doctor: updatedDoctor,
-        message: "Doctor updated successfully",
-      });
+    return res.status(205).json({
+      success: true,
+      doctor: updatedDoctor,
+      message: "Doctor updated successfully",
+    });
   } catch (err) {
     next(err);
   }

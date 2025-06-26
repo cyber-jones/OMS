@@ -19,6 +19,7 @@ export const verifyAccess = (req, res, next) => {
         req.user = user.id;
         req.email = user.email;
         req.roles = roles;
+        req.token = accessToken;
 
         return next();
     });

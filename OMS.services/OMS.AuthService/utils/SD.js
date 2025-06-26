@@ -1,7 +1,3 @@
-export const client_dev_uri = process.env.CLIENT_DEV_URI;
-
-export const client_production_uri = process.env.CLIENT_PRODUCTION_URI;
-
 export const ROLES = ["admin", "doctor", "staff", "patient"];
 
 export const ALLOWEDORIGINS = [

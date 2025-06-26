@@ -23,9 +23,8 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const { password, ...data } = formData;
 
-    if (password.length !== 4)
+    if (formData.password.length !== 4)
       return enqueueSnackbar("Password should be four digits only", {
         variant: "error",
       });
@@ -33,40 +32,20 @@ const Signup = () => {
     try {
       const res = await axioAnonymous(oms_server_production_url.patient).post(
         "/patient",
-        data
+        formData
       );
 
       if (res.status !== 201)
         return enqueueSnackbar(res.data?.message || res.statusText, {
           variant: "error",
         });
-      else {
-        const body = {
-          Email: formData.email,
-          Password: password,
-          AccType: "patient",
-          Role: "patient",
-          User_Profile_Id: res.data?.patient._id,
-        };
 
-        const res2 = await axioAnonymous(oms_server_production_url.auth).post(
-          "/user/register",
-          body
-        );
-
-        if (res2.status !== 201)
-          return enqueueSnackbar(res2.data?.message || res.statusText, {
-            variant: "error",
-          });
-
-        enqueueSnackbar(res2.data?.message || res2.statusText, {
-          variant: "success",
-        });
-        setFormData({});
-        navigete(oms_url.dashBoard);
-      }
+      enqueueSnackbar(res.data?.message || res.statusText, {
+        variant: "success",
+      });
+      setFormData({});
+      navigete(oms_url.dashBoard);
     } catch (err) {
-      console.log(err);
       enqueueSnackbar(err.response?.data?.message || err.response?.statusText, {
         variant: "error",
       });
@@ -146,6 +125,7 @@ const Signup = () => {
             onChange={handleChange}
             className="w-full border-t-0 border-r-0 opacity-75 pt-2 focus:outline-0 px-1 border-b-1 border-l-1 border-b-gray-300 border-l-gray-300 rounded-bl-xl"
           >
+            <option></option>
             <option value={"Lagos"}>Lagos</option>
             <option value={"Ikeja"}>Ikeja</option>
             <option value={"Abuja"}>Abuja</option>

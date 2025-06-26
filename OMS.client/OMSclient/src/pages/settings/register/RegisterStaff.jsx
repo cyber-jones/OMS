@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Input2 from "../../../components/Inputs/Input2";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { oms_server_production_url, oms_url } from "../../../utils/SD";
 import useAxiosAuthorization from "../../../hooks/useAxiosAuth";
-import { axioAnonymous } from "../../../data/axios";
 
 const RegisterStaff = () => {
   const [formData, setFormData] = useState({});
@@ -20,54 +19,28 @@ const RegisterStaff = () => {
     });
   };
 
-  // useEffect(()=> {
-  //   let val = Object.keys(formData);
-  //   val.forEach(key => {
-  //     localStorage.setItem(key, "");
-  //   });
-
-  // }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const { password, ...data } = formData;
 
-    if (password.length !== 4)
+    if (formData.password.length !== 4)
       return enqueueSnackbar("Password should be four digits only", {
         variant: "error",
       });
 
     try {
-      const res = await axiosAuth.post("/staff", data);
+      const res = await axiosAuth.post("/staff", formData);
 
       if (res.status !== 201)
         return enqueueSnackbar(res.data?.message || res.statusText, {
           variant: "error",
         });
-      else {
-        const body = {
-          Email: formData.email,
-          Password: password,
-          AccType: "staff",
-          Role: "staff",
-          User_Profile_Id: res.data?.staff._id,
-        };
 
-        const res2 = await axioAnonymous(oms_server_production_url.auth).post(
-          "/user/register",
-          body
-        );
-
-        if (res2.status !== 201)
-          return enqueueSnackbar(res.data?.message || res.statusText, {
-            variant: "error",
-          });
-
-        enqueueSnackbar(res.statusText, { variant: "success" });
-        setFormData({});
-        navigete(oms_url.doctorList);
-      }
+      enqueueSnackbar(res.data?.message || res.statusText, {
+        variant: "success",
+      });
+      setFormData({});
+      navigete(oms_url.doctorList);
     } catch (err) {
       enqueueSnackbar(err?.response?.data?.message || err?.message, {
         variant: "error",

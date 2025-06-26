@@ -17,8 +17,16 @@ export const LoginValidator = Joi.object({
 
 
 export const EmailValidator = Joi.object({
-    RecieverEmail: Joi.string().email().required(),
-    Name: Joi.string().required(),
-    Title: Joi.string().required(),
-    Description: Joi.string().required()
+    Email: Joi.string().email().required(),
+});
+
+
+export const OTPValidator = Joi.object({
+    otp: Joi.string().length(5).required().error(new Error("Invalid otp format")),
+});
+
+
+export const PasswordValidator = Joi.object({
+    Password: Joi.string().length(4).required(),
+    ConfirmPassword: Joi.string().length(4).required(),
 });

@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 
 
 
-export const verifyAccess = (req, res, next) => {
+export const verifyTokenAccess = (req, res, next) => {
     const token = req.headers.Authorization || req.headers.authorization;
 
     if (token == null || !token?.startsWith("Bearer")) 
@@ -19,7 +19,7 @@ export const verifyAccess = (req, res, next) => {
         req.user = user.id;
         req.email = user.email;
         req.roles = roles;
-        req.token = accessToken;
+        req.otp = user.otp;
 
         return next();
     });

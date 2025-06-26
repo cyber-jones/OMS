@@ -207,7 +207,7 @@ export const forgetPassword = async (req, res, next) => {
       maxAge: 1000 * 60 * 5,
     };
 
-    return res.cookie("restToken", refreshToken, cookieOpt).status(200).json({
+    return res.cookie("restToken", otpToken, cookieOpt).status(200).json({
       success: true,
       otpToken,
       message: "A token has been sent to your email",

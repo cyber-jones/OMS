@@ -8,6 +8,7 @@ import useAxiosAuthorization from "../../hooks/useAxiosAuth";
 import { oms_server_production_url, oms_url } from "../../utils/SD";
 import { Link } from "react-router-dom";
 import { formatTime } from "../../utils/formatTime";
+import toast from "react-hot-toast";
 
 const Chat = () => {
   const [loading, setLoading] = useState(false);
@@ -68,6 +69,7 @@ const Chat = () => {
 
     socket.on("new-message", (message) => {
       dispatch(setMessages([...messages, message]));
+      { message?.text ? toast.promise(message.text) : toast.promise("New message: image");}
     });
 
     return () => socket.off("new-message");

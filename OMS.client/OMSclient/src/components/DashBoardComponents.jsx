@@ -1,24 +1,22 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import Header from "./Header";
 import SideBar from "./SideBar";
 import useSocket from "../hooks/useSocket";
-import { useSnackbar } from "notistack";
+import toast from "react-hot-toast";
 
 const DashBoardComponents = ({ children }) => {
   const [sideNav, setSideNav] = useState(true);
   const { socket } = useSocket();
-  const { enqueueSnackbar } = useSnackbar();
   
   useEffect(() => {
     if (!socket) return;
 
     socket.on("new-connection", (userId) => {
-      enqueueSnackbar("Online: " + userId, { variant: "success" });
+      toast.success("Online: " + userId);
     });
 
     socket.on("new-disconnection", (userId) => {
-      enqueueSnackbar("Offline: " + userId);
+      toast("Offline: " + userId);
     });
 
     return () => {

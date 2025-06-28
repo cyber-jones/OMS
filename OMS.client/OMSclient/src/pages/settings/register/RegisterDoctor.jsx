@@ -50,9 +50,9 @@ const RegisterDoctor = () => {
       return enqueueSnackbar("Password should be four digits only", {
         variant: "error",
       });
-      
+
     if (!formData.work_ID.length.startsWith("OMS-") && formData.work_ID.length !== 8)
-      return enqueueSnackbar("Password should be four digits only", {
+      return enqueueSnackbar("Work Id is Invalid", {
         variant: "error",
       });
 
@@ -119,11 +119,12 @@ const RegisterDoctor = () => {
         <label htmlFor="Relationship" className="w-full">
           <p className="font-medium">Relationship:</p>
           <select
+            required
             id="relationship"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
-            <option>--select relationship</option>
+            <option></option>
             <option value={"Married"}>Married</option>
             <option value={"Single"}>Single</option>
             <option value={"Devorced"}>Devorced</option>
@@ -132,11 +133,12 @@ const RegisterDoctor = () => {
         <label htmlFor="state" className="w-full">
           <p className="font-medium">Address State:</p>
           <select
+            required
             id="state"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
-            <option>--select address state</option>
+            <option></option>
             <option value={"Lagos"}>Lagos</option>
             <option value={"Ikeja"}>Ikeja</option>
             <option value={"Abuja"}>Abuja</option>
@@ -163,11 +165,12 @@ const RegisterDoctor = () => {
         <label htmlFor="sex" className="w-full">
           <p className="font-medium">Sex:</p>
           <select
+            required
             id="sex"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
-            <option>--select sex</option>
+            <option></option>
             <option value={"Male"}>Male</option>
             <option value={"Female"}>Female</option>
           </select>
@@ -187,11 +190,12 @@ const RegisterDoctor = () => {
         <label htmlFor="specialty" className="w-full">
           <p className="font-medium">Specialty:</p>
           <select
+            required
             id="specialty"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
-            <option>--select specialty</option>
+            <option></option>
             {!loadingSpecialty && specialties ? (
               specialties.map((specialty, index) => (
                 <option key={index} value={specialty?._id}>
@@ -206,11 +210,12 @@ const RegisterDoctor = () => {
         <label htmlFor="sub_Specialty" className="w-full">
           <p className="font-medium">Sub Specialty:</p>
           <select
+            required
             id="sub_Specialty"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
-            <option>--select specialty</option>
+            <option></option>
             {!loadingSpecialty && specialties ? (
               specialties.map((specialty, index) => (
                 <option key={index} value={specialty?._id}>
@@ -249,6 +254,7 @@ const RegisterDoctor = () => {
         <label htmlFor="certificate_Url" className="w-full">
           <p className="font-medium">Upload Certificate:</p>
           <input
+            required
             id="certificate_Url"
             type="file"
             accept="image/*"

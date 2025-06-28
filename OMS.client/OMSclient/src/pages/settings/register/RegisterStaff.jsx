@@ -29,7 +29,7 @@ const RegisterStaff = () => {
       });
 
     if (!formData.work_ID.length.startsWith("OMS-") && formData.work_ID.length !== 8)
-      return enqueueSnackbar("Password should be four digits only", {
+      return enqueueSnackbar("Work Id is Invalid", {
         variant: "error",
       });
 
@@ -97,11 +97,12 @@ const RegisterStaff = () => {
         <label htmlFor="relationship" className="w-full">
           <p className="font-medium">Relationship:</p>
           <select
+            required
             id="relationship"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
-            <option>--select relationship</option>
+            <option></option>
             <option value={"Married"}>Married</option>
             <option value={"Single"}>Single</option>
             <option value={"Devorced"}>Devorced</option>
@@ -110,11 +111,12 @@ const RegisterStaff = () => {
         <label htmlFor="state" className="w-full">
           <p className="font-medium">Address State:</p>
           <select
+            required
             id="state"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
-            <option>--select address state</option>
+            <option></option>
             <option value={"Lagos"}>Lagos</option>
             <option value={"Ikeja"}>Ikeja</option>
             <option value={"Abuja"}>Abuja</option>
@@ -141,11 +143,12 @@ const RegisterStaff = () => {
         <label htmlFor="sex" className="w-full">
           <p className="font-medium">Sex:</p>
           <select
+            required
             id="sex"
             onChange={(e) => handleChange(e)}
             className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
           >
-            <option>--select sex</option>
+            <option></option>
             <option value={"Male"}>Male</option>
             <option value={"Female"}>Female</option>
           </select>

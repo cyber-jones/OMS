@@ -20,15 +20,15 @@ const Log = () => {
     if (
       (!loadingDoctorLogs &&
         doctorLogs &&
-        loadingStaffLogs &&
+        !loadingStaffLogs &&
         staffLogs &&
-        loadingPatientLogs &&
+        !loadingPatientLogs &&
         patientLogs &&
-        loadingDrugLogs &&
+        !loadingDrugLogs &&
         drugLogs &&
-        loadingAppointmentLogs,
+        !loadingAppointmentLogs,
       appointmentLogs,
-      loadingAuthLogs && authLogs)
+      !loadingAuthLogs && authLogs)
     ) {
       const allLogs = [
         ...doctorLogs,
@@ -83,7 +83,12 @@ const Log = () => {
           <div className="w-3/12">Victim</div>
           <div className="w-3/12">Date</div>
         </div>
-        {!loadingDoctorLogs ? (
+        {!loadingDoctorLogs &&
+        !loadingStaffLogs &&
+        !loadingPatientLogs &&
+        !loadingDrugLogs &&
+        !loadingAppointmentLogs &&
+        !loadingAuthLogs ? (
           data ? (
             data.map((log, index) => (
               <div

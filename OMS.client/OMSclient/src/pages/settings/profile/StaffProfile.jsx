@@ -71,18 +71,6 @@ const StaffProfile = () => {
             <p>
               <b>Registered</b>: {new Date(staff?.createdAt).toDateString()}
             </p>
-            <p className="text-red-500 mt-3">
-              <b>Emergency Contact</b>
-            </p>
-            <p>
-              <b>Address</b>: {staff?.eC_Address}
-            </p>
-            <p>
-              <b>Phone</b>: {staff?.eC_Cell_Phone}
-            </p>
-            <p>
-              <b>Full Name</b>: {staff?.eC_FullName}
-            </p>
             <div hidden={!isAdmin} className="mt-3 flex flex-col-reverse gap-2">
               <button className="bg-red-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in">
                 Lock <i className="bi bi-lock"></i>
@@ -93,6 +81,9 @@ const StaffProfile = () => {
               >
                 Update <i className="bi bi-cloud-check"></i>
               </Link>
+              <button className="bg-purple-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-purple-950 transition duration-500 ease-in">
+                Make Admin <i className="bi bi-person"></i>
+              </button>
             </div>
           </div>
         </>

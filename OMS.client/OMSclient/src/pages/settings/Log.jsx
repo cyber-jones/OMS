@@ -1,31 +1,75 @@
 import { useEffect, useState } from "react";
-import useLog from "../../hooks/useLog";
+import useDoctorLog from "../../hooks/useDoctorLog";
+import useStaffLog from "../../hooks/useStaffLog";
+import usePatientLog from "../../hooks/usePatientLog";
+import useDrugLog from "../../hooks/useDrugLog";
+import useAppointmentLog from "../../hooks/useAppointmentLog";
+import useAuthLog from "../../hooks/useAuthLog";
 
 const Log = () => {
-  const { loading, logs } = useLog();
+  const { loading: loadingDoctorLogs, logs: doctorLogs } = useDoctorLog();
+  const { loading: loadingStaffLogs, logs: staffLogs } = useStaffLog();
+  const { loading: loadingPatientLogs, logs: patientLogs } = usePatientLog();
+  const { loading: loadingDrugLogs, logs: drugLogs } = useDrugLog();
+  const { loading: loadingAppointmentLogs, logs: appointmentLogs } =
+    useAppointmentLog();
+  const { loading: loadingAuthLogs, logs: authLogs } = useAuthLog();
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    if (!loading && logs) {
-    const newArrLogs = logs.map((log) => ({
-      blame: log.blame,
-      description: log.description,
-      victim: log.victim,
-      createdAt: log.createdAt,
-      color: log.description.includes("Update")
-        ? "text-yellow-600"
-        : log.description.includes("New")
-        ? "text-green-600"
-        : log.description.includes("Delete") ||
-          log.description.includes("Cancle")
-        ? "text-red-600"
-        : "text-pint-600",
-    }));
-    // console.log("arr", newArrLogs);
-    setData(newArrLogs);
-  }
+    if (
+      (!loadingDoctorLogs &&
+        doctorLogs &&
+        loadingStaffLogs &&
+        staffLogs &&
+        loadingPatientLogs &&
+        patientLogs &&
+        loadingDrugLogs &&
+        drugLogs &&
+        loadingAppointmentLogs,
+      appointmentLogs,
+      loadingAuthLogs && authLogs)
+    ) {
+      const allLogs = [
+        ...doctorLogs,
+        ...staffLogs,
+        ...patientLogs,
+        ...drugLogs,
+        ...appointmentLogs,
+        ...authLogs,
+      ];
+      const newArrLogs = allLogs.map((log) => ({
+        blame: log.blame,
+        description: log.description,
+        victim: log.victim,
+        createdAt: log.createdAt,
+        color: log.description.includes("Update")
+          ? "text-yellow-600"
+          : log.description.includes("New")
+          ? "text-green-600"
+          : log.description.includes("Delete") ||
+            log.description.includes("Cancle")
+          ? "text-red-600"
+          : "text-pint-600",
+      }));
+      // console.log("arr", newArrLogs);
+      setData(newArrLogs);
+    }
     return;
-  }, [loading, logs, setData]);
+  }, [
+    loadingDoctorLogs,
+    doctorLogs,
+    staffLogs,
+    loadingStaffLogs,
+    loadingPatientLogs,
+    patientLogs,
+    loadingDrugLogs,
+    drugLogs,
+    loadingAppointmentLogs,
+    appointmentLogs,
+    loadingAuthLogs,
+    authLogs,
+  ]);
 
   return (
     <div className="w-[95%] md:w-[90%] h-full pt-1">
@@ -39,7 +83,7 @@ const Log = () => {
           <div className="w-3/12">Victim</div>
           <div className="w-3/12">Date</div>
         </div>
-        {!loading ? (
+        {!loadingDoctorLogs ? (
           data ? (
             data.map((log, index) => (
               <div

@@ -26,13 +26,13 @@ export const getStaff = async (req, res, next) => {
 
 export const postStaff = async (req, res, next) => {
   try {
-    const { error, value } = StaffValidator.validate(req.body);
-    const { password, ...data } = value;
+    const { password, ...data } = req.body;
+    const { error, value } = StaffValidator.validate(data);
 
     if (error)
       return res.status(400).json({ success: false, message: error.message });
 
-    const newStaff = new Staff({ created_By: req.email, ...data });
+    const newStaff = new Staff({ created_By: req.email, ...value });
 
     const body = {
       Email: value.Email,

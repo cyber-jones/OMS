@@ -69,7 +69,7 @@ export const updateDrug = async (req, res, next) => {
       { new: true }
     );
 
-    await Logger(req.email, "Updated Drug", updateDrug.Name);
+    await Logger(req.email, "Updated Drug", updateDrug.drug_Name);
 
     return res
       .status(205)
@@ -90,17 +90,17 @@ export const imageUpload = async (req, res, next) => {
       resource_type: "image",
     });
 
-    const updatedPatient = await Drug.findByIdAndUpdate(
+    const updatedDrug = await Drug.findByIdAndUpdate(
       req.params.id,
-      { $set: { image: cloudImage?.secure_url } },
+      { $set: { image: cloudImage.secure_url } },
       { new: true }
     );
 
-    await Logger(req.email, "Updated Drug Image", req.email);
+    await Logger(req.email, "Updated Drug Image", updatedDrug.drug_Name);
 
     return res.status(205).json({
       success: true,
-      patient: updatedPatient,
+      drug: updatedDrug,
       message: "Updated successfully with profile image",
     });
   } catch (err) {

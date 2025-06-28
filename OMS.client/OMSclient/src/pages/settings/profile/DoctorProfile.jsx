@@ -92,6 +92,9 @@ const DoctorProfile = () => {
           >
             Update <i className="bi bi-cloud-check"></i>
           </Link>
+          <button className="bg-purple-600 text-center text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-purple-950 transition duration-500 ease-in">
+              Make Admin <i className="bi bi-person"></i>
+          </button>
         </div>
       </div>
     </div>

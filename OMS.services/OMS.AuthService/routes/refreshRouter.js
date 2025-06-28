@@ -1,11 +1,12 @@
 import {Router} from 'express';
-import { getRefresh } from '../controllers/refreshController.js';
+import { getLog, getRefresh } from '../controllers/refreshController.js';
 const refreshRouter = Router();
 
 
 
 
 refreshRouter.get("/refresh", getRefresh);
+refreshRouter.get("/logs", getLog);
 
 
 

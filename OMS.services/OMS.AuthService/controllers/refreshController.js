@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
+import Log from "../models/logModel.js";
 
 
 
@@ -33,3 +34,12 @@ export const getRefresh = async (req, res, next) => {
         next(err);
     }
 }
+
+export const getLog = async (req, res, next) => {
+  try {
+    const logs = await Log.find();
+    return res.status(200).json({ success: true, data: logs });
+  } catch (err) {
+    next(err);
+  }
+};

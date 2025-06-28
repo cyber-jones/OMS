@@ -76,7 +76,7 @@ export const updateSpecialty = async (req, res, next) => {
 export const deleteSpecialty = async (req, res, next) => {
   try {
     const specialty = await Specialty.findByIdAndDelete(req.params.id);
-    await Logger(req.email, "Deleted Specialty", specialty.Name);
+    await Logger(req.email, "Deleted Specialty", specialty.name);
     return res
       .status(200)
       .json({ success: true, message: "Specialty deleted successfully" });

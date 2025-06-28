@@ -50,6 +50,11 @@ const RegisterDoctor = () => {
       return enqueueSnackbar("Password should be four digits only", {
         variant: "error",
       });
+      
+    if (!formData.work_ID.length.startsWith("OMS-") && formData.work_ID.length !== 8)
+      return enqueueSnackbar("Password should be four digits only", {
+        variant: "error",
+      });
 
     try {
       const res = await axiosAuth.post("/doctor", formData);

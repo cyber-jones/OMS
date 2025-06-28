@@ -12,6 +12,7 @@ import userRouter from "./routes/userRouter.js";
 import refreshRouter from "./routes/refreshRouter.js";
 import { reqLogger } from "./config/logConfig.js";
 import { credentials } from "./middlewares/corsCredentials.js";
+import { verifyAccess } from "./middlewares/verifyAccess.js";
 
 
 
@@ -33,7 +34,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 
 app.use("/api/user", userRouter);
-app.use("/api", refreshRouter);
+app.use("/api", verifyAccess, refreshRouter);
 
 
 app.all("*", (req, res) => {

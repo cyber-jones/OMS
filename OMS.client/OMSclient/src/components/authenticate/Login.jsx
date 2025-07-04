@@ -43,7 +43,7 @@ const Login = () => {
       dispatch(setAuthUser({ authUser: data, accessToken: access }));
       connectSocket(res.data.body.email);
 
-      enqueueSnackbar(res.statusText, {
+      enqueueSnackbar(res?.data?.message || res.statusText, {
         variant: "success",
       });
       navigete(prevLoc, { replace: true });

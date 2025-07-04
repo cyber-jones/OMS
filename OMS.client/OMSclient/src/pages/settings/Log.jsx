@@ -78,10 +78,10 @@ const Log = () => {
       </h1>
       <div className="w-[95%] md:w-[90%] h-11/12 flex flex-col gap-2 font-sans overflow-auto">
         <div className="flex md:text-[10px] lg:text-sm text-[10px] justify-around items-center border border-t-0 border-l-0 border-r-0 border-b-gray-500 py-2">
-          <div className="w-3/12">Blame</div>
+          <div className="w-4/12">Blame</div>
           <div className="w-3/12">Description</div>
-          <div className="w-3/12">Victim</div>
-          <div className="w-3/12">Date</div>
+          <div className="w-4/12">Victim</div>
+          <div className="w-1/12">Date</div>
         </div>
         {!loadingDoctorLogs &&
         !loadingStaffLogs &&

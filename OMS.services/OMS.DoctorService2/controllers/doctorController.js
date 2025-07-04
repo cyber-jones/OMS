@@ -33,19 +33,19 @@ export const getDoctor = async (req, res, next) => {
 
 export const postDoctor = async (req, res, next) => {
   try {
-    const { error, value } = DoctorValidator.validate(req.body);
-    const { Password, ...data } = value;
+    const { password, ...data } = req.body;
+    const { error, value } = DoctorValidator.validate(data);
 
     if (error)
       return res.status(400).json({ success: false, message: error.message });
 
-    const newDoctor = new Doctor({ created_By: req.email, ...data });
+    const newDoctor = new Doctor({ created_By: req.email, ...value });
 
     await Logger(req.email, "New Doctor", value.email);
 
     const body = {
       Email: value.email,
-      Password: Password,
+      Password: password,
       AccType: ROLES[1],
       Role: ROLES[1],
       User_Profile_Id: newDoctor._id,

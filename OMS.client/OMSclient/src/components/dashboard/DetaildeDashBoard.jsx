@@ -1,119 +1,9 @@
-import Chart from "chart.js/auto";
+import { useSelector } from "react-redux";
+import { oms_url } from "../../utils/SD";
+import { Link } from "react-router-dom";
 
 const DetaildeDashBoard = () => {
-  window.onload = () => {
-    // const ctx = document.getElementById('myChart');
-    const ctx1 = document.getElementById("myChart1");
-    const ctx2 = document.getElementById("myChart2");
-    // const ctx3 = document.getElementById('myChart3');
-
-    // new Chart(ctx, {
-    //     type: 'bar',
-    //     data: {
-    //       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    //       datasets: [{
-    //         label: '# of Votes',
-    //         data: [12, 19, 3, 5, 2, 3],
-    //         borderWidth: 1
-    //       }]
-    //     },
-    //     options: {
-    //       scales: {
-    //         y: {
-    //           beginAtZero: true
-    //         }
-    //       }
-    //     }
-    //   });
-
-    new Chart(ctx1, {
-      type: "doughnut",
-      data: {
-        labels: ["sick", "healthy", "addmitted"],
-        datasets: [
-          {
-            label: "Health data set 2024",
-            data: [50, 300, 100],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(144, 238, 144)",
-              "rgb(255, 205, 86)",
-            ],
-            hoverOffset: 4,
-          },
-        ],
-      },
-    });
-
-    new Chart(ctx2, {
-      type: "radar",
-      data: {
-        labels: [
-          "Eating",
-          "Drinking",
-          "Sleeping",
-          "Designing",
-          "Coding",
-          "Cycling",
-          "Running",
-        ],
-        datasets: [
-          {
-            label: "Sick",
-            data: [65, 59, 90, 81, 56, 55, 40],
-            fill: true,
-            backgroundColor: "rgba(255, 99, 132, 0.2)",
-            borderColor: "rgb(255, 99, 132)",
-            pointBackgroundColor: "rgb(255, 99, 132)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgb(255, 99, 132)",
-          },
-          {
-            label: "Healthy",
-            data: [28, 48, 40, 19, 96, 27, 100],
-            fill: true,
-            backgroundColor: "rgba(54, 162, 235, 0.2)",
-            borderColor: "rgb(54, 162, 235)",
-            pointBackgroundColor: "rgb(54, 162, 235)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgb(54, 162, 235)",
-          },
-        ],
-      },
-      options: {
-        elements: {
-          line: {
-            borderWidth: 3,
-          },
-        },
-      },
-    });
-
-    // new Chart(ctx3, {
-    //     type: 'line',
-    //     data: {
-    //         labels: [
-    //             'January',
-    //             'Febuary',
-    //             'March',
-    //             'April',
-    //             'May',
-    //             'June',
-    //             'July'
-    //         ],
-    //         datasets: [{
-    //           label: 'Raidar - Health Tracker',
-    //           data: [65, 59, 80, 81, 56, 55, 40],
-    //           fill: false,
-    //           borderColor: 'rgb(75, 192, 192)',
-    //           tension: 0.1
-    //         }]
-    //       }
-    // });
-  };
-
+  const { user } = useSelector((state) => state.user);
   const appointments = [
     {
       id: 1,
@@ -174,18 +64,77 @@ const DetaildeDashBoard = () => {
         <h1 className="text-3xl font-semibold">DashBoard</h1>
         <h3 className="text-sm font-thin text-red-400">Health Data Tracker</h3>
       </div>
-      <div className="w-full flex h-11/12 text-sm md:text-lg gap-2 p-4">
-        <div className="bg-white h-20 p-1 md:p-4 rounded-lg shadow hover:shadow-md transition">
-          <h2 className="font-semibold mb-2 text-blue-600">Total Patients</h2>
-          <p className="text-lg font-bold">{patients.length}</p>
+      <div className="w-full flex flex-col h-11/12 text-[12px] md:text-lg gap-2 p-4">
+        <div className="h-4/12 w-full flex justify-center items-center">
+          <div className="w-[95%] lg:w-10/12 h-11/12 shadow-lg flex rounded-b-2xl">
+            <div className="w-5/12 h-full flex justify-center items-center p-2">
+              <Link
+                to={oms_url.profile}
+                className="h-30 lg:h-11/12 rounded-full bg-black mr-3"
+              >
+                <img
+                  src={
+                    user?.profile_Url
+                      ? user?.profile_Url
+                      : user?.sex == "Male"
+                      ? "/images/profile-masculine.jpeg"
+                      : "/images/profile-femine.jpeg"
+                  }
+                  className="rounded-full h-full"
+                />
+              </Link>
+            </div>
+            <div className="w-7/12 flex flex-col justify-center">
+              <h1 className="font-semibold text-lg lg:text-3xl text-blue-900">
+                {user?.first_Name} {user?.last_Name} {user?.middle_Name}
+              </h1>
+              <p className="font-semibold">
+                User:{" "}<span className="text-purple-600">
+                {user?.mln ? "Doctor" : user?.work_ID ? "Staff" : "Patient"}</span>
+              </p>
+              <i className="">
+                Joined: {new Date(user?.createdAt).toDateString()}
+              </i>
+            </div>
+          </div>
         </div>
-        <div className="bg-white h-20 p-1 md:p-4 rounded-lg shadow hover:shadow-md transition">
-          <h2 className="font-semibold mb-2 text-green-600">Appointments</h2>
-          <p className="text-lg font-bold">{appointments.length}</p>
-        </div>
-        <div className="bg-white h-20 p-1 md:p-4 rounded-lg shadow hover:shadow-md transition">
-          <h2 className="font-semibold mb-2 text-purple-600">Activity Logs</h2>
-          <p className="text-lg font-bold">{logs.length}</p>
+        <div className="h-8/12 w-full grid grid-cols-2 md:grid-cols-3 text-sm md:text-lg gap-2">
+          <div className="bg-white text-center h-16 md:h-26 w-full p-1 md:p-4 rounded-lg shadow hover:shadow-md transition border-l-stone-700 border-l-4">
+            <h2 className="font-semibold mb-2 text-stone-500">Patients</h2>
+            <p className="font-bold">{patients.length}</p>
+          </div>
+          <div className="bg-white text-center h-16 md:h-26 w-full p-1 md:p-4 rounded-lg shadow hover:shadow-md transition border-l-sstone-700 border-l-4">
+            <h2 className="font-semibold mb-2 text-stone-500">Staff</h2>
+            <p className="font-bold">{appointments.length}</p>
+          </div>
+          <div className="bg-white text-center h-16 md:h-26 w-full p-1 md:p-4 rounded-lg shadow hover:shadow-md transition border-l-stone-700 border-l-4">
+            <h2 className="font-semibold mb-2 text-stone-500">Doctors</h2>
+            <p className="font-bold">{patients.length}</p>
+          </div>
+          <div className="bg-white text-center h-16 md:h-26 w-full p-1 md:p-4 rounded-lg shadow hover:shadow-md transition border-l-sstone-700 border-l-4">
+            <h2 className="font-semibold mb-2 text-stone-500">Appointments</h2>
+            <p className="font-bold">{appointments.length}</p>
+          </div>
+          <div className="bg-white text-center h-16 md:h-26 w-full p-1 md:p-4 rounded-lg shadow hover:shadow-md transition border-l-stone-700 border-l-4">
+            <h2 className="font-semibold mb-2 text-stone-500">Activity Logs</h2>
+            <p className="font-bold">{logs.length}</p>
+          </div>
+          <div className="bg-white text-center h-16 md:h-26 w-full p-1 md:p-4 rounded-lg shadow hover:shadow-md transition border-l-stone-700 border-l-4">
+            <h2 className="font-semibold mb-2 text-stone-500">Messages</h2>
+            <p className="font-bold">{patients.length}</p>
+          </div>
+          <div className="bg-white text-center h-16 md:h-26 w-full p-1 md:p-4 rounded-lg shadow hover:shadow-md transition border-l-sstone-700 border-l-4">
+            <h2 className="font-semibold mb-2 text-stone-500">Specialties</h2>
+            <p className="font-bold">{appointments.length}</p>
+          </div>
+          <div className="bg-white text-center h-16 md:h-26 w-full p-1 md:p-4 rounded-lg shadow hover:shadow-md transition border-l-stone-700 border-l-4">
+            <h2 className="font-semibold mb-2 text-stone-500">Drugs</h2>
+            <p className="font-bold">{logs.length}</p>
+          </div>
+          <div className="bg-white text-center h-16 md:h-26 w-full p-1 md:p-4 rounded-lg shadow hover:shadow-md transition border-l-stone-700 border-l-4">
+            <h2 className="font-semibold mb-2 text-stone-500">Prescriptions</h2>
+            <p className="font-bold">{logs.length}</p>
+          </div>
         </div>
       </div>
     </div>

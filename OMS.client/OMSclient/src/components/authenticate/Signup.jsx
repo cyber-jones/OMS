@@ -22,7 +22,6 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
     if (formData.password.length !== 4)
       return enqueueSnackbar("Password should be four digits only", {
@@ -30,6 +29,7 @@ const Signup = () => {
       });
 
     try {
+      setLoading(true);
       const res = await axioAnonymous(oms_server_production_url.patient).post(
         "/patient",
         formData

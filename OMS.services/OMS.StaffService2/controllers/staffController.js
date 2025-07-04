@@ -5,6 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { StaffValidator } from "../validators/validateSchema.js";
 import { ROLES } from "../utils/SD.js";
 import { axiosPrivate } from "../config/axiosConfig.js";
+import mail from "../config/emailConfig.js";
 
 export const getStaffs = async (req, res, next) => {
   try {
@@ -35,7 +36,7 @@ export const postStaff = async (req, res, next) => {
     const newStaff = new Staff({ created_By: req.email, ...value });
 
     const body = {
-      Email: value.Email,
+      Email: value.email,
       Password: password,
       AccType: ROLES[2],
       Role: ROLES[2],
@@ -48,9 +49,9 @@ export const postStaff = async (req, res, next) => {
         success: false,
         message: authRes.data?.message || authRes.statusText,
       });
-
+    
     await newStaff.save();
-    await Logger(value.email, "New Staff", value.email);
+    await Logger(req.email, "New Staff", value.email);
     await mail(
       newStaff.email,
       `${newStaff.first_Name} ${newStaff.last_Name}`,

@@ -5,7 +5,6 @@ import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import useSpecialty from "../../hooks/useSpecialty";
 import useDoctor from "../../hooks/useDoctor";
-import Circle from "../../components/loading/Circle";
 import { useSelector } from "react-redux";
 
 const NewAppointment = () => {
@@ -25,7 +24,6 @@ const NewAppointment = () => {
   const today = `${new Date().getFullYear()}-${
     month > 9 ? month : "0" + month
   }-${date > 9 ? date : "0" + date}`;
-console.log(today)
 
   useEffect(() => {
     setData(doctors);
@@ -68,8 +66,6 @@ console.log(today)
     }
   };
 
-  console.log({ ...formData, specialty_Id: specialty, time: time, patient_Id: authUser?.user_Profile_Id });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -78,16 +74,21 @@ console.log(today)
         ...formData,
         specialty_Id: specialty,
         time: time,
-        patient_Id: authUser?.user_Profile_Id
+        patient_Id: authUser?.user_Profile_Id,
       });
       if (res && res?.status !== 201)
-        return enqueueSnackbar(res.data?.message || res.statusText, { variant: "warning" });
+        return enqueueSnackbar(res.data?.message || res.statusText, {
+          variant: "warning",
+        });
 
       enqueueSnackbar(res.data.message, { variant: "success" });
       setFormData({});
       navigate(oms_url.appointment);
     } catch (err) {
-      enqueueSnackbar(err.response?.data.message || err?.statusText || err.message, { variant: "error" });
+      enqueueSnackbar(
+        err.response?.data.message || err?.statusText || err.message,
+        { variant: "error" }
+      );
     } finally {
       setLoading(false);
     }
@@ -198,8 +199,24 @@ console.log(today)
       </div>
       <div className="w-full md:w-[40%] h-5/12 md:h-full flex justify-center items-center">
         <calendar-date class="cally bg-base-100 border border-base-300 shadow-lg rounded-box">
-          <svg aria-label="Previous" className="fill-current size-4" slot="previous" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M15.75 19.5 8.25 12l7.5-7.5"></path></svg>
-          <svg aria-label="Next" className="fill-current size-4" slot="next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path></svg>
+          <svg
+            aria-label="Previous"
+            className="fill-current size-4"
+            slot="previous"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path fill="currentColor" d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+          </svg>
+          <svg
+            aria-label="Next"
+            className="fill-current size-4"
+            slot="next"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path fill="currentColor" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+          </svg>
           <calendar-month></calendar-month>
         </calendar-date>
       </div>

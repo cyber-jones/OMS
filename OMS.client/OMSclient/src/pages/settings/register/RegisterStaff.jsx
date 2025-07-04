@@ -21,19 +21,19 @@ const RegisterStaff = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
     if (formData.password.length !== 4)
       return enqueueSnackbar("Password should be four digits only", {
         variant: "error",
       });
 
-    if (!formData.work_ID.length.startsWith("OMS-") && formData.work_ID.length !== 8)
+    if (!formData.work_ID.startsWith("OMS-") || formData.work_ID.length !== 8)
       return enqueueSnackbar("Work Id is Invalid", {
         variant: "error",
       });
 
     try {
+      setLoading(true);
       const res = await axiosAuth.post("/staff", formData);
 
       if (res.status !== 201)
@@ -45,7 +45,7 @@ const RegisterStaff = () => {
         variant: "success",
       });
       setFormData({});
-      navigete(oms_url.doctorList);
+      navigete(oms_url.staffList);
     } catch (err) {
       enqueueSnackbar(err?.response?.data?.message || err?.message, {
         variant: "error",

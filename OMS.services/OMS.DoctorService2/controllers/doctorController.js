@@ -44,7 +44,7 @@ export const postDoctor = async (req, res, next) => {
     await Logger(req.email, "New Doctor", value.email);
 
     const body = {
-      Email: value.Email,
+      Email: value.email,
       Password: Password,
       AccType: ROLES[1],
       Role: ROLES[1],

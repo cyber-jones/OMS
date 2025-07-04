@@ -40,7 +40,7 @@ export const registerUser = async (req, res, next) => {
     });
     newUser.roles.push(role);
 
-    await Logger(req.email, "New authUser", newUser.email);
+    await Logger(newUser.email, "New authUser", newUser.email);
 
     await newUser.save();
     const { password: pass, refreshToken: refresh, ...rest } = newUser._doc;

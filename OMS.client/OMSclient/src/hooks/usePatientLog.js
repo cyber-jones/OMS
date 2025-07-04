@@ -8,7 +8,7 @@ import useAxiosAuthorization from './useAxiosAuth';
 
 
 const usePatientLog = () => {
-    const [logs, setLogs] = useState(null);
+    const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const axiosAuth = useAxiosAuthorization(oms_server_production_url.patient);

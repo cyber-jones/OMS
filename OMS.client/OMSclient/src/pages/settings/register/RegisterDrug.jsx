@@ -36,7 +36,7 @@ const RegisterDrug = () => {
   };
 
   const handleSubmit = async (e) => {
-       e.preventDefault();
+    e.preventDefault();
     setLoading(true);
     try {
       const res = await axiosAuth.post("/drug", formData);

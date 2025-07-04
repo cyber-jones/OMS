@@ -16,7 +16,7 @@ const DashBoardComponents = ({ children }) => {
     });
 
     socket.on("new-disconnection", (userId) => {
-      toast("Offline: " + userId);
+      toast.error("Offline: " + userId);
     });
 
     return () => {

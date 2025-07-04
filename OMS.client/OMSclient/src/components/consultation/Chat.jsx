@@ -69,7 +69,7 @@ const Chat = () => {
 
     socket.on("new-message", (message) => {
       dispatch(setMessages([...messages, message]));
-      { message?.text ? toast.promise(message.text) : toast.promise("New message: image");}
+      { message?.text ? toast.success(message.text) : toast.success("New message: image");}
     });
 
     return () => socket.off("new-message");

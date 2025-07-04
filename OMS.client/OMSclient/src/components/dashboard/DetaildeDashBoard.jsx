@@ -1,4 +1,4 @@
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
 
 const DetaildeDashBoard = () => {
   window.onload = () => {
@@ -169,80 +169,25 @@ const DetaildeDashBoard = () => {
   ];
 
   return (
-    // <div className="p-6 space-y-6 font-sans">
-    //   <h1 className="text-3xl font-bold mb-6">Doctor Dashboard</h1>
-    //   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-    //     <div className="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
-    //       <h2 className="text-xl font-semibold mb-2 text-blue-600">Total Patients</h2>
-    //       <p className="text-4xl font-bold">{patients.length}</p>
-    //     </div>
-    //     <div className="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
-    //       <h2 className="text-xl font-semibold mb-2 text-green-600">Appointments</h2>
-    //       <p className="text-4xl font-bold">{appointments.length}</p>
-    //     </div>
-    //     <div className="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
-    //       <h2 className="text-xl font-semibold mb-2 text-purple-600">Activity Logs</h2>
-    //       <p className="text-4xl font-bold">{logs.length}</p>
-    //     </div>
-    //   </div>
-    // </div>
-
     <div className="w-full h-full flex justify-center items-center flex-col px-1">
       <div className="w-full h-1/12 md:pl-8 pl-2">
         <h1 className="text-3xl font-semibold">DashBoard</h1>
         <h3 className="text-sm font-thin text-red-400">Health Data Tracker</h3>
       </div>
-      <div className="w-full flex justify-around items-center h-6/12">
-        <div className="md:w-[40%] w-[60%] h-11/12 shadow-xl bg-gray-200 flex justify-center items-center rounded-xl">
-          <canvas id="myChart2"></canvas>
+      <div className="w-full flex h-11/12 text-sm md:text-lg gap-2 p-4">
+        <div className="bg-white h-20 p-1 md:p-4 rounded-lg shadow hover:shadow-md transition">
+          <h2 className="font-semibold mb-2 text-blue-600">Total Patients</h2>
+          <p className="text-lg font-bold">{patients.length}</p>
         </div>
-        <div className="md:w-[50%] w-[30%] h-11/12 shadow-xl bg-gray-200 rounded-xl p-1 text-sm">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-1 md:p-4 rounded-lg shadow hover:shadow-md transition">
-              <h2 className="font-semibold mb-2 text-blue-600">
-                Total Patients
-              </h2>
-              <p className="text-lg font-bold">{patients.length}</p>
-            </div>
-            <div className="bg-white p-1 md:p-4 rounded-lg shadow hover:shadow-md transition">
-              <h2 className="font-semibold mb-2 text-green-600">
-                Appointments
-              </h2>
-              <p className="text-lg font-bold">{appointments.length}</p>
-            </div>
-            <div className="bg-white p-1 md:p-4 rounded-lg shadow hover:shadow-md transition">
-              <h2 className="font-semibold mb-2 text-purple-600">
-                Activity Logs
-              </h2>
-              <p className="text-lg font-bold">{logs.length}</p>
-            </div>
-          </div>
+        <div className="bg-white h-20 p-1 md:p-4 rounded-lg shadow hover:shadow-md transition">
+          <h2 className="font-semibold mb-2 text-green-600">Appointments</h2>
+          <p className="text-lg font-bold">{appointments.length}</p>
+        </div>
+        <div className="bg-white h-20 p-1 md:p-4 rounded-lg shadow hover:shadow-md transition">
+          <h2 className="font-semibold mb-2 text-purple-600">Activity Logs</h2>
+          <p className="text-lg font-bold">{logs.length}</p>
         </div>
       </div>
-      <div className="w-full flex justify-around items-center h-6/12">
-        <div className="md:w-[50%] w-[30%] h-11/12 shadow-xl bg-gray-200 rounded-xl"></div>
-        <div className="md:w-[40%] w-[60%] h-11/12 shadow-xl bg-gray-200 flex justify-center items-center rounded-xl">
-          <canvas id="myChart1"></canvas>
-        </div>
-      </div>
-      {/* <div className='w-full h-11/12 my-4 overflow-auto'>
-            <div className='block lg:flex w-full justify-center items-center'>
-                <div className='p-6 bg-gray-200 rounded-xl lg:w-1/2 shadow-xl'>
-                    <canvas id="myChart3"></canvas>
-                </div>
-                <div className='p-6 bg-gray-200 rounded-xl lg:w-1/2 shadow-xl'>
-                    <canvas id="myChart1"></canvas>
-                </div>
-            </div>
-            <div className='block lg:flex justify-center items-center w-full'>
-                <div className='p-6 bg-gray-200 rounded-xl lg:w-1/2 shadow-xl'>
-                    <canvas id="myChart2"></canvas>
-                </div>
-                <div className='p-6 bg-gray-200 rounded-xl lg:w-1/2 shadow-xl'>
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-        </div> */}
     </div>
   );
 };

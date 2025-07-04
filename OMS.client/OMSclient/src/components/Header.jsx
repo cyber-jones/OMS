@@ -1,12 +1,14 @@
 import useUser from "../hooks/useUser";
 import { Link } from "react-router-dom";
 import { oms_url } from "../utils/SD";
+import { Toaster } from "react-hot-toast";
 
 const Header = ({ sideNav, setSideNav }) => {
   const { loading, user } = useUser();
 
   return (
     <header className="static w-full h-1/12 bg-gray-100 flex justify-between items-center">
+      <Toaster />
       <div className="w-[10%] px-2 flex gap-6 justify-start sm:justify-center items-center">
         <i
           className={`bi bi-list text-md rounded-md px-2 cursor-pointer sm:hidden block ${

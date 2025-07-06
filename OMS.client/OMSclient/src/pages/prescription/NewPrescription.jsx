@@ -11,8 +11,9 @@ const NewPrescription = () => {
   const { prescribedDrugs, patient } = useSelector(
     (state) => state.prescription
   );
+  const { user } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
-  const [formDate, setFormData] = useState({});
+  const [formData, setFormData] = useState([]);
   const axiosAuth = useAxiosAuthorization(
     oms_server_production_url.appointment
   );
@@ -24,8 +25,10 @@ const NewPrescription = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axiosAuth.post("/prescription");
-      console.log(res);
+      const res = await axiosAuth.post(
+        "/prescription/" + user._id + "/" + patient._id,
+        formData
+      );
       if (res?.status !== 201)
         return enqueueSnackbar(res.statusText, { variant: "error" });
 
@@ -41,17 +44,42 @@ const NewPrescription = () => {
 
   const handleRemoveDrug = (drug) => {
     const newPrescribedDrugs = prescribedDrugs.filter(
-      (value) => value.drug_Id !== drug.drug_Id
+      (value) => value._id !== drug._id
     );
     dispatch(setPrescribedDrugs([...newPrescribedDrugs]));
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formDate,
-      [e.target.id]: e.target.value,
-    });
+    let prescribed = formData.find((value) => value.drug_Id == e.target.id);
+    if (prescribed) {
+      prescribed.prescription = e.target.value;
+      const newResult = formData.filter(
+        (value) => value.drug_Id !== e.target.id
+      );
+      newResult.push(prescribed);
+      setFormData(newResult);
+    } else {
+      const newPrescription = {
+        drug_Id: e.target.id,
+        prescription: e.target.value,
+      };
+      setFormData([...formData, newPrescription]);
+    }
   };
+
+  const handleChangeAmount = (e) => {
+    let prescribed = formData.find((value) => value.drug_Id == e.target.id);
+    if (prescribed) {
+      prescribed.amount = e.target.value;
+      const newResult = formData.filter(
+        (value) => value.drug_Id !== e.target.id
+      );
+      newResult.push(prescribed);
+      setFormData(newResult);
+    }
+  };
+
+  console.log(formData);
 
   return (
     <form
@@ -63,33 +91,44 @@ const NewPrescription = () => {
       </h1>
       <p className="font-semibold w-11/12 md:w-6/12 font-serif">
         Patient: {patient?.first_Name} {patient?.last_Name}{" "}
-        {patient?.middle_Name} <b className="float-right text-red-400 cursor-pointer">Clear</b>
+        {patient?.middle_Name}{" "}
+        <b
+          className="float-right text-red-400 cursor-pointer"
+          onClick={() => setPrescribedDrugs([])}
+        >
+          Clear
+        </b>
       </p>
       <div className="w-11/12 md:w-6/12 overflow-y-scroll">
         {prescribedDrugs.length > 0 ? (
           prescribedDrugs.map((drug, index) => (
-            <label
-              key={index}
-              htmlFor={drug.drug_Name}
-              className="w-11/12 md:w-6/12"
-            >
-              <p className="font-semibold mb-3">
-                {drug.drug_Name}:{" "}
-                <button
-                  type="button"
-                  onClick={() => handleRemoveDrug(drug)}
-                  className="py-1 px-3 float-right text-sm rounded-lg text-white bg-red-500 hover:cursor-pointer"
-                >
-                  Remove
-                </button>
-              </p>
-              <textarea
-                id={drug.drug_Id}
-                type="text"
-                onChange={handleChange}
-                className="w-full max-h-46 min-h-36 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 mb-3 border-gray-300 bg-gray-200"
-              ></textarea>
-            </label>
+            <div key={index}>
+              <label htmlFor={drug.drug_Name} className="w-11/12 md:w-6/12">
+                <p className="font-semibold mb-3">
+                  {drug.drug_Name}:{" "}
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveDrug(drug)}
+                    className="py-1 px-3 float-right text-sm rounded-lg text-white bg-red-500 hover:cursor-pointer"
+                  >
+                    <i className="bi bi-trash" />
+                  </button>
+                </p>
+                <textarea
+                  id={drug._id}
+                  type="text"
+                  onChange={handleChange}
+                  className="w-full max-h-46 min-h-36 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 mb-3 border-gray-300 bg-gray-200"
+                ></textarea>
+              </label>
+              <input
+                id={drug._id}
+                placeholder="Input amount to purchase"
+                type="number"
+                onChange={handleChangeAmount}
+                className="w-full opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 mb-3 border-gray-300 bg-gray-200"
+              />
+            </div>
           ))
         ) : (
           <p className="text-red-400 text-lg">

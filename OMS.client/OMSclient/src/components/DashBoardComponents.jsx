@@ -3,11 +3,14 @@ import Header from "./Header";
 import SideBar from "./SideBar";
 import useSocket from "../hooks/useSocket";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+
 
 const DashBoardComponents = ({ children }) => {
   const [sideNav, setSideNav] = useState(true);
+  const { authUser } = useSelector((state) => state.authUser);
   const { socket } = useSocket();
-  
+
   useEffect(() => {
     if (!socket) return;
 
@@ -19,11 +22,20 @@ const DashBoardComponents = ({ children }) => {
       toast.error("Offline: " + userId);
     });
 
+    socket.on("new-message", (message) => {
+      {
+        message.reciever_Id == authUser.email && message?.text
+          ? toast.success(message.text)
+          : toast.success("New message: image");
+      }
+    });
+
     return () => {
       socket.off("new-connection");
       socket.off("new-disconnection");
-    }
-  }, [socket]);
+      socket.off("new-message");
+    };
+  }, [socket, authUser]);
 
   return (
     <div className="bg-white w-full h-screen font-mono">

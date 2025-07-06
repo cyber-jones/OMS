@@ -42,6 +42,9 @@ import Log from "./pages/settings/Log";
 import ForgetPassword from "./pages/reset-password/ForgetPassword";
 import VerifyOtp from "./pages/reset-password/VerifyOtp";
 import ResetPassword from "./pages/reset-password/ResetPassword";
+import Prescription from "./pages/prescription/Prescription";
+import Prescriptions from "./pages/prescription/prescriptions";
+import PatientPrescriptions from "./pages/prescription/PatientPrescriptions";
 
 function App() {
   return (
@@ -63,34 +66,6 @@ function App() {
             </DashBoardComponents>
           }
         />
-        <Route element={<IsAuth roles={[Roles.DOCTOR]} />}>
-          <Route
-            path={oms_url.newPrescription+"/:id"}
-            element={
-              <DashBoardComponents>
-                <NewPrescription />
-              </DashBoardComponents>
-            }
-          />
-        </Route>
-        <Route element={<IsAuth roles={[Roles.DOCTOR, Roles.STAFF]} />}>
-          <Route
-            path={oms_url.patients}
-            element={
-              <DashBoardComponents>
-                <Patients />
-              </DashBoardComponents>
-            }
-          />
-          <Route
-            path={oms_url.patient+"/action/:id"}
-            element={
-              <DashBoardComponents>
-                <PatientAction />
-              </DashBoardComponents>
-            }
-          />
-        </Route>
         <Route
           path={oms_url.specialties}
           element={
@@ -195,7 +170,68 @@ function App() {
             </DashBoardComponents>
           }
         />
+        <Route
+          path={oms_url.prescription + "/:id"}
+          element={
+            <DashBoardComponents>
+              <Prescription />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.prescriptions + "/patient/:id"}
+          element={
+            <DashBoardComponents>
+              <PatientPrescriptions />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.prescriptions}
+          element={
+            <DashBoardComponents>
+              <Prescriptions />
+            </DashBoardComponents>
+          }
+        />
       </Route>
+
+      {/**==================================================================================================== */}
+
+      <Route element={<IsAuth roles={[Roles.DOCTOR]} />}>
+        <Route
+          path={oms_url.newPrescription + "/:id"}
+          element={
+            <DashBoardComponents>
+              <NewPrescription />
+            </DashBoardComponents>
+          }
+        />
+      </Route>
+
+      {/**==================================================================================================== */}
+
+      <Route element={<IsAuth roles={[Roles.DOCTOR, Roles.STAFF]} />}>
+        <Route
+          path={oms_url.patients}
+          element={
+            <DashBoardComponents>
+              <Patients />
+            </DashBoardComponents>
+          }
+        />
+        <Route
+          path={oms_url.patient + "/action/:id"}
+          element={
+            <DashBoardComponents>
+              <PatientAction />
+            </DashBoardComponents>
+          }
+        />
+      </Route>
+
+      {/**==================================================================================================== */}
+
       <Route
         element={<IsAuth roles={[Roles.ADMIN, Roles.DOCTOR, Roles.STAFF]} />}
       >
@@ -215,6 +251,9 @@ function App() {
             </DashBoardComponents>
           }
         />
+
+        {/**==================================================================================================== */}
+
       </Route>
       <Route element={<IsAuth roles={[Roles.ADMIN]} />}>
         <Route
@@ -330,7 +369,13 @@ function App() {
           }
         />
       </Route>
+
+      {/**==================================================================================================== */}
+
       <Route path={oms_url.home} element={<Home />} />
+
+      {/**==================================================================================================== */}
+
       <Route element={<IsLoggedIn />}>
         <Route path={oms_url.auth} element={<Auth />} />
         <Route path={oms_url.forgetPassword} element={<ForgetPassword />} />

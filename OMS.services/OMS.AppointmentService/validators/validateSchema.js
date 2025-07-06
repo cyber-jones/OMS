@@ -13,9 +13,8 @@ export const AppointmentValidator = Joi.object({
 
 
 export const PrescriptionValidator = Joi.object({
-    doctor_Id: Joi.string().required(),
-    patient_Id: Joi.string().required(),
-    drug_Ids: Joi.array().required(),
+    amount: Joi.number().required(),
+    drug_Id: Joi.array().required(),
     prescription: Joi.string().required()
 });
 

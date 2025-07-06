@@ -13,6 +13,7 @@ const Settings = () => {
   const navigate = useNavigate();
   const isAdminAuth = useAuth([Roles.ADMIN]); 
   const isAuth = useAuth([Roles.ADMIN, Roles.DOCTOR, Roles.STAFF]); 
+  const isPatient = useAuth([Roles.PATIENT]); 
 
   const handleLogout = () => {
     disconnectSocket();
@@ -127,6 +128,7 @@ const Settings = () => {
           <p className="text-md">Appointments</p>
         </Link>
         <Link
+          hidden={!isPatient}
           to={oms_url.prescriptions}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-l-3 shadow border-l-green-900 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >

@@ -7,13 +7,11 @@ import useDrug from "../../hooks/useDrug";
 import Circle from "../../components/loading/Circle";
 import usePatient from "../../hooks/usePatient";
 import { oms_url } from "../../utils/SD";
-import { useSelector } from "react-redux";
 
 const PatientPrescriptions = () => {
-  const { user } = useSelector(state => state.user)
   const { id } = useParams();
   const [data, setData] = useState([]);
-  const { loading, prescriptions } = usePrescription(user._id);
+  const { loading, prescriptions } = usePrescription(id);
   const { loading: loadingDoctor, doctors } = useDoctor();
   const { patients: patient } = usePatient(id);
   const { loading: loadingSpecialty, specialties } = useSpecialty();

@@ -27,6 +27,7 @@ export const oms_url = {
     staff: "/staff",
     patient: "/patient",
     drug: "/drug",
+    report: "/report",
     appointment: "/appointment",
     doctorList: "/doctor/all",
     staffList: "/staff/all",

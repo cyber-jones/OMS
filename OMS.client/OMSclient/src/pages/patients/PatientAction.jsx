@@ -21,13 +21,13 @@ const PatientAction = () => {
           View profile
         </Link>
         <Link
-          to={oms_url.prescription + "/" + id}
+          to={oms_url.prescriptions + "/patient/" + id}
           className="w-[80%] rounded-lg py-2 px-5 bg-purple-600 text-white"
         >
           View prescriptions
         </Link>
         <Link
-          to={oms_url.newPrescription + "/" + id}
+          to={oms_url.report + "/" + id}
           className="w-[80%] rounded-lg py-2 px-5 bg-red-600 text-white"
         >
           Report patient

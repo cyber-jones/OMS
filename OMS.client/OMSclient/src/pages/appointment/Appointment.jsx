@@ -3,7 +3,7 @@ import useAppointments from "../../hooks/useAppointment ";
 import Circle from "../../components/loading/Circle";
 import useSpecialty from "../../hooks/useSpecialty";
 import useDoctor from "../../hooks/useDoctor";
-import { oms_server_dev_url, oms_url, Roles, Status } from "../../utils/SD";
+import { oms_server_production_url, oms_url, Roles, Status } from "../../utils/SD";
 import { useSnackbar } from "notistack";
 import useAxiosAuthorization from "../../hooks/useAxiosAuth";
 import { useSelector } from "react-redux";
@@ -28,7 +28,7 @@ const Appointment = () => {
     : null;
   const [doctor, setDoctor] = useState({});    
   const { enqueueSnackbar } = useSnackbar();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
   const navigate = useNavigate();
   const isAuth = useAuth([Roles.ADMIN]);
 
@@ -43,8 +43,8 @@ const Appointment = () => {
 
   const handleDelete = async () => {
     try {
-      const res = await axiosAuth.get("/appointment/" + id);
-      if (res?.status !== 204 && res) {
+      const res = await axiosAuth.delete("/appointment/" + id);
+      if (res && res?.status !== 204) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",
         });
@@ -56,7 +56,7 @@ const Appointment = () => {
       });
       navigate(oms_url.appointments);
     } catch (err) {
-      enqueueSnackbar(err?.response?.data?.message || err.message, {
+      enqueueSnackbar(err?.response?.data?.message || err.message || err?.response?.statusText, {
         variant: "error",
       });
     }
@@ -64,7 +64,7 @@ const Appointment = () => {
 
   const handleCancle = async () => {
     try {
-      const res = await axiosAuth.get("/appointment/cancle" + id);
+      const res = await axiosAuth.get("/appointment/cancle/" + id);
       if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",
@@ -86,7 +86,7 @@ const Appointment = () => {
   const handleApprove = async () => {
     try {
       const res = await axiosAuth.post("/appointment/approve/" + id, {
-        name: user.Email,
+        name: user.email,
       });
       if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
@@ -132,7 +132,7 @@ const Appointment = () => {
   return (
     <>
       {!loading && appointment ? (
-        <div className="w-[90%] md:w-[50%] h-11/12 p-7 md:p-20 rounded-lg shadow-lg bg-amber-200">
+        <div className="w-[90%] md:w-[50%] h-11/12 p-7 md:p-20 rounded-lg shadow-lg bg-green-200">
           <h1 className="text-xl md:text-3xl text-red-400 font-bold mb-6">
             {new Date(appointment?.date).toDateString()}
           </h1>
@@ -159,7 +159,7 @@ const Appointment = () => {
               <b>Illness Descroption</b>: {appointment?.illness_Description}
             </p>
           </div>
-          <div className="w-full flex flex-col mt-10 gap-2">
+          <div className="w-full flex flex-col mt-10 h-7/12 justify-center pb-6 gap-2">
             {appointment?.status == Status.APPROVED ? (
               <button
                 hidden={!isAuthorized}
@@ -195,9 +195,9 @@ const Appointment = () => {
             <button
               hidden={!isAuth}
               onClick={handleDelete}
-              className="bg-red-700 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in"
+              className="bg-red-900 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in"
             >
-              Delete <i className="bi bi-x-circle"></i>
+              Delete <i className="bi bi-trash"></i>
             </button>
           </div>
         </div>

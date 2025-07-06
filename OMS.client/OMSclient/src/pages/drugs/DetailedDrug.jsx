@@ -26,8 +26,7 @@ const DetailedDrug = () => {
 
   const handleAddToPrescription = () => {
     if (!loading && drug) {
-      console.log(prescribedDrugs);
-      const foundDrug = prescribedDrugs.find(value => value.drug_Id == drug._id);
+      const foundDrug = prescribedDrugs.find(value => value._id == drug._id);
       if (foundDrug) enqueueSnackbar("Drug already in prescription!", { variant: "warning" }); 
       else {
         dispatch(setPrescribedDrugs([...prescribedDrugs, drug]));
@@ -98,11 +97,11 @@ const DetailedDrug = () => {
             <p className="font-sans">{drug?.side_Effects}</p>
           </div>
           <div className="text-sm mt-3">
-            <span>
+            {/* <span>
               <strong className="text-blue-600">Expiry: </strong>
               <span className="font-sans">{drug?.expiry_Date}</span>
-            </span>
-            <span className="ml-4">
+            </span> */}
+            <span className=" ">
               <strong className="text-blue-600">Price: </strong>
               <span className="font-sans">{drug?.price} Naira</span>
             </span>

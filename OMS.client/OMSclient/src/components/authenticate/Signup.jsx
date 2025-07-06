@@ -59,7 +59,8 @@ const Signup = () => {
       className="flex flex-col justify-center items-center w-full h-10/12 gap-3 md:gap-2"
       onSubmit={(e) => handleSignup(e)}
     >
-      <p className="text-2xl font-bold my-2">SignUp Here!</p>
+      <p className="text-lg font-bold my-2">SignUp Here!</p>
+      <p className="text-[12px] text-red-600 font-bold">Please submit a correct infomation!</p>
       <div className="flex gap-2 w-full">
         <Input
           type={"text"}

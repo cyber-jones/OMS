@@ -59,12 +59,12 @@ const DetaildeDashBoard = () => {
   ];
 
   return (
-    <div className="w-full h-full flex justify-center items-center flex-col px-1">
-      <div className="w-full h-1/12 md:pl-8 pl-2">
-        <h1 className="text-3xl font-semibold">DashBoard</h1>
+    <div className="w-full h-full flex flex-col px-1">
+      <div className="w-full md:pl-8 pl-2">
+        <h1 className="text-lg lg:text-3xl font-semibold">DashBoard</h1>
         <h3 className="text-sm font-thin text-red-400">Health Data Tracker</h3>
       </div>
-      <div className="w-full flex flex-col h-11/12 text-[12px] md:text-lg gap-2 p-4">
+      <div className="w-full flex flex-col h-full text-[12px] md:text-lg gap-2 p-4">
         <div className="h-4/12 w-full flex justify-center items-center">
           <div className="w-[95%] lg:w-10/12 h-11/12 shadow-lg flex rounded-b-2xl">
             <div className="w-5/12 h-full flex justify-center items-center p-2">

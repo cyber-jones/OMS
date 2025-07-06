@@ -51,7 +51,7 @@ const Home = () => {
         {assets.reels.map((reel, index) => (
           <div
             key={index}
-            className="w-[95%] min-h-[500px] lg:w-[500px] lg:h-[200px] border shadow-2xl rounded-lg flex justify-around items-center flex-col px-3 lg:mr-7"
+            className="w-[95%] min-h-[500px] lg:w-[500px] lg:h-[200px] shadow-2xl rounded-lg flex justify-around items-center flex-col px-3 lg:mr-7"
           >
             <p className="font-bold">{reel.title}</p>
             <img src={reel.img} alt={reel.title} />

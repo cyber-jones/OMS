@@ -185,7 +185,7 @@ const Chat = () => {
                   >
                     <div className="chat-header">
                       <time className="text-xs opacity-50">
-                        {formatTime(message.createdAt)}
+                        {new Date(message.createdAt).toDateString()} {formatTime(message.createdAt)}
                       </time>
                     </div>
                     {message?.text ? (

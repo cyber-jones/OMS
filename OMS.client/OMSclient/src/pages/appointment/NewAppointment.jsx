@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosAuthorization from "../../hooks/useAxiosAuth";
-import { oms_server_dev_url, oms_url } from "../../utils/SD";
+import { oms_server_production_url, oms_url } from "../../utils/SD";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import useSpecialty from "../../hooks/useSpecialty";
@@ -18,7 +18,7 @@ const NewAppointment = () => {
   const { authUser } = useSelector((state) => state.authUser);
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const { doctors, loading: loadingDoctor } = useDoctor();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
   const month = new Date().getMonth();
   const date = new Date().getDate();
   const today = `${new Date().getFullYear()}-${
@@ -81,9 +81,9 @@ const NewAppointment = () => {
           variant: "warning",
         });
 
-      enqueueSnackbar(res.data.message, { variant: "success" });
+      enqueueSnackbar(res.data?.message || res.statusText, { variant: "success" });
       setFormData({});
-      navigate(oms_url.appointment);
+      navigate(oms_url.appointments);
     } catch (err) {
       enqueueSnackbar(
         err.response?.data.message || err?.statusText || err.message,

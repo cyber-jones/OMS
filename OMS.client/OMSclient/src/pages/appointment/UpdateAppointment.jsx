@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosAuthorization from "../../hooks/useAxiosAuth";
-import { oms_server_dev_url, oms_url, Roles } from "../../utils/SD";
+import { oms_server_production_url, oms_url, Roles } from "../../utils/SD";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
 import useSpecialty from "../../hooks/useSpecialty";
@@ -27,7 +27,7 @@ const UpdateAppointment = () => {
     .find((value) => value == true);
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const { doctors, loading: loadingDoctor } = useDoctor();
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
   const month = new Date().getMonth();
   const date = new Date().getDate();
   const today = `${new Date().getFullYear()}-${

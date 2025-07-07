@@ -150,7 +150,7 @@ export const isAdmin = async (req, res, next) => {
 export const updateEmail = async (req, res, next) => {
   try {
     const user = await User.findByIdAndUpdate(req.user, {
-      $set: { email: req.body },
+      $set: { email: req.body.email },
     });
 
     await Logger(req.email, "Updated authUser email", user.email);

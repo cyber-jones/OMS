@@ -79,7 +79,7 @@ export const updatePatient = async (req, res, next) => {
 
     const authRes = await axiosPrivate(req.token).put(
       "/update/email",
-      value.email
+      { email: value.email }
     );
     if (authRes && authRes.status !== 205)
       return res.status(400).json({

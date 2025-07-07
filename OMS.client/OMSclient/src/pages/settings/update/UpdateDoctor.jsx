@@ -228,7 +228,7 @@ const UpdateDoctor = () => {
             <p className="font-medium">Specialty:</p>
             <select
               id="specialty"
-              value={formData?.specialty._id}
+              value={formData?.specialty?._id}
               onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >
@@ -248,7 +248,7 @@ const UpdateDoctor = () => {
             <p className="font-medium">Sub Specialty:</p>
             <select
               id="sub_Specialty"
-              value={formData?.sub_Specialty._id}
+              value={formData?.sub_Specialty?._id}
               onChange={handleChange}
               className="w-10/12 opacity-75 p-2 focus:outline-0 px-3 rounded-lg border-1 border-gray-300 bg-gray-200"
             >

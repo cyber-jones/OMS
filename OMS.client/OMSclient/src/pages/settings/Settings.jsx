@@ -24,7 +24,7 @@ const Settings = () => {
   };
 
   const toggleMode = () => {
-    console.log(localStorage.getItem("theme"))
+    // console.log(localStorage.getItem("theme"))
     if (localStorage.getItem("theme") == "light")
       localStorage.setItem("theme", "dark");
     else

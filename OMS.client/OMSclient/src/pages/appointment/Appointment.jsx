@@ -9,6 +9,8 @@ import useAxiosAuthorization from "../../hooks/useAxiosAuth";
 import { useSelector } from "react-redux";
 import { useAuth } from "../../utils/isAuthorized";
 import { useEffect, useState } from "react";
+import usePatient from "../../hooks/usePatient";
+import Modal from "../../components/daisyUI/Modal";
 
 const Appointment = () => {
   const { id } = useParams();
@@ -21,25 +23,31 @@ const Appointment = () => {
   );
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const { doctors, loading: loadingDoctor } = useDoctor();
+  const { patients, loading: loadingPatient } = usePatient();
   const specialty = specialties !== null && appointment !== null
     ? specialties.find(
         (specialtyValue) => specialtyValue._id == appointment.specialty_Id
       )
     : null;
   const [doctor, setDoctor] = useState({});    
+  const [patient, setPatient] = useState({});    
   const { enqueueSnackbar } = useSnackbar();
   const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
   const navigate = useNavigate();
   const isAuth = useAuth([Roles.ADMIN]);
 
   useEffect(() => {
-    if (!loadingDoctor && doctors && !loading && appointment) {
+    if (!loadingDoctor && doctors && !loading && appointment && !loadingPatient && patients) {
       const doctor = doctors.find(
       (doctor) => doctor._id == appointment.doctor_Id
   );
+      const patientt = patients.find(
+      (patient) => patient._id == appointment.patient_Id
+  );
     setDoctor(doctor);
+    setPatient(patientt);
     }
-  }, [loadingDoctor, doctors, appointment, loading]);
+  }, [loadingDoctor, doctors, appointment, loading, loadingPatient, patients]);
 
   const handleDelete = async () => {
     try {
@@ -140,7 +148,13 @@ const Appointment = () => {
             <p className="font-sans">
               <b>Doctor</b>:{" "}
               {!loadingDoctor && doctor
-                ? `${doctor?.first_Name} ${doctor?.last_Name}`
+                ? `${doctor?.first_Name} ${doctor?.last_Name} ${doctor?.middle_Name}`
+                : "loading..."}
+            </p>
+            <p className="font-sans">
+              <b>Patient</b>:{" "}
+              {!loadingPatient && patient
+                ? `${patient?.first_Name} ${patient?.last_Name} ${patient?.middle_Name}`
                 : "loading..."}
             </p>
             <p className="font-sans">
@@ -183,22 +197,10 @@ const Appointment = () => {
                 >
                   Approve <i className="bi bi-check2-circle"></i>
                 </button>
-                <button
-                  hidden={isAuth && isAuthorized}
-                  onClick={handleCancle}
-                  className="bg-red-400 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-600 transition duration-500 ease-in"
-                >
-                  Cancle <i className="bi bi-x-circle"></i>
-                </button>
+                <Modal hidden={!isAuth && isAuthorized} action={"Cancle"} type={"primary"} handleAction={handleCancle} icon={<i className="bi bi-x-circle"></i>}/>
               </>
             )}
-            <button
-              hidden={!isAuth}
-              onClick={handleDelete}
-              className="bg-red-900 w-full text-white py-2 px-4 rounded-lg font-semibold cursor-pointer hover:bg-red-950 transition duration-500 ease-in"
-            >
-              Delete <i className="bi bi-trash"></i>
-            </button>
+            <Modal hidden={!isAuth} action={"Delete"} type={"error"} handleAction={handleDelete} icon={<i className="bi bi-trash"></i>}/>
           </div>
         </div>
       ) : (

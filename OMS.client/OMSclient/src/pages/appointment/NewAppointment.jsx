@@ -18,7 +18,9 @@ const NewAppointment = () => {
   const { authUser } = useSelector((state) => state.authUser);
   const { specialties, loading: loadingSpecialty } = useSpecialty();
   const { doctors, loading: loadingDoctor } = useDoctor();
-  const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
+  const axiosAuth = useAxiosAuthorization(
+    oms_server_production_url.appointment
+  );
   const month = new Date().getMonth();
   const date = new Date().getDate();
   const today = `${new Date().getFullYear()}-${
@@ -26,8 +28,8 @@ const NewAppointment = () => {
   }-${date > 9 ? date : "0" + date}`;
 
   useEffect(() => {
-    setData(doctors);
-  }, [doctors]);
+    if (!loadingDoctor) setData(doctors);
+  }, [doctors, loadingDoctor]);
 
   const handleFormChange = (e) => {
     setFormData({
@@ -39,7 +41,8 @@ const NewAppointment = () => {
   const handleSpecialtyChange = (e) => {
     setSpecialty(e.target.value);
     const filterDoctors = doctors.filter(
-      (doctor) => doctor.specialty._id == e.target.value
+      (doctor) =>
+        doctor.specialty._id == e.target.value || doctor.sub_Specialty._id
     );
     setData(filterDoctors);
   };
@@ -56,7 +59,7 @@ const NewAppointment = () => {
       const docCTS = hrs + mins;
       const docCTE = hrs1 + mins1;
 
-      if (reqTime > docCTS && reqTime < docCTE) setTime(e.target.value);
+      if (reqTime >= docCTS && reqTime <= docCTE) setTime(e.target.value);
       else {
         e.target.value = null;
         enqueueSnackbar(
@@ -81,7 +84,9 @@ const NewAppointment = () => {
           variant: "warning",
         });
 
-      enqueueSnackbar(res.data?.message || res.statusText, { variant: "success" });
+      enqueueSnackbar(res.data?.message || res.statusText, {
+        variant: "success",
+      });
       setFormData({});
       navigate(oms_url.appointments);
     } catch (err) {

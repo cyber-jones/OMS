@@ -45,7 +45,7 @@ const Appointments = () => {
 
       setData([...mutateAppointments]);
     }
-  }, [appointments, loadingSpecialty, loading]);
+  }, [appointments, loadingSpecialty, loading, specialties]);
 
   //should be memoized or stable
   const columns = useMemo(

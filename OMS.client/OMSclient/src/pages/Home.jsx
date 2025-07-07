@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import assets from "../assets/asset";
 import { motion } from "framer-motion";
 import { oms_url } from "../utils/SD";
+import Card from "../components/daisyUI/Card";
 
 const Home = () => {
   const navigate = useNavigate();
   return (
     <div className="w-full flex flex-col">
+      <Card />
       <div className="w-full bg-black h-screen">
         <img
           src="/images/image-2.jpg"

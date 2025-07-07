@@ -1,16 +1,17 @@
-const Modal = ({ action, type, handleAction }) => {
+const Modal = ({ action, type, handleAction, icon = null, hidden = null }) => {
   return (
     <div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
       <button
-        className={`btn btn-${type}`}
+        hidden={hidden}
+        className={`btn btn-${type} w-full text-white`}
         onClick={() => document.getElementById("my_modal_5").showModal()}
       >
-        {action}
+        {action} {icon}
       </button>
       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">CBT Says!</h3>
+          <h3 className="font-bold text-lg">HealthTech Says!</h3>
           <p className="py-4">
             Are you sure you want to continue with this action?
           </p>

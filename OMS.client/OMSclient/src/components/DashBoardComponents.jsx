@@ -43,7 +43,7 @@ const DashBoardComponents = ({ children }) => {
       <div className="flex h-11/12 w-full">
         <SideBar sideNav={sideNav} />
         <div
-          className={`flex-1 h-full flex justify-center items-center`}
+          className={`flex-1 md:w-[90%] w-full h-full flex justify-center items-center`}
         >
           {children}
         </div>

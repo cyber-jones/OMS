@@ -43,7 +43,7 @@ import ForgetPassword from "./pages/reset-password/ForgetPassword";
 import VerifyOtp from "./pages/reset-password/VerifyOtp";
 import ResetPassword from "./pages/reset-password/ResetPassword";
 import Prescription from "./pages/prescription/Prescription";
-import Prescriptions from "./pages/prescription/prescriptions";
+import Prescriptions from "./pages/prescription/Prescriptions";
 import PatientPrescriptions from "./pages/prescription/PatientPrescriptions";
 
 function App() {

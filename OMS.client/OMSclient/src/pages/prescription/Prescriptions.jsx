@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Link, useParams } from "react-router-dom";
 import usePrescription from "../../hooks/usePrescription";
 import useDoctor from "../../hooks/useDoctor";
@@ -6,14 +7,22 @@ import { useEffect, useState } from "react";
 import useDrug from "../../hooks/useDrug";
 import Circle from "../../components/loading/Circle";
 import usePatient from "../../hooks/usePatient";
-import { oms_url } from "../../utils/SD";
+import { oms_url, Roles } from "../../utils/SD";
 import { useSelector } from "react-redux";
 
 const PatientPrescriptions = () => {
-  const { user } = useSelector(state => state.user)
+  const { user } = useSelector(state => state.user);
+  const { authUser } = useSelector(state => state.authUser);
   const { id } = useParams();
   const [data, setData] = useState([]);
-  const { loading, prescriptions } = usePrescription(user._id);
+    let getPrescriptions = null;
+    if (authUser.roles.includes(Roles.PATIENT))
+      getPrescriptions = usePrescription(user._id);
+    else if(authUser.roles.includes(Roles.DOCTOR))
+      getPrescriptions = usePrescription(null, null, user._id);
+    else
+      getPrescriptions = usePrescription();
+  const { loading, prescriptions } = getPrescriptions;
   const { loading: loadingDoctor, doctors } = useDoctor();
   const { patients: patient } = usePatient(id);
   const { loading: loadingSpecialty, specialties } = useSpecialty();

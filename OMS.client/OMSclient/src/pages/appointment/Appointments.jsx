@@ -19,9 +19,9 @@ const Appointments = () => {
   const isPatient = useAuth([Roles.PATIENT]);
   let appointment = null;
   if (authUser.roles.includes(Roles.PATIENT))
-    appointment = useAppointments(authUser.user_Profile_Id);
+    appointment = useAppointments(authUser._id);
   else if(authUser.roles.includes(Roles.DOCTOR))
-    appointment = useAppointments(null, authUser.user_Profile_Id);
+    appointment = useAppointments(null, authUser._id);
   else
     appointment = useAppointments();
   

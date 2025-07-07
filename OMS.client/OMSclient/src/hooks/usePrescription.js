@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { oms_server_dev_url, oms_server_production_url } from '../utils/SD';
+import { oms_server_production_url } from '../utils/SD';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import useAxiosAuthorization from './useAxiosAuth';
@@ -7,11 +7,11 @@ import useAxiosAuthorization from './useAxiosAuth';
 
 
 
-const usePrescription = (patient_Id = null, Id = null) => {
+const usePrescription = (patient_Id = null, Id = null, doctor_Id = null) => {
     const [loading, setLoading] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const [prescriptions, setPrescription] = useState(null);
-    const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
+    const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
 
     const getPrescription = async () => {
         setLoading(true)
@@ -19,6 +19,8 @@ const usePrescription = (patient_Id = null, Id = null) => {
             let res = null;
             if (patient_Id)
                 res = await axiosAuth.get("/prescription/patient/"+patient_Id);
+            if (doctor_Id)
+                res = await axiosAuth.get("/prescription/doctor/"+doctor_Id);
             else if (Id)
                 res = await axiosAuth.get("/prescription/"+Id);
             else

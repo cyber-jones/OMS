@@ -33,6 +33,16 @@ export const getPatientPrescriptions = async (req, res, next) => {
 }  
 
 
+export const getDoctorPrescriptions = async (req, res, next) => {
+    try {
+        const prescriptions = await Prescription.find({ doctor_Id: req.params.id });
+        return res.status(200).json({ success: true, prescriptions });
+    } catch (err) {
+        next(err);
+    }
+}  
+
+
 export const postPrescription = async (req, res, next) => {
     const { doctorId, patientId } = req.params;
     try {

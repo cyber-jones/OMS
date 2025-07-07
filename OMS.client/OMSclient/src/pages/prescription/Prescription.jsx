@@ -15,7 +15,7 @@ const Prescription = () => {
   const { loading: loadingDoctor, doctors } = useDoctor();
   const { loading: loadingSpecialty, specialties } = useSpecialty();
   const { loading: laodingDrug, drugs } = useDrug();
-  const isNotDoctor = useAuth([Roles.ADMIN, Roles.STAFF]);
+  const isNotDoctor = useAuth([Roles.STAFF]);
 
   useEffect(() => {
     if (

@@ -39,7 +39,7 @@ const Home = () => {
       <div className="w-full">
         <div className="float-right mx-2">
           <button
-            onClick={() => navigate(oms_url.auth)}
+            onClick={() => navigate(oms_url.dashBoard)}
             className="px-6 py-2 text-2xl text-white bg-purple-900 mt-4 hover:bg-purple-950 cursor-pointer"
           >
             Sign in

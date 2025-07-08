@@ -49,7 +49,7 @@ const Patients = () => {
       />
       {!loading ? (
         // <div className="w-full md:w-[70%] py-3 font-serif h-11/12 grid grid-cols-1 gap-4 bg-white place-content-start place-items-center scroll-smooth overflow-y-scroll">
-        <ul className="list bg-base-100 h-full rounded-box shadow-md scroll-smooth overflow-y-scroll w-full md:w-[70%]">
+        <ul className="list bg-base-100 h-full rounded-box shadow-md scroll-smooth overflow-y-scroll w-full md:w-[70%] gap-2">
           <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
             All Patients
           </li>

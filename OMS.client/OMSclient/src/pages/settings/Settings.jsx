@@ -120,7 +120,7 @@ const Settings = () => {
           <p className="text-md">Specialties</p>
         </Link>
         <Link
-          to={oms_url.appointmentList}
+          to={oms_url.appointments}
           className="w-[80%] cursor-pointer hover:bg-gray-200 border-l-3 shadow border-l-purple-800 h-[100px] rounded-lg flex justify-center items-center gap-7"
         >
           <i className="bi bi-building-check text-4xl text-purple-800"></i>

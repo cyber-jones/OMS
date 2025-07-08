@@ -1,10 +1,11 @@
 import useUser from "../hooks/useUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { oms_url } from "../utils/SD";
 import { Toaster } from "react-hot-toast";
 
 const Header = ({ sideNav, setSideNav }) => {
   const { loading, user } = useUser();
+  const navigate = useNavigate();
 
   return (
     <header className="static w-full h-1/12 bg-gray-100 flex justify-between items-center">
@@ -16,7 +17,7 @@ const Header = ({ sideNav, setSideNav }) => {
           }`}
           onClick={() => setSideNav((prev) => !prev)}
         ></i>
-        <p className="font-bold text-lg md:text-3xl">OMS</p>
+        <p onClick={() => navigate(oms_url.home)} className="font-bold text-lg md:text-3xl">OMS</p>
       </div>
       <div className="flex-1">
         <p className="uppercase text-sm md:text-lg hidden md:block">welcome! <b className="text-blue-700">{user?.mln ? "Dr" : null } {user?.first_Name}</b></p>

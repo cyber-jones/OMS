@@ -116,9 +116,7 @@ const Appointment = () => {
 
   const handleDisapprove = async () => {
     try {
-      const res = await axiosAuth.post("/appointment/disapprove/" + id, {
-        name: user.Email,
-      });
+      const res = await axiosAuth.post("/appointment/disapprove/" + id);
       if (res?.status !== 200 && res) {
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",

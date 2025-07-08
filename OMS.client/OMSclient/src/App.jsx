@@ -329,14 +329,6 @@ function App() {
           }
         />
         <Route
-          path={oms_url.appointmentList}
-          element={
-            <DashBoardComponents>
-              <Appointments />
-            </DashBoardComponents>
-          }
-        />
-        <Route
           path={oms_url.updateSpecialty + "/:id"}
           element={
             <DashBoardComponents>

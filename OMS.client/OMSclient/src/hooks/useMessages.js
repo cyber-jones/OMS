@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { oms_server_dev_url } from "../utils/SD";
+import { oms_server_production_url } from "../utils/SD";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import useAxiosAuthorization from "./useAxiosAuth";
@@ -8,7 +8,7 @@ const useMessage = () => {
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const [messages, setMessage] = useState([]);
-  const axiosAuth = useAxiosAuthorization(oms_server_dev_url.appointment);
+  const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
 
   const getMessage = async () => {
     setLoading(true);

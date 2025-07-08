@@ -15,7 +15,8 @@ const Prescription = () => {
   const { loading: loadingDoctor, doctors } = useDoctor();
   const { loading: loadingSpecialty, specialties } = useSpecialty();
   const { loading: laodingDrug, drugs } = useDrug();
-  const isNotDoctor = useAuth([Roles.STAFF]);
+  const isNotStaff = useAuth([Roles.STAFF]);
+  const isNotDoctor = useAuth([Roles.DOCTOR]);
 
   useEffect(() => {
     if (
@@ -101,9 +102,9 @@ const Prescription = () => {
               <i>{new Date(data?.updatedAt).toDateString()}</i>
             </div>
             <div className="grid grid-col-1 gap-1">
-              <button className="btn btn-success" hidden={!isNotDoctor}>Approve</button>
-              <button className="btn btn-primary" hidden={!isNotDoctor}>Disapprove</button>
-              <button hidden={data?.status == "approved" ? true : false } className="btn btn-error">Delete</button>
+              <button className="btn btn-success" hidden={!isNotStaff}>Approve</button>
+              <button className="btn btn-primary" hidden={!isNotStaff}>Disapprove</button>
+              <button hidden={ !isNotDoctor && data?.status == "approved" ? true : false } className="btn btn-error">Delete</button>
               <button className="btn">Download</button>
             </div>
           </div>

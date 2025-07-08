@@ -6,10 +6,10 @@ const Card = () => {
     <div hidden={dis} className="card bg-neutral text-neutral-content w-96 fixed z-20">
       <div className="card-body items-center text-center">
         <h2 className="card-title">Cookies!</h2>
-        <p>We are using cookies for no reason.</p>
+        <p>We are using cookies for a reason.</p>
         <div className="card-actions justify-end">
-          <button onClick={() => setDis(false)} className="btn btn-primary">Accept</button>
-          <button onClick={() => setDis(false)} className="btn btn-ghost">Deny</button>
+          <button onClick={() => setDis(true)} className="btn btn-primary">Accept</button>
+          <button onClick={() => setDis(true)} className="btn btn-ghost">Deny</button>
         </div>
       </div>
     </div>

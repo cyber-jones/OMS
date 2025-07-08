@@ -31,16 +31,8 @@ const UpdateStaff = () => {
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];
-    const fileSize = 2048000;
     if (!file.type.startsWith("image/")) {
       enqueueSnackbar("Please select an image file", { variant: "error" });
-      return;
-    }
-
-    if (file.size > fileSize) {
-      enqueueSnackbar("Image size too large { maximum - 2mb}", {
-        variant: "error",
-      });
       return;
     }
 

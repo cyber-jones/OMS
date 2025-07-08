@@ -19,12 +19,14 @@ import { credentials } from "./middlewares/corsCredentials.js";
 import { getLogs } from "./controllers/appointmentController.js";
 import { verifyRoles } from "./middlewares/verifyRoles.js";
 import { ROLES } from "./utils/SD.js";
+import { ConnectCloudinary } from "./config/cloudinaryConfig.js";
 
 
 
 
 const URI = process.env.MONGOOSE_PRODUCTION_URI;
 const PORT = process.env.PORT || 7006;
+ConnectCloudinary();
 connectDb(URI);
 
 

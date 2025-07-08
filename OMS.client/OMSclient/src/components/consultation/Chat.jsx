@@ -9,20 +9,22 @@ import { oms_server_production_url, oms_url } from "../../utils/SD";
 import { Link } from "react-router-dom";
 import { formatTime } from "../../utils/formatTime";
 
-
 const Chat = () => {
   const [loading, setLoading] = useState(false);
   const { selectedUser, messages } = useSelector((state) => state.chat);
   const { authUser } = useSelector((state) => state.authUser);
   const [text, setText] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageRaw, setImageRaw] = useState(null);
   const { socket } = useSocket();
   const { onlineUsers } = useSelector((state) => state.chat);
   const imageRef = useRef();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const messageEndRef = useRef();
-  const axiosAuth = useAxiosAuthorization(oms_server_production_url.appointment);
+  const axiosAuth = useAxiosAuthorization(
+    oms_server_production_url.appointment
+  );
   const profileUrl = selectedUser?.mln
     ? `/doctor/${selectedUser?._id}`
     : `/patient/${selectedUser?._id}`;
@@ -33,6 +35,14 @@ const Chat = () => {
     const senderId = authUser.email;
     const recieverId = selectedUser.email;
 
+    const form = new FormData();
+    if (imageRaw) form.append("image", imageRaw);
+    form.append("sender_Id", senderId);
+    form.append("reciever_Id", recieverId);
+    form.append("text", text);
+
+    console.log("FORM", form);
+    
     const newMessage = {
       sender_Id: senderId,
       reciever_Id: recieverId,
@@ -42,14 +52,16 @@ const Chat = () => {
 
     setLoading(true);
     try {
-      const res = await axiosAuth.post("/message", newMessage);
+      const res = await axiosAuth.post("/message", form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-      if (res?.status !== 201 && res) {
+      if (res && res?.status !== 201)
         enqueueSnackbar(res?.data?.message || res?.statusText, {
           variant: "error",
         });
-        return;
-      }
 
       dispatch(setMessages([...messages, res.data.newMessage]));
       setText("");
@@ -76,7 +88,7 @@ const Chat = () => {
 
   const handleImageUrl = (e) => {
     const file = e.target.files[0];
-    
+    setImageRaw(file);
     if (!file.type.startsWith("image/")) {
       enqueueSnackbar("Please select an image file", { variant: "error" });
       return;
@@ -101,7 +113,7 @@ const Chat = () => {
 
   useEffect(() => {
     if (messageEndRef.current && messages)
-      messageEndRef.current.scrollIntoView({ behavior: "smooth" })
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   return (
@@ -176,7 +188,8 @@ const Chat = () => {
                   >
                     <div className="chat-header">
                       <time className="text-xs opacity-50">
-                        {new Date(message.createdAt).toDateString()} {formatTime(message.createdAt)}
+                        {new Date(message.createdAt).toDateString()}{" "}
+                        {formatTime(message.createdAt)}
                       </time>
                     </div>
                     {message?.text ? (

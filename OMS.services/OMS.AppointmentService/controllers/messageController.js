@@ -1,5 +1,6 @@
 import { getRecieverSocketId, io } from "../config/socket.io.config.js";
 import Message from "../models/messageModel.js";
+import { v2 as cloudinary } from "cloudinary";
 import { MessageValidator } from "../validators/validateSchema.js";
 
 export const getAllMessages = async (req, res, next) => {
@@ -30,13 +31,22 @@ export const getUserMessages = async (req, res, next) => {
 
 export const postMessage = async (req, res, next) => {
   try {
-    const { text, image, ...data } = req.body;
+    const { text, ...data } = req.body;
+    const imageFile = req.file;
     const { error, value } = MessageValidator.validate(data);
+
+    let cloudImage = null;
+    if (imageFile) {
+      cloudImage = await cloudinary.uploader.upload(imageFile.path, {
+      resource_type: "image",
+    });
+    }
 
     if (error)
       return res.status(400).json({ success: false, message: error.message });
 
-    const newMessage = new Message({ ...value, text, image });
+    const newMessage = new Message({ ...value, text });
+    if (cloudImage) newMessage.image = cloudImage.secure_url
     await newMessage.save();
 
     const recieverId = getRecieverSocketId(value.reciever_Id);
@@ -49,6 +59,7 @@ export const postMessage = async (req, res, next) => {
     next(err);
   }
 };
+
 
 export const deleteMessage = async (req, res, next) => {
   try {

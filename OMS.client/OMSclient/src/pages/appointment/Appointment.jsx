@@ -142,7 +142,7 @@ const Appointment = () => {
           <h1 className="text-xl md:text-3xl text-red-400 font-bold mb-6">
             {new Date(appointment?.date).toDateString()}
           </h1>
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 h-7/12">
             <p className="font-sans">
               <b>Doctor</b>:{" "}
               {!loadingDoctor && doctor
@@ -171,7 +171,7 @@ const Appointment = () => {
               <b>Illness Descroption</b>: {appointment?.illness_Description}
             </p>
           </div>
-          <div className="w-full flex flex-col mt-10 h-7/12 justify-center pb-6 gap-2">
+          <div className="w-full flex flex-col mt-10 h-4/12 justify-center pb-6 gap-2">
             {appointment?.status == Status.APPROVED ? (
               <button
                 hidden={!isAuthorized}

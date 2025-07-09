@@ -17,7 +17,7 @@ const Header = ({ sideNav, setSideNav }) => {
           }`}
           onClick={() => setSideNav((prev) => !prev)}
         ></i>
-        <p onClick={() => navigate(oms_url.home)} className="font-bold text-lg md:text-3xl">OMS</p>
+        <p onClick={() => navigate(oms_url.home)} className="font-bold text-lg md:text-3xl hover:cursor-pointer">OMS</p>
       </div>
       <div className="flex-1">
         <p className="uppercase text-sm md:text-lg hidden md:block">welcome! <b className="text-blue-700">{user?.mln ? "Dr" : null } {user?.first_Name}</b></p>

@@ -56,7 +56,7 @@ const Signup = () => {
 
   return (
     <form
-      className="flex flex-col justify-center items-center w-full h-10/12 gap-3 md:gap-2 overflow-y-scroll"
+      className="flex flex-col justify-center items-center w-full h-10/12 gap-3 md:gap-2"
       onSubmit={(e) => handleSignup(e)}
     >
       <p className="text-lg font-bold my-2">SignUp Here!</p>
